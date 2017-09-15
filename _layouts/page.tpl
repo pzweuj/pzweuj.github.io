@@ -61,7 +61,7 @@
 		<p>
 			<a href="http://disqus.com/" target="_blank">Disqus</a>,
 			<a href="http://elfjs.com/" target="_blank">elf+js</a>,
-			<a href="https://github.com/hehedanli" target="_blank">hehedanli</a>,
+			<a href="https://github.com/" target="_blank">github</a>,
 			<a href="http://softwaremaniacs.org/soft/highlight/en/">HighlightJS</a>,
 			<a href="http://www.google.com/cse/" target="_blank">Google Custom Search</a>,
 			<a href="http://en.gravatar.com/" target="_blank">Gravatar</a>,

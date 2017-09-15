@@ -55,7 +55,7 @@ aside .block p{margin:0 .5em;}
 aside .block-about p{color:#999;}
 aside .block-about figure img{border-radius:2px;}
 aside .block-about figcaption{margin:0.2em .5em;}
-aside .block-about figcaption:after{content:'<hehedanli@gmail.com>'; padding-left:.5em; color: #bbb; font-weight:bold; opacity: 0; transition:opacity .5s; -moz-transition:opacity .5s; -webkit-transition:opacity .5s;}
+aside .block-about figcaption:after{content:'<pzweuj@live.com>'; padding-left:.5em; color: #bbb; font-weight:bold; opacity: 0; transition:opacity .5s; -moz-transition:opacity .5s; -webkit-transition:opacity .5s;}
 aside .block-about:hover figcaption:after{opacity: 1;}
 aside .block-fork{position:relative;margin:0;font-size:300%;}
 

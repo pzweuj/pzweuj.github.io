@@ -4,4 +4,4 @@ title: Picture Test!
 category: default
 ---
 
-![chromas test](pzweuj.github.io/downloads/images/chromas.png)
+![chromas test](https://github.com/pzweuj/pzweuj.github.io/raw/master/downloads/images/chromas.png)

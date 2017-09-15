@@ -21,7 +21,7 @@
 	{{ content }}
 
 	<footer>
-		<p>&copy; Since 2016<a href="http://github.com/hehedanli" target="_blank">  github.com/hehedanli</a></p>
+		<p>&copy; Since 2017<a href="http://github.com/pzweuj" target="_blank">  github.com/pzweuj</a></p>
 	</footer>
 </div>
 
@@ -53,7 +53,7 @@
 		{% endif %}
 			<figcaption><strong>{{ site.meta.author.name }} </strong></figcaption>
 		</figure>
-		<p>不定时更新废话</p>
+		<p>吞POT的时候更新</p>
 	</div>
 
 	<div class="block block-license">
@@ -63,7 +63,7 @@
 	
 	
 	<div class="block block-thank">
-		<h3>Powered by</h3>
+		<h3>感谢以下</h3>
 		<p>
 			<a href="http://disqus.com/" target="_blank">Disqus</a>,
 			<a href="http://elfjs.com/" target="_blank">elf+js</a>,
@@ -73,6 +73,7 @@
 			<a href="http://en.gravatar.com/" target="_blank">Gravatar</a>,
 			<a href="https://github.com/mojombo/jekyll" target="_blank">jekyll</a>,
 			<a href="https://github.com/mytharcher/SimpleGray" target="_blank">SimpleGray</a>
+			<a href="https://github.com/hehedanli" target="_blank">hehedanli</a>
 		</p>
 	</div>
 </aside>

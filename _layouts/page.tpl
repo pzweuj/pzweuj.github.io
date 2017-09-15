@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!--写在最前：
+		希望能解决一下懒癌
+		希望能学习多一点东西
+		希望能。。。。
+                                -->
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8" />

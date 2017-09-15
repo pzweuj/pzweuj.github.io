@@ -36,12 +36,12 @@
 	</nav>
 	
 	<form action="/search/" class="block block-search">
-		<h3>Search</h3>
+		<h3>搜索</h3>
 		<p><input type="search" name="q" placeholder="关键词搜索" /></p>
 	</form>
 	
 	<div class="block block-about">
-		<h3>About</h3> 
+		<h3>关于</h3> 
 
 	<div class="block block-fork">
 	{% if site.meta.author.github %}
@@ -55,26 +55,24 @@
 		</figure>
 		<p>吞POT的时候更新</p>
 	</div>
-
-	<div class="block block-license">
-		<h3>Copyright</h3>
-		<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/" target="_blank" class="hide-target-icon" title="Copyright declaration of site content"><img alt="知识共享许可协议" src="http://i.creativecommons.org/l/by-nc-nd/2.5/cn/88x31.png" /></a></p>
-	</div>
-	
 	
 	<div class="block block-thank">
-		<h3>感谢以下</h3>
+		<h3>感谢</h3>
 		<p>
 			<a href="http://disqus.com/" target="_blank">Disqus</a>,
 			<a href="http://elfjs.com/" target="_blank">elf+js</a>,
-			<a href="https://github.com/" target="_blank">GitHub</a>,
+			<a href="https://github.com/hehedanli" target="_blank">hehedanli</a>,
 			<a href="http://softwaremaniacs.org/soft/highlight/en/">HighlightJS</a>,
 			<a href="http://www.google.com/cse/" target="_blank">Google Custom Search</a>,
 			<a href="http://en.gravatar.com/" target="_blank">Gravatar</a>,
 			<a href="https://github.com/mojombo/jekyll" target="_blank">jekyll</a>,
 			<a href="https://github.com/mytharcher/SimpleGray" target="_blank">SimpleGray</a>
-			<a href="https://github.com/hehedanli" target="_blank">hehedanli</a>
 		</p>
+	</div>
+	
+	<div class="block block-license">
+		<h3>Copyright</h3>
+		<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/" target="_blank" class="hide-target-icon" title="Copyright declaration of site content"><img alt="知识共享许可协议" src="http://i.creativecommons.org/l/by-nc-nd/2.5/cn/88x31.png" /></a></p>
 	</div>
 </aside>
 

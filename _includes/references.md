@@ -12,4 +12,3 @@
 [jslib]: https://github.com/elfjs/jslib/
 [jslib-builder]: http://github.com/elfjs/jslib-builder/
 [Markdown]: http://daringfireball.net/projects/markdown/
-[WordPress]: http://wordpress.org/

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
 <link rel="stylesheet" type="text/css" href="/assets/css/site.css" />
 <link rel="stylesheet" type="text/css" href="/assets/css/code/github.css" />
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
 {% for style in page.styles %}<link rel="stylesheet" type="text/css" href="{{ style }}" />
 {% endfor %}
 </head>
@@ -20,7 +21,7 @@
 	{{ content }}
 
 	<footer>
-		<p>&copy; Since 2012</p>
+		<p>&copy; Since 2016<a href="http://github.com/hehedanli" target="_blank">  github.com/hehedanli</a></p>
 	</footer>
 </div>
 
@@ -36,28 +37,30 @@
 	
 	<form action="/search/" class="block block-search">
 		<h3>Search</h3>
-		<p><input type="search" name="q" placeholder="Search" /></p>
+		<p><input type="search" name="q" placeholder="关键词搜索" /></p>
 	</form>
 	
 	<div class="block block-about">
-		<h3>About</h3>
-		<figure>
-			{% if site.meta.author.gravatar %}<img src="{{ site.meta.gravatar}}{{ site.meta.author.gravatar }}?s=48" />{% endif %}
-			<figcaption><strong>{{ site.meta.author.name }}</strong></figcaption>
-		</figure>
-		<p>Write something about yourself.</p>
+		<h3>About</h3> 
+
+	<div class="block block-fork">
+	{% if site.meta.author.github %}
+		<a title="on Github" href="https://github.com/{{ site.meta.author.github }}"><i class="fa fa-github" aria-hidden="true"></i></a>
+	{% endif %}
 	</div>
-	
+		<figure>
+		{% if site.meta.author.gravatar %}<img src="{{ site.meta.author.gravatar}}{{ site.meta.author.gravatar }}?s=48" />
+		{% endif %}
+			<figcaption><strong>{{ site.meta.author.name }} </strong></figcaption>
+		</figure>
+		<p>不定时更新废话</p>
+	</div>
+
 	<div class="block block-license">
 		<h3>Copyright</h3>
 		<p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/2.5/cn/" target="_blank" class="hide-target-icon" title="Copyright declaration of site content"><img alt="知识共享许可协议" src="http://i.creativecommons.org/l/by-nc-nd/2.5/cn/88x31.png" /></a></p>
 	</div>
 	
-	{% if site.meta.author.github %}
-	<div class="block block-fork">
-		<a href="https://github.com/{{ site.meta.author.github }}"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a>
-	</div>
-	{% endif %}
 	
 	<div class="block block-thank">
 		<h3>Powered by</h3>
@@ -65,9 +68,9 @@
 			<a href="http://disqus.com/" target="_blank">Disqus</a>,
 			<a href="http://elfjs.com/" target="_blank">elf+js</a>,
 			<a href="https://github.com/" target="_blank">GitHub</a>,
+			<a href="http://softwaremaniacs.org/soft/highlight/en/">HighlightJS</a>,
 			<a href="http://www.google.com/cse/" target="_blank">Google Custom Search</a>,
 			<a href="http://en.gravatar.com/" target="_blank">Gravatar</a>,
-			<a href="http://softwaremaniacs.org/soft/highlight/en/">HighlightJS</a>,
 			<a href="https://github.com/mojombo/jekyll" target="_blank">jekyll</a>,
 			<a href="https://github.com/mytharcher/SimpleGray" target="_blank">SimpleGray</a>
 		</p>

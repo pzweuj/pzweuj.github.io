@@ -13,7 +13,6 @@ desc: 得闲吞POT
 custom:
     category:
         default: 默认
-        another: 其他
         biology: 生物相关
         coding: 编程相关
         database: 数据库
@@ -21,9 +20,6 @@ custom:
     categories:
       - name:  default
         title: 默认
-
-      - name:  another
-        title: 其他
         
       - name:  biology
         title: 生物相关

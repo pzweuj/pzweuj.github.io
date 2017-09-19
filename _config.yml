@@ -12,17 +12,13 @@ desc: 得闲吞POT
 
 custom:
     category:
-        default: 默认
-        biology: 生物相关
+        default: 随笔
         coding: 编程相关
         database: 数据库
         software: 软件
     categories:
       - name:  default
-        title: 默认
-        
-      - name:  biology
-        title: 生物相关
+        title: 随笔
         
       - name:  coding
         title: 编程相关

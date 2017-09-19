@@ -39,7 +39,7 @@ meta:
     author:
         name: pzweuj
         email: pzweuj@live.com
-        disqus:                # Disqus缩略标识
+        disqus: pzweuj              # Disqus缩略标识
         gcse: 004668129225968465032:d-qq_nrrwzu # Google自定义搜索标识ID
         github: pzweuj                 # GitHub账号
         gravatar:   #Gravatar头像标识

@@ -48,5 +48,5 @@ meta:
         instagram: 
 
     disqus: # Disqus评论的JS地址
-    gapi:   # Google API地址
+    gapi: https://developers.google.com/custom-search/docs/element  # Google API地址
     gravatar: # Gravatar头像服务器地址

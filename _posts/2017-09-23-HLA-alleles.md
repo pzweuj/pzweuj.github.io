@@ -19,7 +19,7 @@ HLA便成为免疫遗传学、免疫生物学和生物化学等学科的一个�
 HLA-alleles这个网页提供了每个HLA区域的[分型表](http://hla.alleles.org/alleles/text_index.html)。
 
 比如说[HLA-B区](https://raw.githubusercontent.com/ANHIG/IMGTHLA/Latest/alignments/B_nuc.txt)
-![hla-b-alignments](https://github.com/pzweuj/pzweuj.github.io/raw/master/downloads/images/hla-B-alignments-nuc.png)
+![hla-b-alignments](https://github.com/pzweuj/pzweuj.github.io/raw/master/downloads/images/HLA-B-alignments-nuc.png)
 可以看到，这里用了B\*07:02:01:01这个分型作为参照组，下面的都是对照组，
 其中，“—”表示的是缺失，“\*”表示的相同。然后和参照组不一样的就会直接的列出AGTC。
 
@@ -32,6 +32,8 @@ HLA-alleles这个网页提供了每个HLA区域的[分型表](http://hla.alleles
 
 -------------------------------------------
 还有一件事，网页左侧有一个Lead sponsors。他家的HLA分型试剂盒是最领先的最准确的。再配合他家的非卖品分型软件，效果非常好。不说了，涉嫌打广告了已经。
+
+
 -------------------------------------------
 
 说到HLA分型软件，还有一下免费的作品，比如[Seq2HLA](https://bitbucket.org/sebastian_boegel/seq2hla/src)。但是这些对没什么编程知识的人不太友好。

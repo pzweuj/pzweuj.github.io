@@ -22,7 +22,7 @@ primarySeq(seq)
 secondarySeq(seq)
 
 #输出可视化图像
-chromatogram(seq, showcalls = 'both')
+chromatogram(bc, showcalls = 'both')
 ```
 
 结果如下：

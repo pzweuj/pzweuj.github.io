@@ -1,0 +1,156 @@
+---
+title: "Second R Markdown for Midterm"
+author: "Jing Qian"
+date: "10/11/2017"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1:  What is your current path?
+
+```{bash}
+pwd
+```
+
+## Question 2:  What is the date?
+
+```{bash}
+date
+```
+
+## Question 3:  Please make a new directory under the directory you are in called "mydirectory"
+
+```{bash}
+mkdir mydirectory
+```
+
+## Question 4:  What are the last 5 commands you have in your history
+
+```{bash}
+history 5
+```
+
+
+## Question 5:  Please put the following data into a file called "numbers.txt" using bash in R in a code block, where each number is on its own line using echo and the appropriate optional tag.
+
+*1234
+*12121
+*3434
+*123
+*12341239879
+
+```{r}
+x <- c(1234, 12121, 3434, 123, 12341239879)
+write.table(x, file = "numbers.txt")
+```
+
+## Question 6:  Please cat the file numbers.txt you just created
+
+```{bash}
+cat numbers.txt
+```
+
+## Question 7:  How many characters and how many lines are in the file?
+
+```{bash}
+wc -c numbers.txt  
+wc -l numbers.txt  
+wc -w numbers.txt  
+```
+
+## Question 8: Please create a sed command (e.g. sed 's/match/replace/g' numbers.txt) to commify the list of numbers in thousands place to the screen.  For example: 1,234 or 12,121
+
+```{bash}
+sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta' numbers.txt
+```
+
+## Question 9:  Please make the 'numbers.txt' file private such that only you can read and write it.  Nobody at the group level can read it, write or execute it.
+
+```{bash}
+chmod 700 numbers.text
+```
+
+## Question 10:   Please make that file 'numbers.txt' such that you can read and write to it, and everyone else on the computer both world and group can just read it.
+
+```{bash}
+chmod 744 numbers.text
+```
+
+## Question 11:  Please scrape or download the information behind the gene PTEN into a file from this [web-page](https://ghr.nlm.nih.gov/gene/PTEN)
+
+```{bash}
+wget https://ghr.nlm.nih.gov/gene/PTEN.pdf
+```
+
+## Question 12:  Please echo your PATH
+
+```{bash}
+echo $PATH
+PATH = $PATH:/usr/local/bin
+```
+
+## Question 13:  Please add ~/bin to your existing path
+
+```{bash}
+export PATH=$PATH:/usr/local/bin
+```
+
+## Question 14:  Please find files ending in md in your current directory
+
+```{bash}
+find . -name "*.md"
+```
+
+## Question 15:  Please put all in the previous commands in your history into a file and call that file "history.txt"
+
+```{bash}
+cat .bash_history >> history.txt
+```
+
+## Question 16:  Please print the first 5 lines of your history by piping history into head
+
+```{bash}
+head 5 history.txt
+```
+
+## Question 17:  How would I specify to send me a reminder email every 8 minutes using a crontab?
+
+```{bash}
+8 * * * * echo 'Hello Dr.craig' | mail -s 'reminder' someone@example.com
+```
+
+## Question 18: What is the first line of a BASH script?
+
+```{bash}
+# !/bin/bash
+```
+
+
+
+
+<!-- The text below is just to reformat the page, using css styling -->
+```{r results="asis", echo = FALSE}
+cat("
+<style>
+h1 {
+    background-color: #990000;
+    color:#FFF;
+    text-align:center;
+}
+h2 {
+   background-color:#f3d6d6;
+   text-align:center;
+   color:#333
+}
+h3 {
+   margin-left:-5px;
+   color:#333
+}
+
+</style>
+")
+```

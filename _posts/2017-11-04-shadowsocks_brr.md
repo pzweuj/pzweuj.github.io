@@ -53,4 +53,4 @@ chmod +x bbr.sh
 
 最后感谢[clowwindy](https://github.com/clowwindy)
 
-[^_^]:又更新啦！
+[^_^]:研究了很久还是觉得伸手党最简单

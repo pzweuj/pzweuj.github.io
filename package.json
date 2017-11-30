@@ -1,0 +1,40 @@
+{
+  "name": "jekyll-text-theme",
+  "version": "1.4.0",
+  "description": "A text first theme for Jekyll.",
+  "scripts": {
+    "build": "bundle exec jekyll build",
+    "serve": "bundle exec jekyll serve -H 0.0.0.0",
+    "default": "bundle exec jekyll serve -H 0.0.0.0 -t",
+    "dev": "bundle exec jekyll serve -H 0.0.0.0 -t --config ./_config.dev.yml",
+    "demo": "bundle exec jekyll serve -H 0.0.0.0 -t --config ./_config.demo.yml",
+    "posts-cp": "mkdir ./_posts && cp -Rfv ./test/_posts/** ./_posts",
+    "posts-rm": "rm -Rfv ./_posts/**",
+    "favicon": "gulp favicon",
+    "icons": "gulp icons",
+    "artwork": "gulp artwork",
+    "gem-build": "rm -fv jekyll-text-theme-*.gem && gem build jekyll-text-theme.gemspec",
+    "gem-push": "gem push jekyll-text-theme-*.gem"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kitian616/kitian616.github.io.git"
+  },
+  "keywords": [
+    "jekyll",
+    "jekyll-theme",
+    "jekyll-template"
+  ],
+  "author": "Tian Qi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kitian616/issues"
+  },
+  "homepage": "https://github.com/kitian616#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-svg2png": "^2.0.2",
+    "gulp-to-ico": "^1.0.0"
+  }
+}

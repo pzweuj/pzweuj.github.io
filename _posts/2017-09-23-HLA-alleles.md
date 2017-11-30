@@ -1,7 +1,7 @@
 ---
 layout: post
 title: HLA分型与资料数据库
-category: database
+tags: database
 ---
 > HLA是一个非常难的项目，查了无数资料和网站，发现了这个，资料很丰富。
 [HLA-alleles](http://hla.alleles.org/nomenclature/index.html)。

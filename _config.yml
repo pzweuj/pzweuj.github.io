@@ -1,48 +1,111 @@
+# Welcome to Jekyll!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely need to edit after that.
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'jekyll serve'. If you change this file, please restart the server process.
+#
+# ,--------.      ,--.   ,--. ,--.
+# '--.  .--',---.  \  `.'  /,-'  '-.
+#    |  |  | .-. :  .'    \ '-.  .-'
+#    |  |  \   --. /  .'.  \  |  |
+#    `--'   `----''--'   '--' `--'
+
+## Base settings ##
+# url:  #the base hostname & protocol for your site e.g. https://www.someone.com
+baseurl: pzweuj.github.io
+title: 生物信息文件夹
+description: > #this means to ignore newlines until "nav_lists:"
+  吞pot的时候更新
+
+nav_lists:
+  - titles:
+      en: About
+      zh: 关于
+      zh-Hans: 关于
+      zh-Hant: 關於
+    url: /about.html
+
+# paths:
+#   home: /
+#   all:  /all.html
+#   rss:  /feed.xml
+
+## GitHub repository (if the site is hosted by GitHub) ##
+repository:  pzweuj/pzweuj.github.io
+repository_tree: master
+
+## Language & timezone ##
+lang: zh #the language of your site, eg: en(English), zh(简体中文), zh-Hans(简体中文), zh-Hant(繁體中文)
+timezone: Asia/Shanghai
+
+## Author & social ##
+author:
+  name: Someone
+  email: pzweuj@live.com #your Email address e.g. someone@site.com
+  # facebook:  #your Facebook username
+  # twitter:  #your Twitter username
+  github: pzweuj #your GitHub username
+  # googleplus:  #your Google+ username
+  # weibo:  #your Weibo username
+  # douban:  #your Douban username
+  # linkedin:  #your Linkedin username
+
+## Comment system (Disqus) ##
+disqus:
+  # shortname:  #the Disqus shortname for the site
+
+## Google Analytics ##
+# ga_tracking_id:  #Google analytics id for the site
+
+## Reading quantity (LeanCloud) ##
+leancloud:
+  # app_id:  #LeanCloud App id
+  # app_key:  #LeanCloud App key
+  # app_class:  #LeanCloud App class
+
+# mathjax: true
+
+## Paginate ##
+paginate: 5
+paginate_path: /blog/page:num
+
+## Post excerpts ##
+excerpt_separator: <!--more-->
+excerpt_type: html # text | html
+
+## Build ##
 markdown: kramdown
 highlighter: rouge
-safe: false
-lsi: false
-permalink: /posts/:title.html
+permalink: date
+
 exclude:
+  - CHANGELOG.md
+  - CHECKLIST.md
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README-*.md
   - README.md
+  - gulpfile.js
+  - jekyll-text-theme.gemspec
+  - package-lock.json
+  - package.json
+  - /docs
+  - /node_modules
+  - /screenshots
+  - /test
+  - /vendor
 
-name: 生物信息文件夹
-url: pzweuj.github.io
-desc: 得闲吞POT
+## Plugins ##
+gems:
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-paginate
+  - jemoji
 
-custom:
-    category:
-        default: 随笔
-        coding: 编程相关
-        database: 数据库
-        software: 软件
-    categories:
-      - name:  default
-        title: 随笔
-        
-      - name:  coding
-        title: 编程相关
-        
-      - name:  database
-        title: 数据库
-        
-      - name:  software
-        title: 软件
+## Server ##
+server_url: "0.0.0.0"
 
-    scrollingLoadCount: 0                          # 滚屏自动加载文章数量，“0”为关闭
-
-meta:
-    author:
-        name: pzweuj
-        email: pzweuj@live.com
-        disqus: pzweuj              # Disqus缩略标识
-        gcse: 004668129225968465032:d-qq_nrrwzu # Google自定义搜索标识ID
-        github: pzweuj                 # GitHub账号
-        gravatar:   #Gravatar头像标识
-        stackoverflow: 
-        weibo:
-        instagram: 
-
-    disqus: # Disqus评论的JS地址
-    gapi: https://developers.google.com/custom-search/docs/element  # Google API地址
-    gravatar: # Gravatar头像服务器地址
+## Development ##
+isdebug: false

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Hello world!
-category: default
+tags: default
 ---
 这是一篇测试文章，TEST，~~~test~~~ testing
 

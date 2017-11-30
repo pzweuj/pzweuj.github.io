@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 用R处理ab1数据
-category: coding
+tags: coding
 ---
 不多说，直接上代码！
 

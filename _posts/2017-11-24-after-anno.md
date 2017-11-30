@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 关于注释之后怎么进行基本的筛选
-category: default
+tags: default
 ---
 >因为最近很冷！不想码字，所以随便更新一点点
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 科学上网，shadowsocks+BRR
-category: software
+tags: software
 ---
 >首先，你需要一个服务器。
 

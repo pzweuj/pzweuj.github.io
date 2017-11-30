@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 肿瘤体细胞基因突变高通量测序(1)
-category: default
+tags: default
 ---
 >今天开始更新一个新系列，跟着大神们做一个实际的项目。希望能跟得上哦！
 

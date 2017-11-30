@@ -1,7 +1,7 @@
 ---
 layout: post
 title: github建立博客！
-category: default
+tags: default
 ---
 
 > 事情是这样的，前几天，我想着利用github page建一个博客。由于零基础，我google了很多教程。~~但是！都不好用！因为他们都过时了！~~我发现，现在用github建博客非常简单！根本不像那些教程做的那么复杂！当然，如果你要很炫很折腾的那种，就去看那些教程。下面来说说我的教程。

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: GATK流程
-category: default
+tags: default
 ---
 >不管啦，先放点代码上来，我真的在慢慢整理。
 

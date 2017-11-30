@@ -12,11 +12,11 @@
 #    `--'   `----''--'   '--' `--'
 
 ## Base settings ##
-# url:  #the base hostname & protocol for your site e.g. https://www.someone.com
-baseurl: pzweuj.github.io
+url: pzweuj.github.io #the base hostname & protocol for your site e.g. https://www.someone.com
+baseurl: /
 title: 生物信息文件夹
 description: > #this means to ignore newlines until "nav_lists:"
-  吞pot的时候更新
+    吞pot的时候更新
 
 nav_lists:
   - titles:
@@ -24,15 +24,15 @@ nav_lists:
       zh: 关于
       zh-Hans: 关于
       zh-Hant: 關於
-    url: /about.html
+    url: /blog/about.html
 
-# paths:
-#   home: /
-#   all:  /all.html
-#   rss:  /feed.xml
+paths:
+  home: /blog
+  all:  /blog/all.html
+  rss:  /feed.xml
 
 ## GitHub repository (if the site is hosted by GitHub) ##
-repository:  pzweuj/pzweuj.github.io
+repository: pzweuj/pzweuj.github.io
 repository_tree: master
 
 ## Language & timezone ##
@@ -41,33 +41,33 @@ timezone: Asia/Shanghai
 
 ## Author & social ##
 author:
-  name: Someone
-  email: pzweuj@live.com #your Email address e.g. someone@site.com
+  name: pzweuj
+  email: pzweuj@live.com
   # facebook:  #your Facebook username
-  # twitter:  #your Twitter username
-  github: pzweuj #your GitHub username
-  # googleplus:  #your Google+ username
-  # weibo:  #your Weibo username
-  # douban:  #your Douban username
+  # twitter: 
+  github:  pzweuj
+  # googleplus: 101827554735084402671
+  # weibo: 
+  # douban:
   # linkedin:  #your Linkedin username
 
 ## Comment system (Disqus) ##
-disqus:
-  # shortname:  #the Disqus shortname for the site
+# disqus:
+  # shortname: #the Disqus shortname for the site
 
 ## Google Analytics ##
-# ga_tracking_id:  #Google analytics id for the site
+# ga_tracking_id: #Google analytics id for the site
 
 ## Reading quantity (LeanCloud) ##
-leancloud:
-  # app_id:  #LeanCloud App id
-  # app_key:  #LeanCloud App key
-  # app_class:  #LeanCloud App class
+# leancloud:
+#   app_id: 
+#   app_key: 
+#   app_class: 
 
 # mathjax: true
 
 ## Paginate ##
-paginate: 5
+paginate: 7
 paginate_path: /blog/page:num
 
 ## Post excerpts ##

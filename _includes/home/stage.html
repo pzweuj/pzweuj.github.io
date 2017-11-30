@@ -1,0 +1,57 @@
+<!-- happy birthday -->
+<div class="stage">
+    <div class="egg" id="egg1"><img src="/res/pic/cake.png" /></div>
+    <div class="egg" id="egg2"><img src="/res/pic/cake.png" /></div>
+    <div class="egg" id="egg3"><img src="/res/pic/cake.png" /></div>
+    <div class="egg" id="egg4"><img src="/res/pic/cake.png" /></div>
+    <div class="egg" id="egg5"><img src="/res/pic/cake.png" /></div>
+    <div class="egg" id="egg6"><img src="/res/pic/cake.png" /></div>
+    <div class="egg" id="egg7"><img src="/res/pic/cake.png" /></div>
+    <div class="egg" id="egg8"><img src="/res/pic/cake.png" /></div>
+</div>
+
+<script>
+    $(function(){
+        var starPos;
+        var starWidth;
+        var starHeight;
+        var stageWidth;
+        var stageHeight;
+        var eggWidth = $(".egg").outerWidth();
+        var eggHeight = $(".egg").outerHeight();
+        setVar();
+        function setEggsPos(){
+            $("#egg1").css({"top": -eggHeight, "left": stageWidth / 3});
+            $("#egg2").css({"top": -eggHeight, "left": stageWidth / 3 * 2});
+            $("#egg3").css({"top": stageHeight / 3, "left": stageWidth});
+            $("#egg4").css({"top": stageHeight / 3 * 2, "left": stageWidth});
+            $("#egg5").css({"top": stageHeight, "left": stageWidth / 3});
+            $("#egg6").css({"top": stageHeight, "left": stageWidth / 3 * 2});
+            $("#egg7").css({"top": stageHeight / 3, "left": -eggWidth});
+            $("#egg8").css({"top": stageHeight / 3 * 2, "left": -eggWidth});
+        }
+        setEggsPos();
+        function setVar(){
+            stageWidth = $(".stage").outerWidth();
+            stageHeight = $(".stage").outerHeight();
+            starPos = $(".my-photo").offset();
+            starWidth = $(".my-photo").innerWidth();
+            starHeight = $(".my-photo").innerHeight();
+        }
+        $(window).resize(setVar);
+
+        function MoveAnimate(){
+            setEggsPos();
+            $(".egg").each(function(){
+                $(this).css({"opacity": "100"});
+                $(this).delay(Math.random()*2000).animate({
+                    left: starPos.left + starWidth / 2 - eggWidth / 2,
+                    top: starPos.top + starHeight / 2 - eggHeight / 2,
+                    opacity: 0
+                }, 1500);
+            });
+            }
+            MoveAnimate();
+            window.setInterval(MoveAnimate,4000);
+    });
+</script>

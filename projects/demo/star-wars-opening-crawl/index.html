@@ -1,0 +1,123 @@
+---
+layout: none
+title: Project Star War
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    
+    <title>Star Wars opening crawl</title>
+    <meta name="description" content="Star Wars opening crawl demo"> 
+    
+    <link rel="icon" sizes="128x128" type="image/vnd.microsoft.icon" href="/logo/favicon-128x128.ico"/>
+    <link rel="icon" sizes="64x64" type="image/vnd.microsoft.icon" href="/logo/favicon-64x64.ico"/>
+    <link rel="icon" sizes="48x48" type="image/vnd.microsoft.icon" href="/logo/favicon-48x48.ico"/>
+    <link rel="icon" sizes="32x32" type="image/vnd.microsoft.icon" href="/logo/favicon-32x32.ico"/>
+    <link rel="icon" sizes="16x16" type="image/vnd.microsoft.icon" href="/logo/favicon-16x16.ico"/>
+    <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico"> 
+    <link rel="apple-touch-icon" href="/logo/touch-icon-iphone.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/logo/touch-icon-ipad.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/logo/touch-icon-iphone-retina.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/logo/touch-icon-ipad-retina.png">
+    <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    
+    <style>
+        html {
+            height: 100%;
+        }
+        body {
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+            color: #ffda00;
+            font-size: 4em;
+            background-color: black;
+            perspective: 500;
+            -webkit-perspective: 500;
+        }
+        @media screen and (max-width: 300px){
+            body{
+                font-size: 1em;
+            }
+        }
+        @media screen and (min-width: 300px)and (max-width: 400px){
+            body{
+                font-size: 1.2em;
+            }
+        }
+        @media screen and (min-width: 400px) and (max-width: 650px){
+            body{
+                font-size: 2em;
+            }
+        }
+        a {
+            color: #ffda00;
+        }
+        .center {
+            text-align: center;
+        }
+        .paper {
+            height: 100%;
+            width: 100%;
+            
+            -webkit-transform: rotateX(60deg);
+            -moz-transform: rotateX(60deg);
+            transform: rotateX(60deg);
+        }
+        #content {
+            box-sizing: border-box;
+            margin: 0 auto;
+            width: 80%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .empty-content {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+        }
+        .bottom {
+           display: table;
+        }
+        .my-mine {           
+            display: table-cell;
+            vertical-align: middle;
+       }
+    </style>
+    <script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    <div class="paper">
+        <div id="content">
+            <div class="empty-content"></div>
+            <p class="center">A long time ago, in a galaxy far, far away...</p>
+            
+            <br><br>
+
+            <h4 class="center">Episode IV</h4>
+            <h5 class="center">A NEW HOPE</h5>
+            
+            <p class="center">It is a period of civil war. Rebel spaceships, striking from a hidden base, have won their first victory against the evil Galactic Empire.</p>
+            <p class="center">During the battle, Rebel spies managed to steal secret plans to the Empire's ultimate weapon,the DEATH STAR,an armored space station with enough power to destroy an entire planet.</p>
+            <p class="center">Pursued by the Empire's sinister agents,Princess Leia races home aboard her starship,custodian of the stolen plans that can save her people and restore freedom galaxy....</p>
+            <div class="empty-content bottom">
+                <div class="my-mine">
+                    <p class="center">May the Force be with You.</p>
+                    <p class="center"><a href="/blog/2016/02/17/may-the-force-be-with-you.html">How I made it</a></p>
+                    <p class="center">@<a href="http://weibo.com/kitian616">田小7777777</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+        var scrollHeight = $("#content")[0].scrollHeight;
+        $("#content").animate({scrollTop: scrollHeight}, scrollHeight * 20, "linear");
+    }());
+</script>
+</html>

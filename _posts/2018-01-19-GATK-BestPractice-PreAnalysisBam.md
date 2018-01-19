@@ -77,10 +77,10 @@ java -jar $picard AddOrReplaceReadGroups \
 	I=sample.marked_dup.bam \
 	O=sample.addhead.bam \
 	RGID=4 \
-    RGLB=lib1 \
-    RGPL=illumina \
-    RGPU=unit1 \
-    RGSM=20
+    	RGLB=lib1 \
+   	RGPL=illumina \
+    	RGPU=unit1 \
+    	RGSM=20
 # 这里后面几个RG信息都按自己的实际情况填哦
 ```
 

@@ -11,7 +11,7 @@ tags: software
 ![GATK-pre-analysis](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/GATK_pre_analysis.PNG)
 
 放两个用作测试学习的原始数据。
-点[这里](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/gatk-pre-analysis-test-data)下载！
+点[这里](https://github.com/pzweuj/pzweuj.github.io/tree/master/downloads/gatk-pre-analysis-test-data)下载！
 
 #1 先把需要用到的软件还有数据库下载好
 首先是软件。当然是要用最新的啦，跟上时代。

@@ -6,17 +6,16 @@ tags: coding
 这是整理过的脚本！
 
 说一说我的目录结构：
-└── ~
-    ├── Project              # 存放项目
-    │   └── MakePreBam       # 每个项目单独一个文件夹
-    │       ├── Bam          # 存放最终生成的bam文件
-    │       ├── Bin          # 存放使用的脚本
-    │       ├── Temp         # 存放中间文件，最终可以删掉
-    │       └── Rawdata      # 存放原始的fastq文件
-    │
-    ├── Database             # 数据库
-    ├── Scripts              # 脚本大杂烩，做啥都套模板就行了
-    └── Software             # 软件	
+-~
+	-Project              # 存放项目
+		-MakePreBam       # 每个项目单独一个文件夹
+			-Bam          # 存放最终生成的bam文件
+			-Bin          # 存放使用的脚本
+			-Temp         # 存放中间文件，最终可以删掉
+			-Rawdata      # 存放原始的fastq文件
+	-Database             # 数据库
+	-Scripts              # 脚本大杂烩，做啥都套模板就行了
+	-Software             # 软件	
 
 
 GATK4 best practise prepare bam

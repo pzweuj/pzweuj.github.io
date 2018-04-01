@@ -13,7 +13,7 @@ tags: coding
    |     |--Bam           # 存放最终生成的bam文件
    |     |--Bin           # 存放使用的脚本
    |     |--Temp          # 存放中间文件，最终可以删掉
-   |     |--Vcf           # 存放原始的fastq文件
+   |     |--Vcf           # 存放最终的Vcf文件
    |
    |--Database            # 数据库
    |--Scripts             # 脚本大杂烩，做啥都套模板就行了

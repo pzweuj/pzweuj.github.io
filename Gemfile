@@ -1,2 +1,8 @@
-source 'http://gems.ruby-china.org/'
-gem 'github-pages', '104', group: :jekyll_plugins
+source 'https://rubygems.org/'
+
+gemspec
+
+# For dev under windows, I know that yikes....
+
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+# gem 'wdm', '>= 0.1.0' if Gem.win_platform?

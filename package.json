@@ -1,17 +1,20 @@
 {
-  "name": "personal-site",
-  "version": "2.0.0",
-  "description": "My Personal Website, powered by jekyll-TeXt-theme",
+  "name": "jekyll-text-theme",
+  "version": "1.5.0",
+  "description": "A text first theme for Jekyll.",
   "scripts": {
     "build": "bundle exec jekyll build",
     "serve": "bundle exec jekyll serve -H 0.0.0.0",
-    "dev": "bundle exec jekyll serve -H 0.0.0.0 -t",
+    "default": "bundle exec jekyll serve -H 0.0.0.0 -t",
+    "dev": "bundle exec jekyll serve -H 0.0.0.0 -t --config ./_config.dev.yml",
+    "demo-dev": "bundle exec jekyll serve -H 0.0.0.0 -t --config ./_config.demo.yml",
+    "demo-beta": "JEKYLL_ENV=beta bundle exec jekyll serve -H 0.0.0.0 -t --config ./_config.demo.yml",
+    "demo-production": "JEKYLL_ENV=production bundle exec jekyll serve -H 0.0.0.0 -t --config ./_config.demo.yml",
     "favicon": "gulp favicon",
     "icons": "gulp icons",
     "artwork": "gulp artwork",
-    "merge": "sh bin/merge.sh",
-    "cm-merge": "git commit -m 'chore: merge to Text Theme'",
-    "cm-post": "git commit -m 'feat: publish new post'"
+    "gem-build": "rm -fv jekyll-text-theme-*.gem && gem build jekyll-text-theme.gemspec",
+    "gem-push": "gem push jekyll-text-theme-*.gem"
   },
   "repository": {
     "type": "git",
@@ -19,7 +22,8 @@
   },
   "keywords": [
     "jekyll",
-    "jekyll-site"
+    "jekyll-theme",
+    "jekyll-template"
   ],
   "author": "Tian Qi",
   "license": "MIT",
@@ -28,6 +32,7 @@
   },
   "homepage": "https://github.com/kitian616#readme",
   "devDependencies": {
+    "eslint": "^4.19.1",
     "gulp": "^3.9.1",
     "gulp-rename": "^1.2.2",
     "gulp-svg2png": "^2.0.2",

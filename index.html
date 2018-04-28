@@ -1,36 +1,8 @@
 ---
-title: 生物信息文件夹
-excerpt: pzweuj | 生物信息文件夹
+layout: home
+titles:
+  en: Blog
+  zh: 博客
+  zh-Hans: 博客
+  zh-Hant: 博客
 ---
-<!DOCTYPE html>
-<!-- 
-    一、不要懒
-	二、好好学习
-	三、喜欢钱
-	四、喜欢#
-                          -->
-<html lang="{{ site.lang }}">
-    <head>
-        {% include common-head.html %}
-        {% include head-icons-rel.html %}
-        <link rel="stylesheet" href="{{ "/assets/css/home.css" | prepend: site.baseurl | replace:'//','/' }}">
-        <script src="//cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
-    </head>
-    <body>
-        <div class="home" itemscope itemtype="http://schema.org/Person">
-            <div class="main">
-                <div class="content">
-                    <div class="my-photo">
-                        <img alt="my photo" src="https://github.com/pzweuj/pzweuj.github.io/raw/master/downloads/images/555.png" />
-                    </div>
-                    <h1 itemprop="name" class="title-text">{{ site.author.name }}</h1>
-                    {% include info/follow-me.html %}
-                    <p><a class="social-link blog" title="Visit my blog." itemprop="sameAs" href="/blog" target="_self">Visit My Blog</a></p>
-                </div>
-            </div>
-        </div>
-        {% if site.isdebug == false %}
-            {% include utils/google-analytics.html %}
-        {% endif %}
-    </body>
-</html>

@@ -1,6 +1,6 @@
-{% assign __return = '' %}
-{% if page.lang %}
-  {% assign __return = page.lang %}
-{% else %}
-  {% assign __return = site.lang %}
-{% endif %}
+{%- assign __return = site.data.variables.default.lang -%}
+{%- if page.lang -%}
+  {%- assign __return = page.lang -%}
+{%- elsif site.lang -%}
+  {%- assign __return = site.lang -%}
+{%- endif -%}

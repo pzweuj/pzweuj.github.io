@@ -11,12 +11,13 @@
 #    |  |  \   --. /  .'.  \  |  |
 #    `--'   `----''--'   '--' `--'
 
+text_color_theme: default #eg: default | dark | forest | ocean | chocolate | orange
 ## Base settings ##
-url: pzweuj.github.io #the base hostname & protocol for your site e.g. https://www.someone.com
+url: pzweuj.github.io
 baseurl: /
 title: 生物信息文件夹
 description: > #this means to ignore newlines until "nav_lists:"
-    吞pot的时候更新
+  吞pot的时候更新
 
 nav_lists:
   - titles:
@@ -24,55 +25,76 @@ nav_lists:
       zh: 关于
       zh-Hans: 关于
       zh-Hant: 關於
-    url: /blog/about.html
+    url: /about.html
 
 paths:
-  home: /blog
-  all:  /blog/all.html
+  base: /
+  home: /
+  all:  /all.html
   rss:  /feed.xml
 
-## GitHub repository (if the site is hosted by GitHub) ##
-repository: pzweuj/pzweuj.github.io
-repository_tree: master
+# GitHub repository (if the site is hosted by GitHub) ##
+repository:  pzweuj/pzweuj.github.io
+repository_tree:  #e.g. master
 
 ## Language & timezone ##
 lang: zh #the language of your site, eg: en(English), zh(简体中文), zh-Hans(简体中文), zh-Hant(繁體中文)
-timezone: Asia/Shanghai
+timezone: Asia/Shanghai #see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
 
 ## Author & social ##
 author:
   name: pzweuj
   email: pzweuj@live.com
   # facebook:  #your Facebook username
-  # twitter: 
-  github:  pzweuj
-  # googleplus: 101827554735084402671
-  # weibo: 
-  # douban:
+  # twitter:  #your Twitter username
+  github: pzweuj
+  # googleplus:  #your Google+ username
+  # weibo:  #your Weibo username
+  # douban:  #your Douban username
   # linkedin:  #your Linkedin username
 
+## TOC
+toc:
+  # selectors: 'h1,h2,h3'
+
 ## Comment system (Disqus) ##
-# disqus:
-  # shortname: #the Disqus shortname for the site
+disqus:
+  # shortname:  #the Disqus shortname for the site
+
+## Comment system (gitalk) ##
+# please refer to https://github.com/gitalk/gitalk for more info.
+gitalk:
+  # clientID:  #Github Application Client ID
+  # clientSecret:  #Github Application Client Secret
+  # repository:  #Github repo
+  # owner:  #Github repo owner
+  # admin: #Github repo owner and collaborators, only these guys can initialize github issues, IT IS A LIST.
+    # - owner
 
 ## Google Analytics ##
-# ga_tracking_id: #Google analytics id for the site
+# ga_tracking_id:  #Google analytics id for the site
 
 ## Reading quantity (LeanCloud) ##
-# leancloud:
-#   app_id: 
-#   app_key: 
-#   app_class: 
+leancloud:
+  # app_id:  #LeanCloud App id
+  # app_key:  #LeanCloud App key
+  # app_class:  #LeanCloud App class
 
 # mathjax: true
+# mathjax_autoNumber: true
+# mermaid: true
+# chart: true
 
 ## Paginate ##
 paginate: 7
-paginate_path: /blog/page:num
+paginate_path: /page:num
 
 ## Post excerpts ##
 excerpt_separator: <!--more-->
-excerpt_type: html # text | html
+excerpt_type: text # text | html
+
+## Sources ##
+# sources: bootcss #eg: bootcss | unpkg
 
 ## Build ##
 markdown: kramdown
@@ -98,7 +120,7 @@ exclude:
   - /vendor
 
 ## Plugins ##
-gems:
+plugins:
   - jekyll-sitemap
   - jekyll-feed
   - jekyll-paginate
@@ -106,6 +128,3 @@ gems:
 
 ## Server ##
 server_url: "0.0.0.0"
-
-## Development ##
-isdebug: false

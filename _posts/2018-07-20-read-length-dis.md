@@ -6,7 +6,7 @@ tags: coding
 
 直接用awk命令
 ```bash
-awk '{if(NR%4==2) print length($1)}' $inputdata | sort -n | uniq -c > reads_length.txt
+awk '{if(NR%4==2) print length($1)}' read.fastq | sort -n | uniq -c > reads_length.txt
 ```
 NR%4==2的意思是以每四行为一个组，统计每组的第二行（在fastq文件中就是碱基信息行）。
 

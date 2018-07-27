@@ -30,7 +30,7 @@ vt normalize temp.split2.vcf \
 	-r ~/database/b37/Homo_sapiens.GRCh37.dna.toplevel.fa \
 	-o temp.norm.vcf \
 	-w 2000000
-prepare_annovar_user.pl -dbtype clinvar2 temp.norm.vcf -out hg19_clinvar_20180701.txt
+perl prepare_annovar_user.pl -dbtype clinvar2 temp.norm.vcf -out hg19_clinvar_20180701.txt
 ```
 最后还是按之前那样创建个索引文件吧。
 [传送门](https://pzweuj.github.io/2018/04/25/convert-clinvar-to-annovar.html)

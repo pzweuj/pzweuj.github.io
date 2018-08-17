@@ -54,17 +54,17 @@ $picard MarkDuplicates \
 	I=~/Project/MakePreBam/Temp/sample.sorted.bam \
 	O=~/Project/MakePreBam/Temp/sample.marked_dup.bam \
 	M=~/Project/MakePreBam/Temp/sample_marked_dup.txt \
-	REMOVE_DUPLICATES=true
+	REMOVE_DUPLICATES=false
 
 # 加头信息。RGSM是样本名称，在somatic中需要，不能乱取。
 $picard AddOrReplaceReadGroups \
 	I=~/Project/MakePreBam/Temp/sample.marked_dup.bam \
 	O=~/Project/MakePreBam/Temp/sample.addhead.bam \
 	RGID=001 \
-    RGLB=lib1 \
-    RGPL=illumina \
-    RGPU=unit1 \
-    RGSM=sample
+	RGLB=lib1 \
+	RGPL=illumina \
+	RGPU=unit1 \
+	RGSM=sample
 
 # 创建索引
 $picard BuildBamIndex \

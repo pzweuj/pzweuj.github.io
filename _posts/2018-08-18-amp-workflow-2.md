@@ -57,12 +57,6 @@ filt_sample_info_tab$color[filt_sample_info_tab$char == "carbonate"] <- "darkkha
 filt_sample_info_tab
 ```
 
-基本分析(暂缺待更新)
----
-```R
-
-```
-
 Alpha分析
 ---
 ```R

@@ -246,6 +246,7 @@ plot_ordination(vst_physeq, vst_pcoa, color="time") +
   theme(legend.position="none")
 ```
 ![pcoa](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/amp-pcoa.png)
+
 可以看出随着前9天和后9天的组间差异还是很明显的。
 
 至此，扩增子的学习暂告一段落了。

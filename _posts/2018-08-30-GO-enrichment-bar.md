@@ -57,7 +57,7 @@ write.table(CC_df, file="GO_CC.xls", sep="\t", row.names=F)
 CC_top5 <- head(CC_df, n=5)
 
 # 这次就是用ggplot2画图
-p <- ggplot(CC_df, aes(x=CC_df$Description, y=CC_df$BgRatio, fill=CC_df$p.adjust)) + geom_bar(stat="identity") +
+p <- ggplot(CC_top5, aes(x=CC_top5$Description, y=CC_top5$BgRatio, fill=CC_top5$p.adjust)) + geom_bar(stat="identity") +
 	theme(axis.text.x = element_text(angle = 45, hjust = 0.5, vjust = 0.5)) +
 	ylab("sample number/background number") +
 	xlab("pathway name") +

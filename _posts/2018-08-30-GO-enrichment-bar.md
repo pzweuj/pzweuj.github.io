@@ -66,6 +66,32 @@ p <- ggplot(CC_top5, aes(x=CC_top5$Description, y=CC_top5$BgRatio, fill=CC_top5$
 p
 ```
 结果如下
-![qc](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/GO_CC_bar_1.PNG)
+![CC1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/GO_CC_bar_1.PNG)
 
-[-_-]:萌井
+##20180905更新
+p值越小，置信等级越高，所以这里需要把图例反过来。
+
+采取一个投机取巧的方法，把p值求相反数。
+```R
+CC_top5$p.adjust2 <- 0 - CC_top5$p.adjust
+```
+
+然后再来画图，注意这里的labels和breaks是一一对应的。labels是图例显示，而breaks是实际中的断点。
+```R
+p <- ggplot(CC_top5, aes(x=CC_top5$Description, y=CC_top5$GeneRatio, fill=CC_top5$p.adjust2)) + geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)) +
+  ylab("sample number/background number") +
+  xlab("pathway name") +
+  labs(fill="p.adjust") +
+  scale_fill_gradient(low="#C1FFC1",
+                      high="#228B22",
+                      labels=c("0.01", "0"),
+                      breaks=c(-0.01, 0),
+                      limits=c(-0.01, 0)
+                      )
+p
+```
+![CC2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/GO_CC_bar_3.png)
+
+
+[-_-]:萌井!

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 科学上网，shadowsocks+BRR
+title: 科学上网，shadowsocks+BBR
 tags: software
 ---
 >首先，你需要一个服务器。
@@ -26,7 +26,7 @@ chmod +x shadowsocks-all.sh
 ./shadowsocks-all.sh uninstall
 ```
 
-然后接下来装BRR。BRR是一个加速网络的算法。
+然后接下来装BBR。BBR是一个加速网络的算法。
 ```
 # 下载脚本
 wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh

@@ -1,28 +1,23 @@
 .main {
-  width: 100%;
-  max-width: map-get($layout, content-max-width);
-  padding: 0 map-get($spacers, 5);
+  box-sizing: border-box;
   margin: 0 auto;
-  @include media-breakpoint-down(lg) {
-    padding: 0 map-get($spacers, 4);
+  padding: 0 2rem;
+  max-width: map-get($layout, content-max-width);
+  @include media-breakpoint-down(l) {
+    padding: 0 1rem;
   }
-  @include media-breakpoint-down(md) {
-    padding: 0 map-get($spacers, 3);
-  }
-}
-
-.has-aside {
-  .main {
-    max-width: map-get($layout, content-max-width) + map-get($layout, aside-width);
-    @include media-breakpoint-down(lg) {
-      max-width: map-get($layout, content-max-width);
+  .main-header {
+    & > h1 {
+      font-weight: map-get($base, font-weight-bold);
     }
+    margin-top: 2rem;
   }
 }
 
-.full-width {
-  .main {
-    width: 100%;
-    max-width: 100%;
+.has-toc .main {
+  max-width: map-get($layout, content-max-width) + map-get($layout, aside-width);
+  @include media-breakpoint-down(l) {
+    max-width: map-get($layout, content-max-width);
+    padding: 0 1rem;
   }
 }

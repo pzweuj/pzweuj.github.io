@@ -1,0 +1,98 @@
+.m-all {
+  &.search > .main {
+    & > .m-tags {
+      display: none;
+    }
+    & > .m-result {
+      section {
+        ul > li {
+          .date {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+  & > .main {
+    & > .m-tags {
+      margin-bottom: map-get($base, vertical-space-large) * 2;
+      display: block;
+    }
+    & > .m-search-box {
+      position: relative;
+      box-sizing: border-box;
+      max-width: 22rem;
+      margin: map-get($base, vertical-space-large) 0;
+      @include media-breakpoint-down(s) {
+        max-width: none;
+        width: 100%;
+      }
+      & > input {
+        @include round-rect(2rem, .2rem 1.8rem);
+        @include transition(box-shadow map-get($animation, duration) map-get($animation, timing-function));
+        -webkit-appearance: none; /* fix iOS don't display box-shadow properly */
+        width: 100%;
+        box-sizing: border-box;
+        display: inline-block;
+        border: none;
+        margin: 0;
+        background-color: $text-background-color;
+        @include link-focus() {
+          @include box-shadow(1);
+        }
+      }
+      & > .icon-search, & > .icon-clear {
+        position: absolute;
+        top: 50%;
+        @include transform(translateY(-50%));
+        display: inline-block;
+        vertical-align: middle;
+        & > svg {
+          display: block;
+          fill: $text-color-l;
+          height: 1.2rem;
+          width: 1.2rem;
+        }
+      }
+      &.not-empty > .icon-clear {
+        display: block;
+      }
+      & > .icon-clear {
+        display: none;
+        right: .5rem;
+        @extend %button;
+        @include link-colors($text-color-l, transparent,
+          $text-color-d, transparent, $text-color-d, transparent);
+      }
+      & > .icon-search {
+        left: .5rem;
+      }
+    }
+    & > .m-result {
+      margin: map-get($base, vertical-space-large) 0;
+      section {
+        &:not(:last-child) {
+          padding: 0 0 .4rem 0;
+        }
+        .year {
+          font-size: 1.6rem;
+        }
+        ul > li {
+          list-style-type: none;
+          margin: .4rem 0;
+          .date {
+            font-family: map-get($base, code-font-family);
+            display: inline-block;
+            font-size: map-get($base, font-size-sub);
+            color: $text-color-l;
+            padding: 0 1rem 0 0;
+          }
+          .link {
+            font-size: 1rem;
+            @include link-text-colors($text-color-d, $main-color-1, $main-color-1);
+          }
+        }
+      }
+    }
+  }
+}

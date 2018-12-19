@@ -1,4 +1,4 @@
-@include keyframes(fade-in-down) {
+@keyframes fade-in-down {
   from {
     opacity: 0;
     @include transform(translateY(-2rem));

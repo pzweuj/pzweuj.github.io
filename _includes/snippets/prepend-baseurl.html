@@ -1,4 +1,1 @@
-{%- assign _include_path_replace_index = include.path | replace: 'index.html', '' -%}
-{%- include snippets/prepend-path.html
-  path=_include_path_replace_index
-  prepend_path=site.baseurl -%}
+{%- assign __return = __path | replace:'index.html','' | prepend: site.baseurl | replace:'//','/' -%}

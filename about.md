@@ -1,5 +1,5 @@
 ---
-layout: article
+layout: page
 titles:
   en: About
   zh: 关于

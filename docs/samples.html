@@ -1,0 +1,21 @@
+---
+layout: page
+title: Samples
+permalink: /samples.html
+---
+<div class="layout--articles">
+  <div class="my-5">
+    <h2 id="page-layout">Page Layout</h2>
+    {%- include article-list.html articles=site.page type='grid' -%}
+  </div>
+
+  <div class="my-5">
+    <h2 id="articles-layout">Articles(Home) Layout</h2>
+    {%- include article-list.html articles=site.articles type='grid' -%}
+  </div>
+
+    <div class="my-5">
+    <h2 id="languages">Languages</h2>
+    {%- include article-list.html articles=site.languages type='grid' -%}
+  </div>
+</div>

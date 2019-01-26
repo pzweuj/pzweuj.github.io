@@ -4,6 +4,9 @@ title: WSL怎么用docker
 tags: default
 ---
 
+[以前写的docker安装流程](https://pzweuj.github.io/2018/07/23/docker-install.html)
+
+
 WSL里装了docker，但是运行的时候会报
 ```shell
 docker: Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?.                See 'docker run --help'. 

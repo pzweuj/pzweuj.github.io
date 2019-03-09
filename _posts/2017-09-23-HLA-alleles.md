@@ -1,5 +1,4 @@
 ---
-layout: post
 title: HLA分型与资料数据库
 tags: database
 ---

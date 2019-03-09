@@ -1,5 +1,4 @@
 ---
-layout: post
 title: GATK4推荐的call体细胞突变流程（脚本）
 tags: coding
 ---

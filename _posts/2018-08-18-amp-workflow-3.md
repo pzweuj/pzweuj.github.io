@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 扩增子流程
 tags: default
 ---

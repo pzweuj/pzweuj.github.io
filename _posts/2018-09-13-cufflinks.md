@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 用cufflinks统计RPKM值
 tags: software
 ---

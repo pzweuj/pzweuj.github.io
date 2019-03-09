@@ -1,5 +1,4 @@
 ---
-layout: post
 title: GATK推荐的找体细胞突变流程
 tags: software
 ---

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 新建用于annovar的cosmic数据库
 tags: default
 ---

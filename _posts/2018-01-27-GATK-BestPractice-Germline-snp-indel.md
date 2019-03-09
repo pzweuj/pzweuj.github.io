@@ -1,5 +1,4 @@
 ---
-layout: post
 title: GATK推荐的germline call snp+indel流程
 tags: software
 ---

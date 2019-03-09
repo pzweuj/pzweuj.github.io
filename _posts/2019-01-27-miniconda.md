@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 这才是conda的正确姿势
 tags: default
 ---

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 统计fastq中每个读长的counts数
 tags: coding
 ---

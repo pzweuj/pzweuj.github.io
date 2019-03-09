@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 新手组装电脑注意事项
 tags: default
 ---

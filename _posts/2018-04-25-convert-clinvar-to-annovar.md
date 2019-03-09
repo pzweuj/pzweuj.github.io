@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 把clinvar转换成annovar可用的格式
 tags: coding
 ---

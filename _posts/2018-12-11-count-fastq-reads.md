@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 用shell命令统计fastq的reads数
 tags: coding
 ---

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Hello world!
 tags: default
 ---

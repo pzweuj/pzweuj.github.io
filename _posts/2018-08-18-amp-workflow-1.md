@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 扩增子流程以及复现文章（1）
 tags: default
 ---

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 从TCGA中获得甲状腺癌的相关突变
 tags: coding
 ---

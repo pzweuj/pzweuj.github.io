@@ -1,5 +1,4 @@
 ---
-layout: post
 title: annovar的官方clinvar数据库格式修改教程
 tags: default
 ---

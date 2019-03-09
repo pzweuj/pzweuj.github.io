@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 用R处理ab1数据
 tags: coding
 ---

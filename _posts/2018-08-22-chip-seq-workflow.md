@@ -1,5 +1,4 @@
 ---
-layout: post
 title: ChIP-seq基本流程
 tags: default
 ---

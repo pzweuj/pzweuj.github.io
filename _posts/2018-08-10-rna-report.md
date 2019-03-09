@@ -1,5 +1,4 @@
 ---
-layout: post
 title: RNA-seq报告简单模板
 tags: default
 ---

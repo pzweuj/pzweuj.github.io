@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 建立阿尔兹海默病的数据库
 tags: coding
 ---

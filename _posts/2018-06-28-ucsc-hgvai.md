@@ -1,5 +1,4 @@
 ---
-layout: post
 title: UCSC在线对vcf进行注释
 tags: default
 ---

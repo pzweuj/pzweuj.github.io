@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 安装docker
 tags: software
 ---

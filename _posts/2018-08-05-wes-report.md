@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 外显子报告简单模板
 tags: default
 ---

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: root登录ubuntu的图形界面
 tags: default
 ---

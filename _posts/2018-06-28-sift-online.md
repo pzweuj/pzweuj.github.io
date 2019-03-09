@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 使用在线的sift
 tags: software
 ---

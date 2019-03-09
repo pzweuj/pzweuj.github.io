@@ -1,5 +1,4 @@
 ---
-layout: post
 title: github建立博客！
 tags: default
 ---

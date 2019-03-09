@@ -1,5 +1,4 @@
 ---
-layout: post
 title: ggplot2画GO注释的条形图
 tags: coding
 ---

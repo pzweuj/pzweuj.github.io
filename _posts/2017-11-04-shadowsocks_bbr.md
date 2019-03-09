@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 科学上网，shadowsocks+BBR
 tags: software
 ---

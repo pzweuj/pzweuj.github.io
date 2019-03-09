@@ -1,5 +1,4 @@
 ---
-layout: post
 title: GATK流程
 tags: default
 ---

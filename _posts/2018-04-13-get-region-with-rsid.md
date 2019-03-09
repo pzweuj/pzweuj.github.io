@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 知道RSID，怎么得到在染色体上的位置
 tags: default
 ---

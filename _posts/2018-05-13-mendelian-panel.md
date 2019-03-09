@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 弄了个孟德尔遗传病的panel
 tags: database
 ---

@@ -1,5 +1,4 @@
 ---
-layout: post
 title: GATK4推荐的数据预处理（脚本）
 tags: coding
 ---

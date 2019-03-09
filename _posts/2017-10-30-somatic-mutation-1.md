@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 肿瘤体细胞基因突变高通量测序(1)
 tags: default
 ---

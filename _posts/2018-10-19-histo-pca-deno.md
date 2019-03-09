@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 柱状图，PCA图，系统发育树
 tags: coding
 ---

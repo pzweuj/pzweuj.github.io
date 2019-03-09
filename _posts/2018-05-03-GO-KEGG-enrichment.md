@@ -1,5 +1,4 @@
 ---
-layout: post
 title: GO/KEGG 富集分析
 tags: coding
 ---

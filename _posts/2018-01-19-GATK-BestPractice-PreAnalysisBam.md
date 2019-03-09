@@ -1,5 +1,4 @@
 ---
-layout: post
 title: GATK推荐的数据预处理流程
 tags: software
 ---

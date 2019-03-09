@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 宏基因组，除去宿主序列
 tags: default
 ---

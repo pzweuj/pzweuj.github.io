@@ -1,5 +1,4 @@
 ---
-layout: post
 title: 通过OMIM做一个癫痫panel
 tags: default
 ---

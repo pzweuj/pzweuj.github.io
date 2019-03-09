@@ -1,6 +1,7 @@
 ---
 title: Hello world!
 tags: default
+key: Hello-World
 ---
 这是一篇测试文章，TEST，~~~test~~~ testing
 

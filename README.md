@@ -1,5 +1,5 @@
 #update log
-<br>20190309 升级模块 
+<br>20190309 以后的博文添加评论模块
 <br>20181219 狗在家的日子将要过去，接下来好好更新
 <br>20180428 更新一下
 <br>20171130 更新一下博客模板[TeXt](https://github.com/kitian616/jekyll-TeXt-theme)

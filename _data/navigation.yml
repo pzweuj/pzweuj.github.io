@@ -1,0 +1,68 @@
+header:
+  - titles:               最差实践
+    url:                  /docs/quick-start
+  - titles:
+      en      : &EN       Archive
+      en-GB   : *EN
+      en-US   : *EN
+      en-CA   : *EN
+      en-AU   : *EN
+      zh-Hans : &ZH_HANS  归档
+      zh      : *ZH_HANS
+      zh-CN   : *ZH_HANS
+      zh-SG   : *ZH_HANS
+      zh-Hant : &ZH_HANT  歸檔
+      zh-TW   : *ZH_HANT
+      zh-HK   : *ZH_HANT
+      ko      : &KO       아카이브
+      ko-KR   : *KO
+    url: /archive.html
+
+  - titles:
+      en      : &EN       About
+      en-GB   : *EN
+      en-US   : *EN
+      en-CA   : *EN
+      en-AU   : *EN
+      zh-Hans : &ZH_HANS  关于
+      zh      : *ZH_HANS
+      zh-CN   : *ZH_HANS
+      zh-SG   : *ZH_HANS
+      zh-Hant : &ZH_HANT  關於
+      zh-TW   : *ZH_HANT
+      zh-HK   : *ZH_HANT
+      ko      : &KO       소개
+      ko-KR   : *KO
+    url: /about.html
+
+docs-zh:
+  - title:      开始
+    children:
+      - title:  快速开始
+        url:    /docs/zh/quick-start
+      - title:  从 1.x 升级到 2.x
+        url:    /docs/zh/update-from-1-to-2
+  - title:      定制
+    children:
+      - title:  配置
+        url:    /docs/zh/configuration
+      - title:  导航栏
+        url:    /docs/zh/navigation
+      - title:  布局
+        url:    /docs/zh/layouts
+      - title:  Logo 和 Favicon
+        url:    /docs/zh/logo-and-favicon
+      - title:  作者
+        url:    /docs/zh/authors
+      - title:  国际化
+        url:    /docs/zh/i18n
+  - title:      内容
+    children:
+      - title:  撰写博客
+        url:    /docs/zh/writing-posts
+      - title:  附加样式
+        url:    /docs/zh/additional-styles
+      - title:  扩展
+        url:    /docs/zh/extensions
+      - title:  Markdown 增强
+        url:    /docs/zh/markdown-enhancements

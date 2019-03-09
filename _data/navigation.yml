@@ -6,7 +6,7 @@ header:
       zh-Hans : &ZH_HANS  归档
     url: /archive.html
   - titles:
-      ZH_Hans : &ZH_HANS  最差实践
+      ZH_Hans : &ZH_HANS  实践
     url: /docs/en/quick-start
     key: docs
   - titles:

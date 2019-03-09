@@ -1,10 +1,14 @@
 header:
-  - titles:               最差实践
-    url:                  /docs/quick-start
+  - titles:
+      zh-Hans : &ZH_HANS  博客
+    url: /
   - titles:
       zh-Hans : &ZH_HANS  归档
     url: /archive.html
-
+  - titles:
+      ZH_Hans : &ZH_HANS  最差实践
+    url: /docs/en/quick-start
+    key: docs
   - titles:
       zh-Hans : &ZH_HANS  关于
     url: /about.html

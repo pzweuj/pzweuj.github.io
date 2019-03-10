@@ -215,19 +215,6 @@ defaults:
       show_subscribe: false
       pageview: true
 
-  ## docs
-  - scope:
-      path: "_docs/zh"
-    values:
-      layout: article
-      nav_key: docs
-      sidebar:
-        nav: docs-zh
-      license: true
-      aside:
-        toc: true
-      show_edit_on_github: true
-      show_date: false
 
 ## => Plugins
 ##############################

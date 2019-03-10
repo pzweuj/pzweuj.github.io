@@ -11,7 +11,7 @@
 #    |  |  \   --. /  .'.  \  |  |
 #    `--'   `----''--'   '--' `--'
 
-
+# config file for demo site, DELETE IT IF YOU WANT.
 
 
 ## => Site Settings
@@ -19,16 +19,16 @@
 text_skin: default # "default" (default), "dark", "forest", "ocean", "chocolate", "orange"
 highlight_theme: default # "default" (default), "tomorrow", "tomorrow-night", "tomorrow-night-eighties", "tomorrow-night-blue", "tomorrow-night-bright"
 url     : https://pzweuj.github.io
-baseurl : # does not include hostname
-title   : 生物信息文件夹
-description: > # this means to ignore newlines until "Language & timezone"
-  吞pot的时候更新
+baseurl : /docs
+title   : 生物信息实践
+description: >
+  想叫最差实践，意思是至少还能实践呀
 
 
 ## => Language and Timezone
 ##############################
 lang: zh-Hans # the language of your site, default as "en"
-timezone: Asia/Shanghai # see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones for the available values
+timezone: Asia/Shanghai
 
 
 ## => Author and Social
@@ -37,20 +37,21 @@ author:
   type      : # "person" (default), "organization"
   name      : pzweuj
   url       :
-  avatar    : # path or url of avatar image (square)
-  bio       : 不想学习。
+  avatar    : 
+  bio: >
+    用于整理各种分析流程！
   email     : pzweuj@live.com
-  facebook  : # "user_name" the last part of your profile url, e.g. https://www.facebook.com/user_name
-  twitter   : # "user_name" the last part of your profile url, e.g. https://twitter.com/user_name
-  weibo     : # "user_id"   the last part of your profile url, e.g. https://www.weibo.com/user_id/profile?...
-  googleplus: # "user_id"   the last part of your profile url, e.g. https://plus.google.com/u/0/user_id
-  telegram  : # "user_name" the last part of your profile url, e.g. https://t.me/user_name
-  medium    : # "user_name" the last part of your profile url, e.g. https://medium.com/user_name
-  zhihu     : # "user_name" the last part of your profile url, e.g. https://www.zhihu.com/people/user_name
-  douban    : # "user_name" the last part of your profile url, e.g. https://www.douban.com/people/user_name
-  linkedin  : # "user_name" the last part of your profile url, e.g. https://www.linkedin.com/in/user_name
-  github    : pzweuj # "user_name" the last part of your profile url, e.g. https://github.com/user_name
-  npm       : # "user_name" the last part of your profile url, e.g. https://www.npmjs.com/~user_name
+  facebook  :
+  twitter   : 
+  weibo     : 
+  googleplus: 
+  telegram  :
+  medium    :
+  zhihu     :
+  douban    :
+  linkedin  :
+  github    : pzweuj
+  npm       :
 
 
 ## => GitHub Repository (if the site is hosted by GitHub)
@@ -63,7 +64,7 @@ repository_tree: master
 ##############################
 paths:
   root    : # title link url, "/" (default)
-  home    : # home layout url, "/" (default)
+  home    :  # home layout url, "/" (default)
   archive : # "/archive.html" (default)
   rss     : # "/feed.xml" (default)
 
@@ -74,7 +75,7 @@ paths:
 excerpt_separator: <!--more-->
 
 ## license
-license: CC-BY-NC-4.0 # "CC-BY-4.0", "CC-BY-SA-4.0", "CC-BY-NC-4.0", "CC-BY-ND-4.0"
+license: CC-BY-4.0 # "CC-BY-4.0", "CC-BY-SA-4.0", "CC-BY-NC-4.0", "CC-BY-ND-4.0"
 
 ## TOC
 toc:
@@ -84,14 +85,14 @@ toc:
 ## => Markdown Enhancements
 ##############################
 ## Mathjax
-mathjax: # false (default), true
-mathjax_autoNumber: # false (default), true
+mathjax: true # false (default), true
+mathjax_autoNumber: true # false (default), true
 
 ## Mermaid
-mermaid: # false (default), true
+mermaid: true # false (default), true
 
 ## Chart
-chart: # false (default), true
+chart: true # false (default), true
 
 
 ## => Paginate
@@ -108,17 +109,18 @@ sources: # bootcdn (default), unpkg
 ## => Sharing
 ##############################
 sharing:
-  provider: false # false (default), "addtoany", "addthis", "custom"
+  provider:  # false (default), "addtoany", "addthis", "custom"
 
   ## AddThis
   addthis:
-    id: # AddThis pubid, e.g. ra-5xxxxxxxxxxx
+    id:  # AddThis pubid, e.g. ra-5xxxxxxxxxxx
 
 
 ## => Comments
 ##############################
 comments:
   provider: gitalk # false (default), "disqus", "gitalk", "valine", "custom"
+  # provider: valine
 
   ## Disqus
   disqus:
@@ -127,33 +129,31 @@ comments:
   ## Gitalk
   # please refer to https://github.com/gitalk/gitalk for more info.
   gitalk:
-    clientID    : 8ad9eb9adde22f7d620e # GitHub Application Client ID
-    clientSecret: 0bc89357f4ff8502086ed5736184e9aa0c5ab17f # GitHub Application Client Secret
-    repository  : pzweuj.github.io # GitHub repo
-    owner       : pzweuj # GitHub repo owner
-    admin: pzweuj # GitHub repo owner and collaborators, only these guys can initialize GitHub issues, IT IS A LIST.
-      # - your GitHub Id
+    clientID    : 8ad9eb9adde22f7d620e
+    clientSecret: 0bc89357f4ff8502086ed5736184e9aa0c5ab17f
+    repository  : pzweuj.github.io
+    owner       : pzweuj
+    admin:
+      - pzweuj
 
   ## Valine
   # please refer to https://valine.js.org/en/ for more info.
   valine:
-    app_id      : # LeanCloud App id
-    app_key     : # LeanCloud App key
+    app_id      : 
+    app_key     : 
     placeholder : # Prompt information
-    visitor     : # false (default)
-    meta        : # "[nick, mail, link]" (default) nickname, E-mail, Personal-site
 
 
 ## => Pageview
 ##############################
 pageview:
-  provider: false # false (default), "leancloud", "custom"
+  provider:  # false (default), "leancloud", "custom"
 
   ## Leancloud
   leancloud:
-    app_id    : # LeanCloud App id
-    app_key   : # LeanCloud App key
-    app_class : # LeanCloud App class
+    app_id    : 
+    app_key   : 
+    app_class : 
 
 
 ## => Search
@@ -173,8 +173,8 @@ analytics:
 
   ## Google Analytics
   google:
-    tracking_id : UA-131202162-1 # Google Analytics id for the site
-    anonymize_ip: true # Anonymize IP tracking for Analytics
+    tracking_id : UA-131202162-1
+    anonymize_ip: true
 
 
 ## => Build
@@ -195,13 +195,33 @@ exclude:
   - jekyll-text-theme.gemspec
   - package-lock.json
   - package.json
-  - /docs
+  # - /docs
   - /node_modules
-  - /screenshots
-  - /test
+  # - /screenshots
+  # - /test
   - /vendor
+  - /_posts
+  - /index.html
+
+collections_dir: docs
+collections:
+  docs:
+    output: true
+  sample_page:
+    output: true
+  sample_articles:
+    output: true
+  sample_languages:
+    output: true
 
 defaults:
+  ## home
+  - scope:
+      path: "test"
+    values:
+      articles:
+        excerpt_type: html
+  ## posts
   - scope:
       path: ""
       type: posts
@@ -209,11 +229,47 @@ defaults:
       layout: article
       sharing: true
       license: true
+      category: post
       aside:
         toc: true
       show_edit_on_github: false
       show_subscribe: false
       pageview: true
+      # lightbox: true
+  ## samples
+  - scope:
+      path: ""
+      type: sample_page
+    values:
+      nav_key: samples
+  - scope:
+      path: ""
+      type: sample_articles
+    values:
+      nav_key: samples
+      show_date: false
+  - scope:
+      path: ""
+      type: sample_languages
+    values:
+      layout: article
+      nav_key: samples
+      show_date: false
+  ## docs
+  - scope:
+      path: "_docs/zh"
+    values:
+      layout: article
+      nav_key: docs
+      sidebar:
+        nav: docs-zh
+      license: true
+      aside:
+        toc: true
+      lang: zh
+      show_edit_on_github: false
+      show_date: false
+      # lightbox: true
 
 
 ## => Plugins
@@ -222,4 +278,7 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-github-metadata
   - jemoji
+
+data_dir: /docs/_data

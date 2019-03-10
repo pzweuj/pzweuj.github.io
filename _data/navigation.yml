@@ -7,7 +7,7 @@ header:
     url: /archive.html
   - titles:
       zh_Hans : &ZH_HANS  实践
-    url: /docs/zh/quick-start
+    url: /_docs/zh/quick-start
     key: docs
   - titles:
       zh-Hans : &ZH_HANS  反馈

@@ -6,8 +6,8 @@ header:
       zh-Hans : &ZH_HANS  归档
     url: /archive.html
   - title:                实践
-    url:        /_docs/zh/quick-start
-    key:        docs
+    url: /_docs/zh/quick-start
+    key: docs
   - titles:
       zh-Hans : &ZH_HANS  反馈
     url: /about.html
@@ -16,9 +16,9 @@ docs-zh:
   - title:      开始
     children:
       - title:  快速开始
-        url:    /docs/zh/quick-start
+        url:    /_docs/zh/quick-start
       - title:  从 1.x 升级到 2.x
-        url:    /docs/zh/update-from-1-to-2
+        url:    /_docs/zh/update-from-1-to-2
   - title:      定制
     children:
       - title:  配置

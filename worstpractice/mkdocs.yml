@@ -2,7 +2,8 @@ site_name: 生物信息最差实践
 site_description: '最差也能实践'
 site_author: 'pzweuj'
 site_url: 'https://pzweuj.github.io/worstpractice'
-theme: 'mkdocs'
+theme: 
+  name: 'material'
 copyright: 'Copyright &copy; 2019 pzweuj'
 
 repo_url: https://github.com/pzweuj/pzweuj.github.io/worstpractice

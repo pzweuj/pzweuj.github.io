@@ -6,7 +6,7 @@ theme:
   name: 'material'
 copyright: 'Copyright &copy; 2019 pzweuj'
 
-repo_url: https://github.com/pzweuj/pzweuj.github.io/worstpractice
+repo_url: https://github.com/pzweuj/pzweuj.github.io/
 
 extra:
   palette:

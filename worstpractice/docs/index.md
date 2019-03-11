@@ -1,17 +1,26 @@
-# Welcome to MkDocs
+# 生物信息最差实践
 
-For full documentation visit [mkdocs.org](https://mkdocs.org).
+取这个名字，其实是想和Best Practice做点区别，取最差也能实践的意思。
+开始的时候，其实是想着，从原始的[博客](pzweuj.github.io)里把流程相关的提取出来，这里的宗旨，就是不像博客那些碎碎念。
 
-## Commands
+[点击返回博客](https://pzweuj.github.io)
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
+## 期望更新
 
-## Project layout
+DNA-seq分析流程
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+RNA-seq分析流程
+
+ChIP-seq分析流程
+
+16S分析流程
+
+宏基因组分析流程
+
+scRNA-seq分析流程
+
+## 目前进度
+
+木有进度！
+
+[^_^]:献给前景

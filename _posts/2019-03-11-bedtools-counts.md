@@ -21,9 +21,14 @@ bedtools genomecov -ibam xxx.sorted.bam -g reference.fa -d -split > results.txt
 得到下面这样的结果
 
 chr1	100	101	300
+
 chr1	101	102	311
+
 chr1	102	103	400
+
 chr1	103	104	320
+
+
 
 这时候就可以用python脚本来统计了
 ```python

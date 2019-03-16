@@ -14,6 +14,16 @@ extra:
 
 nav:
   - '前言': index.md
+  - '一、 DNA-seq' :
+    - '01. 参考基因/数据库/原始数据的准备': C01_DNA-seq/01.prepare_data.md
+    - '02. 比对': C01_DNA-seq/02.mapping.md
+    - '03. 排序以及标记重复序列': C01_DNA-seq/03.sort_and_mark_duplicates.md
+    - '04. 找变异': C01_DNA-seq/04.call_snp.md
+    - '05. 体细胞突变': C01_DNA-seq/05.call_somatics.md
+    - '06. CNV突变': C01_DNA-seq/06.call_cnvs.md
+    - '07. 融合基因检测': C01_DNA-seq/07.call_fusions.md
+    - '08. 注释': C01_DNA-seq/08.annotation.md
+    - '09. 可视化': C01_DNA-seq/09.visualization.md
 
 use_directory_urls: true
 

@@ -13,7 +13,7 @@
         <meta name="description" content="最差也能实践">
       
       
-        <link rel="canonical" href="https://pzweuj.github.io/worstpractice/">
+        <link rel="canonical" href="https://pzweuj.github.io/worstpractice/C01_DNA-seq/01.prepare_data/">
       
       
         <meta name="author" content="pzweuj">
@@ -37,21 +37,21 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.0.2">
     
     
       
-        <title>生物信息最差实践</title>
+        <title>01. 参考基因/数据库/原始数据的准备 - 生物信息最差实践</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/application.982221ab.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.982221ab.css">
       
       
     
     
-      <script src="assets/javascripts/modernizr.1f0bcf2b.js"></script>
+      <script src="../../assets/javascripts/modernizr.1f0bcf2b.js"></script>
     
     
       
@@ -60,7 +60,7 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
     
     
     
@@ -150,7 +150,7 @@
               生物信息最差实践
             </span>
             <span class="md-header-nav__topic">
-              前言
+              01. 参考基因/数据库/原始数据的准备
             </span>
           
         </div>
@@ -258,56 +258,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        前言
-      </label>
-    
-    <a href="." title="前言" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../.." title="前言" class="md-nav__link">
       前言
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" title="期望更新" class="md-nav__link">
-    期望更新
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" title="目前进度" class="md-nav__link">
-    目前进度
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -315,10 +270,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       一、 DNA-seq
@@ -334,11 +291,63 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="C01_DNA-seq/01.prepare_data/" title="01. 参考基因/数据库/原始数据的准备" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        01. 参考基因/数据库/原始数据的准备
+      </label>
+    
+    <a href="./" title="01. 参考基因/数据库/原始数据的准备" class="md-nav__link md-nav__link--active">
       01. 参考基因/数据库/原始数据的准备
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" title="参考基因组的准备" class="md-nav__link">
+    参考基因组的准备
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" title="准备各种数据集" class="md-nav__link">
+    准备各种数据集
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="准备原始数据" class="md-nav__link">
+    准备原始数据
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -348,7 +357,7 @@
 
 
   <li class="md-nav__item">
-    <a href="C01_DNA-seq/02.mapping/" title="02. 比对" class="md-nav__link">
+    <a href="../02.mapping/" title="02. 比对" class="md-nav__link">
       02. 比对
     </a>
   </li>
@@ -360,7 +369,7 @@
 
 
   <li class="md-nav__item">
-    <a href="C01_DNA-seq/03.sort_and_mark_duplicates/" title="03. 排序以及标记重复序列" class="md-nav__link">
+    <a href="../03.sort_and_mark_duplicates/" title="03. 排序以及标记重复序列" class="md-nav__link">
       03. 排序以及标记重复序列
     </a>
   </li>
@@ -372,7 +381,7 @@
 
 
   <li class="md-nav__item">
-    <a href="C01_DNA-seq/04.call_snp/" title="04. 找变异" class="md-nav__link">
+    <a href="../04.call_snp/" title="04. 找变异" class="md-nav__link">
       04. 找变异
     </a>
   </li>
@@ -384,7 +393,7 @@
 
 
   <li class="md-nav__item">
-    <a href="C01_DNA-seq/05.call_somatics/" title="05. 体细胞突变" class="md-nav__link">
+    <a href="../05.call_somatics/" title="05. 体细胞突变" class="md-nav__link">
       05. 体细胞突变
     </a>
   </li>
@@ -396,7 +405,7 @@
 
 
   <li class="md-nav__item">
-    <a href="C01_DNA-seq/06.call_cnvs/" title="06. CNV突变" class="md-nav__link">
+    <a href="../06.call_cnvs/" title="06. CNV突变" class="md-nav__link">
       06. CNV突变
     </a>
   </li>
@@ -408,7 +417,7 @@
 
 
   <li class="md-nav__item">
-    <a href="C01_DNA-seq/07.call_fusions/" title="07. 融合基因检测" class="md-nav__link">
+    <a href="../07.call_fusions/" title="07. 融合基因检测" class="md-nav__link">
       07. 融合基因检测
     </a>
   </li>
@@ -420,7 +429,7 @@
 
 
   <li class="md-nav__item">
-    <a href="C01_DNA-seq/08.annotation/" title="08. 注释" class="md-nav__link">
+    <a href="../08.annotation/" title="08. 注释" class="md-nav__link">
       08. 注释
     </a>
   </li>
@@ -432,7 +441,7 @@
 
 
   <li class="md-nav__item">
-    <a href="C01_DNA-seq/09.visualization/" title="09. 可视化" class="md-nav__link">
+    <a href="../09.visualization/" title="09. 可视化" class="md-nav__link">
       09. 可视化
     </a>
   </li>
@@ -464,15 +473,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_2" title="期望更新" class="md-nav__link">
-    期望更新
+  <a href="#_2" title="参考基因组的准备" class="md-nav__link">
+    参考基因组的准备
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" title="目前进度" class="md-nav__link">
-    目前进度
+  <a href="#_3" title="准备各种数据集" class="md-nav__link">
+    准备各种数据集
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" title="准备原始数据" class="md-nav__link">
+    准备原始数据
   </a>
   
 </li>
@@ -493,23 +509,38 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/pzweuj/pzweuj.github.io/edit/master/docs/index.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/pzweuj/pzweuj.github.io/edit/master/docs/C01_DNA-seq/01.prepare_data.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="_1">生物信息最差实践</h1>
-<p>取这个名字，其实是想和Best Practice做点区别，取最差也能实践的意思。
-开始的时候，其实是想着，从原始的博客里把流程相关的提取出来，这里的宗旨，就是不像博客那些碎碎念。</p>
-<p><a href="https://pzweuj.github.io">点击返回博客</a></p>
-<h2 id="_2">期望更新</h2>
-<p>DNA-seq分析流程</p>
-<p>RNA-seq分析流程</p>
-<p>ChIP-seq分析流程</p>
-<p>16S分析流程</p>
-<p>宏基因组分析流程</p>
-<p>scRNA-seq分析流程</p>
-<h2 id="_3">目前进度</h2>
-<p>2019/03/16  努力更新DNA-seq中</p>
-<p>2019/03/11  木有进度！</p>
+                <h1 id="_1">数据的准备</h1>
+<p>DNA-seq最常见的就是WES还有WGS以及各种小pannel（target）检测，就是最常见的测序方式。针对DNA-seq，有很多成熟的流程，比如<a href="https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145">GATK-best-practice</a>，又比如<a href="https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/DNA_Seq_Variant_Calling_Pipeline/">GDC DNA-seq pipeline</a>。这一章基本上会写一些常用的软件，以及一些基本成熟的流程和分析方法。</p>
+<h2 id="_2">参考基因组的准备</h2>
+<p>参考基因组一般可以去<a href="https://www.ncbi.nlm.nih.gov/">ncbi</a>，<a href="http://www.ensembl.org/index.html">ensembl</a>，<a href="http://www.genomaize.org/">ucsc</a>寻找。这里以人为例，目前大多数的公司还是在使用hg19（也叫GRCh37）这一版本号的参考基因，但是！据我观察，目前大多数的数据库已经以hg38（也叫GRCh38）为默认参考了，所以，本着向前发展的原则，这里将会采用hg38。再不行，往后还可以用<a href="http://www.genomaize.org/cgi-bin/hgLiftOver">liftover</a>来进行hg19和hg38之间的转换。</p>
+<p>那么现在先来下载hg38也就是GRCh38的参考基因组。
+可以下载ncbi的</p>
+<pre><code class="bash">wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.38_GRCh38.p12/GCF_000001405.38_GRCh38.p12_genomic.fna.gz
+</code></pre>
+
+<p>可以下载ucsc的</p>
+<pre><code class="bash">wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+</code></pre>
+
+<p>可以下载ensembl的</p>
+<pre><code class="bash">wget ftp://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+</code></pre>
+
+<p>当然，这次我们先下载gatk提供的</p>
+<pre><code class="bash">wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/Homo_sapiens_assembly38.fasta.gz
+</code></pre>
+
+<h2 id="_3">准备各种数据集</h2>
+<p>为了后续用GATK来找变异，这里先把<a href="ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/">gatk bundle</a>的下了，如果打不开，有可能是同时太多人登录了，得换个时间试试。有条件的话，可以在<a href="https://console.cloud.google.com/storage/browser/genomics-public-data/resources/broad/hg38/v0">google cloud</a>下载。把除了参考基因组以外的都下下来，后面校正的时候用。</p>
+<h2 id="_4">准备原始数据</h2>
+<p>原始数据的来源，一般的，可以在ncbi sra上找公开的数据进行实践，怎么下载，可以看<a href="https://pzweuj.github.io/2019/02/13/NCBI-SRA.html">这里</a>。对于DNA-seq，比如WES和WGS，还可以下载<a href="https://pzweuj.github.io/2018/11/16/KPGP.html">韩国人基因组</a>的，方便。</p>
+<p>不过这次，我们使用2017年卫生部室间质量评价的来进行学习。
+原始数据的下载可以在<a href="http://pan.baidu.com/s/1miMfpag#rfmn">百度网盘</a>。要输入密码的话自己看链接，应该能发现。</p>
+<p>请下载illumina平台的数据。只要B17NC以及B1704就好。还需要一个bed文件，点击<a href="https://github.com/pzweuj/pzweuj.github.io/raw/master/downloads/OCP_Target.bed">这里</a>下载。</p>
+<p>数据的下载先到这。</p>
                 
                   
                 
@@ -530,14 +561,28 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
+          <a href="../.." title="前言" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                前言
+              </span>
+            </div>
+          </a>
         
-          <a href="C01_DNA-seq/01.prepare_data/" title="01. 参考基因/数据库/原始数据的准备" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+        
+          <a href="../02.mapping/" title="02. 比对" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                01. 参考基因/数据库/原始数据的准备
+                02. 比对
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -569,9 +614,9 @@
       
     </div>
     
-      <script src="assets/javascripts/application.d9aa80ab.js"></script>
+      <script src="../../assets/javascripts/application.d9aa80ab.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
       
@@ -581,7 +626,7 @@
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script>
       
-        <script src="assets/js/umlconvert.js"></script>
+        <script src="../../assets/js/umlconvert.js"></script>
       
     
   </body>

@@ -516,7 +516,12 @@
 <p>比对是生物信息分析最常用的方法，就是把自己的数据拿去跟参考数据进行比较，得到差异的结果。而当所要分析的数据是变异时，差异的结果就是突变的碱基，也可以说是突变的基因。在DNA-seq中，常用的比对软件是<a href="https://github.com/lh3/bwa">bwa</a>。另外还有<a href="http://bowtie-bio.sourceforge.net/bowtie2/index.shtml">bowtie2</a>，但是bowtie2似乎在RNA-seq的比对中比bwa好，而在DNA中要稍微弱一些。除此之外，还有华大的<a href="http://soap.genomics.org.cn/">soup</a>，速度很快的<a href="http://subread.sourceforge.net/">subread</a>等。</p>
 <p>这里着重讲bwa。</p>
 <h3 id="_2">比对之前</h3>
-<p>比对之前，当然是先要做一下质控。经典方法是使用<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastqc</a>进行质控报告的生成，用<a href="https://cutadapt.readthedocs.io/en/stable/">cutadapt</a>来剪掉adapter序列。目前的话，国产软件<a href="https://github.com/OpenGene/fastp">fastp</a>也不错，可以自动完成上面的操作，同时下游的<a href="https://multiqc.info/">multiqc</a>软件都支持fastqc以及fastp，这里使用fastp。</p>
+<p>比对之前，当然是先要做一下质控。经典方法是使用<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">fastqc</a>进行质控报告的生成</p>
+<pre><code class="bash">fastqc Illumina_B17NC_R1.fq.gz Illumina_B17NC_R2.fq.gz
+</code></pre>
+
+<p>从fastqc的结果看，这个样本的质量非常高（毕竟是卫生部生成出来做质量检测的），所以并不需要做进一步的过滤。但是这里也说一下怎么用fastp进行简单的过滤。
+然后用<a href="https://cutadapt.readthedocs.io/en/stable/">cutadapt</a>来剪掉adapter序列。目前的话，国产软件<a href="https://github.com/OpenGene/fastp">fastp</a>也不错，可以自动完成上面的操作，同时下游的<a href="https://multiqc.info/">multiqc</a>软件都支持fastqc以及fastp。</p>
 <pre><code class="bash">fastp -i Illumina_B17NC_R1.fq.gz \
     -I Illumina_B17NC_R2.fq.gz \
     -o B17NC.clean_R1.fq.gz \
@@ -537,6 +542,11 @@ make
 bwa和bowtie2都是用一种叫<a href="https://www.bilibili.com/video/av15743137?from=search&amp;seid=13830371255182481586">bwt的算法</a>进行比对。在比对前，需要先创建索引，提高整个比对速度。
 用bwa对参考基因建立索引</p>
 <pre><code class="bash">bwa index Homo_sapiens_assembly38.fasta
+</code></pre>
+
+<p>还要建立fasta的索引。</p>
+<pre><code class="bash">samtools faidx Homo_sapiens_assembly38.fasta
+gatk CreateSequenceDictionary -R Homo_sapiens_assembly38.fasta
 </code></pre>
 
 <h3 id="_4">比对</h3>

@@ -125,6 +125,10 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
+      <a href="#call-snp" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -330,10 +334,48 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        04. 找变异
+      </label>
     
     <a href="./" title="04. 找变异" class="md-nav__link md-nav__link--active">
       04. 找变异
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gatk4call-snp" title="使用GATK4进行call snp" class="md-nav__link">
+    使用GATK4进行call snp
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bcftoolscall-snp" title="使用bcftools进行call snp" class="md-nav__link">
+    使用bcftools进行call snp
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -410,6 +452,44 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gatk4call-snp" title="使用GATK4进行call snp" class="md-nav__link">
+    使用GATK4进行call snp
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bcftoolscall-snp" title="使用bcftools进行call snp" class="md-nav__link">
+    使用bcftools进行call snp
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -418,9 +498,26 @@
                   <a href="https://github.com/pzweuj/pzweuj.github.io/edit/master/docs/C01_DNA-seq/04.call_snp.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>04. 找变异</h1>
-                
-                
+                <h1 id="call-snp">Call SNP找变异</h1>
+<p>找变异基本上是重中之重了。有GATK4 best practice提供的复杂的方法，也有使用属于samtools全家桶的<a href="https://samtools.github.io/bcftools/">bcftools</a>找变异的方法。这里将会介绍这两种方法。最终结果都是得到vcf文件。samtools<a href="https://samtools.github.io/hts-specs/VCFv4.2.pdf">这里</a>有一篇介绍vcf格式的pdf。</p>
+<h2 id="gatk4call-snp">使用GATK4进行call snp</h2>
+<p>虽说是call snp，不过当然，也会call indel。
+<img alt="gatk1" src="https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/germline.PNG" /></p>
+<pre><code class="bash">gatk HaplotypeCaller \
+    -R Homo_sapiens_assembly38.fasta \
+    -I B17NC.final.bam \
+    -O B17NC.vcf.gz
+</code></pre>
+
+<p>另外，当输入是多样本时，其实gatk可以先输出GVCF文件，再将它们合并。</p>
+<h2 id="bcftoolscall-snp">使用bcftools进行call snp</h2>
+<p>bcftools的流程已经有一篇不错的<a href="https://samtools.github.io/bcftools/howtos/variant-calling.html">教程</a>，非常值得参考。bcf其实就是vcf的二进制格式，这里仍然输出我们更加熟悉的vcf。
+bcftools mpileup会产生超级大的中间文件，所以这里建议用管道往后进行call snp。另外，<a href="http://varscan.sourceforge.net/">Varscan</a>这个工具可以</p>
+<pre><code class="bash">bcftools mpileup -f Homo_sapiens_assembly38.fasta \
+    B17NC.final.bam \
+    | bcftools call -mv -O v \
+    -o B17NC.vcf
+</code></pre>
                 
                   
                 

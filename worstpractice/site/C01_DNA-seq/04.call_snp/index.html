@@ -512,7 +512,7 @@
 <p>另外，当输入是多样本时，其实gatk可以先输出GVCF文件，再将它们合并。</p>
 <h2 id="bcftoolscall-snp">使用bcftools进行call snp</h2>
 <p>bcftools的流程已经有一篇不错的<a href="https://samtools.github.io/bcftools/howtos/variant-calling.html">教程</a>，非常值得参考。bcf其实就是vcf的二进制格式，这里仍然输出我们更加熟悉的vcf。
-bcftools mpileup会产生超级大的中间文件，所以这里建议用管道往后进行call snp。另外，<a href="http://varscan.sourceforge.net/">Varscan</a>这个工具可以</p>
+bcftools mpileup会产生超级大的中间文件，所以这里建议用管道往后进行call snp。另外，<a href="http://varscan.sourceforge.net/">Varscan</a>这个工具也可以使用。</p>
 <pre><code class="bash">bcftools mpileup -f Homo_sapiens_assembly38.fasta \
     B17NC.final.bam \
     | bcftools call -mv -O v \

@@ -349,9 +349,45 @@
       
     
     
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        05. 体细胞突变
+      </label>
+    
     <a href="./" title="05. 体细胞突变" class="md-nav__link md-nav__link--active">
       05. 体细胞突变
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gatk" title="GATK流程" class="md-nav__link">
+    GATK流程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#varscan" title="Varscan流程" class="md-nav__link">
+    Varscan流程
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -426,6 +462,29 @@
     
   
   
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gatk" title="GATK流程" class="md-nav__link">
+    GATK流程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#varscan" title="Varscan流程" class="md-nav__link">
+    Varscan流程
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -441,7 +500,7 @@
                 
                 <h1 id="_1">体细胞变异</h1>
 <p>体细胞变异差不多就是在说肿瘤突变。常用的方法是测配对样本，就是组织样本和血液样本分别检测再call snp的时候一起放入软件中来找突变位点。也有靶向测序直接测肿瘤突变的位置。另外，目前有游离DNA检测来检测血浆中的肿瘤游离DNA，要求是超高深度的检测出肿瘤marker。还有测marker基因启动子甲基化来得到肿瘤早筛效果的方法。</p>
-<p>这里还是使用经典的GATK4路线。</p>
+<h2 id="gatk">GATK流程</h2>
 <p>先用配对的正常样本生成一个vcf，GATK对它的命名是PoN，也就是Panel of Normal</p>
 <pre><code class="bash">gatk Mutect2 \
     -R Homo_sapiens_assembly38.fasta \
@@ -474,6 +533,12 @@
 </code></pre>
 
 <p>GATK后续还有些继续过滤校正去污染的方法，这里就不再继续了。</p>
+<h2 id="varscan">Varscan流程</h2>
+<p>Varscan的流程可以先用samtools的mpileup作为输入，当然新版的话使用bcftools。</p>
+<pre><code class="bash">bcftools mpileup -f Homo_sapiens_assembly38.fasta B1704.final.bam &gt; B1704.pileup
+bcftools mpileup -f Homo_sapiens_assembly38.fasta B17NC.final.bam &gt; B17NC.pileup
+java -jar VarScan.jar somatic B17NC.pileup B1704.pileup B1704
+</code></pre>
                 
                   
                 

@@ -15,7 +15,7 @@ key: bedtools-genomecov
 可以看出，当加入参数-d -split的时候，可以得到比较好进行下一步统计的结果。
 
 ```bash
-bedtools genomecov -ibam xxx.sorted.bam -g reference.fa -d -split > results.txt
+bedtools genomecov -ibam xxx.sorted.bam -g reference.fa -bga > results.txt
 ```
 例如：
 得到下面这样的结果
@@ -32,32 +32,31 @@ chr1	103	104	320
 
 这时候就可以用python脚本来统计了
 ```python
-# 读入文件
-inputdata = open("results.txt", "r")
-n = 0
-m = 0
-for line in inputdata:
-	lineAfterSplit = line.split("\t")
-	chrom = lineAfterSplit[0]
-	start = lineAfterSplit[1]
-	end = lineAfterSplit[2]
-	depth = int(lineAfterSplit[3])
-	
-	# 覆盖度统计
-	if depth != 0:
-		n += 1
-	
-    # >300x的覆盖度
-	if depth >= 300:
-		m += 1
-	
-	# 平均深度
-	sum_depth += depth
-		
-# 最后除以区域总长，这个自己想方法算
-percent = float(n / (103 - 100 + 1))
-# 平均深度
-avg_depth = float(sum_depth / (103 - 100 + 1))
+def getChromCoverage(inputfile, chrom):
+	inputFile = open(inputfile, "r")
+	length = 0
+	covLength = 0
+	counts = 0
+	for line in inputFile:
+		lineAS = line.split("\t")
+		chromosome = lineAS[0]
+		start = lineAS[1]
+		end = lineAS[2]
+		count = lineAS[3].split("\n")[0]
+		if chromosome == chrom:
+			length_tmp = int(end) - int(start)
+			length += length_tmp
+			counts += (int(count) * length_tmp)
+			if count != "0":
+				covLength_tmp = length_tmp
+				covLength += covLength_tmp
+
+	coverage = "%.2f" % ((float(covLength) / float(length)) * 100) + "%"
+	depth_cov = "%.2f" % (float(counts) / float(covLength))
+	depth_all = "%.2f" % (float(counts) / float(length))
+	inputFile.close()
+
+	return [coverage, depth_cov, depth_all]
 
 ```
 

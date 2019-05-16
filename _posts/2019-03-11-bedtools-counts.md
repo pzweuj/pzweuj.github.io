@@ -24,13 +24,16 @@ chr1	100	101	300
 
 chr1	101	102	311
 
-chr1	102	103	400
+chr1	102	150	400
 
-chr1	103	104	320
+chr1	150	155	320
+
+
+可以看出，当加入的参数是-bga时，bedtools genomecov 输出的结果是染色体，区域起始，区域结束，这个区域的深度。
 
 
 
-这时候就可以用python脚本来统计了
+这时候就可以用python脚本来统计了，下面这个方法可以统计的是某染色体的覆盖度，染色体覆盖区域的平均深度以及染色体总体的平均深度。如果说要统计每个染色体的平均深度和覆盖度时，比较有用。
 ```python
 def getChromCoverage(inputfile, chrom):
 	inputFile = open(inputfile, "r")
@@ -60,8 +63,30 @@ def getChromCoverage(inputfile, chrom):
 
 ```
 
-这时，只要depth不等于0的，就统计，最后用n值除以统计区域的总长度，就是覆盖度了。
-同理多定义几个统计的变量，就可以得到想要的深度的百分比了。比如说上面统计深度大于300的百分比。
+如果是统计大于任意深度的百分比
+```python
+def getDepthContent(inputfile, depth):
+	inputFile = open(inputfile, "r")
+	covLength = 0
+	depthLength = 0
+	for line in inputFile:
+		lineAS = line.split("\t")
+		chromosome = lineAS[0]
+		start = lineAS[1]
+		end = lineAS[2]
+		count = lineAS[3].split("\n")[0]
+		
+		if count != "0":
+			covLength_tmp = int(end) - int(start)
+			covLength += covLength_tmp
+		
+		if int(count) >= depth:
+			depthLength_tmp = int(end) - int(start)
+			depthLength += depthLength_tmp
+			
+	covDepthPercent = "%.2f" % (float(depthLength) / float(covLength) * 100) + "%"
+	return covDepthPercent
+```
 
 
 

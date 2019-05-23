@@ -40,10 +40,19 @@ source deactivate
 **注意：请勿使用以下步骤**
 根据 Anaconda 软件源上的说明，Anaconda 和 Miniconda 是 Anaconda, Inc. 的商标，任何未经授权的公开镜像都是不允许的。目前清华与中科院的镜像站均已屏蔽了anaconda，更改镜像会导致404，或者重定向至conda官方源，因此没有必要进行以下步骤。*在国内镜像站得到授权后会回来删除这段说明。*
 
-删除过去设置的源的方法：
-修改~目录下的.condarc。
+删除过去设置的源，恢复默认：
 
+第一种方法：修改~目录下的.condarc。
 
+第二种方法
+```bash
+conda config --remove-key channels
+conda config --add channels r
+conda config --add channels conda-forge
+conda config --add channels bioconda
+```
+
+设置为清华源（目前已失效）
 ```bash
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
 conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/

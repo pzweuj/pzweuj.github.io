@@ -48,6 +48,15 @@
 
 <p><img alt="sv1" src="http://conifer.sourceforge.net/images/screeplot.png" /></p>
 <p>conifier建议根据出来的这幅图来设定svd的值，一般设置在拐点，比如上面这幅图能得到的建议是把svd设置在2到5之间。</p>
+<p>由于pytable这个包版本更新，运行时可能会报错</p>
+<pre><code>ImportError: cannot import name openFile
+</code></pre>
+
+<p>上面这个错误需要修改conifer.py第50行的openFile为open_file。</p>
+<pre><code>AttributeError: 'File' object has no attribute 'createGroup'
+</code></pre>
+
+<p>上面这个错误需要修改conifer.py第51行和第134行的createGroup为create_group。</p>
 <h3 id="_2">结果生成</h3>
 <p>结果生成使用的是上面输出的hdf5文件</p>
 <pre><code class="bash">python conifer.py call \

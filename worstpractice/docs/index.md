@@ -5,6 +5,8 @@
 
 [点击返回博客](https://pzweuj.github.io)
 
+![gugu](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/gugu.jpg)
+
 ## 期望更新
 
 DNA-seq分析流程
@@ -20,9 +22,10 @@ ChIP-seq分析流程
 scRNA-seq分析流程
 
 ## 目前进度
+2019/06/03  快速~~水~~写完DNA-seq剩下部分
 
 2019/03/16  努力更新DNA-seq中
 
 2019/03/11  木有进度！
 
-[^_^]:献给前景
+[^_^]: 献给前景

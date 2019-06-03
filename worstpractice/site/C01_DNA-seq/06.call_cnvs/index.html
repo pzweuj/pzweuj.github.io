@@ -29,6 +29,11 @@
 </code></pre>
 
 <p>其中，probes.txt是这个外显子检测的bed文件，就是各个探针的位置信息。</p>
+<p>另外，如果运行时报这个错误</p>
+<pre><code>AttributeError: 'pysam.libcsamfile.Samfile' object has no attribute '_hasIndex'
+</code></pre>
+
+<p>需要将conifer.py中第564行修改为”if not f.check_index():“，这是因为pysam更新了方法。</p>
 <h3 id="_1">分析</h3>
 <p>然后是conifer的主分析程序，这一步是对rpkm进行统计，因为CNV分析需要用到多个样本进行对比，所以这里的input是装有多个rpkm统计表的文件夹。</p>
 <pre><code class="bash">python conifer.py analyze \

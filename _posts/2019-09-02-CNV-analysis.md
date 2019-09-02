@@ -23,7 +23,7 @@ java -jar VarScan.jar copyCaller prefix.copynumber --output-file output.cnv.txt
 ```R
 library(DNAcopy)
 cn <- read.table("output.cnv.txt", header=F)
-CNA.object <- CNA(genomdat=cn[,6], chrom=cn[,1], maploc=cn[,2], data.type="logratio")
+CNA.object <- CNA(cbind( cn$adjusted_log_ratio), cn$chrom,cn$chr_start, data.type="logratio", sampleid="tumor")
 CNA.smoothed <- smooth.CNA(CNA.object)
 segs <- segment(CNA.smoothed, verbose=0, min.width=2)
 segs2 = segs$output

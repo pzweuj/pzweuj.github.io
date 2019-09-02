@@ -128,7 +128,7 @@ python conifer.py analyze --probes probes.txt --rpkm_dir /RPKM/ \
 	--plot_scree screeplot.png \
 	--write_sd sd_values.txt
 ```
-conifer使用的一些包年代久远，一些方法早就已经修改，所有会存在一些bug，具体的bug秀谷可以参照[这里](https://pzweuj.github.io/worstpractice/site/C01_DNA-seq/06.call_cnvs/)。另外，probes.txt可以在官网中[下载](http://sourceforge.net/projects/conifer/files/probes.txt/download)，也可以自行创建，就是bed文件。
+conifer使用的一些包年代久远，一些方法早就已经修改，所有会存在一些bug，具体的bug修复可以参照[这里](https://pzweuj.github.io/worstpractice/site/C01_DNA-seq/06.call_cnvs/)。另外，probes.txt可以在官网中[下载](http://sourceforge.net/projects/conifer/files/probes.txt/download)，也可以自行创建，就是bed文件。
 conifer需要8个样本以上进行对比，才能有结果。
 
 ### freec

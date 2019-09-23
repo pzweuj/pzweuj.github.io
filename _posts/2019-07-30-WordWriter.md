@@ -58,7 +58,7 @@ pip install python-docx
 
 
 ### 模块使用说明
-设置好表格，再来说明如何使用模块。
+设置好模板，再来说明如何使用模块。
 首先需要导入模块，以下为python代码。
 ```python
 import WordWriter
@@ -89,4 +89,4 @@ WordWriter.WordWriter("template.docx", "output.docx", testDict)
 有时tag并不能被很好的识别。可能是因为word将一段不连续的输入的tag理解成为是多个“run”。程序需要一个tag作为一个run时才能识别出来。所以，如果遇到这种情况，建议是将不能识别的tag完整的复制到文本文档中，再完整的（一次性的）粘贴回模板中替换掉不识别的tag。在修改格式如颜色字体等的时候也需要是将一个tag完全选中来修改，避免被认为是多个run。
 
 
-[^_^]:准备好了
+[^_^]: 准备好了

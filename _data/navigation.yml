@@ -9,6 +9,6 @@ header:
     url: /worstpractice/site/index.html
     key: docs
   - titles:
-      zh-Hans : &ZH_HANS  反馈
+      zh-Hans : &ZH_HANS  关于
     url: /about.html
 

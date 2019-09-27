@@ -11,7 +11,7 @@ key: page-about
 
 ~~职业影评人~~看电影只打分很少评论。生信打工仔。
 
-杨超越粉。
+[杨超越](https://zh.wikipedia.org/wiki/%E6%9D%A8%E8%B6%85%E8%B6%8A)粉。
 
 
 

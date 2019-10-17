@@ -117,7 +117,7 @@ gatk CallCopyRatioSegments -I tumor.cr.seg \
 [PostprocessGermlineCNVCalls](https://software.broadinstitute.org/gatk/documentation/tooldocs/current/org_broadinstitute_hellbender_tools_copynumber_PostprocessGermlineCNVCalls.php)
 
 ### conifer
-[conifer](http://conifer.sourceforge.net/)是外显子常用的cnv分析工具。
+[conifer](http://conifer.sourceforge.net/)是外显子常用的cnv分析工具。这个软件写的很烂，感觉就算不是版本问题，也会出现很多bug。
 ```bash
 python conifer.py rpkm --probes probes.txt --input sample.bam --output sample.rpkm.txt
 
@@ -128,7 +128,7 @@ python conifer.py analyze --probes probes.txt --rpkm_dir /RPKM/ \
 	--plot_scree screeplot.png \
 	--write_sd sd_values.txt
 ```
-conifer使用的一些包年代久远，一些方法早就已经修改，所有会存在一些bug，具体的bug修复可以参照[这里](https://pzweuj.github.io/worstpractice/site/C01_DNA-seq/06.call_cnvs/)。另外，probes.txt可以在官网中[下载](http://sourceforge.net/projects/conifer/files/probes.txt/download)，也可以自行创建，就是bed文件。
+conifer使用的一些包年代久远，一些方法早就已经修改，存在大量[bug](https://www.biostars.org/p/262148/)，参考文章，对于依赖来说最后安装的版本是pytables 2.4.0、hdf5 1.8、numpy 1.9.3、numexpr 2.1。另外conifer_functions.py文件里第113行将samples\[s\]改成rpkm_filename。另外，probes.txt可以在官网中[下载](http://sourceforge.net/projects/conifer/files/probes.txt/download)，也可以自行创建，就是bed文件。
 conifer需要8个样本以上进行对比，才能有结果。
 
 ### freec

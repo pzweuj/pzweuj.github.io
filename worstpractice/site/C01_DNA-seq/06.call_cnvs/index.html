@@ -23,17 +23,13 @@
 以下是从官方文档里抄来的流程。</p>
 <h2 id="conifer">CoNIFER</h2>
 <p><a href="http://conifer.sourceforge.net/">CoNIFER</a>据称可以去除多批次的实验做成的误差。软件只支持python2，不支持python3，另外已经有7年没有更新过，所以如果有更好更新的替代品，可以放弃使用CoNIFER。软件的安装还有一些依赖的包的安装就不说了。</p>
+<p>conifer使用对于依赖包的版本比较严格，建议在python中新建一个环境，或者新建一个目录来安装指定版本的包。pytables 2.4.0，hdf5 1.8，numpy 1.9.3， numexpr 2.1。另外需要修改conifer_functions.py第113行“samples[s]”到“rpkm_filename”。</p>
 <h3 id="rpkm">统计rpkm</h3>
 <p>首先是对bam文件统计rpkm值</p>
 <pre><code class="bash">python conifer.py rpkm --probes probes.txt --input sample.bam --output sample.rpkm.txt
 </code></pre>
 
 <p>其中，probes.txt是这个外显子检测的bed文件，就是各个探针的位置信息。</p>
-<p>另外，如果运行时报这个错误</p>
-<pre><code>AttributeError: 'pysam.libcsamfile.Samfile' object has no attribute '_hasIndex'
-</code></pre>
-
-<p>需要将conifer.py中第564行修改为”if not f.check_index():“，这是因为pysam更新了方法。</p>
 <h3 id="_1">分析</h3>
 <p>然后是conifer的主分析程序，这一步是对rpkm进行统计，因为CNV分析需要用到多个样本进行对比，所以这里的input是装有多个rpkm统计表的文件夹。</p>
 <pre><code class="bash">python conifer.py analyze \
@@ -48,15 +44,6 @@
 
 <p><img alt="sv1" src="http://conifer.sourceforge.net/images/screeplot.png" /></p>
 <p>conifier建议根据出来的这幅图来设定svd的值，一般设置在拐点，比如上面这幅图能得到的建议是把svd设置在2到5之间。</p>
-<p>由于pytable这个包版本更新，运行时可能会报错</p>
-<pre><code>ImportError: cannot import name openFile
-</code></pre>
-
-<p>上面这个错误需要修改conifer.py第50行的openFile为open_file。</p>
-<pre><code>AttributeError: 'File' object has no attribute 'createGroup'
-</code></pre>
-
-<p>上面这个错误需要修改conifer.py第51行和第134行的createGroup为create_group。</p>
 <h3 id="_2">结果生成</h3>
 <p>结果生成使用的是上面输出的hdf5文件</p>
 <pre><code class="bash">python conifer.py call \

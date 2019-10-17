@@ -2,52 +2,52 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://pzweuj.github.io/worstpractice/</loc>
-     <lastmod>2019-09-04</lastmod>
+     <lastmod>2019-10-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/01.prepare_data/</loc>
-     <lastmod>2019-09-04</lastmod>
+     <lastmod>2019-10-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/02.mapping/</loc>
-     <lastmod>2019-09-04</lastmod>
+     <lastmod>2019-10-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/03.sort_and_mark_duplicates/</loc>
-     <lastmod>2019-09-04</lastmod>
+     <lastmod>2019-10-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/04.call_snp/</loc>
-     <lastmod>2019-09-04</lastmod>
+     <lastmod>2019-10-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/05.call_somatics/</loc>
-     <lastmod>2019-09-04</lastmod>
+     <lastmod>2019-10-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/06.call_cnvs/</loc>
-     <lastmod>2019-09-04</lastmod>
+     <lastmod>2019-10-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/07.call_fusions/</loc>
-     <lastmod>2019-09-04</lastmod>
+     <lastmod>2019-10-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/08.annotation/</loc>
-     <lastmod>2019-09-04</lastmod>
+     <lastmod>2019-10-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/09.visualization/</loc>
-     <lastmod>2019-09-04</lastmod>
+     <lastmod>2019-10-17</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

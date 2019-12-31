@@ -16,9 +16,9 @@ pip install python-docx
 ```
 
 模块下载：
-[python2](https://raw.githubusercontent.com/pzweuj/practice/master/python/WordWriter/WordWriter.py)
+[python2](https://raw.githubusercontent.com/pzweuj/WordWriter/master/WordWriter.py)
 
-[python3](https://raw.githubusercontent.com/pzweuj/practice/master/python/WordWriter/WordWriter3.py)
+[python3](https://raw.githubusercontent.com/pzweuj/WordWriter/master/WordWriter3.py)
 
 
 ### 模板说明

@@ -8,6 +8,9 @@ tags: coding
 从这个原理看，可以知道的是我们只要定一个随机梯度，对OTU进行随机选取就可以做出这个Observed species的稀释曲线矩阵了。
 
 一般的，OTU表格长这样
+
+
+
 ![rare_c1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/rare_c1.jpg)
 
 首先使用python将这个表格处理成用来作图的矩阵
@@ -50,9 +53,15 @@ ob.close()
 ```
 
 形成下面这样的矩阵
+
+
+
 ![rare_c2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/rare_c2.jpg)
 
+
+
 然后就可以在R里用ggplot2画图啦
+
 ```R
 library(ggplot2)
 
@@ -66,8 +75,14 @@ ggplot(num,aes(x=OTU_Num, y=OB, colour=Samples)) + geom_line() +
   scale_fill_discrete(name="Samples")
 ```
 
+
+
+
+
 ![rare_c2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/rare_c3.jpeg)
+
+
 
 其实还应该把每个样本的对齐，修剪一下的。另外，如果想稀释曲线更加滑溜，可以把梯度调大，或者用ggplot的smooth方法。另外香浓指数稀释等稀释曲线也可以按同样的方式获得矩阵后来画。
 
-[^_^]:杨超越天下第一。
+[^_^]: 杨超越天下第一。

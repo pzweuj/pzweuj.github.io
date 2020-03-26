@@ -1,0 +1,51 @@
+---
+title:  shannon指数的python实现
+tags: coding
+---
+这里以稀释曲线的方式求香农指数。可以查看结果是否到达平台期来判断香农指数是否达到最大。
+
+先来看看shannon指数的公式。
+$$
+H = -\sum_{i=i}^{s}{p_i}{log_2}{p_i}
+$$
+
+这里s是物种OTU，pi是该OTU的丰度。一般使用log2，也有使用ln的。
+
+我的写法是这样的
+```python
+# 首先将所有物种OTU按照出现次数（即reads数）加入到一个list中
+# 比方说就是OTU1如果有10000条reads支持，在list中就有10000个OTU1元素
+# 以下以OTU_list表示这个list
+import random
+from collections import Counter
+import math
+
+selectNum = 0
+while selectNum < len(OTU_list):
+	# 随机抽取selectNum条组成新list
+	selectList = random.sample(OTU_list, selectNum)
+	# 计算随机抽取的结果里有多少Unique OTU
+	UniqueOTU = set(selectList)
+	# 计算各个OTU在随机抽取的list里的数量
+	countSelectList = Counter(selectList)
+	# 设置0值
+	H = 0
+	# 计算shannon指数
+	if len(selectList) != 0:
+		for u in UniqueOTU:
+			# 获得当前OTU的丰度
+			count_u = countSelectList[u]
+			pi = float(count_u) / len(selectList)
+			# log
+			logpi = math.log(pi, 2)
+			H += (logpi * pi)
+	# 获得当前抽取reads数下的shannon指数
+	H = H * (-1)
+	# 输出reads数和对应的shannon指数
+	print selectNum, H
+	# 梯度抽取，这里递加1000reads
+	selectNum += 1000
+```
+
+
+[^_^]:集合啦，动物之森

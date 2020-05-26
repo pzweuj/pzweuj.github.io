@@ -44,10 +44,37 @@ plt.show()
 ```
 
 画出来是这样的
+
 ![ROC](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/81on227_5E_274M.png)
 
 
+顺便，还有每个feature的重要性输出的方法：
+```python
+# 除了上面那些，还需要导入numpy
+import numpy as np
+
+def feature_ranking(xtrain, clf):
+	importances = clf.feature_importances_
+	std = np.std([tree.feature_importances_ for tree in clf.estimators_], axis=0)
+	indices = np.argsort(importances)[::-1]
+	print("Feature ranking:")
+	for f in range(xtrain.shape[1]):
+		print("%d. feature %d (%f)" % (f + 1, indices[f], importances[indices[f]]))
+
+	plt.figure()
+	plt.title("Feature importances")
+	plt.bar(range(xtrain.shape[1]), importances[indices],
+		color="r", yerr=std[indices], align="center")
+	plt.xticks(range(xtrain.shape[1]), indices)
+	plt.xlim([-1, xtrain.shape[1]])
+	plt.show()
+```
+
+
 参考：
+
 [AUC，ROC我看到的最透彻的讲解](https://blog.csdn.net/u013385925/article/details/80385873)
 
 [python-sklearn中RandomForestClassifier函数以及ROC曲线绘制](https://blog.csdn.net/hjxu2016/article/details/78337308)
+
+[Feature importances with forests of trees](https://scikit-learn.org/stable/auto_examples/ensemble/plot_forest_importances.html)

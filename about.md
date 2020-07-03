@@ -7,7 +7,7 @@ key: page-about
 
 
 
-游戏宅，设备有PC和Switch。育碧粉。波兰蠢驴的米饭班主，已预购[赛博朋克2077](https://store.steampowered.com/app/1091500/Cyberpunk_2077/?l=schinese)。超级马里奥64版120星全取得玩家。
+游戏宅，设备有PC和Switch。育碧粉。波兰蠢驴的米饭班主，已预购[赛博朋克2077](https://store.steampowered.com/app/1091500/Cyberpunk_2077/?l=schinese)。超级马里奥64版120星全取得玩家。智能~~家居~~房间建设中。
 
 ~~职业影评人~~看电影只打分很少评论。生信打工仔。
 

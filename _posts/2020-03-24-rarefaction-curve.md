@@ -29,7 +29,7 @@ OTU.close()
 
 # 再对每个样本进行统计
 for i in range(len(nameList)):
-	OTU = open("count_xzx.txt", "r")
+	OTU = open("OTU.txt", "r")
 	OTU_list = []
 	for line in OTU:
 		if line.startswith("Representative_Sequence"):

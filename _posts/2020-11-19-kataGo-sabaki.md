@@ -10,7 +10,7 @@ key: katago
 ## 准备工作
 首先请先确定自己能用哪个版本的KataGo，是OpenCL还是CUDA还是Eigen，三个版本的对比在[这里](https://github.com/lightvector/KataGo#opencl-vs-cuda-vs-eigen)。下载自己需要的版本，然后再下载[model文件](https://github.com/lightvector/KataGo/releases/tag/v1.4.5)。KataGo提供了2020年6月的训练结果，建议上说GPU越强，就用blocks数字越大的。最后去下载sabaki程序。
 
-分别是以下两个。
+分别是以下三个。
 ```
 katago-v1.7.0-gpu-opencl-windows-x64.zip
 g170-b40c256x2-s5095420928-d1229425124.bin.gz

@@ -18,7 +18,7 @@ tags: default
 ## SideQuest
 sideQuest实际上是相当于往电脑上装的手机应用市场之类的软件，可以通过sideQuest往设备中安装第三方应用。具体安装方法就参考[sideQuest](https://sidequestvr.com/setup-howto)官网好了。就这样，设置好了之后，我们自己找一些安卓apk，比如clash，在设备连接到电脑时，把apk拖到sideQuest中，就直接安装了。这时就可以在设备自己里面实现魔法，没必要用电脑热点了。
 
-## 无限串流
+## 无线串流
 买一体机肯定是为了无线串流，不可能用有线的。现在最好的串流应用只能是[virtual desktop](https://www.oculus.com/experiences/quest/2017050365004772/?locale=zh_HK)。建议20刀直接买好了，效果比免费的ALVR好的不是一点半点。这个可以通过paypal或者在某鱼中找人代购，会给你发兑换码，然后在手机的oculus app里兑换就好了。同时在设备和电脑中安装virtual desktop，只要两者是在同一个网段里，就能直接找到。这里有个小bug，就是如果在设备中开了魔法，需要在魔法应用里设置virtual desktop不走魔法通道，不然可能会无法连接。
 
 另外，电脑端的oculus app也要装上，可能是有些驱动或者依赖项的原因，一开始我没装这个，就没法把steam里的半衰期爱丽丝串流到quest2上，每次打开都报错。

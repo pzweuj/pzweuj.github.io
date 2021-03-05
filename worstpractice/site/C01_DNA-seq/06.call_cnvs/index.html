@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="最差也能实践">
+        <meta name="description" content="至少还能实践">
       
       
       
@@ -20,7 +20,7 @@
     
     
       
-        <title>06. CNV突变 - 生物信息最差实践</title>
+        <title>06. CNV突变 - 生物信息实践</title>
       
     
     
@@ -81,7 +81,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://pzweuj.github.io/worstpractice" title="生物信息最差实践" class="md-header__button md-logo" aria-label="生物信息最差实践">
+    <a href="https://pzweuj.github.io/worstpractice" title="生物信息实践" class="md-header__button md-logo" aria-label="生物信息实践">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
@@ -94,7 +94,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            生物信息最差实践
+            生物信息实践
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -177,13 +177,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://pzweuj.github.io/worstpractice" title="生物信息最差实践" class="md-nav__button md-logo" aria-label="生物信息最差实践">
+    <a href="https://pzweuj.github.io/worstpractice" title="生物信息实践" class="md-nav__button md-logo" aria-label="生物信息实践">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
 
     </a>
-    生物信息最差实践
+    生物信息实践
   </label>
   
     <div class="md-nav__source">
@@ -543,7 +543,50 @@
 一般来说，WES使用CoNIFER、WGS使用freec。
 以下是从官方文档里抄来的流程。</p>
 <h2 id="cnvkit">cnvkit</h2>
-<p>大概以后会默认使用<a href="https://cnvkit.readthedocs.io/en/stable/">cnvkit</a>，毕竟方便。使用的简单方式可以看<a href="https://pzweuj.github.io/2019/09/02/CNV-analysis.html#cnvkit">这里</a>。</p>
+<p>大概以后会默认使用<a href="https://cnvkit.readthedocs.io/en/stable/">cnvkit</a>，毕竟方便。cnvkit单次配对样本的使用方式如下：</p>
+<pre><code class="language-bash">cnvkit.py batch tumor.bam \
+    --normal normal.bam \
+    --targets my.bed --fasta hg19.fa --annotate refFlat.txt \
+    --access access.hg19.bed \
+    --output-reference reference.cnn --output-dir output/ \
+    --diagram --scatter
+</code></pre>
+<p><a href="http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/refFlat.txt.gz">refFlat下载</a></p>
+<p>access文件的生成可使用UCSC的<a href="http://hgdownload.cse.ucsc.edu/goldenpath/hg19/encodeDCC/wgEncodeMapability/wgEncodeDukeMapabilityRegionsExcludable.bed.gz">wgEncodeDukeMapabilityRegionsExcludable</a>进行来去除不能比对的区域。</p>
+<pre><code class="language-bash">cnvkit.py access hg19.fa \
+    -x wgEncodeDukeMapabilityRegionsExcludable.bed \
+    -o access.hg19.bed
+</code></pre>
+<p>更多的时候，使用单个肿瘤样本进行分析。建议是先使用多个通过同一实验条件做出来的正常样本数据建立参考基线，先生成target和antitarget的bed文件。</p>
+<pre><code class="language-bash">cnvkit.py target my.bed --anotate refFlat.txt --split -o target.bed
+cnvkit.py antitarget target.bed -g access.hg19.bed -o antitarget.bed
+</code></pre>
+<p>把这些正常的normal bam统统丢进同一个文件夹，然后用下面命令建立一个参考基线</p>
+<pre><code class="language-bash">cnvkit.py batch -n normal/*.bam --output-reference reference.cnn \
+    -t target.bed -a antitarget.bed \
+    -f hg19.fa -g access.hg19.bed
+</code></pre>
+<p>在新分析样本时，就可以用上这个参考</p>
+<pre><code class="language-bash">cnvkit.py batch tumor.bam -r reference.cnn -d output/
+</code></pre>
+<p>上面其实是cnvkit的合并模式，也可以拆开每一步来进行。下面的命令供参考：</p>
+<pre><code class="language-bash"># 对每个样本
+cnvkit.py coverage sample.bam target.bed -o sample.targetcoverage.cnn
+cnvkit.py coverage sample.bam antitarget.bed -o sample.antitargetcoverage.cnn
+
+# 对所有正常样本
+cnvkit.py reference *Normal.{,anti}targetcoverage.cnn \
+    --fasta hg19.fa -o reference.cnn
+
+# 对肿瘤样本
+cnvkit.py fix tumor.targetcoverage.cnn tumor.antitargetcoverge.cnn \
+    reference.cnn -o tumor.cnr
+cnvkit.py segment tumor.cnr -o tumor.cns
+cnvkit.py call tumor.cns -o tumor.call.cns
+cnvkit.py scatter tumor.cnr -s tumor.cns -o tumor.scatter.pdf
+cnvkit.py diagram tumor.cnr -s tumor.cns -o tumor.diagram.pdf
+</code></pre>
+<p>cnvkit中有一个--method参数，默认是hybrid（液相杂交捕获），可选amplicon（引物扩增），wgs（全基因组）。视实验方法而定咯。</p>
 <h2 id="conifer">CoNIFER</h2>
 <p><a href="http://conifer.sourceforge.net/">CoNIFER</a>据称可以去除多批次的实验做成的误差。软件只支持python2，不支持python3，另外已经有7年没有更新过，所以如果有更好更新的替代品，可以放弃使用CoNIFER。软件的安装还有一些依赖的包的安装就不说了。</p>
 <h3 id="rpkm">统计rpkm</h3>

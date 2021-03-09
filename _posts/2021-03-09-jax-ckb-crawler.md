@@ -95,10 +95,10 @@ def print_gene_variant(links):
 url = "https://ckb.jax.org/gene/grid"
 gDict = get_gene_id(url)
 
+print("Gene\tVariant\tUrl\tDescriptions\tDrug Resistance\tTranscript\tgDNA\tcDNA\tProtein\tSourceDatabase\tGenomeBuild")
 for name, ID in gDict.items():
     url = ID
     gene = name
-    print("Gene\tVariant\tUrl\tDescriptions\tDrug Resistance\tTranscript\tgDNA\tcDNA\tProtein\tSourceDatabase\tGenomeBuild")
     list_link = gene_variant_link(gene, url)
 
     pool = threadpool.ThreadPool(10)

@@ -42,3 +42,12 @@ extra_javascript:
   - assets/js/umlconvert.js
 
 google_analytics: ['UA-131202162-1', 'auto']
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - javascripts/config.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js

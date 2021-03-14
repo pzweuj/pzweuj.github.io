@@ -549,12 +549,18 @@
                 <h1 id="_1">统计读数</h1>
 <p>一般来说是统计比对到某个contig，某个基因，某个区域之类的的读数。然后换算为RPKM、FPKM、TPM等值，抑或是直接使用counts数来定量，再进行后面的差异分析。</p>
 <p>其中，RPKM是Reads per kilo bases per million mapped reads，计算公式如下：</p>
-<p>$$RPKM = \frac{Reads_per_transcript}{\frac{total_reads}{10^6} × \frac{transcript_length}{10^3}}$$</p>
+<div class="arithmatex">\[
+RPKM = \frac{Reads\_per\_transcript}{\frac{total\_reads}{10^6} × \frac{transcript\_length}{10^3}}
+\]</div>
 <p>其中10^3是为了标准化基因的长度，而10^6是为了标准化测序深度。FPKM是Fragments per kilo bases per million mapped reads，则是针对双端测序，与RPKM类似，计算方法相同。</p>
 <p>但是，目前更多的会使用TPM或counts。其中，TPM是transcript per million，与RPKM/FPKM不同之处在于TPM先去除了基因的长度影响，而RPKM/FPKM则先去除测序深度的影响，实际上TPM改进了RPKM/FPKM等跨样本时定量的不准确。</p>
-<p>$$T = \sum^{N}_{i=1}{N_i / L_i}$$</p>
-<p>$$TPM = \frac{N_i / L_i × 10^6}{T}$$</p>
-<p>其中$N_i$为比对到第i个外显子的reads数，$L_i$是第i个外显子的长度。</p>
+<div class="arithmatex">\[
+T = \sum^{N}_{i=1}{N_i / L_i}
+\]</div>
+<div class="arithmatex">\[
+TPM = \frac{N_i / L_i × 10^6}{T}
+\]</div>
+<p>其中<span class="arithmatex">\(N_i\)</span>为比对到第i个外显子的reads数，<span class="arithmatex">\(L_i\)</span>是第i个外显子的长度。</p>
 <p>那么什么时候用counts，什么时候用TPM呢。比较容易得到的结论是在比较同一个基因在不同情况下表达量的差异时，基因长度对分析结果不会有影响，所有可以用counts。而在比较不同基因的表达差异时，用TPM可能会更好。</p>
 <p>使用featureCounts或HTseq-count获得counts数同时加入了gtf文件用来注释，后续可以从结果矩阵里计算TPM，这样不管我们是counts还是用TPM来分析都可以。</p>
 <h2 id="featurecounts">featureCounts</h2>
@@ -649,15 +655,11 @@
     
       <script src="../../assets/javascripts/bundle.ca5457b8.min.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
+        <script src="../../javascripts/config.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script>
-      
-        <script src="../../assets/js/umlconvert.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
     
   </body>

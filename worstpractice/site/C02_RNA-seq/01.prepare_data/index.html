@@ -13,14 +13,14 @@
         <meta name="author" content="pzweuj">
       
       
-        <link rel="canonical" href="https://pzweuj.github.io/worstpractice/C01_DNA-seq/04.call_snp/">
+        <link rel="canonical" href="https://pzweuj.github.io/worstpractice/C02_RNA-seq/01.prepare_data/">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
-        <title>04. 找变异 - 生物信息最差实践</title>
+        <title>01. 参考基因/数据库/原始数据的准备 - 生物信息最差实践</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#call-snpindel" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              04. 找变异
+              01. 参考基因/数据库/原始数据的准备
             
           </span>
         </div>
@@ -222,14 +222,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
       
       <label class="md-nav__link" for="__nav_2">
         一、 DNA-seq
@@ -247,9 +245,208 @@
   
   
     <li class="md-nav__item">
-      <a href="../01.prepare_data/" class="md-nav__link">
+      <a href="../../C01_DNA-seq/01.prepare_data/" class="md-nav__link">
         01. 参考基因/数据库/原始数据的准备
       </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/02.mapping/" class="md-nav__link">
+        02. 比对
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/03.sort_and_mark_duplicates/" class="md-nav__link">
+        03. 排序以及标记重复序列
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/04.call_snp/" class="md-nav__link">
+        04. 找变异
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/05.call_somatics/" class="md-nav__link">
+        05. 体细胞突变
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/06.call_cnvs/" class="md-nav__link">
+        06. CNV突变
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/07.call_fusions/" class="md-nav__link">
+        07. 融合基因检测
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/08.annotation/" class="md-nav__link">
+        08. 注释
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/09.visualization/" class="md-nav__link">
+        09. 可视化
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        二、 RNA-seq
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="二、 RNA-seq" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          二、 RNA-seq
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          01. 参考基因/数据库/原始数据的准备
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        01. 参考基因/数据库/原始数据的准备
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    准备原始数据
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    建立索引
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    质控
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rrna" class="md-nav__link">
+    去除rRNA(可选)
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -271,197 +468,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03.sort_and_mark_duplicates/" class="md-nav__link">
-        03. 排序以及标记重复序列
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-    
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          04. 找变异
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        04. 找变异
-      </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#gatk4call-snpindel" class="md-nav__link">
-    使用GATK4进行call snp/indel
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bcftoolscall-snpindel" class="md-nav__link">
-    使用bcftools进行call snp/indel
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#freebayescall-snpindel" class="md-nav__link">
-    使用freebayes进行call snp/indel
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../05.call_somatics/" class="md-nav__link">
-        05. 体细胞突变
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06.call_cnvs/" class="md-nav__link">
-        06. CNV突变
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07.call_fusions/" class="md-nav__link">
-        07. 融合基因检测
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../08.annotation/" class="md-nav__link">
-        08. 注释
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../09.visualization/" class="md-nav__link">
-        09. 可视化
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
-      
-      <label class="md-nav__link" for="__nav_3">
-        二、 RNA-seq
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="二、 RNA-seq" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          二、 RNA-seq
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../C02_RNA-seq/01.prepare_data/" class="md-nav__link">
-        01. 参考基因/数据库/原始数据的准备
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../C02_RNA-seq/02.mapping/" class="md-nav__link">
-        02. 比对
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../C02_RNA-seq/03.counting/" class="md-nav__link">
+      <a href="../03.counting/" class="md-nav__link">
         03. 计算RPKM/FPKM/TPM/counts
       </a>
     </li>
@@ -473,7 +480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../C02_RNA-seq/04.differential_analysis/" class="md-nav__link">
+      <a href="../04.differential_analysis/" class="md-nav__link">
         04. 差异分析
       </a>
     </li>
@@ -485,7 +492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../C02_RNA-seq/05.picture/" class="md-nav__link">
+      <a href="../05.picture/" class="md-nav__link">
         05. 画图
       </a>
     </li>
@@ -523,22 +530,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#gatk4call-snpindel" class="md-nav__link">
-    使用GATK4进行call snp/indel
+  <a href="#_2" class="md-nav__link">
+    准备原始数据
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#bcftoolscall-snpindel" class="md-nav__link">
-    使用bcftools进行call snp/indel
+  <a href="#_3" class="md-nav__link">
+    建立索引
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#freebayescall-snpindel" class="md-nav__link">
-    使用freebayes进行call snp/indel
+  <a href="#_4" class="md-nav__link">
+    质控
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rrna" class="md-nav__link">
+    去除rRNA(可选)
   </a>
   
 </li>
@@ -555,34 +569,83 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/pzweuj/pzweuj.github.io/edit/master/docs/C01_DNA-seq/04.call_snp.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/pzweuj/pzweuj.github.io/edit/master/docs/C02_RNA-seq/01.prepare_data.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="call-snpindel">Call SNP/Indel找变异</h1>
-<p>找变异基本上是重中之重了。有GATK4 best practice提供的复杂的方法，也有使用属于samtools全家桶的<a href="https://samtools.github.io/bcftools/">bcftools</a>找变异的方法。这里将会介绍这两种方法。最终结果都是得到vcf文件。samtools<a href="https://samtools.github.io/hts-specs/VCFv4.2.pdf">这里</a>有一篇介绍vcf格式的pdf。</p>
-<h2 id="gatk4call-snpindel">使用GATK4进行call snp/indel</h2>
-<p>虽说是call snp，不过当然，也会call indel。
-<img alt="gatk1" src="https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/germline.PNG" /></p>
-<pre><code class="language-bash">gatk HaplotypeCaller \
-    -R Homo_sapiens_assembly38.fasta \
-    -I B17NC.final.bam \
-    -O B17NC.vcf.gz
+                <h1 id="_1">数据的准备</h1>
+<p>RNA-seq主要是用来检测不同的时空或者不同的状态下的基因表达差异。常用流程有<a href="https://ccb.jhu.edu/software/tophat/">topHat</a>+<a href="https://ccb.jhu.edu/software/stringtie/">Stringtie</a>+<a href="https://www.bioconductor.org/packages/release/bioc/html/ballgown.html">Ballgown</a>。这里将主要使用<a href="http://daehwankimlab.github.io/hisat2/main/">Hisat2</a>+<a href="http://subread.sourceforge.net/">featureCount</a>+<a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html">DEseq2</a>的流程（同时参照其他流程把其他软件选择加入），可能更（gèng）新。</p>
+<h2 id="_2">准备原始数据</h2>
+<p>本次RNA-seq流程来自Github的<a href="https://github.com/twbattaglia/RNAseq-workflow">twbattaglia</a>，基本照着以上的流程进行。</p>
+<p>下载注释文件以及基因组。目前最新的小鼠（家鼠）参考基因组是GRCm39（mm39），但是可能还是GRCm38（mm10）用得比较多。本着向前发展的原则，我们用mm39。</p>
+<pre><code class="language-bash">wget -P anntation/ http://hgdownload.soe.ucsc.edu/goldenPath/mm39/bigZips/genes/mm39.ncbiRefSeq.gtf.gz
+wget -P genome/ http://hgdownload.soe.ucsc.edu/goldenPath/mm39/bigZips/mm39.fa.gz
+gunzip anntation/mm39.ncbiRefSeq.gtf.gz
+gunzip genome/mm39.fa.gz
 </code></pre>
-<p>另外，当输入是多样本时，其实gatk可以先输出GVCF文件，再将它们合并。</p>
-<h2 id="bcftoolscall-snpindel">使用bcftools进行call snp/indel</h2>
-<p>bcftools的流程已经有一篇不错的<a href="https://samtools.github.io/bcftools/howtos/variant-calling.html">教程</a>，非常值得参考。bcf其实就是vcf的二进制格式，这里仍然输出我们更加熟悉的vcf。
-bcftools mpileup会产生超级大的中间文件，所以这里建议用管道往后进行call snp。另外，<a href="http://varscan.sourceforge.net/">Varscan</a>这个工具也可以使用。</p>
-<pre><code class="language-bash">bcftools mpileup -f Homo_sapiens_assembly38.fasta \
-    B17NC.final.bam \
-    | bcftools call -mv -O v \
-    -o B17NC.vcf
+<p>然后是数据，数据来源是来自“在低葡萄糖和高葡萄糖条件下培养的小鼠胰岛的转录组差异分析”。文章<a href="https://www.ncbi.nlm.nih.gov/pubmed/25051960">PMID25051960</a></p>
+<pre><code class="language-bash">wget -P rawdata/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/001/SRR1374921/SRR1374921.fastq.gz
+wget -P rawdata/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/002/SRR1374922/SRR1374922.fastq.gz
+wget -P rawdata/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/003/SRR1374923/SRR1374923.fastq.gz
+wget -P rawdata/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/004/SRR1374924/SRR1374924.fastq.gz
 </code></pre>
-<h2 id="freebayescall-snpindel">使用freebayes进行call snp/indel</h2>
-<p><a href="https://github.com/freebayes/freebayes">freebayes</a>也是一款不错的软件。</p>
-<pre><code class="language-bash">freebayes -f Homo_sapiens_assembly38.fasta &gt; B17NC.vcf
+<h2 id="_3">建立索引</h2>
+<p>使用hisat2对小鼠基因组GRCm38.p5.genome.fa建立索引。</p>
+<pre><code class="language-bash">hisat2-build genome/mm39.fa mm39
 </code></pre>
+<p>使用STAR对小鼠基因组GRCm38.p5.genome.fa建立索引，建立的同时把gtf加入了，比对后应该可以直接输出counts统计。</p>
+<pre><code class="language-bash">STAR \
+    --runMode genomeGenerate \
+    --genomeDir genome/star_index \
+    --genomeFastaFiles genome/mm39.fa \
+    --sjdbGTFfile anntation/mm39.ncbiRefSeq.gtf \
+    --runThreadN 16
+</code></pre>
+<p>我对STAR没啥好感，因为它的--help又臭又长。另外跑个建立索引就把我的小机器的16G内存吃完了，但是CPU占用率又上不去。</p>
+<h2 id="_4">质控</h2>
+<p>对RNA-seq进行质控的操作与DNA-seq的质控基本一样，使用<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>等软件来查看数据质量，再用<a href="http://www.usadellab.org/cms/?page=trimmomatic">trimmomatic</a>或<a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">trim_galore</a>等软件来进行数据过滤。</p>
+<p>单端数据就这样跑好了，双端也是类似的。</p>
+<p>fastqc基本用法</p>
+<pre><code class="language-bash">fastqc rawdata/SRR1374921.fastq.gz \
+    -o QC/ --noextract
+</code></pre>
+<p>上述命令获得质量报告后，使用trim galore进行过滤。注意，trim galore必须在<a href="https://github.com/marcelm/cutadapt/">cutadapt</a>已在环境变量中才可以使用。</p>
+<pre><code class="language-bash">trim_galore \
+    --quality 20 \
+    --fastqc \
+    --length 25 -j 10 \
+    --output_dir cleandata \
+    rawdata/SRR1374921.fastq.gz
+</code></pre>
+<p>对所有样本均进行以上操作。</p>
+<p>把这些样本ID都扔进一个samplelist里就可以批量运行了。</p>
+<pre><code class="language-bash">cat samplelist.txt | while read line;
+do
+    fastqc rawdata/${line}.fastq.gz -o QC/ --noextract;
+    trim_galore --quality 20 --fastqc --length 25 -j 10 \
+        --output_dir cleandata rawdata/${line}.fastq.gz;
+done
+</code></pre>
+<h2 id="rrna">去除rRNA(可选)</h2>
+<p>接下来使用<a href="https://github.com/biocore/sortmerna">SortMeRNA</a>去除rRNA，这一步其他的RNA-seq分析流程比较少见。</p>
+<p>从sortmerna的<a href="http://bioinfo.lifl.fr/RNA/sortmerna/">原始官网</a>中，是可以下载到教程中的2.1版本的，同时下载下来里面也有silva的16s等数据库存在。但在更新的github 4.2版本中，提供的数据库已经不是2.1版本中提供的了，所以这里接下来将不按原教程的操作，而是使用4.2版本进行。</p>
+<p>使用的数据库为</p>
+<pre><code class="language-bash">wget https://pd.zwc365.com/seturl/https://github.com/biocore/sortmerna/releases/download/v4.2.0/database.tar.gz
+tar -zxvf database.tar.gz
+</code></pre>
+<p>使用里面的smr_v4.3_default_db.fasta。</p>
+<pre><code class="language-bash">sortmerna --ref database/smr_v4.3_default_db.fasta \
+    --reads cleandata/SRR1374921_trimmed.fq.gz \
+    --aligned rRNA/SRR1374921_aligned \
+    --other rRNA/SRR1374921_filtered \
+    --fastx -threads 10 -v \
+    --workdir temp/
+gzip rRNA/SRR1374921_aligned.fq
+gzip rRNA/SRR1374921_filtered.fq
+rm -rf temp/
+</code></pre>
+<p>这个软件使用会自动创建Key-value DB和索引文件夹，后面加上--workdir参数来指定一个临时文件夹来存放。另外这软件虽然能输入gz压缩文件，但是输出只能是fastq。得到的filtered.fq将在后续进行使用。</p>
                 
               
               
@@ -600,7 +663,7 @@ bcftools mpileup会产生超级大的中间文件，所以这里建议用管道�
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../03.sort_and_mark_duplicates/" class="md-footer__link md-footer__link--prev" rel="prev">
+        <a href="../../C01_DNA-seq/09.visualization/" class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -609,19 +672,19 @@ bcftools mpileup会产生超级大的中间文件，所以这里建议用管道�
               <span class="md-footer__direction">
                 Previous
               </span>
-              03. 排序以及标记重复序列
+              09. 可视化
             </div>
           </div>
         </a>
       
       
-        <a href="../05.call_somatics/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../02.mapping/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              05. 体细胞突变
+              02. 比对
             </div>
           </div>
           <div class="md-footer__button md-icon">

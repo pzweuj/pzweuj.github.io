@@ -1,5 +1,5 @@
-site_name: 生物信息实践
-site_description: '至少还能实践'
+site_name: 生物信息最差实践
+site_description: '最差也能实践'
 site_author: 'pzweuj'
 site_url: 'https://pzweuj.github.io/worstpractice'
 theme: 
@@ -24,6 +24,12 @@ nav:
     - '07. 融合基因检测': C01_DNA-seq/07.call_fusions.md
     - '08. 注释': C01_DNA-seq/08.annotation.md
     - '09. 可视化': C01_DNA-seq/09.visualization.md
+  - '二、 RNA-seq' :
+    - '01. 参考基因/数据库/原始数据的准备': C02_RNA-seq/01.prepare_data.md
+    - '02. 比对': C02_RNA-seq/02.mapping.md
+    - '03. 计算RPKM/FPKM/TPM/counts': C02_RNA-seq/03.counting.md
+    - '04. 差异分析': C02_RNA-seq/04.differential_analysis.md
+    - '05. 画图': C02_RNA-seq/05.picture.md
 
 use_directory_urls: true
 

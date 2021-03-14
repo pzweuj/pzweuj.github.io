@@ -13,14 +13,14 @@
         <meta name="author" content="pzweuj">
       
       
-        <link rel="canonical" href="https://pzweuj.github.io/worstpractice/C01_DNA-seq/04.call_snp/">
+        <link rel="canonical" href="https://pzweuj.github.io/worstpractice/C02_RNA-seq/04.differential_analysis/">
       
       <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
-        <title>04. 找变异 - 生物信息最差实践</title>
+        <title>04. 差异分析 - 生物信息最差实践</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#call-snpindel" class="md-skip">
+        <a href="#_1" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              04. 找变异
+              04. 差异分析
             
           </span>
         </div>
@@ -222,14 +222,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
       
       <label class="md-nav__link" for="__nav_2">
         一、 DNA-seq
@@ -239,6 +237,146 @@
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           一、 DNA-seq
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/01.prepare_data/" class="md-nav__link">
+        01. 参考基因/数据库/原始数据的准备
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/02.mapping/" class="md-nav__link">
+        02. 比对
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/03.sort_and_mark_duplicates/" class="md-nav__link">
+        03. 排序以及标记重复序列
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/04.call_snp/" class="md-nav__link">
+        04. 找变异
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/05.call_somatics/" class="md-nav__link">
+        05. 体细胞突变
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/06.call_cnvs/" class="md-nav__link">
+        06. CNV突变
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/07.call_fusions/" class="md-nav__link">
+        07. 融合基因检测
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/08.annotation/" class="md-nav__link">
+        08. 注释
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/09.visualization/" class="md-nav__link">
+        09. 可视化
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        二、 RNA-seq
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="二、 RNA-seq" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          二、 RNA-seq
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -271,8 +409,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../03.sort_and_mark_duplicates/" class="md-nav__link">
-        03. 排序以及标记重复序列
+      <a href="../03.counting/" class="md-nav__link">
+        03. 计算RPKM/FPKM/TPM/counts
       </a>
     </li>
   
@@ -292,12 +430,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          04. 找变异
+          04. 差异分析
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        04. 找变异
+        04. 差异分析
       </a>
       
         
@@ -314,22 +452,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#gatk4call-snpindel" class="md-nav__link">
-    使用GATK4进行call snp/indel
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bcftoolscall-snpindel" class="md-nav__link">
-    使用bcftools进行call snp/indel
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#freebayescall-snpindel" class="md-nav__link">
-    使用freebayes进行call snp/indel
+  <a href="#deseq2" class="md-nav__link">
+    DESeq2
   </a>
   
 </li>
@@ -347,145 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05.call_somatics/" class="md-nav__link">
-        05. 体细胞突变
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../06.call_cnvs/" class="md-nav__link">
-        06. CNV突变
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../07.call_fusions/" class="md-nav__link">
-        07. 融合基因检测
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../08.annotation/" class="md-nav__link">
-        08. 注释
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../09.visualization/" class="md-nav__link">
-        09. 可视化
-      </a>
-    </li>
-  
-
-          
-        </ul>
-      </nav>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
-      
-      <label class="md-nav__link" for="__nav_3">
-        二、 RNA-seq
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="二、 RNA-seq" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          二、 RNA-seq
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../C02_RNA-seq/01.prepare_data/" class="md-nav__link">
-        01. 参考基因/数据库/原始数据的准备
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../C02_RNA-seq/02.mapping/" class="md-nav__link">
-        02. 比对
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../C02_RNA-seq/03.counting/" class="md-nav__link">
-        03. 计算RPKM/FPKM/TPM/counts
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../C02_RNA-seq/04.differential_analysis/" class="md-nav__link">
-        04. 差异分析
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../C02_RNA-seq/05.picture/" class="md-nav__link">
+      <a href="../05.picture/" class="md-nav__link">
         05. 画图
       </a>
     </li>
@@ -523,22 +509,8 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#gatk4call-snpindel" class="md-nav__link">
-    使用GATK4进行call snp/indel
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#bcftoolscall-snpindel" class="md-nav__link">
-    使用bcftools进行call snp/indel
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#freebayescall-snpindel" class="md-nav__link">
-    使用freebayes进行call snp/indel
+  <a href="#deseq2" class="md-nav__link">
+    DESeq2
   </a>
   
 </li>
@@ -555,34 +527,72 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/pzweuj/pzweuj.github.io/edit/master/docs/C01_DNA-seq/04.call_snp.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/pzweuj/pzweuj.github.io/edit/master/docs/C02_RNA-seq/04.differential_analysis.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="call-snpindel">Call SNP/Indel找变异</h1>
-<p>找变异基本上是重中之重了。有GATK4 best practice提供的复杂的方法，也有使用属于samtools全家桶的<a href="https://samtools.github.io/bcftools/">bcftools</a>找变异的方法。这里将会介绍这两种方法。最终结果都是得到vcf文件。samtools<a href="https://samtools.github.io/hts-specs/VCFv4.2.pdf">这里</a>有一篇介绍vcf格式的pdf。</p>
-<h2 id="gatk4call-snpindel">使用GATK4进行call snp/indel</h2>
-<p>虽说是call snp，不过当然，也会call indel。
-<img alt="gatk1" src="https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/germline.PNG" /></p>
-<pre><code class="language-bash">gatk HaplotypeCaller \
-    -R Homo_sapiens_assembly38.fasta \
-    -I B17NC.final.bam \
-    -O B17NC.vcf.gz
+                <h1 id="_1">差异分析</h1>
+<p>差异分析多使用R包<a href="https://bioconductor.org/packages/DESeq2/">DEseq2</a>或者<a href="https://bioconductor.org/packages/release/bioc/html/edgeR.html">edgeR</a>。这里使用DEseq2对featureCounts的结果进行差异分析。</p>
+<p>在windows下的RStudio使用BiocManager安装DESeq2时出现了"Bioconductor version cannot be validated; no internet connection?"这个错误，查找了一下，输入下面这两行可解决，可通过把这两行命令输入到R的配置文件中，避免每次安装都要输入。</p>
+<pre><code class="language-R">options(download.file.method=&quot;libcurl&quot;)
+options(url.method=&quot;libcurl&quot;)
 </code></pre>
-<p>另外，当输入是多样本时，其实gatk可以先输出GVCF文件，再将它们合并。</p>
-<h2 id="bcftoolscall-snpindel">使用bcftools进行call snp/indel</h2>
-<p>bcftools的流程已经有一篇不错的<a href="https://samtools.github.io/bcftools/howtos/variant-calling.html">教程</a>，非常值得参考。bcf其实就是vcf的二进制格式，这里仍然输出我们更加熟悉的vcf。
-bcftools mpileup会产生超级大的中间文件，所以这里建议用管道往后进行call snp。另外，<a href="http://varscan.sourceforge.net/">Varscan</a>这个工具也可以使用。</p>
-<pre><code class="language-bash">bcftools mpileup -f Homo_sapiens_assembly38.fasta \
-    B17NC.final.bam \
-    | bcftools call -mv -O v \
-    -o B17NC.vcf
+<p>接下来还是按照基本原则，软件的安装与R包的安装等不再赘述。</p>
+<h2 id="deseq2">DESeq2</h2>
+<p>以下是DESeq2处理获得差异矩阵的R script，如果是用counts而不是TPM则忽略计算TPM的步骤。</p>
+<pre><code class="language-R">library(DESeq2)
+
+# 读入
+data &lt;- read.table(&quot;final_featureCounts.txt&quot;, header=TRUE, skip=1, row.names=1)
+colnames(data) &lt;- gsub(&quot;.bam&quot;, &quot;&quot;, colnames(data), fixed=TRUE)
+colnames(data) &lt;- gsub(&quot;bam.&quot;, &quot;&quot;, colnames(data), fixed=TRUE)
+countdata &lt;- data[ , 6:ncol(data)]
+
+# 计算TPM
+KB &lt;- data$Length / 1000
+RPK &lt;- countdata / KB
+TPM &lt;- t(t(RPK) / colSums(RPK) * 1000000)
+TPM &lt;- merge(data, as.data.frame(TPM), by=&quot;row.names&quot;, sort=FALSE)
+TPM &lt;- TPM[, 1:ncol(TPM)]
+write.table(TPM, &quot;final_featureCounts.TPM.txt&quot;, sep=&quot;\t&quot;, quote=FALSE, row.names=FALSE)
+
 </code></pre>
-<h2 id="freebayescall-snpindel">使用freebayes进行call snp/indel</h2>
-<p><a href="https://github.com/freebayes/freebayes">freebayes</a>也是一款不错的软件。</p>
-<pre><code class="language-bash">freebayes -f Homo_sapiens_assembly38.fasta &gt; B17NC.vcf
+<p>以上可以计算获得TPM用作分析，不过这里还是继续使用counts。</p>
+<p>接下来读入metadata，metadata格式如下：</p>
+<pre><code>Group   Replicate   sampleid
+LoGlu   Rep1    SRR1374921
+LoGlu   Rep2    SRR1374922
+HiGlu   Rep1    SRR1374923
+HiGlu   Rep2    SRR1374924
 </code></pre>
+<p>使用以下命令读入</p>
+<pre><code class="language-R"># 读入metadata
+metadata &lt;- read.table(&quot;metadata.txt&quot;, header=TRUE)
+rownames(metadata) &lt;- metadata$sampleid
+# 如果需要调整样本编号顺序使与counts结果中相同
+metadata[match(colnames(countdata), metadata$sampleid), ]
+</code></pre>
+<p>接下来使用DESeq2计算差异</p>
+<pre><code class="language-R"># 计算差异
+dds &lt;- DESeqDataSetFromMatrix(countData=countdata, colData=metadata, design=~Group)
+dds &lt;- dds[ rowSums(counts(dds)) &gt; 1, ]
+dds &lt;- DESeq(dds)
+res &lt;- results(dds, pAdjustMethod=&quot;fdr&quot;, alpha=0.05)
+res &lt;- res[order(res$padj),]
+summary(res)
+mcols(res, use.names=TRUE)
+
+# 保存结果
+resdata &lt;- merge(as.data.frame(res), as.data.frame(counts(dds, normalized=TRUE)), by=&quot;row.names&quot;, sort=FALSE)
+write.csv(resdata, file=&quot;LoGlu_HiGlu_mm39_diff.csv&quot;, row.names=FALSE)
+</code></pre>
+<p>计算完后保存的结果可用于作图。</p>
+<pre><code class="language-R"># 也可以输出差异基因
+diff_gene &lt;- subset(res, padj &lt; 0.05 &amp; (log2FoldChange &gt; 1 | log2FoldChange &lt; -1))
+write.table(x=as.data.frame(diff_gene), file=&quot;results_gene_annotated_significant.txt&quot;, sep=&quot;\t&quot;, quote=F, col.names=NA)
+</code></pre>
+<p>计算获得差异结果后，进入下一步画图。</p>
                 
               
               
@@ -600,7 +610,7 @@ bcftools mpileup会产生超级大的中间文件，所以这里建议用管道�
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../03.sort_and_mark_duplicates/" class="md-footer__link md-footer__link--prev" rel="prev">
+        <a href="../03.counting/" class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -609,19 +619,19 @@ bcftools mpileup会产生超级大的中间文件，所以这里建议用管道�
               <span class="md-footer__direction">
                 Previous
               </span>
-              03. 排序以及标记重复序列
+              03. 计算RPKM/FPKM/TPM/counts
             </div>
           </div>
         </a>
       
       
-        <a href="../05.call_somatics/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../05.picture/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              05. 体细胞突变
+              05. 画图
             </div>
           </div>
           <div class="md-footer__button md-icon">

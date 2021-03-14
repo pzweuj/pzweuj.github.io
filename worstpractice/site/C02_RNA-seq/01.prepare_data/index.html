@@ -591,7 +591,7 @@ wget -P rawdata/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/003/SRR1374923/SRR137
 wget -P rawdata/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/004/SRR1374924/SRR1374924.fastq.gz
 </code></pre>
 <h2 id="_3">建立索引</h2>
-<p>使用hisat2对小鼠基因组GRCm38.p5.genome.fa建立索引。</p>
+<p>使用hisat2对小鼠基因组mm39.fa建立索引。</p>
 <pre><code class="language-bash">hisat2-build genome/mm39.fa mm39
 </code></pre>
 <p>使用STAR对小鼠基因组GRCm38.p5.genome.fa建立索引，建立的同时把gtf加入了，比对后应该可以直接输出counts统计。</p>

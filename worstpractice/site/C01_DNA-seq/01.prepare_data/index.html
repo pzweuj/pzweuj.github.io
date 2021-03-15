@@ -566,18 +566,22 @@
 <h2 id="_2">参考基因组的准备</h2>
 <p>参考基因组一般可以去<a href="https://www.ncbi.nlm.nih.gov/">ncbi</a>，<a href="http://www.ensembl.org/index.html">ensembl</a>，<a href="http://www.genomaize.org/">ucsc</a>寻找。这里以人为例，目前大多数的公司还是在使用hg19（也叫GRCh37）这一版本号的参考基因，但是！据我观察，目前大多数的数据库已经以hg38（也叫GRCh38）为默认参考了，所以，本着向前发展的原则，这里将会采用hg38。再不行，往后还可以用<a href="http://www.genomaize.org/cgi-bin/hgLiftOver">liftover</a>来进行hg19和hg38之间的转换。</p>
 <p>那么现在先来下载hg38也就是GRCh38的参考基因组。
-可以下载ncbi的</p>
-<pre><code class="language-bash">wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.38_GRCh38.p12/GCF_000001405.38_GRCh38.p12_genomic.fna.gz
-</code></pre>
-<p>可以下载ucsc的</p>
-<pre><code class="language-bash">wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
-</code></pre>
-<p>可以下载ensembl的</p>
-<pre><code class="language-bash">wget ftp://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
-</code></pre>
-<p>当然，这次我们先下载gatk提供的</p>
-<pre><code class="language-bash">wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/Homo_sapiens_assembly38.fasta.gz
-</code></pre>
+可以下载ncbi的
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.38_GRCh38.p12/GCF_000001405.38_GRCh38.p12_genomic.fna.gz
+</code></pre></div>
+</td></tr></table></p>
+<p>可以下载ucsc的
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+</code></pre></div>
+</td></tr></table></p>
+<p>可以下载ensembl的
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget ftp://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+</code></pre></div>
+</td></tr></table></p>
+<p>当然，这次我们先下载gatk提供的
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/Homo_sapiens_assembly38.fasta.gz
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="_3">准备各种数据集</h2>
 <p>为了后续用GATK来找变异，这里先把<a href="ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/">gatk bundle</a>的下了，如果打不开，有可能是同时太多人登录了，得换个时间试试。有条件的话，可以在<a href="https://console.cloud.google.com/storage/browser/genomics-public-data/resources/broad/hg38/v0">google cloud</a>下载。把除了参考基因组以外的都下下来，后面校正的时候用。</p>
 <h2 id="_4">准备原始数据</h2>

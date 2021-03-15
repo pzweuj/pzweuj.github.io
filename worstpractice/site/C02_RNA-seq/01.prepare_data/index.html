@@ -578,73 +578,113 @@
 <p>RNA-seq主要是用来检测不同的时空或者不同的状态下的基因表达差异。常用流程有<a href="https://ccb.jhu.edu/software/tophat/">topHat</a>+<a href="https://ccb.jhu.edu/software/stringtie/">Stringtie</a>+<a href="https://www.bioconductor.org/packages/release/bioc/html/ballgown.html">Ballgown</a>。这里将主要使用<a href="http://daehwankimlab.github.io/hisat2/main/">Hisat2</a>+<a href="http://subread.sourceforge.net/">featureCount</a>+<a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html">DEseq2</a>的流程（同时参照其他流程把其他软件选择加入），可能更（gèng）新。</p>
 <h2 id="_2">准备原始数据</h2>
 <p>本次RNA-seq流程来自Github的<a href="https://github.com/twbattaglia/RNAseq-workflow">twbattaglia</a>，基本照着以上的流程进行。</p>
-<p>下载注释文件以及基因组。目前最新的小鼠（家鼠）参考基因组是GRCm39（mm39），但是可能还是GRCm38（mm10）用得比较多。本着向前发展的原则，我们用mm39。</p>
-<pre><code class="language-bash">wget -P anntation/ http://hgdownload.soe.ucsc.edu/goldenPath/mm39/bigZips/genes/mm39.ncbiRefSeq.gtf.gz
+<p>下载注释文件以及基因组。目前最新的小鼠（家鼠）参考基因组是GRCm39（mm39），但是可能还是GRCm38（mm10）用得比较多。本着向前发展的原则，我们用mm39。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget -P anntation/ http://hgdownload.soe.ucsc.edu/goldenPath/mm39/bigZips/genes/mm39.ncbiRefSeq.gtf.gz
 wget -P genome/ http://hgdownload.soe.ucsc.edu/goldenPath/mm39/bigZips/mm39.fa.gz
 gunzip anntation/mm39.ncbiRefSeq.gtf.gz
 gunzip genome/mm39.fa.gz
-</code></pre>
-<p>然后是数据，数据来源是来自“在低葡萄糖和高葡萄糖条件下培养的小鼠胰岛的转录组差异分析”。文章<a href="https://www.ncbi.nlm.nih.gov/pubmed/25051960">PMID25051960</a></p>
-<pre><code class="language-bash">wget -P rawdata/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/001/SRR1374921/SRR1374921.fastq.gz
+</code></pre></div>
+</td></tr></table></p>
+<p>然后是数据，数据来源是来自“在低葡萄糖和高葡萄糖条件下培养的小鼠胰岛的转录组差异分析”。文章<a href="https://www.ncbi.nlm.nih.gov/pubmed/25051960">PMID25051960</a>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget -P rawdata/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/001/SRR1374921/SRR1374921.fastq.gz
 wget -P rawdata/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/002/SRR1374922/SRR1374922.fastq.gz
 wget -P rawdata/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/003/SRR1374923/SRR1374923.fastq.gz
 wget -P rawdata/ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR137/004/SRR1374924/SRR1374924.fastq.gz
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="_3">建立索引</h2>
 <p>使用hisat2对小鼠基因组mm39.fa建立索引。</p>
-<pre><code class="language-bash">hisat2-build genome/mm39.fa mm39
-</code></pre>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>hisat2-build genome/mm39.fa mm39
+</code></pre></div>
+</td></tr></table>
 <p>使用STAR对小鼠基因组mm39.fa建立索引，建立的同时把gtf加入了，比对后应该可以直接输出counts统计。</p>
-<pre><code class="language-bash">STAR \
-    --runMode genomeGenerate \
-    --genomeDir genome/star_index \
-    --genomeFastaFiles genome/mm39.fa \
-    --sjdbGTFfile anntation/mm39.ncbiRefSeq.gtf \
-    --runThreadN 16
-</code></pre>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>STAR <span class="se">\</span>
+    --runMode genomeGenerate <span class="se">\</span>
+    --genomeDir genome/star_index <span class="se">\</span>
+    --genomeFastaFiles genome/mm39.fa <span class="se">\</span>
+    --sjdbGTFfile anntation/mm39.ncbiRefSeq.gtf <span class="se">\</span>
+    --runThreadN <span class="m">16</span>
+</code></pre></div>
+</td></tr></table>
 <p>我对STAR没啥好感，因为它的--help又臭又长。另外跑个建立索引就把我的小机器的16G内存吃完了，但是CPU占用率又上不去。</p>
 <h2 id="_4">质控</h2>
 <p>对RNA-seq进行质控的操作与DNA-seq的质控基本一样，使用<a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>等软件来查看数据质量，再用<a href="http://www.usadellab.org/cms/?page=trimmomatic">trimmomatic</a>或<a href="https://www.bioinformatics.babraham.ac.uk/projects/trim_galore/">trim_galore</a>等软件来进行数据过滤。</p>
 <p>单端数据就这样跑好了，双端也是类似的。</p>
-<p>fastqc基本用法</p>
-<pre><code class="language-bash">fastqc rawdata/SRR1374921.fastq.gz \
+<p>fastqc基本用法
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>fastqc rawdata/SRR1374921.fastq.gz <span class="se">\</span>
     -o QC/ --noextract
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <p>上述命令获得质量报告后，使用trim galore进行过滤。注意，trim galore必须在<a href="https://github.com/marcelm/cutadapt/">cutadapt</a>已在环境变量中才可以使用。</p>
-<pre><code class="language-bash">trim_galore \
-    --quality 20 \
-    --fastqc \
-    --length 25 -j 10 \
-    --output_dir cleandata \
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>trim_galore <span class="se">\</span>
+    --quality <span class="m">20</span> <span class="se">\</span>
+    --fastqc <span class="se">\</span>
+    --length <span class="m">25</span> -j <span class="m">10</span> <span class="se">\</span>
+    --output_dir cleandata <span class="se">\</span>
     rawdata/SRR1374921.fastq.gz
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 <p>对所有样本均进行以上操作。</p>
-<p>把这些样本ID都扔进一个samplelist里就可以批量运行了。</p>
-<pre><code class="language-bash">cat samplelist.txt | while read line;
-do
-    fastqc rawdata/${line}.fastq.gz -o QC/ --noextract;
-    trim_galore --quality 20 --fastqc --length 25 -j 10 \
-        --output_dir cleandata rawdata/${line}.fastq.gz;
-done
-</code></pre>
+<p>把这些样本ID都扔进一个samplelist里就可以批量运行了。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cat samplelist.txt <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> line<span class="p">;</span>
+<span class="k">do</span>
+    fastqc rawdata/<span class="si">${</span><span class="nv">line</span><span class="si">}</span>.fastq.gz -o QC/ --noextract<span class="p">;</span>
+    trim_galore --quality <span class="m">20</span> --fastqc --length <span class="m">25</span> -j <span class="m">10</span> <span class="se">\</span>
+        --output_dir cleandata rawdata/<span class="si">${</span><span class="nv">line</span><span class="si">}</span>.fastq.gz<span class="p">;</span>
+<span class="k">done</span>
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="rrna">去除rRNA(可选)</h2>
 <p>接下来使用<a href="https://github.com/biocore/sortmerna">SortMeRNA</a>去除rRNA，这一步其他的RNA-seq分析流程比较少见。</p>
 <p>从sortmerna的<a href="http://bioinfo.lifl.fr/RNA/sortmerna/">原始官网</a>中，是可以下载到教程中的2.1版本的，同时下载下来里面也有silva的16s等数据库存在。但在更新的github 4.2版本中，提供的数据库已经不是2.1版本中提供的了，所以这里接下来将不按原教程的操作，而是使用4.2版本进行。</p>
-<p>使用的数据库为</p>
-<pre><code class="language-bash">wget https://pd.zwc365.com/seturl/https://github.com/biocore/sortmerna/releases/download/v4.2.0/database.tar.gz
+<p>使用的数据库为
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget https://pd.zwc365.com/seturl/https://github.com/biocore/sortmerna/releases/download/v4.2.0/database.tar.gz
 tar -zxvf database.tar.gz
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <p>使用里面的smr_v4.3_default_db.fasta。</p>
-<pre><code class="language-bash">sortmerna --ref database/smr_v4.3_default_db.fasta \
-    --reads cleandata/SRR1374921_trimmed.fq.gz \
-    --aligned rRNA/SRR1374921_aligned \
-    --other rRNA/SRR1374921_filtered \
-    --fastx -threads 10 -v \
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span>
+<span class="normal">9</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sortmerna --ref database/smr_v4.3_default_db.fasta <span class="se">\</span>
+    --reads cleandata/SRR1374921_trimmed.fq.gz <span class="se">\</span>
+    --aligned rRNA/SRR1374921_aligned <span class="se">\</span>
+    --other rRNA/SRR1374921_filtered <span class="se">\</span>
+    --fastx -threads <span class="m">10</span> -v <span class="se">\</span>
     --workdir temp/
 gzip rRNA/SRR1374921_aligned.fq
 gzip rRNA/SRR1374921_filtered.fq
 rm -rf temp/
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 <p>这个软件使用会自动创建Key-value DB和索引文件夹，后面加上--workdir参数来指定一个临时文件夹来存放。另外这软件虽然能输入gz压缩文件，但是输出只能是fastq。得到的filtered.fq将在后续进行使用。</p>
                 
               

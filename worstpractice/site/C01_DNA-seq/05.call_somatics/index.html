@@ -549,45 +549,73 @@
                 <h1 id="_1">体细胞变异</h1>
 <p>体细胞变异差不多就是在说肿瘤突变。常用的方法是测配对样本，就是组织样本和血液样本分别检测再call snp的时候一起放入软件中来找突变位点。也有靶向测序直接测肿瘤突变的位置。另外，目前有游离DNA检测来检测血浆中的肿瘤游离DNA，要求是超高深度的检测出肿瘤marker。还有测marker基因启动子甲基化来得到肿瘤早筛效果的方法。</p>
 <h2 id="gatk">GATK流程</h2>
-<p>先用配对的正常样本生成一个vcf，GATK对它的命名是PoN，也就是Panel of Normal</p>
-<pre><code class="language-bash">gatk Mutect2 \
-    -R Homo_sapiens_assembly38.fasta \
-    -I B17NC.final.bam \
-    -tumor B17NC \
-    --disable-read-filter MateOnSameContigOrNoMappedMateReadFilter \
+<p>先用配对的正常样本生成一个vcf，GATK对它的命名是PoN，也就是Panel of Normal
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk Mutect2 <span class="se">\</span>
+    -R Homo_sapiens_assembly38.fasta <span class="se">\</span>
+    -I B17NC.final.bam <span class="se">\</span>
+    -tumor B17NC <span class="se">\</span>
+    --disable-read-filter MateOnSameContigOrNoMappedMateReadFilter <span class="se">\</span>
     -O B17NC.vcf.gz
-</code></pre>
-<p>如果有多个正常样本PoN，可以这样合成。</p>
-<pre><code class="language-bash">gatk CreateSomaticPanelOfNormals \
-    -vcfs 1.vcf.gz \
-    -vcfs 2.vcf.gz \
-    -vcfs 3.vcf.gz \
+</code></pre></div>
+</td></tr></table></p>
+<p>如果有多个正常样本PoN，可以这样合成。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk CreateSomaticPanelOfNormals <span class="se">\</span>
+    -vcfs <span class="m">1</span>.vcf.gz <span class="se">\</span>
+    -vcfs <span class="m">2</span>.vcf.gz <span class="se">\</span>
+    -vcfs <span class="m">3</span>.vcf.gz <span class="se">\</span>
     -O all.vcf.gz
-</code></pre>
-<p>有了PoN之后，就可以和配对的肿瘤数据call somatic了，需要注意的是，这里的-tumor和-normal就是前面加头信息时加上去的（待确认）。</p>
-<pre><code class="language-bash">gatk Mutect2 \
-    -R Homo_sapiens_assembly38.fasta \
-    -I B1701.final.bam \
-    -I B17NC.final.bam \
-    -tumor B1701 \
-    -normal B17NC \
-    --germline-resource af-only-gnomad_grch38.vcf.gz \
+</code></pre></div>
+</td></tr></table></p>
+<p>有了PoN之后，就可以和配对的肿瘤数据call somatic了，需要注意的是，这里的-tumor和-normal就是前面加头信息时加上去的（待确认）。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk Mutect2 <span class="se">\</span>
+    -R Homo_sapiens_assembly38.fasta <span class="se">\</span>
+    -I B1701.final.bam <span class="se">\</span>
+    -I B17NC.final.bam <span class="se">\</span>
+    -tumor B1701 <span class="se">\</span>
+    -normal B17NC <span class="se">\</span>
+    --germline-resource af-only-gnomad_grch38.vcf.gz <span class="se">\</span>
     -O B1701.m2.vcf.gz
-</code></pre>
-<p>GATK后续还有些继续过滤校正去污染的方法，这里就不再继续了。更多的时候，我们只有单肿瘤样本的数据（tumor-only），还是可以用mutect2的。</p>
-<pre><code class="language-bash">gatk Mutect2 \
-    -R Homo_sapiens_assembly38.fasta \
-    -I B1701.final.bam \
-    -tumor B1701 \
-    --germline-resource af-only-gnomad_grch38.vcf.gz \
+</code></pre></div>
+</td></tr></table></p>
+<p>GATK后续还有些继续过滤校正去污染的方法，这里就不再继续了。更多的时候，我们只有单肿瘤样本的数据（tumor-only），还是可以用mutect2的。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk Mutect2 <span class="se">\</span>
+    -R Homo_sapiens_assembly38.fasta <span class="se">\</span>
+    -I B1701.final.bam <span class="se">\</span>
+    -tumor B1701 <span class="se">\</span>
+    --germline-resource af-only-gnomad_grch38.vcf.gz <span class="se">\</span>
     -O B1701.m2.vcf.gz
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="varscan">Varscan流程</h2>
-<p>Varscan的流程可以先用samtools的mpileup作为输入，当然新版的话使用bcftools。</p>
-<pre><code class="language-bash">bcftools mpileup -f Homo_sapiens_assembly38.fasta B1704.final.bam &gt; B1704.pileup
+<p>Varscan的流程可以先用samtools的mpileup作为输入，当然新版的话使用bcftools。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>bcftools mpileup -f Homo_sapiens_assembly38.fasta B1704.final.bam &gt; B1704.pileup
 bcftools mpileup -f Homo_sapiens_assembly38.fasta B17NC.final.bam &gt; B17NC.pileup
 java -jar VarScan.jar somatic B17NC.pileup B1704.pileup B1704
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
                 
               
               

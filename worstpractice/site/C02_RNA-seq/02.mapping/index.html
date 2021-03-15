@@ -591,53 +591,83 @@
 <h2 id="hisat2">HISAT2</h2>
 <h3 id="_2">分步进行</h3>
 <p>原则上，hisat2先将数据比对到sam文件，再使用samtools转换为bam文件后再进行排序。其中-x后跟的是索引文件的名字（不包括扩展名）。hisat2对SRR1374921比对用时3分钟，比对率在98.24%。</p>
-<pre><code class="language-bash">hisat2 -p 10 \
-    -x genome/mm39 \
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>hisat2 -p <span class="m">10</span> <span class="se">\</span>
+    -x genome/mm39 <span class="se">\</span>
     -U rRNA/SRR1374921_filtered.fq.gz
     -S bam/SRR1374921.sam
-</code></pre>
-<p>再使用samtools转为bam</p>
-<pre><code class="language-bash">samtools view -bS bam/SRR1374921.sam \
-    | samtools sort -@ 10 - -o bam/SRR1374921.bam
-</code></pre>
-<p>最后再用samtools进行排序并创建索引</p>
-<pre><code class="language-bash">samtools index bam/SRR1374921.bam
-</code></pre>
+</code></pre></div>
+</td></tr></table>
+<p>再使用samtools转为bam
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>samtools view -bS bam/SRR1374921.sam <span class="se">\</span>
+    <span class="p">|</span> samtools sort -@ <span class="m">10</span> - -o bam/SRR1374921.bam
+</code></pre></div>
+</td></tr></table></p>
+<p>最后再用samtools进行排序并创建索引
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>samtools index bam/SRR1374921.bam
+</code></pre></div>
+</td></tr></table></p>
 <p>然后其实可把SRR1374921.sam删掉了。</p>
 <h3 id="_3">合并进行</h3>
-<p>其实我们也可以一条命令，直接生成排序后的bam。使用管道和tee同时生成比对报告。</p>
-<pre><code class="language-bash">hisat2 -p 10 \
-    -x genome/mm39 \
-    -U rRNA/SRR1374921_filtered.fq.gz \
-    | tee &gt;(samtools flagstat - &gt; bam/SRR1374921.hisat2.flagstat.txt) \
-    | samtools sort -O BAM \
-    | tee bam/SRR1374921.bam \
-    | samtools index - bam/SRR1374921.bam.bai
-</code></pre>
-<p>写一个循环来跑这些数据。下载的内容里有个mergelist.txt，有所有数据样本名，把样本名截下来。</p>
-<pre><code class="language-bash">cut mergelist.txt -d'_' -f1 &gt; samplelist.txt
-</code></pre>
-<p>然后循环运行</p>
-<pre><code class="language-bash">cat samplelist.txt | while read line; do \
-    hisat2 -p 10 -x genome/mm39 \
-    -U rRNA/${line}_filtered.fq.gz \
-    | tee &gt;(samtools flagstat - &gt; bam/${line}.hisat2.flagstat.txt) \
-    | samtools sort -O BAM \
-    | tee bam/${line}.bam \
-    | samtools index - bam/${line}.bam.bai; done
-</code></pre>
+<p>其实我们也可以一条命令，直接生成排序后的bam。使用管道和tee同时生成比对报告。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>hisat2 -p <span class="m">10</span> <span class="se">\</span>
+    -x genome/mm39 <span class="se">\</span>
+    -U rRNA/SRR1374921_filtered.fq.gz <span class="se">\</span>
+    <span class="p">|</span> tee &gt;<span class="o">(</span>samtools flagstat - &gt; bam/SRR1374921.hisat2.flagstat.txt<span class="o">)</span> <span class="se">\</span>
+    <span class="p">|</span> samtools sort -O BAM <span class="se">\</span>
+    <span class="p">|</span> tee bam/SRR1374921.bam <span class="se">\</span>
+    <span class="p">|</span> samtools index - bam/SRR1374921.bam.bai
+</code></pre></div>
+</td></tr></table></p>
+<p>写一个循环来跑这些数据。下载的内容里有个mergelist.txt，有所有数据样本名，把样本名截下来。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cut mergelist.txt -d<span class="s1">&#39;_&#39;</span> -f1 &gt; samplelist.txt
+</code></pre></div>
+</td></tr></table></p>
+<p>然后循环运行
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cat samplelist.txt <span class="p">|</span> <span class="k">while</span> <span class="nb">read</span> line<span class="p">;</span> <span class="k">do</span> <span class="se">\</span>
+    hisat2 -p <span class="m">10</span> -x genome/mm39 <span class="se">\</span>
+    -U rRNA/<span class="si">${</span><span class="nv">line</span><span class="si">}</span>_filtered.fq.gz <span class="se">\</span>
+    <span class="p">|</span> tee &gt;<span class="o">(</span>samtools flagstat - &gt; bam/<span class="si">${</span><span class="nv">line</span><span class="si">}</span>.hisat2.flagstat.txt<span class="o">)</span> <span class="se">\</span>
+    <span class="p">|</span> samtools sort -O BAM <span class="se">\</span>
+    <span class="p">|</span> tee bam/<span class="si">${</span><span class="nv">line</span><span class="si">}</span>.bam <span class="se">\</span>
+    <span class="p">|</span> samtools index - bam/<span class="si">${</span><span class="nv">line</span><span class="si">}</span>.bam.bai<span class="p">;</span> <span class="k">done</span>
+</code></pre></div>
+</td></tr></table></p>
 <p>比对完成后，进入下一步统计reads数。</p>
 <h2 id="star">STAR</h2>
 <p>同样的数据，STAR需要50min才能完成，比对率85.76%。</p>
-<pre><code class="language-bash">STAR --genomeDir genome/star_index/ \
-    --readFilesIn rRNA/SRR1374921_filtered.fq.gz \
-    --runThreadN 10 --outSAMtype BAM SortedByCoordinate \
-    --quantMode GeneCounts \
-    --outFileNamePrefix bam/SRR1374921. \
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>STAR --genomeDir genome/star_index/ <span class="se">\</span>
+    --readFilesIn rRNA/SRR1374921_filtered.fq.gz <span class="se">\</span>
+    --runThreadN <span class="m">10</span> --outSAMtype BAM SortedByCoordinate <span class="se">\</span>
+    --quantMode GeneCounts <span class="se">\</span>
+    --outFileNamePrefix bam/SRR1374921. <span class="se">\</span>
     --readFilesCommand zcat
 mv bam/SRR1374921.Aligned.sortedByCoord.out.bam bam/SRR1374921.star.bam
 samtools index bam/SRR1374921.star.bam
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 <p>对文件存放结构不满意的需要把log移动到log文件夹。 </p>
 <p>由于在索引中还加入了GTF，STAR会同时输出比对到各个基因的counts，结果在ReadsPerGene.out.tab中，后三列分别是“counts for unstranded RNA-seq”， “counts for the 1st read strand aligned with RNA (htseq-count option -s yes)”， “counts for the 2nd read strand aligned with RNA (htseq-count option -s reverse)”。根据需求选用哪一列。</p>
                 

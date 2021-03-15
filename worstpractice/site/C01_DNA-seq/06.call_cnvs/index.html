@@ -633,123 +633,195 @@
 一般来说，WES使用CoNIFER、WGS使用freec。
 以下是从官方文档里抄来的流程。</p>
 <h2 id="cnvkit">cnvkit</h2>
-<p>大概以后会默认使用<a href="https://cnvkit.readthedocs.io/en/stable/">cnvkit</a>，毕竟方便。cnvkit单次配对样本的使用方式如下：</p>
-<pre><code class="language-bash">cnvkit.py batch tumor.bam \
-    --normal normal.bam \
-    --targets my.bed --fasta hg19.fa --annotate refFlat.txt \
-    --access access.hg19.bed \
-    --output-reference reference.cnn --output-dir output/ \
+<p>大概以后会默认使用<a href="https://cnvkit.readthedocs.io/en/stable/">cnvkit</a>，毕竟方便。cnvkit单次配对样本的使用方式如下：
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py batch tumor.bam <span class="se">\</span>
+    --normal normal.bam <span class="se">\</span>
+    --targets my.bed --fasta hg19.fa --annotate refFlat.txt <span class="se">\</span>
+    --access access.hg19.bed <span class="se">\</span>
+    --output-reference reference.cnn --output-dir output/ <span class="se">\</span>
     --diagram --scatter
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <p><a href="http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/refFlat.txt.gz">refFlat下载</a></p>
-<p>access文件的生成可使用UCSC的<a href="http://hgdownload.cse.ucsc.edu/goldenpath/hg19/encodeDCC/wgEncodeMapability/wgEncodeDukeMapabilityRegionsExcludable.bed.gz">wgEncodeDukeMapabilityRegionsExcludable</a>进行来去除不能比对的区域。</p>
-<pre><code class="language-bash">cnvkit.py access hg19.fa \
-    -x wgEncodeDukeMapabilityRegionsExcludable.bed \
+<p>access文件的生成可使用UCSC的<a href="http://hgdownload.cse.ucsc.edu/goldenpath/hg19/encodeDCC/wgEncodeMapability/wgEncodeDukeMapabilityRegionsExcludable.bed.gz">wgEncodeDukeMapabilityRegionsExcludable</a>进行来去除不能比对的区域。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py access hg19.fa <span class="se">\</span>
+    -x wgEncodeDukeMapabilityRegionsExcludable.bed <span class="se">\</span>
     -o access.hg19.bed
-</code></pre>
-<p>更多的时候，使用单个肿瘤样本进行分析。建议是先使用多个通过同一实验条件做出来的正常样本数据建立参考基线，先生成target和antitarget的bed文件。</p>
-<pre><code class="language-bash">cnvkit.py target my.bed --anotate refFlat.txt --split -o target.bed
+</code></pre></div>
+</td></tr></table></p>
+<p>更多的时候，使用单个肿瘤样本进行分析。建议是先使用多个通过同一实验条件做出来的正常样本数据建立参考基线，先生成target和antitarget的bed文件。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py target my.bed --anotate refFlat.txt --split -o target.bed
 cnvkit.py antitarget target.bed -g access.hg19.bed -o antitarget.bed
-</code></pre>
-<p>把这些正常的normal bam统统丢进同一个文件夹，然后用下面命令建立一个参考基线</p>
-<pre><code class="language-bash">cnvkit.py batch -n normal/*.bam --output-reference reference.cnn \
-    -t target.bed -a antitarget.bed \
+</code></pre></div>
+</td></tr></table></p>
+<p>把这些正常的normal bam统统丢进同一个文件夹，然后用下面命令建立一个参考基线
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py batch -n normal/*.bam --output-reference reference.cnn <span class="se">\</span>
+    -t target.bed -a antitarget.bed <span class="se">\</span>
     -f hg19.fa -g access.hg19.bed
-</code></pre>
-<p>在新分析样本时，就可以用上这个参考</p>
-<pre><code class="language-bash">cnvkit.py batch tumor.bam -r reference.cnn -d output/
-</code></pre>
-<p>上面其实是cnvkit的合并模式，也可以拆开每一步来进行。下面的命令供参考：</p>
-<pre><code class="language-bash"># 对每个样本
+</code></pre></div>
+</td></tr></table></p>
+<p>在新分析样本时，就可以用上这个参考
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py batch tumor.bam -r reference.cnn -d output/
+</code></pre></div>
+</td></tr></table></p>
+<p>上面其实是cnvkit的合并模式，也可以拆开每一步来进行。下面的命令供参考：
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># 对每个样本</span>
 cnvkit.py coverage sample.bam target.bed -o sample.targetcoverage.cnn
 cnvkit.py coverage sample.bam antitarget.bed -o sample.antitargetcoverage.cnn
 
-# 对所有正常样本
-cnvkit.py reference *Normal.{,anti}targetcoverage.cnn \
+<span class="c1"># 对所有正常样本</span>
+cnvkit.py reference *Normal.<span class="o">{</span>,anti<span class="o">}</span>targetcoverage.cnn <span class="se">\</span>
     --fasta hg19.fa -o reference.cnn
 
-# 对肿瘤样本
-cnvkit.py fix tumor.targetcoverage.cnn tumor.antitargetcoverge.cnn \
+<span class="c1"># 对肿瘤样本</span>
+cnvkit.py fix tumor.targetcoverage.cnn tumor.antitargetcoverge.cnn <span class="se">\</span>
     reference.cnn -o tumor.cnr
 cnvkit.py segment tumor.cnr -o tumor.cns
 cnvkit.py call tumor.cns -o tumor.call.cns
 cnvkit.py scatter tumor.cnr -s tumor.cns -o tumor.scatter.pdf
 cnvkit.py diagram tumor.cnr -s tumor.cns -o tumor.diagram.pdf
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <p>cnvkit中有一个--method参数，默认是hybrid（液相杂交捕获），可选amplicon（引物扩增），wgs（全基因组）。视实验方法而定咯。</p>
 <h2 id="conifer">CoNIFER</h2>
 <p><a href="http://conifer.sourceforge.net/">CoNIFER</a>据称可以去除多批次的实验做成的误差。软件只支持python2，不支持python3，另外已经有7年没有更新过，所以如果有更好更新的替代品，可以放弃使用CoNIFER。软件的安装还有一些依赖的包的安装就不说了。</p>
 <h3 id="rpkm">统计rpkm</h3>
-<p>首先是对bam文件统计rpkm值</p>
-<pre><code class="language-bash">python conifer.py rpkm --probes probes.txt --input sample.bam --output sample.rpkm.txt
-</code></pre>
-<p>其中，probes.txt是这个外显子检测的bed文件，就是各个探针的位置信息。</p>
-<p>另外，如果运行时报这个错误</p>
-<pre><code>AttributeError: 'pysam.libcsamfile.Samfile' object has no attribute '_hasIndex'
-</code></pre>
-<p>需要将conifer.py中第564行修改为”if not f.check_index():“，这是因为pysam更新了方法。</p>
+<p>首先是对bam文件统计rpkm值
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python conifer.py rpkm --probes probes.txt --input sample.bam --output sample.rpkm.txt
+</code></pre></div>
+</td></tr></table>
+其中，probes.txt是这个外显子检测的bed文件，就是各个探针的位置信息。</p>
+<p>另外，如果运行时报这个错误
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>AttributeError: &#39;pysam.libcsamfile.Samfile&#39; object has no attribute &#39;_hasIndex&#39;
+</code></pre></div>
+</td></tr></table>
+需要将conifer.py中第564行修改为”if not f.check_index():“，这是因为pysam更新了方法。</p>
 <h3 id="_1">分析</h3>
-<p>然后是conifer的主分析程序，这一步是对rpkm进行统计，因为CNV分析需要用到多个样本进行对比，所以这里的input是装有多个rpkm统计表的文件夹。</p>
-<pre><code class="language-bash">python conifer.py analyze \
-    --probes probes.txt \
-    --rpkm_dir ./RPKM/ \
-    --output analysis.hdf5 \
-    --svd 6 \
-    --write_svals singular_values.txt \
-    --plot_scree screeplot.png \
+<p>然后是conifer的主分析程序，这一步是对rpkm进行统计，因为CNV分析需要用到多个样本进行对比，所以这里的input是装有多个rpkm统计表的文件夹。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python conifer.py analyze <span class="se">\</span>
+    --probes probes.txt <span class="se">\</span>
+    --rpkm_dir ./RPKM/ <span class="se">\</span>
+    --output analysis.hdf5 <span class="se">\</span>
+    --svd <span class="m">6</span> <span class="se">\</span>
+    --write_svals singular_values.txt <span class="se">\</span>
+    --plot_scree screeplot.png <span class="se">\</span>
     --write_sd sd_values.txt
-</code></pre>
-<p><img alt="sv1" src="http://conifer.sourceforge.net/images/screeplot.png" /></p>
+</code></pre></div>
+</td></tr></table>
+<img alt="sv1" src="http://conifer.sourceforge.net/images/screeplot.png" /></p>
 <p>conifier建议根据出来的这幅图来设定svd的值，一般设置在拐点，比如上面这幅图能得到的建议是把svd设置在2到5之间。</p>
-<p>由于pytable这个包版本更新，运行时可能会报错</p>
-<pre><code>ImportError: cannot import name openFile
-</code></pre>
-<p>上面这个错误需要修改conifer.py第50行的openFile为open_file。</p>
-<pre><code>AttributeError: 'File' object has no attribute 'createGroup'
-</code></pre>
-<p>上面这个错误需要修改conifer.py第51行和第134行的createGroup为create_group。</p>
+<p>由于pytable这个包版本更新，运行时可能会报错
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>ImportError: cannot import name openFile
+</code></pre></div>
+</td></tr></table>
+上面这个错误需要修改conifer.py第50行的openFile为open_file。</p>
+<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>AttributeError: &#39;File&#39; object has no attribute &#39;createGroup&#39;
+</code></pre></div>
+</td></tr></table>
+上面这个错误需要修改conifer.py第51行和第134行的createGroup为create_group。</p>
 <h3 id="_2">结果生成</h3>
-<p>结果生成使用的是上面输出的hdf5文件</p>
-<pre><code class="language-bash">python conifer.py call \
-    --input analysis.hdf5 \
+<p>结果生成使用的是上面输出的hdf5文件
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python conifer.py call <span class="se">\</span>
+    --input analysis.hdf5 <span class="se">\</span>
     --output calls.txt
-</code></pre>
-<p>导出数据</p>
-<pre><code class="language-bash"># 所有样本
-python conifer.py export \
-    --input analysis.hdf5 \
+</code></pre></div>
+</td></tr></table></p>
+<p>导出数据
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># 所有样本</span>
+python conifer.py <span class="nb">export</span> <span class="se">\</span>
+    --input analysis.hdf5 <span class="se">\</span>
     --output ./export_svdzrpkm
 
-# 单个样本
-python conifer.py export \
-    --input analysis.hdf5 \
-    --sample SampleID \
+<span class="c1"># 单个样本</span>
+python conifer.py <span class="nb">export</span> <span class="se">\</span>
+    --input analysis.hdf5 <span class="se">\</span>
+    --sample SampleID <span class="se">\</span>
     --output ./export_svdzrpkm/sample.svdzrpkm.bed
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <h3 id="_3">可视化</h3>
-<p>conifer提供了可视化的方法</p>
-<pre><code class="language-bash">python conifer.py plot \
-    --input analysis.hdf5 \
-    --region chrxx:start-end \
-    --output image.png \
+<p>conifer提供了可视化的方法
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python conifer.py plot <span class="se">\</span>
+    --input analysis.hdf5 <span class="se">\</span>
+    --region chrxx:start-end <span class="se">\</span>
+    --output image.png <span class="se">\</span>
     --sample sampleID
-</code></pre>
-<p>出图效果：</p>
+</code></pre></div>
+</td></tr></table>
+出图效果：</p>
 <p><img alt="sv2" src="http://conifer.sourceforge.net/images/chr16_21426277_21747711_NA18517.png" /></p>
-<p>还有两个其他方法</p>
-<pre><code class="language-bash"># 样本高亮
-python conifer.py plot \
-    --input analysis.hdf5 \
-    --region chr#:start-stop \
-    --output image.png \
+<p>还有两个其他方法
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># 样本高亮</span>
+python conifer.py plot <span class="se">\</span>
+    --input analysis.hdf5 <span class="se">\</span>
+    --region chr#:start-stop <span class="se">\</span>
+    --output image.png <span class="se">\</span>
     --sample r:sampleID1 b:sampleID2 g:sampleID3
 
-# 输出所有位置
-python conifer.py plotcalls \
-    --input analysis.hdf5 \
-    --calls calls.txt \
+<span class="c1"># 输出所有位置</span>
+python conifer.py plotcalls <span class="se">\</span>
+    --input analysis.hdf5 <span class="se">\</span>
+    --calls calls.txt <span class="se">\</span>
     --outputdir ./call_imgs/
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="freec">freec</h2>
 <p><a href="http://boevalab.com/FREEC/">freec</a>适合检测全基因组的CNV。最新版是2018年8月的，可以算比较新了。相比上面的conifer，我觉得freec的使用要更麻烦一些，可以参阅<a href="http://boevalab.com/FREEC/tutorial.html">tutorial</a>，除了软件之外，还需要下载数据库，需要创建一个config文件，但是freec出来的图也是挺一目了然的。
 <img alt="freec" src="http://boevalab.com/FREEC/images/xxx.png" /></p>

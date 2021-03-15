@@ -579,66 +579,110 @@
 <p>SV和Fusion其实基本上是一回事，可以理解为SV包括了fusion。</p>
 <h2 id="lumpy">lumpy</h2>
 <p><a href="https://github.com/arq5x/lumpy-sv">lumpy</a>大概是当前最流行的sv检测软件？用法算简单，一般建议检测的时候可以不用去重和使用BQSR校正过的bam，可能会导致读数不准，但是其实可以都试试，毕竟不同实验方法得到的数据肯定是不同的。lumpy的使用毕竟简单，最后还可以用<a href="https://github.com/hall-lab/svtyper">svtyper</a>进行一个简单的分型。</p>
-<pre><code class="language-bash">samtools view -bh -F 1294 sample.bam \
-    | samtools sort -@ 8 - -o sample.discordants.bam
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>samtools view -bh -F <span class="m">1294</span> sample.bam <span class="se">\</span>
+    <span class="p">|</span> samtools sort -@ <span class="m">8</span> - -o sample.discordants.bam
 
-samtools view -h sample.bam \
-    | lumpy-sv/scripts/extractSplitReads_BwaMem \
-    -i stdin | samtools view -bSh - \
-    | samtools sort -@ 8 - -o sample.splitters.bam
+samtools view -h sample.bam <span class="se">\</span>
+    <span class="p">|</span> lumpy-sv/scripts/extractSplitReads_BwaMem <span class="se">\</span>
+    -i stdin <span class="p">|</span> samtools view -bSh - <span class="se">\</span>
+    <span class="p">|</span> samtools sort -@ <span class="m">8</span> - -o sample.splitters.bam
 
-lumpyexpress -B sample.bam \
-    -D sample.discordants.bam \
-    -S sample.splitters.bam \
+lumpyexpress -B sample.bam <span class="se">\</span>
+    -D sample.discordants.bam <span class="se">\</span>
+    -S sample.splitters.bam <span class="se">\</span>
     -o sample.lumpy.vcf
 
-svtyper-sso \
-    -i sample.lumpy.vcf \
-    -B sample.bam \
-    --cores 8 \
+svtyper-sso <span class="se">\</span>
+    -i sample.lumpy.vcf <span class="se">\</span>
+    -B sample.bam <span class="se">\</span>
+    --cores <span class="m">8</span> <span class="se">\</span>
     -o sample.gt.vcf
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 <h2 id="manta">manta</h2>
 <p>illumina出品的<a href="https://github.com/Illumina/manta">manta</a>也挺好用的，输出结果除了一般会有的PR（两端reads比到不同的位置）和SR（一条reads比到不同的位置）之外，还有DP（深度）也提供了。一般来说是要通过断点去获得这个区域的测序深度，最后来算突变丰度，但是直接从bam中统计的话又不太准确。manta同时适用于单样本和配对样本两种方式。--exome这个参数，在检测全外显子或panel测序的时候，都建议加入。</p>
-<pre><code class="language-bash">configManta.py \
-    --tumorBam tumor.bam \
-    --referenceFasta ref.fa \
-    --exome \
-    --generateEvidenceBam \
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>configManta.py <span class="se">\</span>
+    --tumorBam tumor.bam <span class="se">\</span>
+    --referenceFasta ref.fa <span class="se">\</span>
+    --exome <span class="se">\</span>
+    --generateEvidenceBam <span class="se">\</span>
     --runDir output
 output/runWorkflow.py
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 <h2 id="star-fusion">STAR-Fusion</h2>
 <p><a href="https://github.com/STAR-Fusion/STAR-Fusion/wiki">star-fusion</a>基于perl，clone下来后还需要装一堆perl的包，还有准备比对的基因组，可以参照<a href="https://github.com/STAR-Fusion/STAR-Fusion/wiki">wiki</a>里的步骤自行建立，也可以直接在<a href="https://data.broadinstitute.org/Trinity/CTAT_RESOURCE_LIB/">这里</a>下载现成的。</p>
-<p>对于双端数据</p>
-<pre><code class="language-bash"> STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib \
-    --left_fq reads_1.fq \
-    --right_fq reads_2.fq \
+<p>对于双端数据
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code> STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib <span class="se">\</span>
+    --left_fq reads_1.fq <span class="se">\</span>
+    --right_fq reads_2.fq <span class="se">\</span>
     --output_dir star_fusion_outdir
-</code></pre>
-<p>对于单端数据</p>
-<pre><code class="language-bash"> STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib \
-    --left_fq reads_1.fq \ 
+</code></pre></div>
+</td></tr></table></p>
+<p>对于单端数据
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code> STAR-Fusion --genome_lib_dir /path/to/your/CTAT_resource_lib <span class="se">\</span>
+    --left_fq reads_1.fq <span class="se">\ </span>
     --output_dir star_fusion_outdir
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="subread-junction">subread-junction</h2>
 <p>还有这个我使用过的<a href="http://bioinf.wehi.edu.au/subjunc/">subread-junction</a>，不得不说subread这个软件真的速度奇快。</p>
-<p>首先是建立索引</p>
-<pre><code class="language-bash">subread-buildindex -o my_index hg19.fa
-</code></pre>
-<p>然后就是检测了</p>
-<pre><code class="language-bash"># 只输出比对到唯一位置的
-subjunc -T 5 -i my_index -r reads1.txt -o subjunc_results.bam
+<p>首先是建立索引
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>subread-buildindex -o my_index hg19.fa
+</code></pre></div>
+</td></tr></table></p>
+<p>然后就是检测了
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># 只输出比对到唯一位置的</span>
+subjunc -T <span class="m">5</span> -i my_index -r reads1.txt -o subjunc_results.bam
 
-# 最多比对到三个位置
-subjunc --multiMapping -B 3 -T 5 -i my_index -r reads1.txt -o subjunc_results.bam
+<span class="c1"># 最多比对到三个位置</span>
+subjunc --multiMapping -B <span class="m">3</span> -T <span class="m">5</span> -i my_index -r reads1.txt -o subjunc_results.bam
 
-# indel设定最大长度16bp
-subjunc -I 16 -i my_index -r reads1.txt -o subjunc_results.bam
+<span class="c1"># indel设定最大长度16bp</span>
+subjunc -I <span class="m">16</span> -i my_index -r reads1.txt -o subjunc_results.bam
 
-# 找外显子与外显子融合
-subjunc -d 50 -D 600 -i my_index -r reads1.txt -R reads2.txt -o subjunc_results.bam
-</code></pre>
+<span class="c1"># 找外显子与外显子融合</span>
+subjunc -d <span class="m">50</span> -D <span class="m">600</span> -i my_index -r reads1.txt -R reads2.txt -o subjunc_results.bam
+</code></pre></div>
+</td></tr></table></p>
                 
               
               

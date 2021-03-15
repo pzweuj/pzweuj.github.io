@@ -565,24 +565,33 @@
 <h2 id="gatk4call-snpindel">使用GATK4进行call snp/indel</h2>
 <p>虽说是call snp，不过当然，也会call indel。
 <img alt="gatk1" src="https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/germline.PNG" /></p>
-<pre><code class="language-bash">gatk HaplotypeCaller \
-    -R Homo_sapiens_assembly38.fasta \
-    -I B17NC.final.bam \
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk HaplotypeCaller <span class="se">\</span>
+    -R Homo_sapiens_assembly38.fasta <span class="se">\</span>
+    -I B17NC.final.bam <span class="se">\</span>
     -O B17NC.vcf.gz
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 <p>另外，当输入是多样本时，其实gatk可以先输出GVCF文件，再将它们合并。</p>
 <h2 id="bcftoolscall-snpindel">使用bcftools进行call snp/indel</h2>
 <p>bcftools的流程已经有一篇不错的<a href="https://samtools.github.io/bcftools/howtos/variant-calling.html">教程</a>，非常值得参考。bcf其实就是vcf的二进制格式，这里仍然输出我们更加熟悉的vcf。
 bcftools mpileup会产生超级大的中间文件，所以这里建议用管道往后进行call snp。另外，<a href="http://varscan.sourceforge.net/">Varscan</a>这个工具也可以使用。</p>
-<pre><code class="language-bash">bcftools mpileup -f Homo_sapiens_assembly38.fasta \
-    B17NC.final.bam \
-    | bcftools call -mv -O v \
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>bcftools mpileup -f Homo_sapiens_assembly38.fasta <span class="se">\</span>
+    B17NC.final.bam <span class="se">\</span>
+    <span class="p">|</span> bcftools call -mv -O v <span class="se">\</span>
     -o B17NC.vcf
-</code></pre>
+</code></pre></div>
+</td></tr></table>
 <h2 id="freebayescall-snpindel">使用freebayes进行call snp/indel</h2>
-<p><a href="https://github.com/freebayes/freebayes">freebayes</a>也是一款不错的软件。</p>
-<pre><code class="language-bash">freebayes -f Homo_sapiens_assembly38.fasta &gt; B17NC.vcf
-</code></pre>
+<p><a href="https://github.com/freebayes/freebayes">freebayes</a>也是一款不错的软件。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>freebayes -f Homo_sapiens_assembly38.fasta &gt; B17NC.vcf
+</code></pre></div>
+</td></tr></table></p>
                 
               
               

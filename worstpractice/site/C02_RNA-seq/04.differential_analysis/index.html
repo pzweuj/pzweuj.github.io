@@ -535,63 +535,104 @@
                 <h1 id="_1">差异分析</h1>
 <p>差异分析多使用R包<a href="https://bioconductor.org/packages/DESeq2/">DEseq2</a>或者<a href="https://bioconductor.org/packages/release/bioc/html/edgeR.html">edgeR</a>。这里使用DEseq2对featureCounts的结果进行差异分析。</p>
 <p>在windows下的RStudio使用BiocManager安装DESeq2时出现了"Bioconductor version cannot be validated; no internet connection?"这个错误，查找了一下，输入下面这两行可解决，可通过把这两行命令输入到R的配置文件中，避免每次安装都要输入。</p>
-<pre><code class="language-R">options(download.file.method=&quot;libcurl&quot;)
-options(url.method=&quot;libcurl&quot;)
-</code></pre>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nf">options</span><span class="p">(</span><span class="n">download.file.method</span><span class="o">=</span><span class="s">&quot;libcurl&quot;</span><span class="p">)</span>
+<span class="nf">options</span><span class="p">(</span><span class="n">url.method</span><span class="o">=</span><span class="s">&quot;libcurl&quot;</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
 <p>接下来还是按照基本原则，软件的安装与R包的安装等不再赘述。</p>
 <h2 id="deseq2">DESeq2</h2>
 <p>以下是DESeq2处理获得差异矩阵的R script，如果是用counts而不是TPM则忽略计算TPM的步骤。</p>
-<pre><code class="language-R">library(DESeq2)
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="nf">library</span><span class="p">(</span><span class="n">DESeq2</span><span class="p">)</span>
 
-# 读入
-data &lt;- read.table(&quot;final_featureCounts.txt&quot;, header=TRUE, skip=1, row.names=1)
-colnames(data) &lt;- gsub(&quot;.bam&quot;, &quot;&quot;, colnames(data), fixed=TRUE)
-colnames(data) &lt;- gsub(&quot;bam.&quot;, &quot;&quot;, colnames(data), fixed=TRUE)
-countdata &lt;- data[ , 6:ncol(data)]
+<span class="c1"># 读入</span>
+<span class="n">data</span> <span class="o">&lt;-</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;final_featureCounts.txt&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="m">1</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="m">1</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;.bam&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">fixed</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">colnames</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="nf">gsub</span><span class="p">(</span><span class="s">&quot;bam.&quot;</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">,</span> <span class="nf">colnames</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">fixed</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="n">countdata</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="p">[</span> <span class="p">,</span> <span class="m">6</span><span class="o">:</span><span class="nf">ncol</span><span class="p">(</span><span class="n">data</span><span class="p">)]</span>
 
-# 计算TPM
-KB &lt;- data$Length / 1000
-RPK &lt;- countdata / KB
-TPM &lt;- t(t(RPK) / colSums(RPK) * 1000000)
-TPM &lt;- merge(data, as.data.frame(TPM), by=&quot;row.names&quot;, sort=FALSE)
-TPM &lt;- TPM[, 1:ncol(TPM)]
-write.table(TPM, &quot;final_featureCounts.TPM.txt&quot;, sep=&quot;\t&quot;, quote=FALSE, row.names=FALSE)
-
-</code></pre>
+<span class="c1"># 计算TPM</span>
+<span class="n">KB</span> <span class="o">&lt;-</span> <span class="n">data</span><span class="o">$</span><span class="n">Length</span> <span class="o">/</span> <span class="m">1000</span>
+<span class="n">RPK</span> <span class="o">&lt;-</span> <span class="n">countdata</span> <span class="o">/</span> <span class="n">KB</span>
+<span class="n">TPM</span> <span class="o">&lt;-</span> <span class="nf">t</span><span class="p">(</span><span class="nf">t</span><span class="p">(</span><span class="n">RPK</span><span class="p">)</span> <span class="o">/</span> <span class="nf">colSums</span><span class="p">(</span><span class="n">RPK</span><span class="p">)</span> <span class="o">*</span> <span class="m">1000000</span><span class="p">)</span>
+<span class="n">TPM</span> <span class="o">&lt;-</span> <span class="nf">merge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="n">TPM</span><span class="p">),</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;row.names&quot;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">TPM</span> <span class="o">&lt;-</span> <span class="n">TPM</span><span class="p">[,</span> <span class="m">1</span><span class="o">:</span><span class="nf">ncol</span><span class="p">(</span><span class="n">TPM</span><span class="p">)]</span>
+<span class="nf">write.table</span><span class="p">(</span><span class="n">TPM</span><span class="p">,</span> <span class="s">&quot;final_featureCounts.TPM.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> <span class="n">quote</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
 <p>以上可以计算获得TPM用作分析，不过这里还是继续使用counts。</p>
-<p>接下来读入metadata，metadata格式如下：</p>
-<pre><code>Group   Replicate   sampleid
+<p>接下来读入metadata，metadata格式如下：
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>Group   Replicate   sampleid
 LoGlu   Rep1    SRR1374921
 LoGlu   Rep2    SRR1374922
 HiGlu   Rep1    SRR1374923
 HiGlu   Rep2    SRR1374924
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <p>使用以下命令读入</p>
-<pre><code class="language-R"># 读入metadata
-metadata &lt;- read.table(&quot;metadata.txt&quot;, header=TRUE)
-rownames(metadata) &lt;- metadata$sampleid
-# 如果需要调整样本编号顺序使与counts结果中相同
-metadata[match(colnames(countdata), metadata$sampleid), ]
-</code></pre>
-<p>接下来使用DESeq2计算差异</p>
-<pre><code class="language-R"># 计算差异
-dds &lt;- DESeqDataSetFromMatrix(countData=countdata, colData=metadata, design=~Group)
-dds &lt;- dds[ rowSums(counts(dds)) &gt; 1, ]
-dds &lt;- DESeq(dds)
-res &lt;- results(dds, pAdjustMethod=&quot;fdr&quot;, alpha=0.05)
-res &lt;- res[order(res$padj),]
-summary(res)
-mcols(res, use.names=TRUE)
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># 读入metadata</span>
+<span class="n">metadata</span> <span class="o">&lt;-</span> <span class="nf">read.table</span><span class="p">(</span><span class="s">&quot;metadata.txt&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
+<span class="nf">rownames</span><span class="p">(</span><span class="n">metadata</span><span class="p">)</span> <span class="o">&lt;-</span> <span class="n">metadata</span><span class="o">$</span><span class="n">sampleid</span>
+<span class="c1"># 如果需要调整样本编号顺序使与counts结果中相同</span>
+<span class="n">metadata</span><span class="p">[</span><span class="nf">match</span><span class="p">(</span><span class="nf">colnames</span><span class="p">(</span><span class="n">countdata</span><span class="p">),</span> <span class="n">metadata</span><span class="o">$</span><span class="n">sampleid</span><span class="p">),</span> <span class="p">]</span>
+</code></pre></div>
+</td></tr></table>
+<p>接下来使用DESeq2计算差异
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># 计算差异</span>
+<span class="n">dds</span> <span class="o">&lt;-</span> <span class="nf">DESeqDataSetFromMatrix</span><span class="p">(</span><span class="n">countData</span><span class="o">=</span><span class="n">countdata</span><span class="p">,</span> <span class="n">colData</span><span class="o">=</span><span class="n">metadata</span><span class="p">,</span> <span class="n">design</span><span class="o">=~</span><span class="n">Group</span><span class="p">)</span>
+<span class="n">dds</span> <span class="o">&lt;-</span> <span class="n">dds</span><span class="p">[</span> <span class="nf">rowSums</span><span class="p">(</span><span class="nf">counts</span><span class="p">(</span><span class="n">dds</span><span class="p">))</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">,</span> <span class="p">]</span>
+<span class="n">dds</span> <span class="o">&lt;-</span> <span class="nf">DESeq</span><span class="p">(</span><span class="n">dds</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">&lt;-</span> <span class="nf">results</span><span class="p">(</span><span class="n">dds</span><span class="p">,</span> <span class="n">pAdjustMethod</span><span class="o">=</span><span class="s">&quot;fdr&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="m">0.05</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">&lt;-</span> <span class="n">res</span><span class="p">[</span><span class="nf">order</span><span class="p">(</span><span class="n">res</span><span class="o">$</span><span class="n">padj</span><span class="p">),]</span>
+<span class="nf">summary</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<span class="nf">mcols</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">use.names</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)</span>
 
-# 保存结果
-resdata &lt;- merge(as.data.frame(res), as.data.frame(counts(dds, normalized=TRUE)), by=&quot;row.names&quot;, sort=FALSE)
-write.csv(resdata, file=&quot;LoGlu_HiGlu_mm39_diff.csv&quot;, row.names=FALSE)
-</code></pre>
+<span class="c1"># 保存结果</span>
+<span class="n">resdata</span> <span class="o">&lt;-</span> <span class="nf">merge</span><span class="p">(</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">res</span><span class="p">),</span> <span class="nf">as.data.frame</span><span class="p">(</span><span class="nf">counts</span><span class="p">(</span><span class="n">dds</span><span class="p">,</span> <span class="n">normalized</span><span class="o">=</span><span class="kc">TRUE</span><span class="p">)),</span> <span class="n">by</span><span class="o">=</span><span class="s">&quot;row.names&quot;</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+<span class="nf">write.csv</span><span class="p">(</span><span class="n">resdata</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="s">&quot;LoGlu_HiGlu_mm39_diff.csv&quot;</span><span class="p">,</span> <span class="n">row.names</span><span class="o">=</span><span class="kc">FALSE</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table></p>
 <p>计算完后保存的结果可用于作图。</p>
-<pre><code class="language-R"># 也可以输出差异基因
-diff_gene &lt;- subset(res, padj &lt; 0.05 &amp; (log2FoldChange &gt; 1 | log2FoldChange &lt; -1))
-write.table(x=as.data.frame(diff_gene), file=&quot;results_gene_annotated_significant.txt&quot;, sep=&quot;\t&quot;, quote=F, col.names=NA)
-</code></pre>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># 也可以输出差异基因</span>
+<span class="n">diff_gene</span> <span class="o">&lt;-</span> <span class="nf">subset</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">padj</span> <span class="o">&lt;</span> <span class="m">0.05</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">log2FoldChange</span> <span class="o">&gt;</span> <span class="m">1</span> <span class="o">|</span> <span class="n">log2FoldChange</span> <span class="o">&lt;</span> <span class="m">-1</span><span class="p">))</span>
+<span class="nf">write.table</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="nf">as.data.frame</span><span class="p">(</span><span class="n">diff_gene</span><span class="p">),</span> <span class="n">file</span><span class="o">=</span><span class="s">&quot;results_gene_annotated_significant.txt&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&quot;\t&quot;</span><span class="p">,</span> <span class="n">quote</span><span class="o">=</span><span class="bp">F</span><span class="p">,</span> <span class="n">col.names</span><span class="o">=</span><span class="kc">NA</span><span class="p">)</span>
+</code></pre></div>
+</td></tr></table>
 <p>计算获得差异结果后，进入下一步画图。</p>
                 
               

@@ -646,50 +646,68 @@
 <p>排序和标记重复都是为了后面更好的找变异，从gatk best practice来说，还需要一部加入测序信息的步骤。排序和标记重复均可使用samtools或者picard进行。但是，<a href="https://software.broadinstitute.org/gatk/download">gatk4</a>已经内置了<a href="https://broadinstitute.github.io/picard/">picard</a>的全部功能，这里将会使用gatk4进行这些操作。如果是不是走gatk call snp的流程，其实更建议使用samtools。这一步虽然名字叫排序和标记重复，实际做的事情不止这些，只是排序和标记重复是最重要的。</p>
 <h2 id="bam">转为二进制bam格式</h2>
 <p>在进行下面的操作之前，先把sam文件转为二进制的bam文件，可以节省空间以及提高效率。
-使用samtools进行转化。</p>
-<pre><code class="language-bash">samtools view -bSh B17NC.sam &gt; B17NC.bam
-</code></pre>
+使用samtools进行转化。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>samtools view -bSh B17NC.sam &gt; B17NC.bam
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="_2">排序</h2>
-<p>使用gatk4进行排序。按coordinate进行排序，意思就是按照染色体编号进行排序。</p>
-<pre><code class="language-bash">gatk SortSam -I B17NC.bam -O B17NC.sorted.bam -SO coordinate
-</code></pre>
-<p>嫌弃gatk4太慢的，也可以用samtools。事实上，如果对bam文件的要求不怎么严谨，那么这一步已经可以算是最后一步了，当前生产出的bam已经可以用于call snp了。</p>
-<pre><code class="language-bash">samtools sort B17NC.bam -@ 8 -o B17NC.sorted.bam
-</code></pre>
+<p>使用gatk4进行排序。按coordinate进行排序，意思就是按照染色体编号进行排序。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk SortSam -I B17NC.bam -O B17NC.sorted.bam -SO coordinate
+</code></pre></div>
+</td></tr></table></p>
+<p>嫌弃gatk4太慢的，也可以用samtools。事实上，如果对bam文件的要求不怎么严谨，那么这一步已经可以算是最后一步了，当前生产出的bam已经可以用于call snp了。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>samtools sort B17NC.bam -@ <span class="m">8</span> -o B17NC.sorted.bam
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="_3">标记重复序列</h2>
 <p>标记重复序列实际上会在文件中重复的reads中加入一个tag来“标记”，因此并不需要去除重复，因为文件已经被改变了。而samtools有一个统计depth的方法，如果检测出reads带有重复tag，将不会统计；如果没有重复的tag，将进行统计。标记重复是为了去除PCR时产生的大量重复，获得较准确的突变丰度。
 这里使用gatk4进行。</p>
-<pre><code class="language-bash">gatk MarkDuplicates -I B17NC.sorted.bam -O B17NC.mdup.bam -M B17NC.dups.txt
-</code></pre>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk MarkDuplicates -I B17NC.sorted.bam -O B17NC.mdup.bam -M B17NC.dups.txt
+</code></pre></div>
+</td></tr></table>
 <h2 id="_4">添加或改写头信息</h2>
-<p>使用gatk4来改变头信息，如果后续用gatk4来进行体细胞突变分析，头信息还是很重要的。当然，如果比对时已经用来-R来加入信息，就不需要这一步了。</p>
-<pre><code class="language-bash">gatk AddOrReplaceReadGroups -I B17NC.mdup.bam -O B17NC.addhead.bam \
+<p>使用gatk4来改变头信息，如果后续用gatk4来进行体细胞突变分析，头信息还是很重要的。当然，如果比对时已经用来-R来加入信息，就不需要这一步了。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk AddOrReplaceReadGroups -I B17NC.mdup.bam -O B17NC.addhead.bam <span class="se">\</span>
     -LB lib1 -PL illumina -PU unit1 -SM B17NC
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="_5">创建索引</h2>
-<p>可以使用gatk4创建索引，也可以使用samtools。</p>
-<pre><code class="language-bash">gatk BuildBamIndex -I B17NC.addhead.bam
-</code></pre>
-<p>更建议使用samtools</p>
-<pre><code class="language-bash">samtools index B17NC.addhead.bam
-</code></pre>
+<p>可以使用gatk4创建索引，也可以使用samtools。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk BuildBamIndex -I B17NC.addhead.bam
+</code></pre></div>
+</td></tr></table></p>
+<p>更建议使用samtools
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>samtools index B17NC.addhead.bam
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="_6">质量值校正</h2>
 <p>接下来就是使用gatk的质量值校正部分了。gatk4使用机器学习的方式，以各种现有的数据集作为训练集来校正质量值。实际上，在bwa比对后再经过samtools排序的bam文件就已经可以进行call snp了。只不过gatk多一手校正。</p>
 <h3 id="indel">indel区域重比对</h3>
-<p>如果下面这一步出错，有可能是java版本不对，请安装openjdk-8-jre。</p>
-<pre><code class="language-bash">gatk BaseRecalibrator -I B17NC.addhead.bam \
-    -R Homo_sapiens_assembly38.fasta \
-    --known-sites Mills_and_1000G_gold_standard.indels.b38.vcf.gz \
-    --known-sites dbsnp_138.vcf \
-    --known-sites 1000g_phase.indels.vcf \
+<p>如果下面这一步出错，有可能是java版本不对，请安装openjdk-8-jre。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk BaseRecalibrator -I B17NC.addhead.bam <span class="se">\</span>
+    -R Homo_sapiens_assembly38.fasta <span class="se">\</span>
+    --known-sites Mills_and_1000G_gold_standard.indels.b38.vcf.gz <span class="se">\</span>
+    --known-sites dbsnp_138.vcf <span class="se">\</span>
+    --known-sites 1000g_phase.indels.vcf <span class="se">\</span>
     -O B17NC.recal.table
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <h3 id="_7">重比对区域校正</h3>
-<pre><code class="language-bash">gatk ApplyBQSR -R Homo_sapiens_assembly38.fasta \
-    -I B17NC.addhead.bam \
-    --bqsr-recal-file B17NC.recal.table \
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk ApplyBQSR -R Homo_sapiens_assembly38.fasta <span class="se">\</span>
+    -I B17NC.addhead.bam <span class="se">\</span>
+    --bqsr-recal-file B17NC.recal.table <span class="se">\</span>
     -O B17NC.final.bam
-</code></pre>
+</code></pre></div>
+</td></tr></table>
                 
               
               

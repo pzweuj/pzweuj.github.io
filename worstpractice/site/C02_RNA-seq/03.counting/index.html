@@ -564,22 +564,31 @@ TPM = \frac{N_i / L_i × 10^6}{T}
 <p>那么什么时候用counts，什么时候用TPM呢。比较容易得到的结论是在比较同一个基因在不同情况下表达量的差异时，基因长度对分析结果不会有影响，所有可以用counts。而在比较不同基因的表达差异时，用TPM可能会更好。</p>
 <p>使用featureCounts或HTseq-count获得counts数同时加入了gtf文件用来注释，后续可以从结果矩阵里计算TPM，这样不管我们是counts还是用TPM来分析都可以。</p>
 <h2 id="featurecounts">featureCounts</h2>
-<p>featureCounts是<a href="http://subread.sourceforge.net/">subread</a>中的一个工具，使用featureCounts进行counts的统计，需要用到gtf基因注释文件。命令中把所有需要的bam文件传入，下面是示例。最好把所有需要的bam文件扔到一个文件夹下。</p>
-<pre><code class="language-bash">featureCounts \
-    -T 10 \
-    -g gene_id \
-    -a annotation/mm39.ncbiRefSeq.gtf \
-    -o results/final_featureCounts.txt \
+<p>featureCounts是<a href="http://subread.sourceforge.net/">subread</a>中的一个工具，使用featureCounts进行counts的统计，需要用到gtf基因注释文件。命令中把所有需要的bam文件传入，下面是示例。最好把所有需要的bam文件扔到一个文件夹下。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>featureCounts <span class="se">\</span>
+    -T <span class="m">10</span> <span class="se">\</span>
+    -g gene_id <span class="se">\</span>
+    -a annotation/mm39.ncbiRefSeq.gtf <span class="se">\</span>
+    -o results/final_featureCounts.txt <span class="se">\</span>
     bam/*.bam
-</code></pre>
+</code></pre></div>
+</td></tr></table></p>
 <p>如果是双端的数据，还需要加入-p参数。</p>
 <p>结果中的Successfully assigned alignments基本都在60%左右，这个值与gtf文件有关，正常应该在70%~90%左右。先不管，进入下一步差异分析。</p>
 <h2 id="htseq">HTseq</h2>
-<p>用<a href="https://htseq.readthedocs.io/en/release_0.11.1/count.html">HTseq-count</a>来统计hisat2比对的结果。推荐使用上面的featureCounts，因为速度是真滴快太多。</p>
-<pre><code class="language-bash">htseq-count -f bam -r pos -s no \
-    -i gene_id bam/*.bam annotation/mm39.ncbiRefSeq.gtf \
-    1&gt;results/final_htseq.txt 2&gt;results/final_htseq.summary
-</code></pre>
+<p>用<a href="https://htseq.readthedocs.io/en/release_0.11.1/count.html">HTseq-count</a>来统计hisat2比对的结果。推荐使用上面的featureCounts，因为速度是真滴快太多。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>htseq-count -f bam -r pos -s no <span class="se">\</span>
+    -i gene_id bam/*.bam annotation/mm39.ncbiRefSeq.gtf <span class="se">\</span>
+    <span class="m">1</span>&gt;results/final_htseq.txt <span class="m">2</span>&gt;results/final_htseq.summary
+</code></pre></div>
+</td></tr></table></p>
                 
               
               

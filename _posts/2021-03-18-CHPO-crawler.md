@@ -25,7 +25,6 @@ cut genes_to_phenotype.txt -f3 | uniq > hpolist.txt
 最终其实只有23万左右的HP编号有用。下面是爬取代码，后期可以使用Thread和queue等库来增加线程数，获得更快速度。但是爬网站还是不能太过分，因此还是只用单线程了。这里爬取过程中顺便解析了，也可以爬完再解析。
 
 ```python
-from selenium import webdriver
 from selenium.webdriver import Edge
 from bs4 import BeautifulSoup
 import os

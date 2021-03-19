@@ -25,6 +25,13 @@ cut genes_to_phenotype.txt -f3 | uniq > hpolist.txt
 最终其实只有23万左右的HP编号有用。下面是爬取代码，后期可以使用Thread和queue等库来增加线程数，获得更快速度。**但是爬网站还是不能太过分**，设置一个长一点的间隔，只用单线程。爬完再解析。
 
 ```python
+from msedge.selenium_tools import Edge
+from msedge.selenium_tools import EdgeOptions
+from bs4 import BeautifulSoup
+import os
+import time
+import random
+
 # 爬取
 def chinahpo(hpo):
     time.sleep(random.randint(5, 30))

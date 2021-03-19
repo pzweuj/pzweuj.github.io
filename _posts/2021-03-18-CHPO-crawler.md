@@ -22,19 +22,29 @@ HPO网站里能很容易获得这个genes_to_phenotype.txt文件，通过这个�
 cut genes_to_phenotype.txt -f3 | uniq > hpolist.txt
 ```
 
-最终其实只有23万左右的HP编号有用。下面是爬取代码，后期可以使用Thread和queue等库来增加线程数，获得更快速度。但是爬网站还是不能太过分，因此还是只用单线程了。这里爬取过程中顺便解析了，也可以爬完再解析。
+最终其实只有23万左右的HP编号有用。下面是爬取代码，后期可以使用Thread和queue等库来增加线程数，获得更快速度。**但是爬网站还是不能太过分**，设置一个长一点的间隔，只用单线程。爬完再解析。
 
 ```python
-from selenium.webdriver import Edge
-from bs4 import BeautifulSoup
-import os
-import time
-import random
+# 爬取
+def chinahpo(hpo):
+    time.sleep(random.randint(5, 30))
+    options = EdgeOptions()
+    options.use_chromium = True
+    # options.add_argument("headless")
+    # options.add_argument("disable-gpu")
+    options.add_argument("--disable-blink-features")
+    options.add_argument("--disable-blink-features=AutomationControlled")
+    options.add_argument("start-maximized")
+    options.add_experimental_option("excludeSwitches", ["enable-automation"])
+    options.add_experimental_option("useAutomationExtension", False)
+    msedge = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedgedriver.exe"
 
+    driver = Edge(options=options, executable_path=msedge)
+    script = "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+    driver.execute_script(script)
+    driver.execute_cdp_cmd("Network.setUserAgentOverride", {"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.53 Safari/537.36"})
+    print(driver.execute_script("return navigator.userAgent;"))
 
-def chinahpo(hpo, dic):
-    time.sleep(random.randint(5, 10))
-    driver = Edge(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedgedriver.exe")
     hpid = hpo.split(":")[1]
     url = "http://www.chinahpo.org/#/searchList?trigger=1&tabType=1&searchContent=HP%3A{hpid}".format(hpid=hpid)
 
@@ -50,52 +60,65 @@ def chinahpo(hpo, dic):
         f.write(str(driver.page_source))
 
     driver.close()
+    fin = open("finish.txt", "a")
+    fin.write(hpo + "\n")
+    fin.close()
 
-    dic[hpo] = {
-        "url": "",
-        "en_name": "",
-        "cn_name": "",
-        "en_def": "",
-        "cn_def": ""
-    }
-
-
+# 解析
+def analysis(hpo):
+    hpid = hpo.split(":")[1]
     file = open("html/hp_" + hpid + ".html", "rb")
     html = file.read()
     soup = BeautifulSoup(html, "html.parser")
     m = soup.select("main")
     c = m[0].find_all("div", {"class": "row_list"})
+    url = "http://www.chinahpo.org/#/searchList?trigger=1&tabType=1&searchContent=HP%3A{hpid}".format(hpid=hpid)
+
+    output = [hpo]
 
     try:
         p = c[0].select("p")
-        dic[hpo]["url"] = url
-        dic[hpo]["en_name"] = p[0].string.split("：")[1]
-        dic[hpo]["cn_name"] = p[1].string.split("：")[1]
-        dic[hpo]["en_def"] = p[2].string.split("：")[1]
-        dic[hpo]["cn_def"] = p[3].string.split("：")[1]
+        output.append(p[0].string.split("：")[1])
+        output.append(p[1].string.split("：")[1])
+        output.append(p[2].string.split("：")[1])
+        output.append(p[3].string.split("：")[1])
+        output.append(url)
         file.close()
     except:
-        print("未找到描述:", hpo)
-        file.close()
-        os.remove("html/hp_" + hpid + ".html")
+        output.append("未找到信息")
+        output.append("-")
+        output.append("-")
+        output.append("-")
+        output.append(url)
 
-    return dic
-    
-hpo_dict = {}
+        # os.remove("html/hp_" + hpid + ".html")
+        filtered = open("filtered.txt", "a")
+        filtered.write(hpo + "\n")
+        filtered.close()
+
+    return "\t".join(output)
+
+
+# 爬取
 hpoFile = open("hpolist.txt", "r")
 for line in hpoFile:
-	hpo = line.replace("\n", "")
-	hpo_dict = chinahpo(hpo, hpo_dict)
+    hpo = line.replace("\n", "")
+    chinahpo(hpo)
 hpoFile.close()
 
-results = open("chpo.txt", "w", encoding="utf-8")
-results.write("HPID\tEn\tCn\tEn_def\tCn_def\tURL\n")
 
-for hd in hpo_dict.keys():
-    print("正在写入", hd)
-    output = [hd, hpo_dict[hd]["en_name"], hpo_dict[hd]["cn_name"], hpo_dict[hd]["en_def"], hpo_dict[hd]["cn_def"], hpo_dict[hd]["url"]]
-    results.write("\t".join(output) + "\n")
-
-results.close()
+# 解析
+hpoFileFinish = open("finish.txt", "r")
+r = open("chinahpo.txt", "w", encoding="utf-8")
+r.write("HPOID\tEN\tCN\tEN_des\tCN_des\tURL\n")
+for line in hpoFileFinish:
+    hpo = line.replace("\n", "")
+    try:
+        hpoString = analysis(hpo)
+        r.write(hpoString + "\n")
+    except:
+        pass
+r.close()
+hpoFileFinish.close()
 ```
 

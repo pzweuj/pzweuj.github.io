@@ -13,14 +13,14 @@
         <meta name="author" content="pzweuj">
       
       
-        <link rel="canonical" href="https://pzweuj.github.io/worstpractice/C01_DNA-seq/01.prepare_data/">
+        <link rel="canonical" href="https://pzweuj.github.io/worstpractice/C03_mNGS/04.annotation/">
       
       <link rel="icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.6">
     
     
       
-        <title>01. 参考基因/数据库/原始数据的准备 - 生物信息实践</title>
+        <title>04. 宏基因组注释 - 生物信息实践</title>
       
     
     
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              01. 参考基因/数据库/原始数据的准备
+              04. 宏基因组注释
             
           </span>
         </div>
@@ -218,14 +218,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
       
       <label class="md-nav__link" for="__nav_2">
         一、 DNA-seq
@@ -241,63 +239,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          01. 参考基因/数据库/原始数据的准备
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../C01_DNA-seq/01.prepare_data/" class="md-nav__link">
         01. 参考基因/数据库/原始数据的准备
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    参考基因组的准备
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    准备各种数据集
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    准备原始数据
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -307,7 +253,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../02.mapping/" class="md-nav__link">
+      <a href="../../C01_DNA-seq/02.mapping/" class="md-nav__link">
         02. 比对
       </a>
     </li>
@@ -319,7 +265,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../03.sort_and_mark_duplicates/" class="md-nav__link">
+      <a href="../../C01_DNA-seq/03.sort_and_mark_duplicates/" class="md-nav__link">
         03. 排序以及标记重复序列
       </a>
     </li>
@@ -331,7 +277,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../04.call_snp/" class="md-nav__link">
+      <a href="../../C01_DNA-seq/04.call_snp/" class="md-nav__link">
         04. 找变异
       </a>
     </li>
@@ -343,7 +289,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../05.call_somatics/" class="md-nav__link">
+      <a href="../../C01_DNA-seq/05.call_somatics/" class="md-nav__link">
         05. 体细胞突变
       </a>
     </li>
@@ -355,7 +301,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../06.call_cnvs/" class="md-nav__link">
+      <a href="../../C01_DNA-seq/06.call_cnvs/" class="md-nav__link">
         06. CNV突变
       </a>
     </li>
@@ -367,7 +313,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../07.call_fusions/" class="md-nav__link">
+      <a href="../../C01_DNA-seq/07.call_fusions/" class="md-nav__link">
         07. 融合基因检测
       </a>
     </li>
@@ -379,7 +325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../08.annotation/" class="md-nav__link">
+      <a href="../../C01_DNA-seq/08.annotation/" class="md-nav__link">
         08. 注释
       </a>
     </li>
@@ -391,7 +337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../09.visualization/" class="md-nav__link">
+      <a href="../../C01_DNA-seq/09.visualization/" class="md-nav__link">
         09. 可视化
       </a>
     </li>
@@ -500,12 +446,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
       
       <label class="md-nav__link" for="__nav_4">
         三、 mNGS
@@ -523,7 +471,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../C03_mNGS/01.prepare_data/" class="md-nav__link">
+      <a href="../01.prepare_data/" class="md-nav__link">
         01. 参考基因/数据库/原始数据的准备
       </a>
     </li>
@@ -535,7 +483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../C03_mNGS/02.remove_host/" class="md-nav__link">
+      <a href="../02.remove_host/" class="md-nav__link">
         02. 去除宿主基因
       </a>
     </li>
@@ -547,7 +495,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../C03_mNGS/03.assemble/" class="md-nav__link">
+      <a href="../03.assemble/" class="md-nav__link">
         03. 基因组组装
       </a>
     </li>
@@ -557,11 +505,63 @@
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../C03_mNGS/04.annotation/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          04. 宏基因组注释
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         04. 宏基因组注释
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#centrifuge" class="md-nav__link">
+    centrifuge
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kraken2" class="md-nav__link">
+    kraken2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    其他
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -571,7 +571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../C03_mNGS/05.pictures/" class="md-nav__link">
+      <a href="../05.pictures/" class="md-nav__link">
         05. 可视化
       </a>
     </li>
@@ -609,22 +609,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#centrifuge" class="md-nav__link">
+    centrifuge
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kraken2" class="md-nav__link">
+    kraken2
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
-    参考基因组的准备
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    准备各种数据集
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    准备原始数据
+    其他
   </a>
   
 </li>
@@ -641,41 +641,64 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/pzweuj/pzweuj.github.io/edit/master/docs/C01_DNA-seq/01.prepare_data.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/pzweuj/pzweuj.github.io/edit/master/docs/C03_mNGS/04.annotation.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="_1">数据的准备</h1>
-<p>DNA-seq最常见的就是WES还有WGS以及各种小pannel（target）检测，就是最常见的测序方式。针对DNA-seq，有很多成熟的流程，比如<a href="https://software.broadinstitute.org/gatk/best-practices/workflow?id=11145">GATK-best-practice</a>，又比如<a href="https://docs.gdc.cancer.gov/Data/Bioinformatics_Pipelines/DNA_Seq_Variant_Calling_Pipeline/">GDC DNA-seq pipeline</a>。这一章基本上会写一些常用的软件，以及一些基本成熟的流程和分析方法。</p>
-<p>另外，目前在搭建<a href="https://github.com/pzweuj/DNApipeline">一个项目</a>，希望能把常用的软件囊括进来。</p>
-<h2 id="_2">参考基因组的准备</h2>
-<p>参考基因组一般可以去<a href="https://www.ncbi.nlm.nih.gov/">ncbi</a>，<a href="http://www.ensembl.org/index.html">ensembl</a>，<a href="http://www.genomaize.org/">ucsc</a>寻找。这里以人为例，目前大多数的公司还是在使用hg19（也叫GRCh37）这一版本号的参考基因，但是！据我观察，目前大多数的数据库已经以hg38（也叫GRCh38）为默认参考了，所以，本着向前发展的原则，这里将会采用hg38。再不行，往后还可以用<a href="http://www.genomaize.org/cgi-bin/hgLiftOver">liftover</a>来进行hg19和hg38之间的转换。</p>
-<p>那么现在先来下载hg38也就是GRCh38的参考基因组。
-可以下载ncbi的
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.38_GRCh38.p12/GCF_000001405.38_GRCh38.p12_genomic.fna.gz
+                <h1 id="_1">基因组注释</h1>
+<p>直接将数据比对到参考的基因组库中，并注释出来。为了后续的可视化，使用kraken2的结果模式。运行过程非常吃内存。</p>
+<h2 id="centrifuge">centrifuge</h2>
+<p>使用<a href="https://ccb.jhu.edu/software/centrifuge/manual.shtml">centrifuge</a>来进行物种注释。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>centrifuge <span class="se">\</span>
+    -x hpvc <span class="se">\</span>
+    -1 removeHuman/SRR10903401_1.fastq.gz <span class="se">\</span>
+    -2 removeHuman/SRR10903401_2.fastq.gz <span class="se">\</span>
+    -S centrifuge/SRR10903401.txt -p <span class="m">8</span> <span class="se">\</span>
+    --report-file centrifuge/SRR10903401.report.tsv
 </code></pre></div>
-</td></tr></table></p>
-<p>可以下载ucsc的
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+</td></tr></table>
+<p>SRR10903401.txt结果一共分为8列。从左到右，原始read ID，比对到数据库的序列ID（如果使用RefSeq或nt库则时AccessionID），物种分类ID，classification得分（序列之和），第二比对结果得分，比对序列长度，比对reads长度，reads比对上的物种数。</p>
+<p>我们可以关注SRR10903401.report.tsv结果，结果中对物种进行了注释。</p>
+<p>将结果转为kraken2的结果回报格式。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>centrifuge-kreport -x hpvc centrifuge/SRR10903401.report.tsv <span class="se">\</span>
+    &gt; centrifuge/SRR10903401.kreport.tsv
 </code></pre></div>
-</td></tr></table></p>
-<p>可以下载ensembl的
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget ftp://ftp.ensembl.org/pub/release-95/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+</td></tr></table>
+<p>运行时报import imp  Warning，因为python3.4后不再使用imp。需要把import imp改为import importlib。</p>
+<h2 id="kraken2">kraken2</h2>
+<p>使用<a href="https://github.com/DerrickWood/kraken2/wiki">kraken2</a>来进行物种注释。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>kraken2 --db minikraken_8GB_20200312 <span class="se">\</span>
+    --threads <span class="m">8</span> <span class="se">\</span>
+    --report kraken2/SRR10903401.kraken2.tsv <span class="se">\</span>
+    --output kraken2/SRR10903401.report.tsv <span class="se">\</span>
+    --gzip-compressed --paired <span class="se">\</span>
+    removeHuman/SRR10903401_1.fastq.gz <span class="se">\</span>
+    removeHuman/SRR10903401_2.fastq.gz
 </code></pre></div>
-</td></tr></table></p>
-<p>当然，这次我们先下载gatk提供的
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/Homo_sapiens_assembly38.fasta.gz
+</td></tr></table>
+<p>由于kraken2本次分析使用的数据库大小远比centrifuge的小，因此速度要快很多。</p>
+<p>kraken2分析的下游还可以使用<a href="https://ccb.jhu.edu/software/bracken/index.shtml">bracken</a>来进行校正。bracken和kraken2可使用相同的数据库。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>bracken -d minikraken_8GB_20200312 -i kraken2/SRR10903401.kraken2.tsv <span class="se">\</span>
+    -o kraken2/SRR10903401.bracken.txt -l S
 </code></pre></div>
-</td></tr></table></p>
-<h2 id="_3">准备各种数据集</h2>
-<p>为了后续用GATK来找变异，这里先把<a href="ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/">gatk bundle</a>的下了，如果打不开，有可能是同时太多人登录了，得换个时间试试。有条件的话，可以在<a href="https://console.cloud.google.com/storage/browser/genomics-public-data/resources/broad/hg38/v0">google cloud</a>下载。把除了参考基因组以外的都下下来，后面校正的时候用。</p>
-<h2 id="_4">准备原始数据</h2>
-<p>原始数据的来源，一般的，可以在ncbi sra上找公开的数据进行实践，怎么下载，可以看<a href="https://pzweuj.github.io/2019/02/13/NCBI-SRA.html">这里</a>。对于DNA-seq，比如WES和WGS，还可以下载<a href="https://pzweuj.github.io/2018/11/16/KPGP.html">韩国人基因组</a>的，方便。</p>
-<p>不过这次，我们使用2017年卫生部室间质量评价的来进行学习。
-原始数据的下载可以在<a href="https://pan.baidu.com/s/1_l3U8_7zURGdDckKCk4PVQ#d4df">百度网盘</a>。要输入密码的话自己看链接，#后面就是啦。</p>
-<p>请下载illumina平台的数据。只要B17NC以及B1701就好。还需要一个bed文件，点击<a href="https://github.com/pzweuj/pzweuj.github.io/raw/master/downloads/OCP_Target.bed">这里</a>下载。</p>
-<p>数据的下载先到这。</p>
+</td></tr></table>
+<h2 id="_2">其他</h2>
+<p>其他可用软件：</p>
+<p><a href="https://huttenhower.sph.harvard.edu/metaphlan/">metaphlan3</a>、<a href="https://github.com/tseemann/prokka">Prokka</a>、<a href="https://github.com/chiulab/SURPI-plus-dist">SURPI</a></p>
                 
               
               
@@ -693,7 +716,7 @@
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../.." class="md-footer__link md-footer__link--prev" rel="prev">
+        <a href="../03.assemble/" class="md-footer__link md-footer__link--prev" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -702,19 +725,19 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              前言
+              03. 基因组组装
             </div>
           </div>
         </a>
       
       
-        <a href="../02.mapping/" class="md-footer__link md-footer__link--next" rel="next">
+        <a href="../05.pictures/" class="md-footer__link md-footer__link--next" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              02. 比对
+              05. 可视化
             </div>
           </div>
           <div class="md-footer__button md-icon">

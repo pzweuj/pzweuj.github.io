@@ -30,6 +30,12 @@ nav:
     - '03. 计算RPKM/FPKM/TPM/counts': C02_RNA-seq/03.counting.md
     - '04. 差异分析': C02_RNA-seq/04.differential_analysis.md
     - '05. 画图': C02_RNA-seq/05.picture.md
+  - '三、 mNGS' :
+    - '01. 参考基因/数据库/原始数据的准备': C03_mNGS/01.prepare_data.md
+    - '02. 去除宿主基因': C03_mNGS/02.remove_host.md
+    - '03. 基因组组装': C03_mNGS/03.assemble.md
+    - '04. 宏基因组注释': C03_mNGS/04.annotation.md
+    - '05. 可视化': C03_mNGS/05.pictures.md
 
 use_directory_urls: true
 

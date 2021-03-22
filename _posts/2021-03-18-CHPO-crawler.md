@@ -19,10 +19,10 @@ pip install msedge-selenium-tools selenium==3.141
 HPO网站里能很容易获得这个genes_to_phenotype.txt文件，通过这个文件可以获得HP编号。
 
 ```bash
-cut genes_to_phenotype.txt -f3 | uniq > hpolist.txt
+cut genes_to_phenotype.txt -f3 | sort | uniq > hpolist.txt
 ```
 
-最终其实只有23万左右的HP编号有用。下面是爬取代码，后期可以使用Thread和queue等库来增加线程数，获得更快速度。**但是爬网站还是不能太过分**，设置一个长一点的间隔，只用单线程。爬完再解析。
+最终其实只有8000左右的HP编号有用。下面是爬取代码，后期可以使用Thread和queue等库来增加线程数，获得更快速度。**但是爬网站还是不能太过分**，设置一个长一点的间隔，只用单线程。爬完再解析。
 
 ```python
 from msedge.selenium_tools import Edge

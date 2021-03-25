@@ -727,25 +727,26 @@
 <span class="normal">5</span>
 <span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py batch tumor.bam <span class="se">\</span>
     --normal normal.bam <span class="se">\</span>
-    --targets my.bed --fasta hg19.fa --annotate refFlat.txt <span class="se">\</span>
-    --access access.hg19.bed <span class="se">\</span>
+    --targets my.bed --fasta Homo_sapiens_assembly38.fasta --annotate refFlat.txt <span class="se">\</span>
+    --access access.hg38.bed <span class="se">\</span>
     --output-reference reference.cnn --output-dir output/ <span class="se">\</span>
     --diagram --scatter
 </code></pre></div>
 </td></tr></table></p>
-<p><a href="http://hgdownload.soe.ucsc.edu/goldenPath/hg19/database/refFlat.txt.gz">refFlat下载</a></p>
-<p>access文件的生成可使用UCSC的<a href="http://hgdownload.cse.ucsc.edu/goldenpath/hg19/encodeDCC/wgEncodeMapability/wgEncodeDukeMapabilityRegionsExcludable.bed.gz">wgEncodeDukeMapabilityRegionsExcludable</a>进行来去除不能比对的区域。
+<p><a href="http://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/refFlat.txt.gz">refFlat下载</a></p>
+<p>access文件的生成可使用encode blacklist 来去除不能比对的区域。</p>
+<p><a href="http://hgdownload.cse.ucsc.edu/goldenpath/hg19/encodeDCC/wgEncodeMapability/wgEncodeDukeMapabilityRegionsExcludable.bed.gz">hg19</a>         <a href="https://www.encodeproject.org/files/ENCFF356LFX/@@download/ENCFF356LFX.bed.gz">hg38</a></p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py access hg19.fa <span class="se">\</span>
-    -x wgEncodeDukeMapabilityRegionsExcludable.bed <span class="se">\</span>
-    -o access.hg19.bed
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py access Homo_sapiens_assembly38.fasta <span class="se">\</span>
+    -x ENCFF356LFX.bed <span class="se">\</span>
+    -o access.hg38.bed
 </code></pre></div>
-</td></tr></table></p>
+</td></tr></table>
 <p>更多的时候，使用单个肿瘤样本进行分析。建议是先使用多个通过同一实验条件做出来的正常样本数据建立参考基线，先生成target和antitarget的bed文件。
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py target my.bed --anotate refFlat.txt --split -o target.bed
-cnvkit.py antitarget target.bed -g access.hg19.bed -o antitarget.bed
+cnvkit.py antitarget target.bed -g access.hg38.bed -o antitarget.bed
 </code></pre></div>
 </td></tr></table></p>
 <p>把这些正常的normal bam统统丢进同一个文件夹，然后用下面命令建立一个参考基线
@@ -753,7 +754,7 @@ cnvkit.py antitarget target.bed -g access.hg19.bed -o antitarget.bed
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py batch -n normal/*.bam --output-reference reference.cnn <span class="se">\</span>
     -t target.bed -a antitarget.bed <span class="se">\</span>
-    -f hg19.fa -g access.hg19.bed
+    -f hg19.fa -g access.hg38.bed
 </code></pre></div>
 </td></tr></table></p>
 <p>在新分析样本时，就可以用上这个参考
@@ -781,7 +782,7 @@ cnvkit.py coverage sample.bam antitarget.bed -o sample.antitargetcoverage.cnn
 
 <span class="c1"># 对所有正常样本</span>
 cnvkit.py reference *Normal.<span class="o">{</span>,anti<span class="o">}</span>targetcoverage.cnn <span class="se">\</span>
-    --fasta hg19.fa -o reference.cnn
+    --fasta Homo_sapiens_assembly38.fasta -o reference.cnn
 
 <span class="c1"># 对肿瘤样本</span>
 cnvkit.py fix tumor.targetcoverage.cnn tumor.antitargetcoverge.cnn <span class="se">\</span>
@@ -825,7 +826,7 @@ cnvkit.py diagram tumor.cnr -s tumor.cns -o tumor.diagram.pdf
     --write_sd sd_values.txt
 </code></pre></div>
 </td></tr></table>
-<img alt="sv1" src="http://conifer.sourceforge.net/images/screeplot.png" /></p>
+<img alt="sv1" src="https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/worstpractice/pictures/conifer.png" /></p>
 <p>conifier建议根据出来的这幅图来设定svd的值，一般设置在拐点，比如上面这幅图能得到的建议是把svd设置在2到5之间。</p>
 <p>由于pytable这个包版本更新，运行时可能会报错
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>ImportError: cannot import name openFile
@@ -881,7 +882,7 @@ python conifer.py <span class="nb">export</span> <span class="se">\</span>
 </code></pre></div>
 </td></tr></table>
 出图效果：</p>
-<p><img alt="sv2" src="http://conifer.sourceforge.net/images/chr16_21426277_21747711_NA18517.png" /></p>
+<p><img alt="sv2" src="https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/worstpractice/pictures/chr16_21426277_21747711_NA18517.png" /></p>
 <p>还有两个其他方法
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>

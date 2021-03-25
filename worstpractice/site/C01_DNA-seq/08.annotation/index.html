@@ -638,7 +638,7 @@
 <p>annovar可以一次对多个数据库进行注释，软件对学术用户免费，要通过<a href="http://download.openbioinformatics.org/annovar_download_form.php">邮件申请下载</a>。</p>
 <h2 id="annovar">annovar 的使用</h2>
 <p>下载数据库，点击<a href="http://annovar.openbioinformatics.org/en/latest/user-guide/download/">这里</a>查看目前可下载的数据库
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>annotate_variation.pl -buildver hg19 -downdb -webfrom annovar refGene humandb/
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>annotate_variation.pl -buildver hg38 -downdb -webfrom annovar refGene humandb/
 </code></pre></div>
 </td></tr></table></p>
 <p>annovar的原始输入是vcf文件，首先需要将vcf转成annovar的格式
@@ -650,7 +650,7 @@
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>table_annovar.pl input humandb/ -buildver hg19 <span class="se">\</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>table_annovar.pl input humandb/ -buildver hg38 <span class="se">\</span>
     -out output -remove <span class="se">\</span>
     -protocol refGene,cytoBand,avsnp150,gnomad211_genome,clinvar_20210131,dbnsfp41a,cosmic92_coding <span class="se">\</span>
     -operation g,r,f,f,f,f,f <span class="se">\</span>
@@ -660,7 +660,7 @@
 <p>对应的，如果说是检测遗传方面的snp，个人觉得只需要注释rsid、频率、基因，clinvar以及位点良恶性预测的数据库。如果是肿瘤方面的话最好注释上cosmic数据库。</p>
 <h2 id="snpeff">snpeff</h2>
 <p><a href="https://pcingola.github.io/SnpEff/">snpEff</a>也挺好用，而且比annovar更易获取。详细流程看<a href="https://pcingola.github.io/SnpEff/se_introduction/">这里</a>。</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>java -jar snpEff.jar -c snpEff.config hg19 input.vcf &gt; output.vcf
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>java -jar snpEff.jar -c snpEff.config hg38 input.vcf &gt; output.vcf
 </code></pre></div>
 </td></tr></table>
                 

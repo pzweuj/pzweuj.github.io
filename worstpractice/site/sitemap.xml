@@ -1,83 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://pzweuj.github.io/worstpractice/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/01.prepare_data/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/02.mapping/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/03.sort_and_mark_duplicates/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/04.call_snp/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/05.call_somatics/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/06.call_cnvs/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/07.call_fusions/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/08.annotation/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C01_DNA-seq/09.visualization/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C02_RNA-seq/01.prepare_data/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C02_RNA-seq/02.mapping/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C02_RNA-seq/03.counting/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C02_RNA-seq/04.differential_analysis/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C02_RNA-seq/05.picture/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C03_mNGS/01.prepare_data/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C03_mNGS/02.remove_host/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C03_mNGS/03.assemble/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C03_mNGS/04.annotation/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://pzweuj.github.io/worstpractice/C03_mNGS/05.pictures/</loc>
-     <lastmod>2021-03-25</lastmod>
+     <lastmod>2021-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

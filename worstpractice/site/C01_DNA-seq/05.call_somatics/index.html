@@ -335,6 +335,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#piscescall-snpindel" class="md-nav__link">
+    使用pisces进行call snp/indel
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -615,6 +622,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#piscescall-snpindel" class="md-nav__link">
+    使用pisces进行call snp/indel
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -702,6 +716,19 @@ bcftools mpileup -f Homo_sapiens_assembly38.fasta B17NC.final.bam &gt; B17NC.pil
 java -jar VarScan.jar somatic B17NC.pileup B1704.pileup B1704
 </code></pre></div>
 </td></tr></table></p>
+<h2 id="piscescall-snpindel">使用pisces进行call snp/indel</h2>
+<p><a href="https://github.com/Illumina/Pisces">pisces</a>由illumina出品，运行速度十分不错。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>dotnet Pisces.dll <span class="se">\</span>
+    -b tumor.bam <span class="se">\</span>
+    -g hg38/ <span class="se">\</span>
+    -o output/ <span class="se">\</span>
+    -t <span class="m">8</span> -i target.bed
+</code></pre></div>
+</td></tr></table>
                 
               
               

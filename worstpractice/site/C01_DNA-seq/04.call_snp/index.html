@@ -330,13 +330,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#piscescall-snpindel" class="md-nav__link">
-    使用pisces进行call snp/indel
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -636,13 +629,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#piscescall-snpindel" class="md-nav__link">
-    使用pisces进行call snp/indel
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -692,19 +678,6 @@ bcftools mpileup会产生超级大的中间文件，所以这里建议用管道�
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>freebayes -f Homo_sapiens_assembly38.fasta &gt; B17NC.vcf
 </code></pre></div>
 </td></tr></table></p>
-<h2 id="piscescall-snpindel">使用pisces进行call snp/indel</h2>
-<p><a href="https://github.com/Illumina/Pisces">pisces</a>由illumina出品，运行速度十分不错。</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span>
-<span class="normal">3</span>
-<span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>dotnet Pisces.dll <span class="se">\</span>
-    -b tumor.bam <span class="se">\</span>
-    -g hg38/ <span class="se">\</span>
-    -o output/ <span class="se">\</span>
-    -t <span class="m">8</span> -i target.bed
-</code></pre></div>
-</td></tr></table>
                 
               
               

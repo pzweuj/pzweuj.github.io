@@ -24,7 +24,7 @@ tags: software
 
 排序：[sambamba](https://lomereiter.github.io/sambamba/)
 
-去重：samtools
+去重：sambamba
 
 校正：不做
 
@@ -47,6 +47,12 @@ gunzip sambamba-0.8.0-linux-amd64-static.gz
 ```bash
 sambamba view input.sam -S -h -f bam -o output.bam
 sambamba sort output.bam -t 8 -o output.sort.bam
+```
+
+与bwa的pipe
+```bash
+bwa mem -t 8 -M -R "@RGxxxxx" ref.fa read1.fq.gz read2.fq.gz \
+	| sambamba view /dev/stdin -S -h -f bam -o output.bam
 ```
 
 sambamba去重和samtools去重，有空测试一下差异
@@ -78,7 +84,7 @@ pipeline 未测试
 samtools mpileup -B -f ref.fa \
 	-q 15 -d 10000 normal.bam tumor.bam \
 	| java -jar VarScan2.jar somatic \
-	- output.prefix \
+	-mpileup output.prefix \
 	--min-coverage-normal 10 --min-coverage-tumor 20 \
 	--min-var-freq 0.02 --strand-filter 1
 ```

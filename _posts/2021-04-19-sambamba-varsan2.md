@@ -78,7 +78,7 @@ java -jar VarScan2.jar somatic \
 	--min-var-freq 0.02 --strand-filter 1
 ```
 
-pipeline 未测试
+pipe
 
 ```bash
 samtools mpileup -B -f ref.fa \

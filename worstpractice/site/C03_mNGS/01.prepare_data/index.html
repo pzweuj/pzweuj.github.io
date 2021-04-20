@@ -744,7 +744,7 @@ wget ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR109/002/SRR10903402/SRR10903402_2.fas
 <p>上述文章的分析流程是在质控后，去除人源，再比对到病毒的参考数据库以及ncbi的nr库，使用blast来比对到病毒，然后使用<a href="https://huttenhower.sph.harvard.edu/metaphlan2/">Metaphlan2</a>来识别病原细菌。再使用<a href="https://github.com/voutcn/megahit">Megahit</a>对上诉blast到病毒结果的reads进行组装。</p>
 <p>还有以下文章<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7330266/">PMID32615925</a>，样本类型有尿液和血液，检测分析得到Enterococcus faecalis。所有数据可在<a href="https://www.ncbi.nlm.nih.gov/sra?linkname=bioproject_sra_all&amp;from_uid=628815">SRA</a>中获取。</p>
 <h2 id="_3">参考数据准备</h2>
-<p>对于使用的centrifuge与kraken3两个软件，均需要参考数据库。</p>
+<p>对于使用的centrifuge与kraken2两个软件，均需要参考数据库。</p>
 <h3 id="_4">人类参考基因组</h3>
 <p>使用ucsc的hg38就好了。</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>

@@ -41,11 +41,11 @@ SNV类型中，start与end均要是参考基因组上的位置，两个值必须
 
 
 
-| Chr  | Start    | End      | Ref  | Alt  | Gene | Type    | Transcript  | cHGVS             | pHGVS       | VAF%  | Consequence      | Affected_Exon |
-| ---- | -------- | -------- | ---- | ---- | ---- | ------- | ----------- | ----------------- | ----------- | ----- | ---------------- | ------------- |
-| 9    | 36923458 | 36923459 | GG   | AT   | PAX5 | Complex | NM_016734.3 | c.803_804delinsTA | p.Ala268Asp | 23.12 | Complex_mutation | 7/10          |
+| Chr  | Start    | End      | Ref  | Alt  | Gene | Type    | Transcript  | cHGVS             | pHGVS       | VAF%  | Consequence          | Affected_Exon |
+| ---- | -------- | -------- | ---- | ---- | ---- | ------- | ----------- | ----------------- | ----------- | ----- | -------------------- | ------------- |
+| 9    | 36923458 | 36923459 | GG   | AT   | PAX5 | Complex | NM_016734.3 | c.803_804delinsTA | p.Ala268Asp | 23.12 | **Complex_mutation** | 7/10          |
 
-对于以上这种MNV来说，不能把点拆成多个SNV来写，类型是Complex。另外，Consequence是Complex_mutation（复杂突变）。
+对于以上这种MNV来说，不能把点拆成多个SNV来写，类型是Complex。【另外，Consequence是Complex_mutation（复杂突变）】。以上表格是NCCL原文原例，实际上，这个例子是也和NCCL下文解析中描述相悖。**原文大意：对于仅影响单个密码子的替换，只能选Nonsense_substitution、Missense_substitution、Synonymous_substitution三种；而在影响多密码子时才选Complex_mutation**。因此上诉例子其实应该是一个Missense_substitution。
 
 
 

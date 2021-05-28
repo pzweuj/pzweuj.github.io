@@ -70,7 +70,7 @@ docker run -p 8001:8001 quay.io/comp-bio-aging/cromwell-web:0.3.1
 
 能成功进入界面，但是在Update workflows时提示连接拒绝，连不上cromwell server。暂时用不上，后面再看看。
 
-![cromwellweb(https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/cromwellweb.png)
+![cromwellweb](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/cromwellweb.png)
 
 
 ## cromwell-frontend

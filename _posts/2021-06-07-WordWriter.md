@@ -146,6 +146,7 @@ testDict["#[testString]#"] = "string replace"
 testDict["#[TX-textbox]#"] = "textbox string replace"
 ```
 
+图形中的文本也等同于文本框中文本。
 
 
 #### 图片插入

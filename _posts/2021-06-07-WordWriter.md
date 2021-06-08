@@ -132,7 +132,7 @@ testDict["#[TBIMG-1-(20,20)]#"] = "/path/to/picture/picture.png"
 testDict["#[testString]#"] = "string replace"
 ```
 
-替换的内容的格式会完全跟随模板中tag的格式，即在模板中对**tag**进行加粗，替换内容也会加粗；将tag颜色更改为<font color=red>红色</font>，替换内容也会是红色。单元格字符串替换以及文本框字符串替换同理。
+替换的内容的格式会完全跟随模板中tag的格式，即在模板中对tag进行加粗，如**#[tag]#**，替换内容也会加粗；将tag颜色更改为红色，如<font color=red>#[tag]#</font>，替换内容也会是红色。单元格字符串替换以及文本框字符串替换同理。
 
 
 

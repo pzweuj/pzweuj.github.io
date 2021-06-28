@@ -55,7 +55,7 @@ singularity pull sub://ubuntu:latest
 # 从docker hub中pull
 singularity pull docker://ubuntu:latest
 # pull并保存镜像文件
-singularity pull ubuntu.latest.sig sub://ubuntu:latest
+singularity pull ubuntu.latest.sif sub://ubuntu:latest
 ```
 
 
@@ -64,13 +64,13 @@ singularity pull ubuntu.latest.sig sub://ubuntu:latest
 
 ```bash
 # shell方法
-singularity shell ubuntu.latest.sig
+singularity shell ubuntu.latest.sif
 # -B 参数与docker run的-v参数类似
-singularity shell -B /data:/data ubuntu.latest.sig
+singularity shell -B /data:/data ubuntu.latest.sif
 # run方法
-singularity run ubuntu.latest.sig
+singularity run ubuntu.latest.sif
 # exec方法
-singularity exec --containall --bind ${cwd}:${docker_cwd} ubuntu.latest.sig /bin/bash script.sh
+singularity exec --containall --bind ${cwd}:${docker_cwd} ubuntu.latest.sif /bin/bash script.sh
 ```
 
 singularity shell的一个特点是从什么用户进去，外部权限就会是什么用户的，也就是说，在container内新建一个文件夹，对应的外部文件夹权限是属于当时创建container的外部用户的。另外，shell方法只要使用了exit，container就会退出且删除，相当于docker的run --rm。使用-B绑定多个目录时，可用","分隔。

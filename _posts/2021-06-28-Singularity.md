@@ -11,7 +11,7 @@ tags: software
 
 [Singularity](https://sylabs.io/singularity/)是和docker相似的容器化软件。由于在部署Cromwell调度WDL流程时，运行docker失败。看了下文档说是集群无法支持docker，需要使用singularity。
 
-Singularity的sig格式支持直接从docker image中转换过来，因此流程的迁移还是比较方便的。考虑到学习成本，我大概还是只会使用docker来build镜像，再用singularity来部署。在集群中使用singularity，日常普通任务时使用docker。
+Singularity的sif格式支持直接从docker image中转换过来，因此流程的迁移还是比较方便的。考虑到学习成本，我大概还是只会使用docker来build镜像，再用singularity来部署。在集群中使用singularity，日常普通任务时使用docker。
 
 
 
@@ -43,7 +43,7 @@ rm -rf ~/rpmbuild singularity-${VERSION}*.tar.gz
 
 创建镜像
 ```bash
-singularity -d build ubuntu.sig docker://ubuntu:latest
+singularity -d build ubuntu.sif docker://ubuntu:latest
 ```
 
 

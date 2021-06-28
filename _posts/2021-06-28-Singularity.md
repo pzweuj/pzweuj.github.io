@@ -84,7 +84,7 @@ singularity instance stop <name>
 
 ### Cromwell config
 
-cromwell的config文件中，对于singularity配置的写法
+cromwell的config文件中，对于singularity配置的简单写法如下
 
 ```json
 include required(classpath("application"))
@@ -108,6 +108,59 @@ backend {
 }
 ```
 
-合并slurm集群的配置可在这里[下载](https://github.com/broadinstitute/cromwell/blob/develop/cromwell.example.backends/singularity.slurm.conf)。
+合并slurm集群的配置可看[Cromwell的文档](https://cromwell.readthedocs.io/en/stable/tutorials/Containers/)。不要参考Cromwell的github仓库中的例子，那个例子有问题。
+
+由于我将所有docker image都通过singularity转格为sif保存，我是这样改的
+
+```json
+backend {
+  default = slurm
+
+  providers {
+    slurm {
+      actor-factory = "cromwell.backend.impl.sfs.config.ConfigBackendLifecycleActorFactory"
+      config {
+        runtime-attributes = """
+        Int runtime_minutes = 600
+        Int cpus = 2
+        Int requested_memory_mb_per_core = 8000
+        String? docker
+        """
+
+        submit = """
+          sbatch --wait \
+            -J ${job_name} \
+            -D ${cwd} \
+            -o ${out} \
+            -e ${err} \
+            -t ${runtime_minutes} \
+            ${"-c " + cpus} \
+            --mem-per-cpu=${requested_memory_mb_per_core} \
+            --wrap "/bin/bash ${script}"
+        """
+        
+        submit-docker = """
+          IMAGE=/path/to/singularity_sifDB/${docker}.sif
+          sbatch \
+            --wait \
+            -J ${job_name} \
+            -D ${cwd} \
+            -o ${cwd}/execution/stdout \
+            -e ${cwd}/execution/stderr \
+            -t ${runtime_minutes} \
+            ${"-c " + cpus} \
+            --mem-per-cpu=${requested_memory_mb_per_core} \
+            --wrap "singularity exec --containall --bind ${cwd}:${docker_cwd} $IMAGE ${job_shell} ${docker_script}"
+        """
+
+        kill = "scancel ${job_id}"
+        check-alive = "squeue -j ${job_id}"
+        job-id-regex = "Submitted batch job (\\d+).*"
+      }
+    }
+  }
+}
+```
+
 
 

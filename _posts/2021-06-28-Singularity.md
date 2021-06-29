@@ -140,7 +140,13 @@ backend {
         """
         
         submit-docker = """
-          IMAGE=/path/to/singularity_sifDB/${docker}.sif
+          export SINGULARITY_CACHEDIR=/path/to/your/singularity_cache
+          CACHE_DIR=$SINGULARITY_CACHEDIR
+          DOCKER_NAME=$(sed -e 's/[^A-Za-z0-9._-]/_/g' <<< ${docker})
+          IMAGE=$CACHE_DIR/$DOCKER_NAME.sif
+          if [ ! -f $IMAGE ]; then
+            singularity pull $IMAGE docker://${docker}
+          fi
           sbatch \
             --wait \
             -J ${job_name} \

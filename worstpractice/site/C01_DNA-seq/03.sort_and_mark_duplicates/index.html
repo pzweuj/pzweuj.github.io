@@ -316,6 +316,19 @@
     标记重复序列
   </a>
   
+    <nav class="md-nav" aria-label="标记重复序列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#umi" class="md-nav__link">
+    UMI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -668,6 +681,19 @@
     标记重复序列
   </a>
   
+    <nav class="md-nav" aria-label="标记重复序列">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#umi" class="md-nav__link">
+    UMI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -759,10 +785,67 @@
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk MarkDuplicates -I B17NC.sorted.bam -O B17NC.mdup.bam -M B17NC.dups.txt
 </code></pre></div>
 </td></tr></table>
-<p>建议此步使用sambamba，速度更快，回报格式与picard/gatk等同。
+<p>此步可以使用sambamba，速度更快，回报格式与picard/gatk等同。
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>sambamba markdup -t <span class="m">8</span> B17NC.sorted.bam -o B17NC.mdup.bam
 </code></pre></div>
 </td></tr></table></p>
+<h3 id="umi">UMI</h3>
+<p>对游离DNA进行超高深度测序时一般会加入UMI序列，去重步骤与不加入UMI略有不同。可使用fastp 加上<a href="https://github.com/OpenGene/gencore">gencore</a>的流程进行去重。但是gencore的去重方式是直接去掉而不是标记，并且也不是改写flags值（加上1024）的方式，因此这里使用<a href="http://fulcrumgenomics.github.io/fgbio/">fgbio</a> 加上 gatk （gatk已包含picard的功能）的方式。</p>
+<p>IDT有一篇主要<a href="https://sfvideo.blob.core.windows.net/sitefinity/docs/default-source/user-guide-manual/analysis-guideline-variant-calling-data-with-umis.pdf">使用fgbio进行去重的流程</a>，可以参考。而以下的流程仅使用fgbio进行UMI提取，再使用gatk MarkDuplicates进行去重。</p>
+<p>先将<strong>过滤后</strong>的fastq转为ubam。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk FastqToSam -F1 clean.1.fq.gz -F2 clean.2.fq.gz <span class="se">\</span>
+    -O sample.ubam <span class="se">\</span>
+    -SM sample -PL illumina -PU unit
+</code></pre></div>
+</td></tr></table></p>
+<p>然后提取UMI，以双端3bp在Index的3‘的UMI 为例，用的结构式是3M1S+T，即3bp UMI然后跳1bp，剩余的都是Template。更多的Reads结构写法指导参考<a href="https://github.com/fulcrumgenomics/fgbio/wiki/Read-Structures">此篇</a>。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>java jar fgbio.jar ExtractUmisFromBam <span class="se">\</span>
+    -i sample.ubam -o sample.umi.ubam <span class="se">\</span>
+    -r 3M1S+T 3M1S+T -t ZA ZB -s RX
+</code></pre></div>
+</td></tr></table>
+<p>然后将ubam比对到参考基因组，要注意的是，由于fgbio默认将Read Group中的ID写为A，所以此时比对最好也是将ID写为A，后续可以用gatk AddOrReplaceReadGroups来修改。主要bwa mem的-p参数必不可少。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>samtools fastq sample.umi.ubam <span class="se">\</span>
+    <span class="p">|</span> bwa mem -t <span class="m">8</span> -p -R <span class="s2">&quot;@RG\tPL:illumina\tPU:unit\tSM:sample\tID:A&quot;</span> <span class="se">\</span>
+    hg38.fa /dev/stdin <span class="se">\</span>
+    <span class="p">|</span> samtools view -bSh - &gt; sample.umi.bam
+</code></pre></div>
+</td></tr></table>
+<p>将ubam和bam合并，使比对后的bam中能带上未比对的ubam中的UMI tag。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk MergeBamAlignment <span class="se">\</span>
+    -R hg38.fa <span class="se">\</span>
+    -ALIGNED sample.umi.bam -UNMAPPED sample.umi.ubam <span class="se">\</span>
+    -O sample.umi.merge.bam <span class="se">\</span>
+    --ALIGNER_PROPER_PAIR_FLAGS <span class="nb">true</span> <span class="se">\</span>
+    --ATTRIBUTES_TO_RETAIN XS
+</code></pre></div>
+</td></tr></table>
+<p>最后还是使用MarkDuplicates来去重，记得--BARCODE_TAG RX这个参数。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk MarkDuplicates <span class="se">\</span>
+    -I sample.umi.merge.bam <span class="se">\</span>
+    -O sample.marked.bam <span class="se">\</span>
+    -M sample.dups.txt <span class="se">\</span>
+    --CREATE_INDEX <span class="nb">true</span> <span class="se">\</span>
+    --BARCODE_TAG RX
+</code></pre></div>
+</td></tr></table>
 <h2 id="_4">添加或改写头信息</h2>
 <p>使用gatk4来改变头信息，如果后续用gatk4来进行体细胞突变分析，头信息还是很重要的。当然，如果使用bwa比对时已经用来-R来加入信息，就不需要这一步了。
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
@@ -782,7 +865,6 @@
 <h2 id="_6">质量值校正</h2>
 <p>接下来就是使用gatk的质量值校正部分了。gatk4使用机器学习的方式，以各种现有的数据集作为训练集来校正质量值。实际上，在bwa比对后再经过samtools排序的bam文件就已经可以进行call snp了。只不过gatk多一手校正。</p>
 <h3 id="indel">indel区域重比对</h3>
-<p>如果下面这一步出错，有可能是java版本不对，请安装openjdk-8-jre。
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -795,7 +877,7 @@
     --known-sites 1000g_phase.indels.vcf <span class="se">\</span>
     -O B17NC.recal.table
 </code></pre></div>
-</td></tr></table></p>
+</td></tr></table>
 <h3 id="_7">重比对区域校正</h3>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>

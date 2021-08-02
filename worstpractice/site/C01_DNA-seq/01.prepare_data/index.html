@@ -668,6 +668,10 @@
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/hg38/Homo_sapiens_assembly38.fasta.gz
 </code></pre></div>
 </td></tr></table></p>
+<p>更多的会使用GDC的这个
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>wget https://api.gdc.cancer.gov/data/254f697d-310d-4d7d-a27b-27fbf767a834
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="_3">准备各种数据集</h2>
 <p>为了后续用GATK来找变异，这里先把<a href="ftp://gsapubftp-anonymous@ftp.broadinstitute.org/bundle/">gatk bundle</a>的下了，如果打不开，有可能是同时太多人登录了，得换个时间试试。有条件的话，可以在<a href="https://console.cloud.google.com/storage/browser/genomics-public-data/resources/broad/hg38/v0">google cloud</a>下载。把除了参考基因组以外的都下下来，后面校正的时候用。</p>
 <h2 id="_4">准备原始数据</h2>

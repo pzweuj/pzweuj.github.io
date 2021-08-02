@@ -336,6 +336,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vardict" class="md-nav__link">
+    VarDict流程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#piscescall-snpindel" class="md-nav__link">
     使用pisces进行call snp/indel
   </a>
@@ -623,6 +630,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#vardict" class="md-nav__link">
+    VarDict流程
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#piscescall-snpindel" class="md-nav__link">
     使用pisces进行call snp/indel
   </a>
@@ -693,7 +707,7 @@
     -O B1701.m2.vcf.gz
 </code></pre></div>
 </td></tr></table></p>
-<p>GATK后续还有些继续过滤校正去污染的方法，这里就不再继续了。更多的时候，我们只有单肿瘤样本的数据（tumor-only），还是可以用mutect2的。
+<p>GATK后续还有些继续过滤校正去污染的方法，这里就不再继续了。更多的时候，我们只有单肿瘤样本的数据（tumor-only），还是可以用mutect2的。单肿瘤样本可以使用-pon参数来导入pon，gatk提供了hg38和b37的pon，不过貌似只能从<a href="https://console.cloud.google.com/storage/browser/gatk-best-practices">google云</a>下载。
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -707,15 +721,44 @@
     -O B1701.m2.vcf.gz
 </code></pre></div>
 </td></tr></table></p>
-<h2 id="varscan">Varscan流程</h2>
-<p>Varscan的流程可以先用samtools的mpileup作为输入，当然新版的话使用bcftools。
+<p>在使用Mutect2后，进行FilterMutectCalls能有效过滤突变。</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>bcftools mpileup -f Homo_sapiens_assembly38.fasta B1704.final.bam &gt; B1704.pileup
-bcftools mpileup -f Homo_sapiens_assembly38.fasta B17NC.final.bam &gt; B17NC.pileup
-java -jar VarScan.jar somatic B17NC.pileup B1704.pileup B1704
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>gatk FilterMutectCalls <span class="se">\</span>
+    -R hg38.fa <span class="se">\</span>
+    -V B1701.m2.vcf.gz <span class="se">\</span>
+    -O B1701.m2.filter.vcf.gz
+</code></pre></div>
+</td></tr></table>
+<h2 id="varscan">Varscan流程</h2>
+<p>Varscan的流程可以先用samtools的mpileup作为输入。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>samtools mpileup -B -f Homo_sapiens_assembly38.fasta <span class="se">\</span>
+    -q <span class="m">15</span> -d <span class="m">10000</span> <span class="se">\</span>
+    B17NC.final.bam B1704.final.bam <span class="se">\</span>
+    <span class="p">|</span> java -jar VarScan.jar somatic -mpileup <span class="se">\</span>
+    B1704 --strand-filter <span class="m">1</span> --output-vcf
 </code></pre></div>
 </td></tr></table></p>
+<h2 id="vardict">VarDict流程</h2>
+<p>Mutect2有时并不能获得低突变丰度的reads，可以使用VarDict，适合于ctDNA流程。</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>VarDict -G hg38.fa <span class="se">\</span>
+    -f <span class="m">0</span>.001 -N sample <span class="se">\</span>
+    -b tumor.bam <span class="se">\</span>
+    -c <span class="m">1</span> -S <span class="m">2</span> -E <span class="m">3</span> -g <span class="m">4</span> target.bed <span class="se">\</span>
+    <span class="p">|</span> teststrandbias.R <span class="se">\</span>
+    <span class="p">|</span> var2vcf_valid.pl -N sample -E -f <span class="m">0</span>.001 &gt; sample.vcf
+</code></pre></div>
+</td></tr></table>
 <h2 id="piscescall-snpindel">使用pisces进行call snp/indel</h2>
 <p><a href="https://github.com/Illumina/Pisces">pisces</a>由illumina出品，运行速度十分不错。</p>
 <table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>

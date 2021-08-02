@@ -754,7 +754,7 @@ cnvkit.py antitarget target.bed -g access.hg38.bed -o antitarget.bed
 <span class="normal">2</span>
 <span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py batch -n normal/*.bam --output-reference reference.cnn <span class="se">\</span>
     -t target.bed -a antitarget.bed <span class="se">\</span>
-    -f hg19.fa -g access.hg38.bed
+    -f hg38.fa -g access.hg38.bed
 </code></pre></div>
 </td></tr></table></p>
 <p>在新分析样本时，就可以用上这个参考
@@ -794,6 +794,10 @@ cnvkit.py diagram tumor.cnr -s tumor.cns -o tumor.diagram.pdf
 </code></pre></div>
 </td></tr></table></p>
 <p>cnvkit中有一个--method参数，默认是hybrid（液相杂交捕获），可选amplicon（引物扩增），wgs（全基因组）。视实验方法而定咯。</p>
+<p>当然，在分析获得cnr后，可以不进行segment直接call，这样不会把区域合并。
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py call tumor.cnr -o tumor.call.cns
+</code></pre></div>
+</td></tr></table></p>
 <h2 id="conifer">CoNIFER</h2>
 <p><a href="http://conifer.sourceforge.net/">CoNIFER</a>据称可以去除多批次的实验做成的误差。软件只支持python2，不支持python3，另外已经有7年没有更新过，所以如果有更好更新的替代品，可以放弃使用CoNIFER。软件的安装还有一些依赖的包的安装就不说了。</p>
 <h3 id="rpkm">统计rpkm</h3>

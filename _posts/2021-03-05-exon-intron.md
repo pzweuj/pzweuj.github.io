@@ -46,3 +46,43 @@ for line in db:
 db.close()
 ```
 把整个refFlat解析到一个字典里了。
+
+
+换一种写法，可能性能会好一点，把所有exon的起始和终止坐标都解析到字典中。
+```python
+db = open("refFlat.txt", "r")
+refFlatDict = {}
+for line in db:
+    refFlatExonList = []
+    lines = line.split("\t")
+    transcript = lines[1]
+    chrom = lines[2]
+    strand = lines[3]
+    exon_start = lines[9].split(",")[:-1]
+    exon_end = lines[10].split(",")[:-1]
+    for s in exon_start:
+        refFlatExonList.append(s)
+    for e in exon_end:
+        refFlatExonList.append(e)
+    
+    refFlatDict[transcript] = {"strand": strand, "exonMark": refFlatExonList}
+    
+# 判断位点位置
+def location(refFlatDict, transcript, queryPoint):
+    transDict = refFlatDict[transcript]
+    strand = transDict["strand"]
+    exonMark = transDict["exonMark]
+    exonMark.append(queryPoint)
+    if strand == "-":
+        exonMark.sort(reverse=True)
+    else:
+        exonMark.sort(reverse=False)
+    idxQuery = exonMark.index(queryPoint)
+    # 索引双数时是内含子
+    if idxQuery % 2 == 0:
+        loca = "intron" + str(int(idxQuery / 2))
+    # 索引单数时是外显子
+    else:
+        loca = "exon" + str(int((idxQuery + 1) / 2))
+    return loca
+```

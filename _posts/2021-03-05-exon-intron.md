@@ -71,7 +71,7 @@ for line in db:
 def location(refFlatDict, transcript, queryPoint):
     transDict = refFlatDict[transcript]
     strand = transDict["strand"]
-    exonMark = transDict["exonMark]
+    exonMark = transDict["exonMark"]
     exonMark.append(queryPoint)
     if strand == "-":
         exonMark.sort(reverse=True)

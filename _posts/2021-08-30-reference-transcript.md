@@ -45,4 +45,4 @@ wget https://ftp.ebi.ac.uk/pub/databases/genenames/hgnc/tsv/locus_types/gene_wit
 
 然后编写代码，提取出每个数据库对于每个基因的参考转录本。优先度以LRG > MANE select > RefSeq > Clinvar > HGNC排序。
 
-最后，对自己小panel内的基因进行**人工校对**即可。
+最后，对自己小panel内的核心基因进行**人工校对**，这一步不可缺少。举个例子，[MET](http://ftp.ebi.ac.uk/pub/databases/lrgex/LRG_662.xml)在LRG中的参考转录本是NM_001127500.1，而MANE select是NM_000245.4。按照上面的优先度原则，应该选择NM_001127500.1，但事实上我们会用NM_000245.4作为参考。

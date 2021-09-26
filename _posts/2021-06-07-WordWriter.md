@@ -38,6 +38,7 @@ pip install pandas
 from WordWriter3 import WordWriter
 
 # 建立标签与输入内容（替换内容）对照字典
+testDict = {}
 testDict["#[tag]#"] = "replace string"
 
 # 输出
@@ -57,7 +58,7 @@ WordWriter(templateDocx, outputDocx, testDict)
 表格的输入为以tab分割的txt文件路径，即
 
 ```python
-testDict[#[TABLE-xxxx]#] = "/path/to/table/table.txt"
+testDict["#[TABLE-xxxx]#"] = "/path/to/table/table.txt"
 ```
 
 

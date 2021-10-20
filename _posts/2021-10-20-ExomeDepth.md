@@ -103,7 +103,7 @@ data(Conrad.hg19)
 
 ### 循环执行
 
-循环执行即每次挑出一个样本作为case，其余样本作为control，获得每个样本的结果。下面代码中使用AnnotateExtra注释时，报错。但是还可以自行注释，因此影响不大。循环执行的方式适合于在同一批次的数据中找CNV。如果是
+循环执行即每次挑出一个样本作为case，其余样本作为control，获得每个样本的结果。下面代码中使用AnnotateExtra注释时，报错。但是还可以自行注释，因此影响不大。循环执行的方式适合于在同一批次的数据中找CNV。如果是单样本的方式，则调整下面脚本，固定reference和choice即可。分析获得的结果与上次的xhmm结果相比，多了一个缺失。不过看了下支持reads数只有15条，因此可以排除，实际结果是相同的。
 ```R
 nSamples <- ncol(exomeCount.mat)
 for (i in 1:nSamples) {

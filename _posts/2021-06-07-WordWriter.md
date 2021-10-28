@@ -5,7 +5,7 @@ tags: coding
 
 ### 介绍
 
-这个脚本主要靠[python-docx](https://python-docx.readthedocs.io/en/latest/)实现。同时使用[pandas](https://www.pypandas.cn/)来处理输入的表格。基于python3。
+这个脚本主要靠[python-docx](https://python-docx.readthedocs.io/en/latest/)实现。同时使用[pandas](https://www.pypandas.cn/)来处理输入的表格。基于python3。使用复杂度没有[docxtpl](https://docxtpl.readthedocs.io/en/latest/)那么高。
 
 需要安装
 ```bash
@@ -35,7 +35,7 @@ pip install pandas
 
 在python中导入
 ```python
-from WordWriter3 import WordWriter
+from WordWriter import WordWriter
 
 # 建立标签与输入内容（替换内容）对照字典
 testDict = {}
@@ -85,29 +85,11 @@ testDict["#[TABLE-xxxx]#"] = "/path/to/table/table.txt"
 
 
 
-#### 单元格中的字符串替换
+#### 图片插入
 
-单元格字符串tag命名规则：**#[TBS-xxxx]#**
+单元格图片tag命名规则：**#[IMAGE-xxxx]#**
 
-输入为字符串，即
-
-```python
-testDict["#[TBS-xxxx]#"] = "table cell string replace"
-```
-
-多用于以下情况：
-
-| 标题1 | 标题2           |
-| ----- | --------------- |
-| 结果  | #[TBS-results]# |
-
-
-
-#### 单元格中的图片插入
-
-单元格图片tag命名规则：**#[TBIMG-xxxx]#**
-
-包含大小格式：**#[TBIMG-xxxx-(20,20)]#**
+包含大小格式：**#[IMAGE-xxxx-(20,20)]#**
 
 输入为图片文件路径
 
@@ -115,25 +97,11 @@ testDict["#[TBS-xxxx]#"] = "table cell string replace"
 testDict["#[TBIMG-1-(20,20)]#"] = "/path/to/picture/picture.png"
 ```
 
-所有图片均建议加入大小格式，不要使用原始尺寸进行插入。括号中分别是(width,height)。当插入的图片不存在时，图片插入模式会更改为文字插入模式，插入图片的路径。因此这里其实是一个可以选择是插入图片还是文字的小技巧。文本中的图片插入同理。
+所有图片均建议加入大小格式，不要使用原始尺寸进行插入。括号中分别是(width,height)。当插入的图片不存在时，图片插入模式会更改为文字插入模式，插入图片的路径。因此这里其实是一个可以选择是插入图片还是文字的小技巧。图片插入同时支持插入在段落和单元格中。
 
 | 图1                 | 图2                 | 图3                 |
 | ------------------- | ------------------- | ------------------- |
 | #[TBIMG-1-(20,20)]# | #[TBIMG-2-(20,20)]# | #[TBIMG-3-(20,20)]# |
-
-
-
-#### 文本中的字符串替换
-
-文本中字符串tag命名要求不要与其他内容的tag前缀冲突即可。规则：**#[xxxxx]#**
-
-输入为字符串
-
-```python
-testDict["#[testString]#"] = "string replace"
-```
-
-替换的内容的格式会完全跟随模板中tag的格式，即在模板中对tag进行加粗，如**#[tag]#**，替换内容也会加粗；将tag颜色更改为红色，如<font color=red>#[tag]#</font>，替换内容也会是红色。单元格字符串替换以及文本框字符串替换同理。
 
 
 
@@ -147,35 +115,31 @@ testDict["#[testString]#"] = "string replace"
 testDict["#[TX-textbox]#"] = "textbox string replace"
 ```
 
-图形中的文本也等同于文本框中文本。
-
-
-#### 图片插入
-
-图片插入tag命名规则：**#[IMAGE-xxxx]#**
-
-包含大小格式：**#[IMAGE-xxxx-(20,20)]#**
-
-输入为图片文件路径
-
-```python
-testDict["#[IMAGE-2-(20,20)]#"] = "/path/to/picture/picture.png"
-```
+**图形**中的文本也等同于文本框中文本。
 
 
 
-#### 页眉页脚字符串替换
 
-页眉tag命名规则：**#[HEADER-xxxx]#**
+#### 段落/页眉/页脚/单元格中的字符串
 
-页脚tag命名规则：**#[FOOTER-xxxx]#**
+段落/页眉/页脚/单元格中的字符串tag命名规则：**#[xxxx]#**，只要不要和IMAGE、TABLE、TX等保留前缀冲突即可。
 
-输入为字符串
+输入为字符串，即
 
 ```python
-testDict["#[HEADER-date]#"] = "2021年6月7日"
-testDict["#[FOOTER-project]#"] = "test footer"
+testDict["#[xxxx]#"] = "table cell string replace"
 ```
+
+文本中的替换：
+
+替换的内容的格式会完全跟随模板中tag的格式，即在模板中对tag进行加粗，如**#[xxxx]#**，替换内容也会加粗；将tag颜色更改为红色，如<font color=red>#[xxxx]#</font>，替换内容也会是红色。单元格字符串替换以及文本框字符串替换同理。
+
+
+如单元格中的替换：
+
+| 标题1 | 标题2           |
+| ----- | --------------- |
+| 结果  | #[results]# |
 
 
 
@@ -183,35 +147,33 @@ testDict["#[FOOTER-project]#"] = "test footer"
 
 [测试文件](https://github.com/pzweuj/WordWriter/tree/master/test)
 
-测试脚本
+测试脚本，将WordWriter.py也放在同一文件夹时
 ```python
-from WordWriter3 import WordWriter
+import WordWriter as ww
 
 # 测试脚本
-testDict = {}
-testDict["#[HEADER-1]#"] = "模板测试"
-testDict["#[HEADER-2]#"] = "2021年6月7日"
-testDict["#[NAME]#"] = "测试模板"
-testDict["#[fullParagraph]#"] = "这是一段测试段落，通过WordWriter输入。"
-testDict["#[TBS-1]#"] = "未突变"
-testDict["#[TX-1]#"] = "文本框测试成功"
-testDict["#[TX-2]#"] = "文本框测试很成功"
-testDict["#[FOOTER]#"] = "页脚测试"
-
-# 此处输入的是文件路径
-testDict["#[TABLE-1]#"] = "test/testTable.txt"
-testDict["#[IMAGE-1-(30,30)]#"] = "test/testPicture.png"
-testDict["#[IMAGE-2]#"] = "test/testPicture.png"
-testDict["#[TBIMG-3-(20,20)]#"] = "test/testPicture.png"
+resultsDict = {}
+resultsDict["#[testheader1]#"] = "测试页眉1"
+resultsDict["#[testheader2]#"] = "页眉测试2"
+resultsDict["#[testString]#"] = "，文本替换成功"
+resultsDict["#[testfooter]#"] = "测试页脚"
+resultsDict["#[TX-testString2]#"] = "，文本框文本替换成功"
+resultsDict["#[testTableString1]#"] = "单元格文本替换成功"
+resultsDict["#[testTableString2]#"] = "单元格文本替换成功"
+resultsDict["#[IMAGE-test1-(30,30)]#"] = "testPicture.png"
+resultsDict["#[IMAGE-test2]#"] = "testPicture2.png"
+resultsDict["#[IMAGE-test3-(10,10)]#"] = "testPicture.png"
+resultsDict["#[TABLE-test1]#"] = "testTable.txt"
 
 # 使用主函数进行报告填充
-WordWriter("test/test.docx", "test/testOut.docx", testDict)
+ww.WordWriter("test.docx", "output.docx", resultsDict)
 ```
 
+### 
 
 ### 注意事项
 
-有时tag并不能被很好的识别，是因为word将一段不连续的输入的tag理解成为是多个“run”。程序需要一个tag作为一个run时才能识别出来。如果转换docx格式为xml可以看到tag的内容被分在了不同的标签中。
+有时tag并不能被很好的识别，是因为word将一段不连续的输入的tag理解成为是多个“run”。程序需要一个tag作为一个run时才能识别出来。
 
 所以，如果遇到这种情况，建议是将不能识别的tag完整的复制到文本文档中，再完整的（一次性的）粘贴回模板中替换掉不识别的tag。在修改格式如颜色字体等的时候也需要是将一个tag完全选中来修改，避免被认为是多次的输入内容。
 

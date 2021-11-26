@@ -20,7 +20,7 @@ tags: default
 
 D19S433、D5S818、D21S11、D18S51、D6S1043、D3S1358、D13S317 、D7S820、D16S539 、CSF1PO 、PentaD 、vWA 、D8S1179、TPOX 、PentaE、TH01、D12S391、D2S1338、FGA、Amel。
 
-然后还需要人群频率，大概可用在这些数据库找一找，最好当然是找到中国人群的：[STRBase数据库](https://strbase.nist.gov/str_fact.htm,美国)、[STRidER,亚洲](https://strider.online/frequencies)、[Promega,亚洲](https://www.promega.com.cn/products/pm/genetic-identity/population-statistics/allele-frequencies/)。这里有[一篇文献](https://europepmc.org/article/pmc/pmc6779668)的数据，频率来自2367个南方汉族；Github上找到的[这个](https://github.com/T1me/MPTK/blob/main/frequency.yml)；另外也有用[这篇文献](https://pubmed.ncbi.nlm.nih.gov/31905040/)的，点击这里下载文献的[Supplemental](https://www.tandfonline.com/doi/suppl/10.1080/03014460.2019.1705391/suppl_file/iahb_a_1705391_sm0479.zip)。
+然后还需要人群频率，大概可以在这些数据库找一找，最好当然是找到中国人群的：[STRBase数据库](https://strbase.nist.gov/str_fact.htm,美国)、[STRidER,亚洲](https://strider.online/frequencies)、[Promega,亚洲](https://www.promega.com.cn/products/pm/genetic-identity/population-statistics/allele-frequencies/)。这里有[一篇文献](https://europepmc.org/article/pmc/pmc6779668)的数据，频率来自2367个南方汉族；Github上找到的[这个](https://github.com/T1me/MPTK/blob/main/frequency.yml)；另外也有用[这篇文献](https://pubmed.ncbi.nlm.nih.gov/31905040/)的，点击这里下载文献的[Supplemental](https://www.tandfonline.com/doi/suppl/10.1080/03014460.2019.1705391/suppl_file/iahb_a_1705391_sm0479.zip)。
 
 接下来就是计算累计亲权指数CPI（Combined Parentage Index ），可以看[这篇](https://www.promega.com/-/media/files/resources/conference-proceedings/ishi-15/parentage-and-mixture-statistics-workshop/introductiontoparentagestatistics.pdf?la=en)，还有参考内容中的技术规范。
 

@@ -98,7 +98,7 @@ def run(playwright: Playwright) -> None:
         time.sleep(10)
         with open("html/page{}.html".format(str(n)), "w", encoding="utf-8") as f:
             f.write(html)
-            n += 1
+        n += 1
 
     # Close page
     page.close()

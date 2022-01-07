@@ -44,7 +44,7 @@ WisecondorX convert test.rmdup.bam test.npz
 
 这样，在获得多个样本的npz文件后，将正常样本的npz文件放置于同一文件夹下建立基线。wisecondorX建议使用50~500个样本建立参考基线。
 ```bash
-WisecondorX newref reference/*.npz --nipt --cpus 8
+WisecondorX newref reference/*.npz reference.npz --nipt --cpus 8
 ```
 
 使用基线对其他样本进行预测

@@ -151,7 +151,7 @@ testDict["#[xxxx]#"] = "table cell string replace"
 
 测试脚本，将WordWriter.py也放在同一文件夹时
 ```python
-import WordWriter as ww
+from WordWriter import WordWriter
 
 # 测试脚本
 resultsDict = {}
@@ -168,7 +168,7 @@ resultsDict["#[IMAGE-test3-(10,10)]#"] = "testPicture.png"
 resultsDict["#[TABLE-test1]#"] = "testTable.txt"
 
 # 使用主函数进行报告填充
-ww.WordWriter("test.docx", "output.docx", resultsDict)
+WordWriter("test.docx", "output.docx", resultsDict)
 ```
 
 

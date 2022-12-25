@@ -11,7 +11,7 @@ tags: coding
 一些文档是需要登录后才能导出的，这里可使用playwright录制登录的部分，并把cookies进行导出，然后后续使用时通过导入cookies来保持登录状态，预计一段时间会失效，因此需要一段时间就进行一次这个操作，更新cookies。
 
 ```bash
-playwright codegen -o login.py https://xxx.com --save-stroage loginCookies
+playwright codegen -o login.py https://xxx.com --save-storage loginCookies
 ```
 
 使用以上命令，进入腾讯文档进行登录，最好勾选保持登录等，最后登录状态就会保存到loginCookies文件中。

@@ -28,6 +28,9 @@ def hamming_distance(phase1, phase2):
 
 ```python
 # 字典格式：{"T-1": "ATCAGTGC", "T-2": "CATGCATC", "T-3": "CGATCGAT"}
+import random
+import itertools
+
 def randomSelectAndCal(d, amount):
     randomSelectList = random.sample(d.keys(), amount)
     select2 = list(itertools.combinations(randomSelectList, 2))

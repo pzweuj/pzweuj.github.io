@@ -11,6 +11,7 @@ tags: coding
 ```bash
 pip install python-docx
 pip install pandas
+pip install WordWriter
 ```
 
 脚本地址：

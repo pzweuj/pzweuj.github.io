@@ -9,14 +9,20 @@
         <meta name="description" content="至少咱还能实践">
       
       
-      
         <meta name="author" content="pzweuj">
       
       
         <link rel="canonical" href="https://pzweuj.github.io/worstpractice/C01_DNA-seq/06.call_cnvs/">
       
+      
+        <link rel="prev" href="../05.call_somatics/">
+      
+      
+        <link rel="next" href="../07.call_fusions/">
+      
+      
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.5">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.17">
     
     
       
@@ -24,53 +30,37 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.be71726b.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.bcfcd587.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.3f5d1f46.min.css">
-        
-      
-    
-    
-    
-      
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
     
-    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
-  
 
-
-
-  
-  
-
-
-
-  <script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-131202162-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
-  <script async src="https://www.google-analytics.com/analytics.js"></script>
-
-
+    
     
     
   </head>
   
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr">
   
-    
-    <script>function __prefix(e){return new URL("../..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -87,16 +77,22 @@
       
     </div>
     
-      <header class="md-header" data-md-component="header">
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href="../.." title="生物信息实践" class="md-header__button md-logo" aria-label="生物信息实践" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -116,24 +112,30 @@
     </div>
     
     
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
     
       <label class="md-header__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
       </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
+      <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
       
@@ -144,7 +146,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -153,11 +155,10 @@
     
     
       <div class="md-header__source">
-        
-<a href="https://github.com/pzweuj/pzweuj.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/pzweuj/pzweuj.github.io/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -166,11 +167,14 @@
       </div>
     
   </nav>
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
+        
+          
         
       
       <main class="md-main" data-md-component="main">
@@ -184,23 +188,23 @@
                     
 
 
+
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
     <a href="../.." title="生物信息实践" class="md-nav__button md-logo" aria-label="生物信息实践" data-md-component="logo">
       
   
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
 
     </a>
     生物信息实践
   </label>
   
     <div class="md-nav__source">
-      
-<a href="https://github.com/pzweuj/pzweuj.github.io/" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/pzweuj/pzweuj.github.io/" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
     GitHub
@@ -212,14 +216,19 @@
     
       
       
-      
-
+  
   
   
   
     <li class="md-nav__item">
       <a href="../.." class="md-nav__link">
-        前言
+        
+  
+  <span class="md-ellipsis">
+    前言
+  </span>
+  
+
       </a>
     </li>
   
@@ -227,114 +236,185 @@
     
       
       
-      
-
   
   
     
   
   
+  
+    
+    
+    
     
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
-      
-      <label class="md-nav__link" for="__nav_2">
-        一、 DNA-seq
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="一、 DNA-seq" data-md-level="1">
-        <label class="md-nav__title" for="__nav_2">
-          <span class="md-nav__icon md-icon"></span>
-          一、 DNA-seq
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
           
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
             
+  
+  <span class="md-ellipsis">
+    一、 DNA-seq
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            一、 DNA-seq
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../01.prepare_data/" class="md-nav__link">
-        01. 参考基因/数据库/原始数据的准备
+        
+  
+  <span class="md-ellipsis">
+    01. 参考基因/数据库/原始数据的准备
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../02.mapping/" class="md-nav__link">
-        02. 比对
+        
+  
+  <span class="md-ellipsis">
+    02. 比对
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../03.sort_and_mark_duplicates/" class="md-nav__link">
-        03. 排序以及标记重复序列
+        
+  
+  <span class="md-ellipsis">
+    03. 排序以及标记重复序列
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../04.call_snp/" class="md-nav__link">
-        04. 找变异
+        
+  
+  <span class="md-ellipsis">
+    04. 找变异
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../05.call_somatics/" class="md-nav__link">
-        05. 体细胞突变
+        
+  
+  <span class="md-ellipsis">
+    05. 体细胞突变
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
   
   
     
   
   
+  
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          06. CNV突变
+          
+  
+  <span class="md-ellipsis">
+    06. CNV突变
+  </span>
+  
+
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
-        06. CNV突变
+        
+  
+  <span class="md-ellipsis">
+    06. CNV突变
+  </span>
+  
+
       </a>
       
         
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -350,14 +430,18 @@
       
         <li class="md-nav__item">
   <a href="#cnvkit" class="md-nav__link">
-    cnvkit
+    <span class="md-ellipsis">
+      cnvkit
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#conifer" class="md-nav__link">
-    CoNIFER
+    <span class="md-ellipsis">
+      CoNIFER
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="CoNIFER">
@@ -365,28 +449,36 @@
         
           <li class="md-nav__item">
   <a href="#rpkm" class="md-nav__link">
-    统计rpkm
+    <span class="md-ellipsis">
+      统计rpkm
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    分析
+    <span class="md-ellipsis">
+      分析
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
-    结果生成
+    <span class="md-ellipsis">
+      结果生成
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
-    可视化
+    <span class="md-ellipsis">
+      可视化
+    </span>
   </a>
   
 </li>
@@ -398,7 +490,9 @@
       
         <li class="md-nav__item">
   <a href="#freec" class="md-nav__link">
-    freec
+    <span class="md-ellipsis">
+      freec
+    </span>
   </a>
   
 </li>
@@ -410,225 +504,368 @@
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../07.call_fusions/" class="md-nav__link">
-        07. 融合基因检测
+        
+  
+  <span class="md-ellipsis">
+    07. 融合基因检测
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../08.annotation/" class="md-nav__link">
-        08. 注释
+        
+  
+  <span class="md-ellipsis">
+    08. 注释
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../09.visualization/" class="md-nav__link">
-        09. 可视化
+        
+  
+  <span class="md-ellipsis">
+    09. 可视化
+  </span>
+  
+
       </a>
     </li>
   
 
-          
-        </ul>
-      </nav>
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
     
       
       
-      
-
+  
   
   
   
     
+    
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
-      
-      <label class="md-nav__link" for="__nav_3">
-        二、 RNA-seq
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="二、 RNA-seq" data-md-level="1">
-        <label class="md-nav__title" for="__nav_3">
-          <span class="md-nav__icon md-icon"></span>
-          二、 RNA-seq
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
           
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
+  
+  <span class="md-ellipsis">
+    二、 RNA-seq
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            二、 RNA-seq
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../C02_RNA-seq/01.prepare_data/" class="md-nav__link">
-        01. 参考基因/数据库/原始数据的准备
+        
+  
+  <span class="md-ellipsis">
+    01. 参考基因/数据库/原始数据的准备
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../C02_RNA-seq/02.mapping/" class="md-nav__link">
-        02. 比对
+        
+  
+  <span class="md-ellipsis">
+    02. 比对
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../C02_RNA-seq/03.counting/" class="md-nav__link">
-        03. 计算RPKM/FPKM/TPM/counts
+        
+  
+  <span class="md-ellipsis">
+    03. 计算RPKM/FPKM/TPM/counts
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../C02_RNA-seq/04.differential_analysis/" class="md-nav__link">
-        04. 差异分析
+        
+  
+  <span class="md-ellipsis">
+    04. 差异分析
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../C02_RNA-seq/05.picture/" class="md-nav__link">
-        05. 画图
+        
+  
+  <span class="md-ellipsis">
+    05. 画图
+  </span>
+  
+
       </a>
     </li>
   
 
-          
-        </ul>
-      </nav>
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
     
       
       
-      
-
+  
   
   
   
     
+    
+    
+    
     <li class="md-nav__item md-nav__item--nested">
       
-      
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
-      
-      <label class="md-nav__link" for="__nav_4">
-        三、 mNGS
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-      <nav class="md-nav" aria-label="三、 mNGS" data-md-level="1">
-        <label class="md-nav__title" for="__nav_4">
-          <span class="md-nav__icon md-icon"></span>
-          三、 mNGS
-        </label>
-        <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
           
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
+  
+  <span class="md-ellipsis">
+    三、 mNGS
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            三、 mNGS
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../C03_mNGS/01.prepare_data/" class="md-nav__link">
-        01. 参考基因/数据库/原始数据的准备
+        
+  
+  <span class="md-ellipsis">
+    01. 参考基因/数据库/原始数据的准备
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../C03_mNGS/02.remove_host/" class="md-nav__link">
-        02. 去除宿主基因
+        
+  
+  <span class="md-ellipsis">
+    02. 去除宿主基因
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../C03_mNGS/03.assemble/" class="md-nav__link">
-        03. 基因组组装
+        
+  
+  <span class="md-ellipsis">
+    03. 基因组组装
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../C03_mNGS/04.annotation/" class="md-nav__link">
-        04. 宏基因组注释
+        
+  
+  <span class="md-ellipsis">
+    04. 宏基因组注释
+  </span>
+  
+
       </a>
     </li>
   
 
-          
+              
             
+              
+                
+  
   
   
   
     <li class="md-nav__item">
       <a href="../../C03_mNGS/05.pictures/" class="md-nav__link">
-        05. 可视化
+        
+  
+  <span class="md-ellipsis">
+    05. 可视化
+  </span>
+  
+
       </a>
     </li>
   
 
-          
-        </ul>
-      </nav>
+              
+            
+          </ul>
+        </nav>
+      
     </li>
   
 
@@ -645,6 +882,7 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -660,14 +898,18 @@
       
         <li class="md-nav__item">
   <a href="#cnvkit" class="md-nav__link">
-    cnvkit
+    <span class="md-ellipsis">
+      cnvkit
+    </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#conifer" class="md-nav__link">
-    CoNIFER
+    <span class="md-ellipsis">
+      CoNIFER
+    </span>
   </a>
   
     <nav class="md-nav" aria-label="CoNIFER">
@@ -675,28 +917,36 @@
         
           <li class="md-nav__item">
   <a href="#rpkm" class="md-nav__link">
-    统计rpkm
+    <span class="md-ellipsis">
+      统计rpkm
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_1" class="md-nav__link">
-    分析
+    <span class="md-ellipsis">
+      分析
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
-    结果生成
+    <span class="md-ellipsis">
+      结果生成
+    </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
-    可视化
+    <span class="md-ellipsis">
+      可视化
+    </span>
   </a>
   
 </li>
@@ -708,7 +958,9 @@
       
         <li class="md-nav__item">
   <a href="#freec" class="md-nav__link">
-    freec
+    <span class="md-ellipsis">
+      freec
+    </span>
   </a>
   
 </li>
@@ -721,64 +973,60 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
-                  <a href="https://github.com/pzweuj/pzweuj.github.io/edit/master/docs/C01_DNA-seq/06.call_cnvs.md" title="Edit this page" class="md-content__button md-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
-                  </a>
-                
-                
-                <h1 id="cnv">CNV 检测</h1>
+                  
+
+  
+  
+
+
+<h1 id="cnv">CNV 检测</h1>
 <p>CNV基本上不能算在常规检测流程里面，一般都是有需求的时候才会去做的。大多数的CNV检测软件都是采用多个样本比对的方法，就是需要正常样本和待检样本作对照。如果是自己分析的思路，可以是对基因组一定大小划分windows，然后统计每个windows的read counts（或者RPKM、TPM等）。然后将对照组和检测样本横向比较每个windows的read counts，基本上可以参考的是Z检验算法。最终得到是Z值（相当于），然后就可以知道对应区域是拷贝数增多还是减少。常用软件有CoNIFER、freec、cnvnator。像分析单个外显子的缺失，这种可以使用<a href="https://pzweuj.github.io/2019/05/21/DECoN.html">DECoN</a>，我在博客里也写过了。
 一般来说，WES使用CoNIFER、WGS使用freec。
 以下是从官方文档里抄来的流程。</p>
 <h2 id="cnvkit">cnvkit</h2>
 <p>大概以后会默认使用<a href="https://cnvkit.readthedocs.io/en/stable/">cnvkit</a>，毕竟方便。cnvkit单次配对样本的使用方式如下：
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
-<span class="normal">6</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py batch tumor.bam <span class="se">\</span>
-    --normal normal.bam <span class="se">\</span>
-    --targets my.bed --fasta Homo_sapiens_assembly38.fasta --annotate refFlat.txt <span class="se">\</span>
-    --access access.hg38.bed <span class="se">\</span>
-    --output-reference reference.cnn --output-dir output/ <span class="se">\</span>
-    --diagram --scatter
-</code></pre></div>
-</td></tr></table></p>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code>cnvkit.py<span class="w"> </span>batch<span class="w"> </span>tumor.bam<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--normal<span class="w"> </span>normal.bam<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--targets<span class="w"> </span>my.bed<span class="w"> </span>--fasta<span class="w"> </span>Homo_sapiens_assembly38.fasta<span class="w"> </span>--annotate<span class="w"> </span>refFlat.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--access<span class="w"> </span>access.hg38.bed<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output-reference<span class="w"> </span>reference.cnn<span class="w"> </span>--output-dir<span class="w"> </span>output/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--diagram<span class="w"> </span>--scatter
+</code></pre></div></td></tr></table></div></p>
 <p><a href="http://hgdownload.cse.ucsc.edu/goldenpath/hg38/database/refFlat.txt.gz">refFlat下载</a></p>
 <p>access文件的生成可使用encode blacklist 来去除不能比对的区域。</p>
 <p><a href="http://hgdownload.cse.ucsc.edu/goldenpath/hg19/encodeDCC/wgEncodeMapability/wgEncodeDukeMapabilityRegionsExcludable.bed.gz">hg19</a>         <a href="https://www.encodeproject.org/files/ENCFF356LFX/@@download/ENCFF356LFX.bed.gz">hg38</a></p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py access Homo_sapiens_assembly38.fasta <span class="se">\</span>
-    -x ENCFF356LFX.bed <span class="se">\</span>
-    -o access.hg38.bed
-</code></pre></div>
-</td></tr></table>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>cnvkit.py<span class="w"> </span>access<span class="w"> </span>Homo_sapiens_assembly38.fasta<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-x<span class="w"> </span>ENCFF356LFX.bed<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-o<span class="w"> </span>access.hg38.bed
+</code></pre></div></td></tr></table></div>
 <p>更多的时候，使用单个肿瘤样本进行分析。建议是先使用多个通过同一实验条件做出来的正常样本数据建立参考基线，先生成target和antitarget的bed文件。
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
-<span class="normal">2</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py target my.bed --annotate refFlat.txt -o target.bed --short-names
-cnvkit.py antitarget target.bed -g access.hg38.bed -o antitarget.bed
-</code></pre></div>
-</td></tr></table></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code>cnvkit.py<span class="w"> </span>target<span class="w"> </span>my.bed<span class="w"> </span>--annotate<span class="w"> </span>refFlat.txt<span class="w"> </span>-o<span class="w"> </span>target.bed<span class="w"> </span>--short-names
+cnvkit.py<span class="w"> </span>antitarget<span class="w"> </span>target.bed<span class="w"> </span>-g<span class="w"> </span>access.hg38.bed<span class="w"> </span>-o<span class="w"> </span>antitarget.bed
+</code></pre></div></td></tr></table></div></p>
 <p>把这些正常的normal bam统统丢进同一个文件夹，然后用下面命令建立一个参考基线
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py batch -n normal/*.bam --output-reference reference.cnn <span class="se">\</span>
-    -t target.bed -a antitarget.bed <span class="se">\</span>
-    -f hg38.fa -g access.hg38.bed
-</code></pre></div>
-</td></tr></table></p>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>cnvkit.py<span class="w"> </span>batch<span class="w"> </span>-n<span class="w"> </span>normal/*.bam<span class="w"> </span>--output-reference<span class="w"> </span>reference.cnn<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-t<span class="w"> </span>target.bed<span class="w"> </span>-a<span class="w"> </span>antitarget.bed<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-f<span class="w"> </span>hg38.fa<span class="w"> </span>-g<span class="w"> </span>access.hg38.bed
+</code></pre></div></td></tr></table></div></p>
 <p>在新分析样本时，就可以用上这个参考
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py batch tumor.bam -r reference.cnn -d output/
-</code></pre></div>
-</td></tr></table></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cnvkit.py<span class="w"> </span>batch<span class="w"> </span>tumor.bam<span class="w"> </span>-r<span class="w"> </span>reference.cnn<span class="w"> </span>-d<span class="w"> </span>output/
+</code></pre></div></td></tr></table></div></p>
 <p>上面其实是cnvkit的合并模式，也可以拆开每一步来进行。下面的命令供参考：
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -792,82 +1040,74 @@ cnvkit.py antitarget target.bed -g access.hg38.bed -o antitarget.bed
 <span class="normal">12</span>
 <span class="normal">13</span>
 <span class="normal">14</span>
-<span class="normal">15</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># 对每个样本</span>
-cnvkit.py coverage sample.bam target.bed -o sample.targetcoverage.cnn
-cnvkit.py coverage sample.bam antitarget.bed -o sample.antitargetcoverage.cnn
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 对每个样本</span>
+cnvkit.py<span class="w"> </span>coverage<span class="w"> </span>sample.bam<span class="w"> </span>target.bed<span class="w"> </span>-o<span class="w"> </span>sample.targetcoverage.cnn
+cnvkit.py<span class="w"> </span>coverage<span class="w"> </span>sample.bam<span class="w"> </span>antitarget.bed<span class="w"> </span>-o<span class="w"> </span>sample.antitargetcoverage.cnn
 
 <span class="c1"># 对所有正常样本</span>
-cnvkit.py reference *Normal.<span class="o">{</span>,anti<span class="o">}</span>targetcoverage.cnn <span class="se">\</span>
-    --fasta Homo_sapiens_assembly38.fasta -o reference.cnn
+cnvkit.py<span class="w"> </span>reference<span class="w"> </span>*Normal.<span class="o">{</span>,anti<span class="o">}</span>targetcoverage.cnn<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--fasta<span class="w"> </span>Homo_sapiens_assembly38.fasta<span class="w"> </span>-o<span class="w"> </span>reference.cnn
 
 <span class="c1"># 对肿瘤样本</span>
-cnvkit.py fix tumor.targetcoverage.cnn tumor.antitargetcoverge.cnn <span class="se">\</span>
-    reference.cnn -o tumor.cnr
-cnvkit.py segment tumor.cnr -o tumor.cns
-cnvkit.py call tumor.cns -o tumor.call.cns
-cnvkit.py scatter tumor.cnr -s tumor.cns -o tumor.scatter.pdf
-cnvkit.py diagram tumor.cnr -s tumor.cns -o tumor.diagram.pdf
-</code></pre></div>
-</td></tr></table></p>
+cnvkit.py<span class="w"> </span>fix<span class="w"> </span>tumor.targetcoverage.cnn<span class="w"> </span>tumor.antitargetcoverge.cnn<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>reference.cnn<span class="w"> </span>-o<span class="w"> </span>tumor.cnr
+cnvkit.py<span class="w"> </span>segment<span class="w"> </span>tumor.cnr<span class="w"> </span>-o<span class="w"> </span>tumor.cns
+cnvkit.py<span class="w"> </span>call<span class="w"> </span>tumor.cns<span class="w"> </span>-o<span class="w"> </span>tumor.call.cns
+cnvkit.py<span class="w"> </span>scatter<span class="w"> </span>tumor.cnr<span class="w"> </span>-s<span class="w"> </span>tumor.cns<span class="w"> </span>-o<span class="w"> </span>tumor.scatter.pdf
+cnvkit.py<span class="w"> </span>diagram<span class="w"> </span>tumor.cnr<span class="w"> </span>-s<span class="w"> </span>tumor.cns<span class="w"> </span>-o<span class="w"> </span>tumor.diagram.pdf
+</code></pre></div></td></tr></table></div></p>
 <p>cnvkit中有一个--method参数，默认是hybrid（液相杂交捕获），可选amplicon（引物扩增），wgs（全基因组）。视实验方法而定咯。</p>
 <p>当然，在分析获得cnr后，可以不进行segment直接call，这样不会把区域合并。
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>cnvkit.py call tumor.cnr -o tumor.call.cns
-</code></pre></div>
-</td></tr></table></p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>cnvkit.py<span class="w"> </span>call<span class="w"> </span>tumor.cnr<span class="w"> </span>-o<span class="w"> </span>tumor.call.cns
+</code></pre></div></td></tr></table></div></p>
 <h2 id="conifer">CoNIFER</h2>
 <p><a href="http://conifer.sourceforge.net/">CoNIFER</a>据称可以去除多批次的实验做成的误差。软件只支持python2，不支持python3，另外已经有7年没有更新过，所以如果有更好更新的替代品，可以放弃使用CoNIFER。软件的安装还有一些依赖的包的安装就不说了。</p>
 <h3 id="rpkm">统计rpkm</h3>
 <p>首先是对bam文件统计rpkm值
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python conifer.py rpkm --probes probes.txt --input sample.bam --output sample.rpkm.txt
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>python<span class="w"> </span>conifer.py<span class="w"> </span>rpkm<span class="w"> </span>--probes<span class="w"> </span>probes.txt<span class="w"> </span>--input<span class="w"> </span>sample.bam<span class="w"> </span>--output<span class="w"> </span>sample.rpkm.txt
+</code></pre></div></td></tr></table></div>
 其中，probes.txt是这个外显子检测的bed文件，就是各个探针的位置信息。</p>
 <p>另外，如果运行时报这个错误
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>AttributeError: &#39;pysam.libcsamfile.Samfile&#39; object has no attribute &#39;_hasIndex&#39;
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>AttributeError: &#39;pysam.libcsamfile.Samfile&#39; object has no attribute &#39;_hasIndex&#39;
+</code></pre></div></td></tr></table></div>
 需要将conifer.py中第564行修改为”if not f.check_index():“，这是因为pysam更新了方法。</p>
 <h3 id="_1">分析</h3>
 <p>然后是conifer的主分析程序，这一步是对rpkm进行统计，因为CNV分析需要用到多个样本进行对比，所以这里的input是装有多个rpkm统计表的文件夹。
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
 <span class="normal">5</span>
 <span class="normal">6</span>
 <span class="normal">7</span>
-<span class="normal">8</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python conifer.py analyze <span class="se">\</span>
-    --probes probes.txt <span class="se">\</span>
-    --rpkm_dir ./RPKM/ <span class="se">\</span>
-    --output analysis.hdf5 <span class="se">\</span>
-    --svd <span class="m">6</span> <span class="se">\</span>
-    --write_svals singular_values.txt <span class="se">\</span>
-    --plot_scree screeplot.png <span class="se">\</span>
-    --write_sd sd_values.txt
-</code></pre></div>
-</td></tr></table>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>python<span class="w"> </span>conifer.py<span class="w"> </span>analyze<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--probes<span class="w"> </span>probes.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--rpkm_dir<span class="w"> </span>./RPKM/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>analysis.hdf5<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--svd<span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--write_svals<span class="w"> </span>singular_values.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--plot_scree<span class="w"> </span>screeplot.png<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--write_sd<span class="w"> </span>sd_values.txt
+</code></pre></div></td></tr></table></div>
 <img alt="sv1" src="https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/worstpractice/pictures/conifer.png" /></p>
 <p>conifier建议根据出来的这幅图来设定svd的值，一般设置在拐点，比如上面这幅图能得到的建议是把svd设置在2到5之间。</p>
 <p>由于pytable这个包版本更新，运行时可能会报错
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>ImportError: cannot import name openFile
-</code></pre></div>
-</td></tr></table>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>ImportError: cannot import name openFile
+</code></pre></div></td></tr></table></div>
 上面这个错误需要修改conifer.py第50行的openFile为open_file。</p>
-<p><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>AttributeError: &#39;File&#39; object has no attribute &#39;createGroup&#39;
-</code></pre></div>
-</td></tr></table>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>AttributeError: &#39;File&#39; object has no attribute &#39;createGroup&#39;
+</code></pre></div></td></tr></table></div>
 上面这个错误需要修改conifer.py第51行和第134行的createGroup为create_group。</p>
 <h3 id="_2">结果生成</h3>
 <p>结果生成使用的是上面输出的hdf5文件
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
-<span class="normal">3</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python conifer.py call <span class="se">\</span>
-    --input analysis.hdf5 <span class="se">\</span>
-    --output calls.txt
-</code></pre></div>
-</td></tr></table></p>
+<span class="normal">3</span></pre></div></td><td class="code"><div><pre><span></span><code>python<span class="w"> </span>conifer.py<span class="w"> </span>call<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input<span class="w"> </span>analysis.hdf5<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>calls.txt
+</code></pre></div></td></tr></table></div></p>
 <p>导出数据
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -876,35 +1116,33 @@ cnvkit.py diagram tumor.cnr -s tumor.cns -o tumor.diagram.pdf
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
 <span class="normal"> 9</span>
-<span class="normal">10</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># 所有样本</span>
-python conifer.py <span class="nb">export</span> <span class="se">\</span>
-    --input analysis.hdf5 <span class="se">\</span>
-    --output ./export_svdzrpkm
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 所有样本</span>
+python<span class="w"> </span>conifer.py<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input<span class="w"> </span>analysis.hdf5<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>./export_svdzrpkm
 
 <span class="c1"># 单个样本</span>
-python conifer.py <span class="nb">export</span> <span class="se">\</span>
-    --input analysis.hdf5 <span class="se">\</span>
-    --sample SampleID <span class="se">\</span>
-    --output ./export_svdzrpkm/sample.svdzrpkm.bed
-</code></pre></div>
-</td></tr></table></p>
+python<span class="w"> </span>conifer.py<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input<span class="w"> </span>analysis.hdf5<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--sample<span class="w"> </span>SampleID<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>./export_svdzrpkm/sample.svdzrpkm.bed
+</code></pre></div></td></tr></table></div></p>
 <h3 id="_3">可视化</h3>
 <p>conifer提供了可视化的方法
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
 <span class="normal">4</span>
-<span class="normal">5</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code>python conifer.py plot <span class="se">\</span>
-    --input analysis.hdf5 <span class="se">\</span>
-    --region chrxx:start-end <span class="se">\</span>
-    --output image.png <span class="se">\</span>
-    --sample sampleID
-</code></pre></div>
-</td></tr></table>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code>python<span class="w"> </span>conifer.py<span class="w"> </span>plot<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input<span class="w"> </span>analysis.hdf5<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--region<span class="w"> </span>chrxx:start-end<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>image.png<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--sample<span class="w"> </span>sampleID
+</code></pre></div></td></tr></table></div>
 出图效果：</p>
 <p><img alt="sv2" src="https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/worstpractice/pictures/chr16_21426277_21747711_NA18517.png" /></p>
 <p>还有两个其他方法
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
 <span class="normal"> 2</span>
 <span class="normal"> 3</span>
 <span class="normal"> 4</span>
@@ -915,88 +1153,61 @@ python conifer.py <span class="nb">export</span> <span class="se">\</span>
 <span class="normal"> 9</span>
 <span class="normal">10</span>
 <span class="normal">11</span>
-<span class="normal">12</span></pre></div></td><td class="code"><div class="highlight"><pre><span></span><code><span class="c1"># 样本高亮</span>
-python conifer.py plot <span class="se">\</span>
-    --input analysis.hdf5 <span class="se">\</span>
-    --region chr#:start-stop <span class="se">\</span>
-    --output image.png <span class="se">\</span>
-    --sample r:sampleID1 b:sampleID2 g:sampleID3
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># 样本高亮</span>
+python<span class="w"> </span>conifer.py<span class="w"> </span>plot<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input<span class="w"> </span>analysis.hdf5<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--region<span class="w"> </span>chr#:start-stop<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--output<span class="w"> </span>image.png<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--sample<span class="w"> </span>r:sampleID1<span class="w"> </span>b:sampleID2<span class="w"> </span>g:sampleID3
 
 <span class="c1"># 输出所有位置</span>
-python conifer.py plotcalls <span class="se">\</span>
-    --input analysis.hdf5 <span class="se">\</span>
-    --calls calls.txt <span class="se">\</span>
-    --outputdir ./call_imgs/
-</code></pre></div>
-</td></tr></table></p>
+python<span class="w"> </span>conifer.py<span class="w"> </span>plotcalls<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--input<span class="w"> </span>analysis.hdf5<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--calls<span class="w"> </span>calls.txt<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--outputdir<span class="w"> </span>./call_imgs/
+</code></pre></div></td></tr></table></div></p>
 <h2 id="freec">freec</h2>
 <p><a href="http://boevalab.com/FREEC/">freec</a>适合检测全基因组的CNV。最新版是2018年8月的，可以算比较新了。相比上面的conifer，我觉得freec的使用要更麻烦一些，可以参阅<a href="http://boevalab.com/FREEC/tutorial.html">tutorial</a>，除了软件之外，还需要下载数据库，需要创建一个config文件，但是freec出来的图也是挺一目了然的。
 <img alt="freec" src="http://boevalab.com/FREEC/images/xxx.png" /></p>
-                
-              
-              
-                
 
 
-              
-            </article>
-          </div>
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
       </main>
       
-        
-<footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="../05.call_somatics/" class="md-footer__link md-footer__link--prev" aria-label="Previous: 05. 体细胞突变" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              05. 体细胞突变
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="../07.call_fusions/" class="md-footer__link md-footer__link--next" aria-label="Next: 07. 融合基因检测" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              07. 融合基因检测
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
+        <footer class="md-footer">
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-          <div class="md-footer-copyright__highlight">
-            Copyright &copy; 2021 pzweuj
-          </div>
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-        
-      </div>
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 pzweuj
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
       
     </div>
   </div>
@@ -1006,10 +1217,12 @@ python conifer.py plotcalls <span class="se">\</span>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../../assets/javascripts/workers/search.409db549.min.js", "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.56a63758.min.js"></script>
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.1e8ae164.min.js"></script>
       
         <script src="../../javascripts/config.js"></script>
       

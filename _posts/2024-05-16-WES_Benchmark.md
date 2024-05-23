@@ -26,6 +26,12 @@ GIAB项目同时提供了一个Benchmark的最佳实践。
 bedtools intersect -a my.bed -b giab.bed > target.bed
 ```
 
+最好是把低于10X的区域统计出来，不要包含到统计中
+```bash
+samtools depth -a my.bam > lower_10.bed
+bedtools subtract -a target.bed -b lower_10.bed > target_above_10.bed
+```
+
 #### hap.py
 
 即Github中的[ga4gh/benchmarking-tools](https://github.com/ga4gh/benchmarking-tools/)这个项目。主要使用了Illumina的[hap.py](https://github.com/Illumina/hap.py)脚本进行评估。
@@ -36,7 +42,7 @@ export HGREF=reference.fasta
 hap.py \
 	PG.vcf.gz \
 	NA12878.vcf.gz \
-	-f target.bed \
+	-f target_above_10.bed \
 	--threads 8 \
 	-o output.prefix
 ```
@@ -57,13 +63,13 @@ bcftools view -v indels NA12878.vcf.gz -o NA12878.indels.vcf.gz
 rtg format -o RTG_GRCh37_SDF human_v37_decoy.fasta
 
 rtg vcfeval \
-	--bed-regions target.bed \
-	--evaluation-regions target.bed \
-	--template RTG_GRCh37_SDF \
-	--baseline NA12878.vcf.gz \
-	--calls PG.vcf.gz \
-	--sample HG001,NA12878 \
-	--output outpt.prefix
+	-e target.bed \
+	-t RTG_GRCh37_SDF \
+	-b NA12878.vcf.gz \
+	-c PG.vcf.gz \
+	--sample HG001,your_sample_name \
+	-o outpt.prefix \
+	-T 8
 ```
 
 

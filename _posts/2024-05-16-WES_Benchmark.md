@@ -63,7 +63,7 @@ bcftools view -v indels NA12878.vcf.gz -o NA12878.indels.vcf.gz
 rtg format -o RTG_GRCh37_SDF human_v37_decoy.fasta
 
 rtg vcfeval \
-	-e target.bed \
+	-e target_above_10.bed \
 	-t RTG_GRCh37_SDF \
 	-b NA12878.vcf.gz \
 	-c PG.vcf.gz \

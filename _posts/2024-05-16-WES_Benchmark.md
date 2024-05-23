@@ -26,7 +26,7 @@ GIAB项目同时提供了一个Benchmark的最佳实践。
 bedtools intersect -a my.bed -b giab.bed > target.bed
 ```
 
-最好是把低于10X的区域统计出来，不要包含到统计中
+最好是把低于10X的区域统计出来，不要包含到统计中（对这步我个人有异议：既然探针包含了这个设计区域，但这个设计区域的捕获效果差，是否也说明了探针的质量不达标）。
 ```bash
 samtools depth -a my.bam > lower_10.bed
 bedtools subtract -a target.bed -b lower_10.bed > target_above_10.bed

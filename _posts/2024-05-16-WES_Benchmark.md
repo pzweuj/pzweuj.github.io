@@ -28,7 +28,13 @@ bedtools intersect -a my.bed -b giab.bed > target.bed
 
 最好是把低于10X的区域统计出来，不要包含到统计中（对这步我个人有异议：既然探针包含了这个设计区域，但这个设计区域的捕获效果差，是否也说明了探针的质量不达标）。
 ```bash
-samtools depth -a my.bam > lower_10.bed
+samtools depth -a my.bam > bam_cover_depth.txt
+awk '{if ($3 < 10) print $1"\t"$2-1"\t"$2}' bam_cover_depth.txt > lower_10.bed
+
+# 用bedtool来统计可能更好
+bedtools genomecov -ibam my.bam -bga -split -g reference.fa > bam_cover_depth.bed
+
+# 取差集
 bedtools subtract -a target.bed -b lower_10.bed > target_above_10.bed
 ```
 

@@ -33,6 +33,7 @@ awk '{if ($3 < 10) print $1"\t"$2-1"\t"$2}' bam_cover_depth.txt > lower_10.bed
 
 # 用bedtool来统计可能更好
 bedtools genomecov -ibam my.bam -bga -split -g reference.fa > bam_cover_depth.bed
+awk '$4 < 10' bam_cover_depth.bed > lower_10.bed
 
 # 取差集
 bedtools subtract -a target.bed -b lower_10.bed > target_above_10.bed

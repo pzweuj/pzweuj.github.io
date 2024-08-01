@@ -15,14 +15,14 @@ tags: coding
 
 |  档位  | 电价（分/kWh） | 阶梯（kWh） |
 | :----: | :------------: | :---------: |
-| 第一档 |     58.02      |  [0, 260]   |
-| 第二档 |     63.02      | (260, 600]  |
-| 第三档 |     88.02      |  (600, +∞)  |
+| 第一档 |     58.89      |  [0, 260]   |
+| 第二档 |     63.89      | (260, 600]  |
+| 第三档 |     88.89      |  (600, +∞)  |
 
 
 ```python
 # 阶梯
-def step_billing(month_total, step1=58.02, step2=63.02, step3=88.02, step2_cutoff=260, step3_cutoff=600):
+def step_billing(month_total, step1=58.89, step2=63.89, step3=88.89, step2_cutoff=260, step3_cutoff=600):
     step2_amount = step3_amount = 0
     if month_total > step3_cutoff:
         step3_amount = month_total - step3_cutoff
@@ -35,16 +35,16 @@ def step_billing(month_total, step1=58.02, step2=63.02, step3=88.02, step2_cutof
     return billing
 ```
 
-计算所得是176.06元。
+计算所得是178.67元。
 
 
 ## 峰谷计费
 
 | 档位 | 电价（分/kWh） |     时间段      |
 | :--: | :------------: | :-------------: |
-| 峰电 |     98.63      |   10-12,14-19   |
-| 平电 |     58.02      | 8-10,12-14,19-0 |
-| 谷电 |     22.05      |       0-8       |
+| 峰电 |     99.50      |   10-12,14-19   |
+| 平电 |     58.89      | 8-10,12-14,19-0 |
+| 谷电 |     22.92      |       0-8       |
 
 
 但是！峰谷计费仍需要叠加一个阶梯！
@@ -58,7 +58,7 @@ def step_billing(month_total, step1=58.02, step2=63.02, step3=88.02, step2_cutof
 
 ```python
 # 阶梯
-def peekValley_billing(peak, flat, valley, peak_f=98.63, flat_f=58.02, valley_f=22.05):
+def peekValley_billing(peak, flat, valley, peak_f=99.50, flat_f=58.89, valley_f=22.92):
     billing_base = peak * peak_f + flat * flat_f + valley * valley_f
     month_total = peak + flat + valley
     billing_append = step_billing(month_total, 0, 5, 30, 200, 400)
@@ -67,7 +67,7 @@ def peekValley_billing(peak, flat, valley, peak_f=98.63, flat_f=58.02, valley_f=
 
 我大概估算了一下我每个月这三个时间档的用电量，峰电：36kWh；平电：135kWh；谷电：129kWh。
 
-计算所得是147.28元。
+计算所得是149.89元。
 
 ## 结论
 

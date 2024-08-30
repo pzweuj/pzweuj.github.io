@@ -27,3 +27,18 @@ except pd.core.common.SettingWithCopyError as e:
 	print(e)
 ```
 
+还有另外的做法，可以插入下面这个代码
+```python
+import warnings
+import traceback
+pd.options.mode.chained_assignment = 'warn'
+def warn_with_traceback(message, category, filename, lineno, file=None, line=None):
+    log = warnings.formatwarning(message, category, filename, lineno, line)
+    print(log)
+    traceback.print_stack()
+warnings.showwarning = warn_with_traceback
+```
+
+
+
+

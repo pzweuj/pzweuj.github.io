@@ -8,6 +8,20 @@ interface Props {
   }
 }
 
+// 添加这个函数来生成静态路径
+export async function generateStaticParams() {
+  const chapters = await getProjectDocs()
+  
+  // 获取所有文档的 slug
+  const paths = chapters.flatMap(chapter => 
+    chapter.docs.map(doc => ({
+      slug: doc.slug.split('/')  // 将 slug 字符串分割成数组
+    }))
+  )
+  
+  return paths
+}
+
 export default async function ProjectDocPage({ params }: Props) {
   const chapters = await getProjectDocs()
   const slug = params.slug.join('/')

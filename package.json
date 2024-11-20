@@ -1,43 +1,44 @@
 {
-  "name": "jekyll-text-theme",
-  "version": "2.2.4",
-  "description": "A super customizable Jekyll theme for personal site, team site, blog, project, documentation, etc.",
+  "name": "my-blog",
+  "version": "0.1.1",
+  "private": true,
   "scripts": {
-    "build": "bundle exec jekyll build",
-    "serve": "bundle exec jekyll serve -H 0.0.0.0",
-    "default": "bundle exec jekyll serve -H 0.0.0.0 -t",
-    "dev": "bundle exec jekyll serve -H 0.0.0.0 -t --config ./docs/_config.dev.yml",
-    "demo-dev": "bundle exec jekyll serve -H 0.0.0.0 -t --config ./docs/_config.yml",
-    "demo-beta": "JEKYLL_ENV=beta bundle exec jekyll serve -H 0.0.0.0 -t --config ./docs/_config.yml",
-    "demo-production": "JEKYLL_ENV=production bundle exec jekyll serve -H 0.0.0.0 -t --config ./docs/_config.yml",
-    "eslint": "eslint \"_includes/**/*.js\"",
-    "eslint-fix": "eslint \"_includes/**/*.js\" --fix",
-    "stylelint": "stylelint --syntax scss \"_sass/**/*.scss\"",
-    "stylelint-fix": "stylelint --syntax scss \"_sass/**/*.scss\" --fix",
-    "gem-build": "rm -fv jekyll-text-theme-*.gem && gem build jekyll-text-theme.gemspec",
-    "gem-push": "gem push jekyll-text-theme-*.gem"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kitian616/jekyll-TeXt-theme.git"
+  "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-dropdown-menu": "^2.1.2",
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.0.4",
+    "gray-matter": "^4.0.3",
+    "katex": "^0.16.11",
+    "lucide-react": "^0.460.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-katex": "^2.0.3",
+    "next": "15.0.3",
+    "next-themes": "^0.4.3",
+    "prismjs": "^1.29.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tailwind-merge": "^2.5.4",
+    "unified": "^11.0.5"
   },
-  "keywords": [
-    "jekyll",
-    "jekyll-theme",
-    "jekyll-template"
-  ],
-  "author": "Tian Qi",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kitian616/jekyll-TeXt-theme/issues"
-  },
-  "homepage": "https://github.com/kitian616/jekyll-TeXt-theme",
   "devDependencies": {
-    "eslint": "^5.4.0",
-    "stylelint": "^9.5.0",
-    "stylelint-config-recommended-scss": "^3.2.0",
-    "stylelint-config-standard": "^18.2.0",
-    "stylelint-order": "^1.0.0",
-    "stylelint-scss": "^3.3.0"
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/node": "^20",
+    "@types/prismjs": "^1.26.5",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^8",
+    "eslint-config-next": "15.0.3",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15",
+    "typescript": "^5"
   }
 }

@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 代码块样式 */
+pre[class*="language-"] {
+  @apply my-4 p-4 rounded-lg !bg-gray-900 dark:!bg-gray-950 overflow-x-auto;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  @apply text-gray-100 dark:text-gray-200;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  tab-size: 4;
+  hyphens: none;
+}
+
+/* 行内代码样式 */
+:not(pre) > code {
+  @apply px-1.5 py-0.5 mx-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100;
+  font-size: 0.9em;
+}
+
+/* Prism.js 语法高亮主题 */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-gray-500;
+}
+
+.token.punctuation {
+  @apply text-gray-400;
+}
+
+.token.namespace {
+  @apply opacity-70;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  @apply text-red-400;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  @apply text-green-400;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  @apply text-yellow-400;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  @apply text-purple-400;
+}
+
+.token.function,
+.token.class-name {
+  @apply text-blue-400;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  @apply text-orange-400;
+}
+
+/* 代码行号 */
+.line-number::before {
+  @apply inline-block w-4 text-right mr-4 text-gray-500 dark:text-gray-400;
+  content: attr(line);
+}
+
+/* 代码块标题 */
+.code-title {
+  @apply px-4 py-2 font-mono text-sm text-gray-400 dark:text-gray-500 bg-gray-800 dark:bg-gray-900 border-b border-gray-700 dark:border-gray-800 rounded-t-lg;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 255, 255, 255;
+}
+
+[data-theme='dark'] {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+[cmdk-list] {
+  min-height: 300px;
+}
+
+[cmdk-item] {
+  content-visibility: auto;
+}
+
+[cmdk-item][data-selected='true'] {
+  background: rgb(var(--gray-100));
+}
+
+[cmdk-group-heading] {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: rgb(var(--gray-500));
+  user-select: none;
+}
+
+/* CMDK 样式 */
+[cmdk-overlay] {
+  @apply fixed inset-0 bg-black/50 backdrop-blur-sm;
+}
+
+[cmdk-dialog] {
+  @apply fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-2xl w-full bg-white dark:bg-gray-900 rounded-xl shadow-2xl;
+}
+
+[cmdk-input] {
+  @apply w-full h-12 px-4 bg-transparent outline-none text-gray-900 dark:text-gray-100 placeholder:text-gray-400;
+}
+
+[cmdk-list] {
+  @apply max-h-[60vh] overflow-y-auto overscroll-contain p-2;
+}
+
+[cmdk-item] {
+  @apply px-4 py-3 rounded-lg cursor-pointer;
+}
+
+[cmdk-item][data-selected="true"] {
+  @apply bg-gray-100 dark:bg-gray-800;
+}
+
+[cmdk-group-heading] {
+  @apply px-4 py-2 text-xs font-medium text-gray-500 uppercase;
+}
+
+/* KaTeX 数学公式样式 */
+.prose .katex-display {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 3em 0;
+  padding: 4em 3em;
+  background: var(--tw-prose-pre-bg);
+  border-radius: 0.5rem;
+  width: 100%;
+  min-width: 100%;
+}
+
+/* 日间模式下的文字颜色 */
+.prose .katex {
+  font-size: 1.3em;
+  color: #1a1a1a;  /* 更深的文字颜色 */
+}
+
+/* 日间模式下的分数线颜色 */
+.prose .katex .frac-line {
+  border-bottom-color: #1a1a1a;
+  border-bottom-width: 0.1em;
+}
+
+/* 日间模式下的背景色 */
+.prose .katex-display {
+  background-color: #f8f9fa;  /* 更浅的背景色，增加对比度 */
+}
+
+/* 深色模式的样式 */
+:root[class~="dark"] .prose .katex-display {
+  background-color: var(--tw-prose-pre-bg);
+}
+
+:root[class~="dark"] .prose .katex {
+  color: #e1e1e1;
+}
+
+:root[class~="dark"] .prose .katex .frac-line {
+  border-bottom-color: #e1e1e1;
+}
+
+/* 保持原有的字体大小 */
+.prose .katex {
+  font-size: 1.3em;
+}
+
+/* 加粗分数线 */
+.prose .katex .frac-line {
+  border-bottom-width: 0.12em;
+}
+
+/* 确保公式容器宽度足够 */
+.prose .katex-display > .katex {
+  display: block;
+  max-width: none;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* 调整分子分母的间距 */
+.prose .katex .mfrac {
+  margin: 0 0.4em;
+}
+
+/* 增加分子分母的间距 */
+.prose .katex .mfrac .frac-line {
+  margin: 0.15em 0;
+}
+
+/* 优化移动端显示 */
+@media (max-width: 768px) {
+  .prose .katex {
+    font-size: 1.5em;
+  }
+  
+  .prose .katex-display {
+    padding: 2em 1em;
+  }
+}

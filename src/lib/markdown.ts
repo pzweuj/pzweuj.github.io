@@ -135,4 +135,12 @@ export async function getPaginatedPosts(page: number = 1, limit: number = 5) {
       hasPrevPage: page > 1
     }
   }
+}
+
+// 假设每页显示 10 篇文章
+const POSTS_PER_PAGE = 10
+
+export async function getTotalPages() {
+  const posts = await getAllPosts()
+  return Math.ceil(posts.length / POSTS_PER_PAGE)
 } 

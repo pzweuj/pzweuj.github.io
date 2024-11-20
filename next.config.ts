@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'export',  // 添加这行
-  basePath: '/pzweuj.github.io',
+  output: 'export',  // 添加这行
   images: {
     unoptimized: true,
   },

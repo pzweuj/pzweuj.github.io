@@ -1,24 +1,18 @@
 import { getAllPosts } from '@/lib/markdown'
 import { NextResponse } from 'next/server'
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const query = searchParams.get('q')?.toLowerCase()
+export const dynamic = 'force-static'
+export const revalidate = false
 
-  if (!query) {
-    return NextResponse.json([])
-  }
-
+// 预生成包含所有文章的响应
+export async function GET() {
   const posts = await getAllPosts()
+  const searchData = posts.map(post => ({
+    title: post.title,
+    excerpt: post.excerpt,
+    slug: post.slug,
+    date: post.date
+  }))
   
-  const results = posts
-    .filter(post => post.title.toLowerCase().includes(query))
-    .map(post => ({
-      title: post.title,
-      excerpt: post.excerpt,
-      slug: post.slug,
-      date: post.date
-    }))
-
-  return NextResponse.json(results)
+  return NextResponse.json(searchData)
 } 

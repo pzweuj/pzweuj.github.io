@@ -1,14 +1,9 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  output: 'export',
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: 'export',  // 添加这行
   basePath: '/pzweuj.github.io',
   images: {
     unoptimized: true,
-  },
-  devIndicators: {
-    buildActivity: true,
-    buildActivityPosition: 'bottom-right',
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -16,6 +11,6 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-};
+}
 
-export default nextConfig;
+module.exports = nextConfig

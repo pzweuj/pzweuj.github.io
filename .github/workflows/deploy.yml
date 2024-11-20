@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]  # 设置要触发部署的分支
+    branches: [master]  # 设置要触发部署的分支
 
 jobs:
   build-and-deploy:

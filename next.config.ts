@@ -5,7 +5,12 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   images: {
     unoptimized: true, // 静态导出需要
-  }
+  },
+  experimental: {
+    turbotrace: {
+      enabled: true,
+    },
+  },
 }
 
 export default nextConfig 

@@ -1,40 +1,35 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import MarkdownIt from 'markdown-it'
-import Prism from 'prismjs'
-import katex from 'markdown-it-katex'
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkMath from 'remark-math'
+import remarkRehype from 'remark-rehype'
+import rehypeKatex from 'rehype-katex'
+import rehypeStringify from 'rehype-stringify'
+import rehypePrism from 'rehype-prism-plus'
 
-// 加载更多语言支持
-import 'prismjs/components/prism-typescript'
-import 'prismjs/components/prism-javascript'
-import 'prismjs/components/prism-jsx'
-import 'prismjs/components/prism-tsx'
-import 'prismjs/components/prism-bash'
-import 'prismjs/components/prism-json'
-import 'prismjs/components/prism-markdown'
-import 'prismjs/components/prism-css'
-import 'prismjs/components/prism-python'
-import 'prismjs/components/prism-r'
-import 'prismjs/components/prism-perl'
+// 创建统一的 markdown 处理器
+const processor = unified()
+  .use(remarkParse)
+  .use(remarkMath)
+  .use(remarkRehype)
+  .use(rehypePrism, {
+    showLineNumbers: true,
+    ignoreMissing: true,
+  })
+  .use(rehypeKatex, {
+    strict: false
+  })
+  .use(rehypeStringify)
 
-const md = new MarkdownIt({
-  html: true,
-  breaks: true,
-  linkify: true,
-  typographer: true,
-  highlight: (str, lang) => {
-    if (lang && Prism.languages[lang]) {
-      try {
-        return `<pre class="language-${lang}"><code>${Prism.highlight(str, Prism.languages[lang], lang)}</code></pre>`
-      } catch (err) {
-        console.error(err)
-      }
-    }
-    return `<pre class="language-${lang}"><code>${md.utils.escapeHtml(str)}</code></pre>`
-  }
-}).use(katex)  // 启用 KaTeX 支持
+// 异步渲染 markdown
+async function renderMarkdown(content: string): Promise<string> {
+  const result = await processor.process(content)
+  return result.toString()
+}
 
+// 接口定义保持不变
 export interface BlogPost {
   slug: string
   title: string
@@ -91,13 +86,14 @@ function parseTags(tags: unknown): string[] {
   return []
 }
 
-export function getAllPosts(): BlogPost[] {
+// 修改为异步函数
+export async function getAllPosts(): Promise<BlogPost[]> {
   const postsDirectory = path.join(process.cwd(), 'content/posts')
   const fileNames = fs.readdirSync(postsDirectory)
   
-  const posts = fileNames
+  const posts = await Promise.all(fileNames
     .filter(fileName => fileName.endsWith('.md'))
-    .map(fileName => {
+    .map(async fileName => {
       const { date, slug } = parseFileName(fileName)
       const fullPath = path.join(postsDirectory, fileName)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
@@ -109,14 +105,14 @@ export function getAllPosts(): BlogPost[] {
         date,
         tags: parseTags(data.tags),
         excerpt: generateExcerpt(content),
-        content: md.render(content)
+        content: await renderMarkdown(content)
       }
-    })
+    }))
 
   return posts.sort((a, b) => b.date.localeCompare(a.date))
 }
 
-// 添加分页结果的接口定义
+// 分页相关接口定义保持不变
 export interface PaginationInfo {
   currentPage: number
   totalPages: number
@@ -129,9 +125,9 @@ export interface PaginatedPosts {
   pagination: PaginationInfo
 }
 
-// 添加返回类型
-export function getPaginatedPosts(page: number = 1, limit: number = 5): PaginatedPosts {
-  const posts = getAllPosts()
+// 修改为异步函数
+export async function getPaginatedPosts(page: number = 1, limit: number = 5): Promise<PaginatedPosts> {
+  const posts = await getAllPosts()
   const startIndex = (page - 1) * limit
   const endIndex = startIndex + limit
   const totalPages = Math.ceil(posts.length / limit)

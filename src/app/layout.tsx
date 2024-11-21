@@ -3,7 +3,6 @@ import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import './globals.css'
-import 'prismjs/themes/prism-tomorrow.css'
 import 'katex/dist/katex.min.css'
 
 const inter = Inter({ subsets: ['latin'] })

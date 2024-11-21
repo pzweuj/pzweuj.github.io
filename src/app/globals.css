@@ -243,3 +243,80 @@ body {
     padding: 2em 1em;
   }
 }
+
+/* Prism 代码高亮主题 */
+pre[class*="language-"] {
+  @apply bg-gray-800 dark:bg-gray-900;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  @apply text-gray-100;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-gray-500;
+}
+
+.token.punctuation {
+  @apply text-gray-400;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+  @apply text-blue-400;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin {
+  @apply text-green-400;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  @apply text-yellow-400;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  @apply text-purple-400;
+}
+
+.token.function,
+.token.class-name {
+  @apply text-pink-400;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  @apply text-orange-400;
+}
+
+/* 行号样式 */
+.line-number::before {
+  @apply text-gray-500 mr-4;
+}
+
+/* 代码块容器 */
+.rehype-code-title {
+  @apply bg-gray-800 dark:bg-gray-900 text-gray-200 px-4 py-2 rounded-t-lg font-mono text-sm;
+}
+
+pre[class*="language-"] {
+  @apply mt-0 rounded-t-none;
+}

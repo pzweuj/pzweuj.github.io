@@ -1,38 +1,41 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import MarkdownIt from 'markdown-it'
-import Prism from 'prismjs'
-import katex from 'markdown-it-katex'
+import { unified } from 'unified'
+import remarkParse from 'remark-parse'
+import remarkMath from 'remark-math'
+import remarkRehype from 'remark-rehype'
+import rehypeKatex from 'rehype-katex'
+import rehypeStringify from 'rehype-stringify'
+import rehypePrism from 'rehype-prism-plus'
 
-// 加载更多语言支持
-import 'prismjs/components/prism-typescript'
-import 'prismjs/components/prism-javascript'
-import 'prismjs/components/prism-jsx'
-import 'prismjs/components/prism-tsx'
-import 'prismjs/components/prism-bash'
-import 'prismjs/components/prism-json'
-import 'prismjs/components/prism-markdown'
-import 'prismjs/components/prism-css'
-import 'prismjs/components/prism-python'  // Python 支持
-import 'prismjs/components/prism-r'       // R 语言支持
-import 'prismjs/components/prism-perl'    // Perl 支持
-
-const md = new MarkdownIt({
-  html: true,
-  linkify: true,
-  typographer: true,
-  highlight: (str, lang) => {
-    if (lang && Prism.languages[lang]) {
-      try {
-        return `<pre class="language-${lang}"><code>${Prism.highlight(str, Prism.languages[lang], lang)}</code></pre>`
-      } catch (err) {
-        console.error(err)
-      }
+// 创建统一的 markdown 处理器
+const processor = unified()
+  .use(remarkParse)
+  .use(remarkMath)
+  .use(remarkRehype)
+  .use(rehypePrism, {
+    showLineNumbers: true,
+    ignoreMissing: true,
+    // 添加语言支持
+    aliases: {
+      typescript: ['ts'],
+      javascript: ['js'],
+      python: ['py'],
+      r: ['R'],
+      perl: ['pl']
     }
-    return `<pre class="language-${lang}"><code>${md.utils.escapeHtml(str)}</code></pre>`
-  }
-}).use(katex)  // 启用 KaTeX 支持
+  })
+  .use(rehypeKatex, {
+    strict: false
+  })
+  .use(rehypeStringify)
+
+// 异步渲染 markdown
+async function renderMarkdown(content: string): Promise<string> {
+  const result = await processor.process(content)
+  return result.toString()
+}
 
 export interface ProjectDoc {
   slug: string
@@ -55,7 +58,7 @@ function extractH1Title(content: string): string | null {
   return match ? match[1].trim() : null
 }
 
-export function getProjectDocs(): ProjectChapter[] {
+export async function getProjectDocs(): Promise<ProjectChapter[]> {
   const projectPath = path.join(process.cwd(), 'content/project')
   const chapters: ProjectChapter[] = []
   
@@ -82,15 +85,13 @@ export function getProjectDocs(): ProjectChapter[] {
       const content = fs.readFileSync(docPath, 'utf-8')
       const { data, content: markdown } = matter(content)
       
-      // 优先使用 h1 标题，如果没有则使用文件名
       const h1Title = extractH1Title(markdown)
-      // 移除 markdown 中的 h1 标题
       const contentWithoutTitle = markdown.replace(/^#\s+(.+)$/m, '')
       
       docs.push({
         slug: `${dir}/${file.replace('.md', '')}`,
         title: h1Title || data.title || file.replace('.md', '').split('_')[1] || file.replace('.md', ''),
-        content: md.render(contentWithoutTitle), // 使用去除标题后的内容
+        content: await renderMarkdown(contentWithoutTitle),
         chapter: dir,
         order: parseInt(file.split('_')[0])
       })
@@ -112,13 +113,13 @@ export function getProjectDocs(): ProjectChapter[] {
 }
 
 // 获取首页内容
-export function getProjectIndex() {
+export async function getProjectIndex() {
   const indexPath = path.join(process.cwd(), 'content/project/index.md')
   const content = fs.readFileSync(indexPath, 'utf-8')
   const { data, content: markdown } = matter(content)
   
   return {
     title: data.title || '实践项目',
-    content: md.render(markdown)
+    content: await renderMarkdown(markdown)
   }
 } 

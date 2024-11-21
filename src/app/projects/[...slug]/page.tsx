@@ -9,8 +9,8 @@ interface Props {
   }
 }
 
-export default function ProjectDocPage({ params }: Props) {
-  const chapters = getProjectDocs()
+export default async function ProjectDocPage({ params }: Props) {
+  const chapters = await getProjectDocs()
   const slug = params.slug.join('/')
   
   // 查找当前文档
@@ -36,8 +36,8 @@ export default function ProjectDocPage({ params }: Props) {
   )
 }
 
-export function generateStaticParams() {
-  const chapters = getProjectDocs()
+export async function generateStaticParams() {
+  const chapters = await getProjectDocs()
   return chapters.flatMap(chapter => 
     chapter.docs.map(doc => ({
       slug: doc.slug.split('/')
@@ -45,8 +45,8 @@ export function generateStaticParams() {
   )
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const chapters = getProjectDocs()
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const chapters = await getProjectDocs()
   const slug = params.slug.join('/')
   
   const doc = chapters

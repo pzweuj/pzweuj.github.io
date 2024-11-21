@@ -7,9 +7,7 @@ const nextConfig: NextConfig = {
     unoptimized: true, // 静态导出需要
   },
   experimental: {
-    turbotrace: {
-      enabled: true,
-    },
+    outputFileTracing: true,
   },
 }
 

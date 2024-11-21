@@ -2,23 +2,25 @@ import { getPaginatedPosts } from '@/lib/markdown'
 import { PostCard, Pagination } from '@/components/blog/PostList'
 import { notFound } from 'next/navigation'
 
-type PageParams = {
+// 定义类型
+type PageProps = {
   params: {
     page: string
   }
 }
 
-export default function BlogPage({ params }: PageParams) {
-  const page = parseInt(params.page)
+// 页面组件
+export default function BlogPage({ params }: PageProps) {
+  const page = parseInt(params.page) // 将参数转为数字
   
   if (isNaN(page) || page < 1) {
-    notFound()
+    notFound() // 无效页码返回 404
   }
 
-  const { posts, pagination } = getPaginatedPosts(page)
+  const { posts, pagination } = getPaginatedPosts(page) // 获取分页数据
   
   if (posts.length === 0) {
-    notFound()
+    notFound() // 无文章内容返回 404
   }
 
   return (
@@ -35,13 +37,14 @@ export default function BlogPage({ params }: PageParams) {
   )
 }
 
+// 生成静态路径
 export function generateStaticParams() {
-  const { pagination } = getPaginatedPosts(1)
+  const { pagination } = getPaginatedPosts(1) // 获取总页数
   const paths = []
-  
+
   for (let i = 2; i <= pagination.totalPages; i++) {
-    paths.push({ page: i.toString() })
+    paths.push({ params: { page: i.toString() } }) // 包装为 params 格式
   }
-  
+
   return paths
-} 
+}

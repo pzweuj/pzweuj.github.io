@@ -1,18 +1,9 @@
-import { getPaginatedPosts, getTotalPages } from '@/lib/markdown'
+import { getPaginatedPosts } from '@/lib/markdown'
 import { PostCard, Pagination } from '@/components/blog/PostList'
 import { notFound } from 'next/navigation'
 
-// 添加 generateStaticParams 函数
-export async function generateStaticParams() {
-  const totalPages = await getTotalPages() // 假设这个函数返回总页数
-  
-  return Array.from({ length: totalPages }, (_, i) => ({
-    page: String(i + 1) // 将页码转换为字符串
-  }))
-}
-
 export default async function BlogPage({ params }: { params: { page: string } }) {
-  const { page: pageParam } = params
+  const { page: pageParam } = await params
   const page = parseInt(pageParam)
   
   if (isNaN(page) || page < 1) {

@@ -1,4 +1,4 @@
-import fs from 'fs/promises'
+import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 import MarkdownIt from 'markdown-it'
@@ -55,17 +55,17 @@ function extractH1Title(content: string): string | null {
   return match ? match[1].trim() : null
 }
 
-export async function getProjectDocs() {
+export function getProjectDocs(): ProjectChapter[] {
   const projectPath = path.join(process.cwd(), 'content/project')
   const chapters: ProjectChapter[] = []
   
-  const dirs = await fs.readdir(projectPath)
+  const dirs = fs.readdirSync(projectPath)
   
   for (const dir of dirs) {
     if (!dir.match(/^C\d+_/)) continue
     
     const chapterPath = path.join(projectPath, dir)
-    const stat = await fs.stat(chapterPath)
+    const stat = fs.statSync(chapterPath)
     
     if (!stat.isDirectory()) continue
     
@@ -73,13 +73,13 @@ export async function getProjectDocs() {
     const chapterTitle = dir.split('_')[1]
     
     const docs: ProjectDoc[] = []
-    const files = await fs.readdir(chapterPath)
+    const files = fs.readdirSync(chapterPath)
     
     for (const file of files) {
       if (!file.endsWith('.md')) continue
       
       const docPath = path.join(chapterPath, file)
-      const content = await fs.readFile(docPath, 'utf-8')
+      const content = fs.readFileSync(docPath, 'utf-8')
       const { data, content: markdown } = matter(content)
       
       // 优先使用 h1 标题，如果没有则使用文件名
@@ -112,9 +112,9 @@ export async function getProjectDocs() {
 }
 
 // 获取首页内容
-export async function getProjectIndex() {
+export function getProjectIndex() {
   const indexPath = path.join(process.cwd(), 'content/project/index.md')
-  const content = await fs.readFile(indexPath, 'utf-8')
+  const content = fs.readFileSync(indexPath, 'utf-8')
   const { data, content: markdown } = matter(content)
   
   return {

@@ -1,15 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: 'export',  // 添加这行
+import type { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
+  output: "export",  // 启用静态导出
+  reactStrictMode: true,
   images: {
-    unoptimized: true,
-  },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    ignoreBuildErrors: true,
-  },
+    unoptimized: true, // 静态导出需要
+  }
 }
 
-module.exports = nextConfig
+export default nextConfig 

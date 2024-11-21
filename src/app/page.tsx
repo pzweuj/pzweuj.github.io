@@ -1,3 +1,5 @@
+import { redirect } from 'next/navigation'
+
 import { getPaginatedPosts } from '@/lib/markdown'
 import { PostCard, Pagination } from '@/components/blog/PostList'
 

@@ -1,6 +1,7 @@
 import { getProjectDocs } from '@/lib/projects'
 import { ProjectSidebar } from '@/components/projects/ProjectSidebar'
 import { notFound } from 'next/navigation'
+import { Metadata } from 'next'
 
 interface Props {
   params: {
@@ -8,8 +9,8 @@ interface Props {
   }
 }
 
-export default async function ProjectDocPage({ params }: Props) {
-  const chapters = await getProjectDocs()
+export default function ProjectDocPage({ params }: Props) {
+  const chapters = getProjectDocs()
   const slug = params.slug.join('/')
   
   // 查找当前文档
@@ -33,4 +34,34 @@ export default async function ProjectDocPage({ params }: Props) {
       </main>
     </div>
   )
+}
+
+export function generateStaticParams() {
+  const chapters = getProjectDocs()
+  return chapters.flatMap(chapter => 
+    chapter.docs.map(doc => ({
+      slug: doc.slug.split('/')
+    }))
+  )
+}
+
+export function generateMetadata({ params }: Props): Metadata {
+  const chapters = getProjectDocs()
+  const slug = params.slug.join('/')
+  
+  const doc = chapters
+    .flatMap(chapter => chapter.docs)
+    .find(doc => doc.slug === slug)
+  
+  if (!doc) {
+    return {
+      title: '文档未找到',
+      description: '请求的项目文档不存在'
+    }
+  }
+
+  return {
+    title: doc.title,
+    description: `${doc.title} - 项目文档`
+  }
 } 

@@ -59,4 +59,12 @@ export default async function PostPage({ params }: Props) {
       />
     </article>
   )
+}
+
+// 添加 generateStaticParams 函数来生成所有可能的文章路径
+export function generateStaticParams() {
+  const posts = getAllPosts()
+  return posts.map((post) => ({
+    slug: post.slug
+  }))
 } 

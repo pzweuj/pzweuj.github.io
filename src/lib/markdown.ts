@@ -116,7 +116,21 @@ export function getAllPosts(): BlogPost[] {
   return posts.sort((a, b) => b.date.localeCompare(a.date))
 }
 
-export function getPaginatedPosts(page: number = 1, limit: number = 5) {
+// 添加分页结果的接口定义
+export interface PaginationInfo {
+  currentPage: number
+  totalPages: number
+  hasNextPage: boolean
+  hasPrevPage: boolean
+}
+
+export interface PaginatedPosts {
+  posts: BlogPost[]
+  pagination: PaginationInfo
+}
+
+// 添加返回类型
+export function getPaginatedPosts(page: number = 1, limit: number = 5): PaginatedPosts {
   const posts = getAllPosts()
   const startIndex = (page - 1) * limit
   const endIndex = startIndex + limit

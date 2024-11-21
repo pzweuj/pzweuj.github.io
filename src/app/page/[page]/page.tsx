@@ -2,7 +2,13 @@ import { getPaginatedPosts } from '@/lib/markdown'
 import { PostCard, Pagination } from '@/components/blog/PostList'
 import { notFound } from 'next/navigation'
 
-export default function BlogPage({ params }: { params: { page: string } }) {
+type PageParams = {
+  params: {
+    page: string
+  }
+}
+
+export default function BlogPage({ params }: PageParams) {
   const page = parseInt(params.page)
   
   if (isNaN(page) || page < 1) {

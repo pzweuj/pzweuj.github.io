@@ -1,24 +1,9 @@
-import { getAllPosts } from '@/lib/markdown'
+import { generateSearchIndex } from '@/lib/search'
 import { NextResponse } from 'next/server'
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const query = searchParams.get('q')?.toLowerCase()
+export const dynamic = 'force-static'
 
-  if (!query) {
-    return NextResponse.json([])
-  }
-
-  const posts = await getAllPosts()
-  
-  const results = posts
-    .filter(post => post.title.toLowerCase().includes(query))
-    .map(post => ({
-      title: post.title,
-      excerpt: post.excerpt,
-      slug: post.slug,
-      date: post.date
-    }))
-
-  return NextResponse.json(results)
-} 
+export async function GET() {
+  const searchIndex = await generateSearchIndex()
+  return NextResponse.json(searchIndex)
+}

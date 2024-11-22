@@ -4,22 +4,48 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { SearchIcon } from './Icons'
 import { Command } from 'cmdk'
-
-interface SearchResult {
-  id: string
-  title: string
-  excerpt: string
-  slug: string
-  date: string
-  matchType: 'title' | 'content'
-}
+import type { SearchResult } from '@/lib/search'
 
 export default function SearchDialog() {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
+  const [searchIndex, setSearchIndex] = useState<SearchResult[]>([])
   const [results, setResults] = useState<SearchResult[]>([])
   const router = useRouter()
 
+  // 加载搜索索引
+  useEffect(() => {
+    fetch('/api/search')
+      .then(res => res.json())
+      .then(data => setSearchIndex(data))
+      .catch(error => console.error('Failed to load search index:', error))
+  }, [])
+
+  // 本地搜索处理
+  useEffect(() => {
+    if (!query.trim()) {
+      setResults([])
+      return
+    }
+
+    const searchQuery = query.toLowerCase()
+    const filtered = searchIndex.filter(item => 
+      item.title.toLowerCase().includes(searchQuery) ||
+      item.excerpt.toLowerCase().includes(searchQuery)
+    )
+
+    const articleMap = new Map()
+    filtered.forEach((item: SearchResult) => {
+      const existing = articleMap.get(item.slug)
+      if (!existing || (item.matchType === 'title' && existing.matchType === 'content')) {
+        articleMap.set(item.slug, item)
+      }
+    })
+
+    setResults(Array.from(articleMap.values()))
+  }, [query, searchIndex])
+
+  // 键盘快捷键处理
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
@@ -31,41 +57,6 @@ export default function SearchDialog() {
     document.addEventListener('keydown', down)
     return () => document.removeEventListener('keydown', down)
   }, [])
-
-  const handleSearch = async (search: string) => {
-    if (!search) {
-      setResults([])
-      return
-    }
-
-    try {
-      const response = await fetch(`/api/search?q=${encodeURIComponent(search)}`)
-      const data = await response.json()
-      
-      const articleMap = new Map()
-      
-      data.forEach((item: SearchResult) => {
-        const existing = articleMap.get(item.slug)
-        if (!existing || (item.matchType === 'title' && existing.matchType === 'content')) {
-          articleMap.set(item.slug, item)
-        }
-      })
-
-      const uniqueResults = Array.from(articleMap.values())
-      setResults(uniqueResults)
-    } catch (error) {
-      console.error('搜索失败:', error)
-      setResults([])
-    }
-  }
-
-  useEffect(() => {
-    const debounceTimeout = setTimeout(() => {
-      handleSearch(query)
-    }, 300)
-
-    return () => clearTimeout(debounceTimeout)
-  }, [query])
 
   return (
     <>

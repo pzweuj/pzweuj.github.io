@@ -19,10 +19,9 @@ const processor = unified()
   .use(remarkRehype, {
     allowDangerousHtml: true
   })
-  .use(rehypePrism as any, {
+  .use(rehypePrism, {
     showLineNumbers: true,
     ignoreMissing: true,
-    // 添加语言支持
     aliases: {
       typescript: ['ts'],
       javascript: ['js'],

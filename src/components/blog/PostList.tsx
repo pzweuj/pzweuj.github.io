@@ -76,13 +76,16 @@ export function Pagination({
 
   return (
     <nav className="flex items-center justify-between border-t border-gray-200 dark:border-gray-800 px-4 sm:px-0 mt-6 py-3">
-      <div className="flex flex-1 justify-center gap-2">
+      <div className="flex flex-1 justify-center gap-1 sm:gap-2">
         {hasPrevPage && (
           <Link
             href={currentPage === 2 ? '/' : `/page/${currentPage - 1}`}
-            className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            className="relative inline-flex items-center px-2 sm:px-3 py-1 sm:py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            aria-label="上一页"
           >
-            上一页
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
           </Link>
         )}
 
@@ -90,7 +93,7 @@ export function Pagination({
           <Link
             key={pageNum}
             href={pageNum === 1 ? '/' : `/page/${pageNum}`}
-            className={`relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md ${
+            className={`relative inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 text-sm font-medium rounded-md ${
               pageNum === currentPage
                 ? 'bg-blue-500 text-white border border-blue-500'
                 : 'text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700'
@@ -103,13 +106,16 @@ export function Pagination({
         {hasNextPage && (
           <Link
             href={`/page/${currentPage + 1}`}
-            className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            className="relative inline-flex items-center px-2 sm:px-3 py-1 sm:py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            aria-label="下一页"
           >
-            下一页
+            <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </Link>
         )}
 
-        <span className="relative inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300">
+        <span className="relative inline-flex items-center px-2 sm:px-4 py-1 sm:py-2 text-sm font-medium text-gray-700 dark:text-gray-300">
           {currentPage} / {totalPages} 页
         </span>
       </div>

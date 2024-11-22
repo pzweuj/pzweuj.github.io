@@ -41,11 +41,9 @@ export default async function BlogPage({ params }: PageProps) {
 // 生成静态路径
 export async function generateStaticParams() {  // 添加 async
   const { pagination } = await getPaginatedPosts(1) // 添加 await
-  const paths = []
-
-  for (let i = 2; i <= pagination.totalPages; i++) {
-    paths.push({ params: { page: i.toString() } }) // 包装为 params 格式
-  }
-
-  return paths
+  
+  // 生成所有可能的页码参数
+  return Array.from({ length: pagination.totalPages }, (_, i) => ({
+    page: (i + 1).toString()
+  }))
 }

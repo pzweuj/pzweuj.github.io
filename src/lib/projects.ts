@@ -8,13 +8,18 @@ import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
 import rehypeStringify from 'rehype-stringify'
 import rehypePrism from 'rehype-prism-plus'
+import rehypeImgSize from 'rehype-img-size'
+import remarkGfm from 'remark-gfm'
 
 // 创建统一的 markdown 处理器
 const processor = unified()
   .use(remarkParse)
   .use(remarkMath)
-  .use(remarkRehype)
-  .use(rehypePrism, {
+  .use(remarkGfm)
+  .use(remarkRehype, {
+    allowDangerousHtml: true
+  })
+  .use(rehypePrism as any, {
     showLineNumbers: true,
     ignoreMissing: true,
     // 添加语言支持
@@ -26,10 +31,15 @@ const processor = unified()
       perl: ['pl']
     }
   })
+  .use(rehypeImgSize, {
+    dir: path.join(process.cwd(), 'public')
+  })
   .use(rehypeKatex, {
     strict: false
   })
-  .use(rehypeStringify)
+  .use(rehypeStringify, {
+    allowDangerousHtml: true
+  })
 
 // 异步渲染 markdown
 async function renderMarkdown(content: string): Promise<string> {

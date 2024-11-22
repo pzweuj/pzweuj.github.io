@@ -320,3 +320,30 @@ pre[class*="language-"] {
 pre[class*="language-"] {
   @apply mt-0 rounded-t-none;
 }
+
+/* QQ音乐播放器样式 */
+.qq-music-player {
+  @apply my-6 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 shadow-md;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.qq-music-player iframe {
+  @apply w-full border-0 m-0;
+  height: 86px;
+}
+
+/* 移动端适配 */
+@media (max-width: 640px) {
+  .qq-music-player {
+    @apply my-4 mx-0;
+    width: 100%;
+  }
+}
+
+/* 确保播放器在深色模式下有更好的视觉效果 */
+[data-theme='dark'] .qq-music-player {
+  @apply border border-gray-700;
+}

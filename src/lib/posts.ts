@@ -1,9 +1,12 @@
-import { BlogPost, getAllPosts } from './markdown'
+import { getAllPosts, BlogPost } from '@/lib/markdown'
 
-// 按年份组织文章
-export function getPostsByYear() {
-  const posts = getAllPosts()
-  const postsByYear: { [key: string]: BlogPost[] } = {}
+export interface PostsByYear {
+  [key: string]: BlogPost[]
+}
+
+export async function getPostsByYear(): Promise<PostsByYear> {
+  const posts = await getAllPosts()
+  const postsByYear: PostsByYear = {}
 
   posts.forEach(post => {
     const year = post.date.substring(0, 4)
@@ -13,29 +16,24 @@ export function getPostsByYear() {
     postsByYear[year].push(post)
   })
 
-  // 返回按年份排序的对象
-  return Object.entries(postsByYear)
-    .sort(([yearA], [yearB]) => yearB.localeCompare(yearA))
-    .reduce((acc, [year, posts]) => {
-      acc[year] = posts
-      return acc
-    }, {} as { [key: string]: BlogPost[] })
-}
-
-// 获取所有标签
-export function getAllTags() {
-  const posts = getAllPosts()
-  const tags = new Set<string>()
-  
-  posts.forEach(post => {
-    post.tags.forEach(tag => tags.add(tag))
+  // 对每年的文章按日期排序
+  Object.keys(postsByYear).forEach(year => {
+    postsByYear[year].sort((a, b) => b.date.localeCompare(a.date))
   })
 
-  return Array.from(tags).sort()
+  return postsByYear
 }
 
-// 按标签筛选文章
-export function getPostsByTag(tag: string) {
-  const posts = getAllPosts()
-  return posts.filter(post => post.tags.includes(tag))
-} 
+// 如果有其他函数也需要处理异步数据，同样添加 async/await
+export async function getPostTags(): Promise<string[]> {
+  const posts = await getAllPosts()
+  const tagSet = new Set<string>()
+  
+  posts.forEach(post => {
+    post.tags.forEach(tag => tagSet.add(tag))
+  })
+
+  return Array.from(tagSet).sort()
+}
+
+// 其他相关函数也需要类似处理... 

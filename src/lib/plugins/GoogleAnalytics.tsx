@@ -14,10 +14,12 @@ declare global {
         page_path?: string
         page_location?: string
         page_title?: string
-        [key: string]: any
+        [key: string]: string | number | boolean | null | undefined
       }
     ) => void
-    dataLayer: any[]
+    dataLayer: Array<{
+      [key: string]: string | number | boolean | null | undefined
+    }>
   }
 }
 

@@ -1,4 +1,5 @@
 import { GithubIcon } from '../ui/Icons'
+import selfConfig from '@/config/self.config'
 
 // 添加 EmailIcon 组件
 const EmailIcon = () => (
@@ -26,7 +27,7 @@ export default function Footer() {
           {/* 社交链接 */}
           <div className="flex space-x-6">
             <a
-              href="https://github.com/pzweuj"
+              href={selfConfig.social.github}
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
@@ -35,7 +36,7 @@ export default function Footer() {
               <GithubIcon />
             </a>
             <a
-              href="mailto:pzweuj@live.com"
+              href={`mailto:${selfConfig.social.email}`}
               className="text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
               aria-label="Email"
             >
@@ -45,7 +46,7 @@ export default function Footer() {
 
           {/* 版权信息 */}
           <div className="text-center text-sm text-gray-600 dark:text-gray-400">
-            <p>© {new Date().getFullYear()} pzweuj. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} {selfConfig.author}. All rights reserved.</p>
             <p className="mt-1">
               Built with{' '}
               <a 

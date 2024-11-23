@@ -10,10 +10,12 @@ import rehypeStringify from 'rehype-stringify'
 import rehypePrism from 'rehype-prism-plus'
 import rehypeImgSize from 'rehype-img-size'
 import remarkGfm from 'remark-gfm'
+import { remarkQQMusic } from './plugins/remarkQQMusic'
 
 // 创建统一的 markdown 处理器
 const processor = unified()
   .use(remarkParse)
+  .use(remarkQQMusic)
   .use(remarkMath)
   .use(remarkGfm)
   .use(remarkRehype, {

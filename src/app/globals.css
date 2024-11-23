@@ -320,3 +320,19 @@ pre[class*="language-"] {
 pre[class*="language-"] {
   @apply mt-0 rounded-t-none;
 }
+
+/* QQ音乐播放器样式 */
+.qq-music-player {
+  @apply my-6 rounded-lg overflow-hidden bg-gray-50 dark:bg-gray-800 shadow-md;
+}
+
+.qq-music-player iframe {
+  @apply w-full h-[86px] border-0 m-0;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .qq-music-player {
+    @apply mx-0;
+  }
+}

@@ -2,8 +2,6 @@
 
 开始的时候，其实是想着，从原始的博客里把流程相关的提取出来，这里的宗旨，就是不像博客那些碎碎念。慢慢添砖加瓦。
 
-[点击返回博客](https://pzweuj.github.io)
-
 ![gugu](https://github.com/pzweuj/pzweuj.github.io/raw/master/content/data/images/gugu.jpg)
 
 ## 期望更新
@@ -15,6 +13,8 @@ ChIP-seq分析流程
 scRNA-seq分析流程
 
 ## 目前进度
+2024/11/25 预期更新遗传线全外显子分析；肿瘤泛癌种分析
+
 2021/03/22 mNGS第一个版本完成
 
 2021/03/16 开始搞一搞mNGS

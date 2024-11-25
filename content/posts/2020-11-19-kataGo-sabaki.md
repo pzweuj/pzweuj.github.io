@@ -30,13 +30,13 @@ katago.exe genconfig -model model\g170-b40c256x2-s5095420928-d1229425124.bin.gz 
 然后需要回答几个问题，分别是用什么规则，这里选择chinese，即中国规则。然后是时间规则，n就好了。之后是是否允许KataGo在对手读秒时进行计算，默认是否，那么我们也选n就好了。然后是选择使用运算的设备，一般是选分数最大的，因为我只有一块GPU，所以直接选0了。之后是设置内存，KataGo最大会用3GB，那直接给好了。后面的问题是和GPU相关的，都默认直接回车确定就好了。
 
 
-![1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/katago-1.jpg)
+![1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/katago-1.jpg)
 
 
 ## Sabaki配置
 语言可以在File-Preferences下修改为中文。然后选择引擎-显示引擎侧边栏。点击左边播放符号-管理引擎-新增，按下图方式配置好。
 
-![2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/katago-2.jpg)
+![2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/katago-2.jpg)
 
 ```
 gtp -model model\g170-b40c256x2-s5095420928-d1229425124.bin.gz -config gtp_g170_b40.cfg
@@ -45,7 +45,7 @@ gtp -model model\g170-b40c256x2-s5095420928-d1229425124.bin.gz -config gtp_g170_
 点击新增完成保存。
 
 在引擎处选择新增的kataGo引擎，右键选择设为分析器，就可以使用了。
-![3](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/katago-3.jpg)
+![3](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/katago-3.jpg)
 
 
 ## 其他

@@ -13,13 +13,13 @@ panel检测和外显子、全基因检测相比，有耗时短，价格便宜，
 首先，我们要用到的数据库是[OMIM](https://www.omim.org/)，人类孟德尔遗传数据库。搜索癫痫，得到结果。
 当然，单纯的epilepsy是不足以覆盖到所有癫痫基因的，我建议更准确的方法是找到所有癫痫的相关疾病。
 
-![epilepsy](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/epilepsy.PNG)
+![epilepsy](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/epilepsy.PNG)
 
 点击download as下载相关文件。下载下来的文件里，需要的是‘Phenotype MIM number’。可以把这些数字单独弄成一个文件。
 
 比如说，我有[607093](https://www.omim.org/allelicVariant/607093)这个OMIM ID。就可以凭ID找到相关的页面。
 还可以找到相关致病位点（Clinvar中提示为致病的位点）。
-![607093](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/607093.PNG)
+![607093](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/607093.PNG)
 
 一开始，其实我是想用request.get()来把这个页面的源代码爬下来然后再用BeautifulSoup分析的。
 

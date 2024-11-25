@@ -11,7 +11,7 @@ tags: coding
 
 
 
-![rare_c1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/rare_c1.jpg)
+![rare_c1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/rare_c1.jpg)
 
 首先使用python将这个表格处理成用来作图的矩阵
 ```python
@@ -56,7 +56,7 @@ ob.close()
 
 
 
-![rare_c2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/rare_c2.jpg)
+![rare_c2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/rare_c2.jpg)
 
 
 
@@ -79,7 +79,7 @@ ggplot(num,aes(x=OTU_Num, y=OB, colour=Samples)) + geom_line() +
 
 
 
-![rare_c2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/rare_c3.jpeg)
+![rare_c2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/rare_c3.jpeg)
 
 
 

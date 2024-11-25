@@ -28,19 +28,19 @@ pip install python-docx
 需要插入表格，首先需要在模板中定义一个列数一致的表格，并且将tag放置在需要填充的第一行第一列（不包含标题），当然，如果第一列是固定的字段，也可以将tag放置在第一行第二列中（类推）。填充时，格式会按照tag所在行的格式进行填充。表格的tag仅支持#[TABLE-xxxx]#的格式。
 
 例1：
-![ww1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/wordw_1.jpg)
+![ww1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/wordw_1.jpg)
 
 上面的表格中，tag定义为#[TABLE-1]#，后续填充则会从该行开始，以后每一行的格式都会参照tag所在行的格式。表格并不需要设置很多行，只需要设置格式行（标题行除外）即可，程序会自动根据插入的行数来补充表格行数。另外，如果需要每行背景色不一样，目前的建议是在模板中创建一个超行数的表格，并且在模板中调整奇偶行的背景色。程序会在填充后自动删除空白行。
 
 例2：
-![ww2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/wordw_2.jpg)
+![ww2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/wordw_2.jpg)
 
 如上图，只填充后面四列。
 
 #### 单独单元格文字的插入
 表格中文字的替换与表格的插入不同，固定的tag仅支持#[TBS-xxxx]#的样式。
 例3：
-![ww3](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/wordw_3.jpg)
+![ww3](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/wordw_3.jpg)
 
 
 #### 图片的插入
@@ -52,7 +52,7 @@ pip install python-docx
 
 #### 段落文本的插入
 段落文本支持自定义tag，但是最好还是设置为#[xxxx]#的样式，同时，不要使用以上保留的tag样式。注意段落文本和表格中的文本是不一样的。对段落文本tag设置什么样的格式，替换的内容即会是什么样的格式。
-![ww4](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/wordw_4.jpg)
+![ww4](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/wordw_4.jpg)
 
 如上图，在段落中设置了一个tag，最终替换的样式也会跟随该tag的样式。
 

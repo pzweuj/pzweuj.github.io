@@ -7,7 +7,7 @@ tags: software
 >不过把变异call出来是没问题的！
 >没有和其他软件对比过正确率。。。
 
-![germline](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/germline.PNG)
+![germline](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/germline.PNG)
 
 
 #1 首先把原始数据处理成可以用 的bam

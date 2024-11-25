@@ -47,6 +47,6 @@ for(i in 1:nrow(posxy))
 ```
 
 
-![loveCN](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/national-flag-cn.jpeg)
+![loveCN](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/national-flag-cn.jpeg)
 
 祝祖国母亲生日快乐。

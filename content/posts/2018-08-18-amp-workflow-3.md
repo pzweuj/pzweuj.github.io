@@ -36,7 +36,7 @@ plotQualityProfile(fnFs[1])
 plotQualityProfile(fnRs)
 plotQualityProfile(fnFs[17:20])
 ```
-![raw](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/rawdata1.png)
+![raw](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/rawdata1.png)
 
 过滤
 ```R
@@ -49,7 +49,7 @@ out <- filterAndTrim(
 plotQualityProfile(filtFs[1])
 
 ```
-![filt](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/filtdata1.png)
+![filt](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/filtdata1.png)
 
 计算错误率模型
 ```R
@@ -176,7 +176,7 @@ plot_bar(ASV_physeq, fill="Phylum") +
   theme(axis.text.x=element_text(angle=90, vjust=0.4, hjust=1), legend.title=element_blank()) +
   labs(x="Sample", y="Copies recovered", title="All samples")
 ```
-![bar](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/amp_bar.png)
+![bar](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/amp_bar.png)
 
 Alpha分析
 ---
@@ -185,7 +185,7 @@ Alpha分析
 rarecurve(t(countdata), step=100, col=sample_info$color, lwd=2, ylab="# of ASVs", xlab="# of Sequences")
 abline(v=(min(rowSums(t(countdata)))))
 ```
-![rare](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/amp-rarecurve.png)
+![rare](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/amp-rarecurve.png)
 
 
 ```R
@@ -199,7 +199,7 @@ plot_richness(ASV_physeq, x="dpw", color="time", measures=c("Chao1", "Shannon"))
   scale_color_manual(values=unique(sample_info$color[order(sample_info$time)])) +
   theme(legend.title = element_blank())
 ```
-![chao-shannon](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/chao1_shannon.png)
+![chao-shannon](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/chao1_shannon.png)
 
 
 Beta分析
@@ -224,7 +224,7 @@ labels_colors(dend_count) <- dend_cols
 # 画出树
 plot(dend_count, ylab="VST count. dist.")
 ```
-![tree](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/amp-tree.png)
+![tree](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/amp-tree.png)
 
 
 ```R
@@ -244,7 +244,7 @@ plot_ordination(vst_physeq, vst_pcoa, color="time") +
   scale_color_manual(values=unique(sample_info$color[order(sample_info$time)])) + 
   theme(legend.position="none")
 ```
-![pcoa](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/amp-pcoa.png)
+![pcoa](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/amp-pcoa.png)
 
 可以看出随着前9天和后9天的组间差异还是很明显的。
 

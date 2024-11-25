@@ -9,7 +9,7 @@ tags: coding
 
 不过想着既然本地已经有[refFlat](http://hgdownload.cse.ucsc.edu/goldenpath/hg19/database/refFlat.txt.gz)在了，干脆就解析refFlat好了。
 
-![refFlat](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/exon6.png)
+![refFlat](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/exon6.png)
 
 refFlat文件从左到右，每一列分别是基因名，转录本名，染色体编号，方向，转录本起始，转录本终止，cds起始，cds终止，外显子个数，各个外显子起始，各个外显子终止。
 

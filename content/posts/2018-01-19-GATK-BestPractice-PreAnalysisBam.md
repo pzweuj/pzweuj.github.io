@@ -7,7 +7,7 @@ tags: software
 >下面的命令其实还有很多参数的，不过一般来说用这些参数就够。
 >原始数据要用经过了质控之后的数据！
 
-![GATK-pre-analysis](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/GATK_pre_analysis.PNG)
+![GATK-pre-analysis](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/GATK_pre_analysis.PNG)
 
 放两个用作测试学习的原始数据。
 点[这里](https://github.com/pzweuj/pzweuj.github.io/tree/master/downloads/gatk-pre-analysis-test-data)下载！

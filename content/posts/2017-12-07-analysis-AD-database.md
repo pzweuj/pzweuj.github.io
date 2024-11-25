@@ -10,7 +10,7 @@ tags: coding
 这里[molgen.vib-ua.be](http://www.molgen.vib-ua.be/ADMutations/)。
 
 然后选择基因可以看到这样的一个界面。
-![AD](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/AD_genes.png)
+![AD](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/AD_genes.png)
 
 首选的弄下来的方法，当然是复制粘贴。
 
@@ -67,7 +67,7 @@ print 'task done'
 写的稍微乱了点不过可以跑通。
 
 奉上处理之后的样子：
-![AD_aled](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/AD_analysised.png)
+![AD_aled](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/AD_analysised.png)
 
 当然最后可以发现有一些位点重复了，这时候可以用万能的excel来进行处理了。毕竟用excel除重就2秒的事情。
 

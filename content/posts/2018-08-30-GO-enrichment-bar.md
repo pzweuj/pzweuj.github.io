@@ -40,7 +40,7 @@ CC <- setReadable(CC, OrgDb=org.Hs.eg.db)
 barplot(CC, showCategory=5, title="GO_CC", font.size=8)
 ```
 结果是这样的
-![qc](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/GO_CC_bar_2.PNG)
+![qc](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/GO_CC_bar_2.PNG)
 
 
 输出excel结果。
@@ -65,7 +65,7 @@ p <- ggplot(CC_top5, aes(x=CC_top5$Description, y=CC_top5$BgRatio, fill=CC_top5$
 p
 ```
 结果如下
-![CC1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/GO_CC_bar_1.PNG)
+![CC1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/GO_CC_bar_1.PNG)
 
 ##20180905更新
 p值越小，置信等级越高，所以这里需要把图例反过来。
@@ -90,7 +90,7 @@ p <- ggplot(CC_top5, aes(x=CC_top5$Description, y=CC_top5$GeneRatio, fill=CC_top
                       )
 p
 ```
-![CC2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/GO_CC_bar_3.png)
+![CC2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/GO_CC_bar_3.png)
 
 
 [-_-]:萌井!

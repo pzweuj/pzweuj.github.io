@@ -26,7 +26,7 @@ rm tempfile
 
 第二种方法：
 使用NCBI提供的网页工具[rslist](https://www.ncbi.nlm.nih.gov/projects/SNP/dbSNP.cgi?list=rslist)。
-![rslist_view](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/rslist.PNG)
+![rslist_view](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/rslist.PNG)
 
 
 操作上还是挺简单的。不过，必须提供邮箱来接收结果，而且，NCBI在今年（2018）六月就会关闭这个工具。
@@ -35,7 +35,7 @@ rm tempfile
 第三种方法：
 是我目前觉得最好用的，也是一个网页工具：[snp-nexus](http://www.snp-nexus.org)
 能进行注释的内容还是很多的，如图这样输入rsid。选择要注释的数据库以及参考基因版本。
-![snp-nexus-1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/snp-nexus-1.PNG)
+![snp-nexus-1](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/snp-nexus-1.PNG)
 
 我建议无论是做37还是38的都选择38版本。
 因为有部分新的rsid好像在37版本的dbsnp里没有！
@@ -44,7 +44,7 @@ snp nexus里也可以选择发送到邮件，也可以不选。
 等几分钟结果就会出来（看注释多少个位点和数据库）。
 
 一个默认获得的结果是这样的：
-![snp-nexus-2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/snp-nexus-2.PNG)
+![snp-nexus-2](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/snp-nexus-2.PNG)
 
 随便撸个脚本处理一下就美滋滋了！
 

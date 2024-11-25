@@ -23,7 +23,7 @@ ggplot(reads, aes(x=reads$V2, y=reads$V1)) +
 直接用plot也可以，但是ggplot2画出来比较好看。
 
 
-![readlength](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/readLengthDis.PNG)
+![readlength](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/readLengthDis.PNG)
 结果就是这样。
 
 另外，对于被做过修剪质控的数据，这样做是没有意义的，因为那种数据只会有一个固定的读长。

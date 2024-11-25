@@ -32,7 +32,7 @@ runCromwellDashboard(url="127.0.0.1:8000", version="v62")
 ```
 
 默认是用5412端口，界面比较简单，但是只能用于查看任务，其他所有功能都用不了。
-![cdb](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/cromwellDashboard.png)
+![cdb](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/cromwellDashboard.png)
 
 
 ## wdl-workspace
@@ -52,7 +52,7 @@ docker run -p <LOCAL PORT>:80 -d lifescience/wdl-workspace:develop
 
 这个做的比较不错，界面清爽，而且交互逻辑比较清晰，任务运行时能输出实时log。但是导入WDL脚本会有问题。无法识别import的依赖内容，导致流程不能提交（可能和使用docker版有关，没有挂载无法找到对应文件），另外没有保存流程的功能。后面还是试试从源码安装。
 
-![wdlworkspace](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/wdlworkspace.png)
+![wdlworkspace](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/wdlworkspace.png)
 
 
 ## cromwell-client
@@ -70,7 +70,7 @@ docker run -p 8001:8001 quay.io/comp-bio-aging/cromwell-web:0.3.1
 
 能成功进入界面，但是在Update workflows时提示连接拒绝，连不上cromwell server。暂时用不上，后面再看看。
 
-![cromwellweb](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/cromwellweb.png)
+![cromwellweb](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/cromwellweb.png)
 
 
 ## cromwell-frontend

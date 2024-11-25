@@ -111,7 +111,7 @@ biocLite("ChIPseeker")
 fastqc Rawdata/*.fastq.gz -o ./QC
 multiqc ./QC
 ```
-![qc](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/chip-fastqc_per_base_sequence_quality_plot.png)
+![qc](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/chip-fastqc_per_base_sequence_quality_plot.png)
 
 看图，明显的看出Ring1B、SUZ12、IgGold这三个样本的3'端质量不太好，为了和另外一个样本保持一致，可以用软件剪掉。由于Bowtie2带有这种功能，所以这里先不用别的软件了，可以在比对的时候剪掉5个bp。
 
@@ -158,7 +158,7 @@ bowtie2 -p 8 -x ucsc.mm10 \
 	-o Bam/${sample}.sorted.bam
 samtools index Bam/${sample}.sorted.bam
 ```
-![sort](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/chip-sort-bam.PNG)
+![sort](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/chip-sort-bam.PNG)
 
 结果像这样。
 
@@ -179,7 +179,7 @@ macs2 callpeak \
 这里是其中一个例子，其他样本也按照这个来跑。其中-c是control组，一般就是IgG阴性对照，然后-t是treatment组。
 -g参数要输入的是基因组的大小，但是macs2预设了几个选择，比如人类的hs，比如小鼠的mm。
 
-![peak](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/peak.PNG)
+![peak](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/peak.PNG)
 
 结果如图，明显看出RYBP这个样本有问题，其实跑过这个数据的大佬们都提到过了，估计是作者上传数据的时候传错了。
 所以这里可以去下载作者上传的peaks。
@@ -228,7 +228,7 @@ covplot(SUZ12, weightCol="V5")
 # 可以单独查看某些染色体和区域
 covplot(cbx7, weightCol="V5", chrs=c("chr17", "chr18"), xlim=c(4.5e7, 5e7))
 ```
-![cbx7-peak](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/cbx7.PNG)
+![cbx7-peak](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/cbx7.PNG)
 
 示意图是cbx7的。
 
@@ -238,7 +238,7 @@ promoter <- getPromoters(TxDb=txdb, upstream=3000, downstream=3000)
 tagMatrix <- lapply(peak_list, getTagMatrix, windows=promoter)
 tagHeatmap(tagMatrix, xlim=c(-3000, 3000), color=NULL)
 ```
-![heatmap](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/chip-heatmap.PNG)
+![heatmap](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/chip-heatmap.PNG)
 
 这是热图。
 
@@ -247,7 +247,7 @@ plotAvgProf(tagMatrix, xlim=c(-3000, 3000),
 	xlab="Genomic Region (5'->3')",
 	ylab = "Read Count Frequency", facet="row")
 ```
-![avg_row](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/avg_row.PNG)
+![avg_row](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/avg_row.PNG)
 
 还是这种图感觉比较好看。TSS是转录起始位点，然后这里的横坐标是转录起始位点的上下3000个bp。因为一般认为，转录起始位点附近的peak的意义比较重要。
 
@@ -257,7 +257,7 @@ plotAvgProf(tagMatrix, xlim=c(-3000, 3000),
 	xlab="Genomic Region (5'->3')",
 	ylab = "Read Count Frequency")
 ```
-![avg](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/avg.PNG)
+![avg](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/avg.PNG)
 
 peak注释
 ---
@@ -288,24 +288,24 @@ peak可视化
 ```R
 plotAnnoPie(cbx7_Anno)
 ```
-![cbx7_pie](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/cbx7_pie.PNG)
+![cbx7_pie](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/cbx7_pie.PNG)
 
 ```R
 vennpie(cbx7_Anno)
 ```
-![cbx7_venn](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/cbx7_venn.PNG)
+![cbx7_venn](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/cbx7_venn.PNG)
 
 ```R
 upsetplot(cbx7_Anno)
 ```
-![cbx7_upset](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/cbx7_upset.PNG)
+![cbx7_upset](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/cbx7_upset.PNG)
 
 
 然后多个样本可以这样画（其实这些单样本也可以！）
 ```R
 plotAnnoBar(anno_list)
 ```
-![chip2-bar](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/chip2-bar.PNG)
+![chip2-bar](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/chip2-bar.PNG)
 
 这个图实际上就是上面饼图的条形形式。
 
@@ -313,7 +313,7 @@ plotAnnoBar(anno_list)
 plotDistToTSS(anno_list,
 	title="Distribution of transcription factor-binding loci\nrelative to TSS")
 ```
-![chip-tss-dis](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/chip-tss-dis.PNG)
+![chip-tss-dis](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/chip-tss-dis.PNG)
 
 这个是TF结合基因座相对于TSS的分布（我还没搞懂这个意思。。）
 
@@ -336,6 +336,6 @@ Venn图
 genes = lapply(anno_list, function(i) as.data.frame(i)$geneId)
 vennplot(genes)
 ```
-![chip_venn](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/chip_venn.PNG)
+![chip_venn](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/chip_venn.PNG)
 
 [-_-]:我们很适合的啦！

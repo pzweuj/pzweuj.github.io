@@ -7,7 +7,7 @@ tags: default
 [hgVai](http://genome.ucsc.edu/cgi-bin/hgVai)。
 全称是UCSC Variant Annotation Integrator。
 
-![hgvai](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/hgVai.PNG)
+![hgvai](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/hgVai.PNG)
 
 上面这里选择Mammal（哺乳动物）、Human（人类）、参考基因组。
 还可以选择需要分析的区域，一般默认genome（就是所有区域）。

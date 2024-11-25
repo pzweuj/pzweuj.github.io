@@ -29,7 +29,7 @@ GACTGATAACTCTGTTGTCCTATCCCGCAAATATACATCGTTTCCATGGCTGCTAGGCTGTGCTGCCAAC
 TGGATCCTGCGCGGGACGTCCTTTGTTTACGTCCCGTCGGCGCTGAATCCTGCGGACGACCCTTCTCGGG
 ```
 上面这是一段[NC_003977.2](https://www.ncbi.nlm.nih.gov/nuccore/NC_003977.2?report=fasta)。将这段序列放入[genotyping](https://www.ncbi.nlm.nih.gov/projects/genotyping/formpage.cgi)中，选择HBV分型，点击Subtype，得到结果，表面这个作为HBV参考基因组的序列其实是HBV D型。
-![genotyping](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/genotyping.jpg)
+![genotyping](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/genotyping.jpg)
 
 由图其实可以知道，对HBV分型的方式是对序列划分窗口然后每一段拿去和参考的已经分型样本进行blast。
 

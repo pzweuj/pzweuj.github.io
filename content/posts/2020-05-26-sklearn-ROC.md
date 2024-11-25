@@ -45,7 +45,7 @@ plt.show()
 
 画出来是这样的
 
-![ROC](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/81on227_5E_274M.png)
+![ROC](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/81on227_5E_274M.png)
 
 
 顺便，还有每个feature的重要性输出的方法：

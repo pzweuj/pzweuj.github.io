@@ -45,7 +45,7 @@ for(i in c(1:12)){
 # 输出结束
 dev.off()
 ```
-![histo](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/mid_histo.PNG)
+![histo](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/mid_histo.PNG)
 
 
 PCA图
@@ -74,7 +74,7 @@ write.table(summary$importance,
             sep='\t', col.names=NA, quote=FALSE)
 ```
 
-![histo](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/mid_pca.PNG)
+![histo](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/mid_pca.PNG)
 
 系统发育树
 ----
@@ -94,7 +94,7 @@ pdf("Dendrogram.pdf")
 plot(hc, main="Cluster Dendrogram")
 dev.off()
 ```
-![deno](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/mid_deno.PNG)
+![deno](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/mid_deno.PNG)
 
 
 

@@ -8,7 +8,7 @@ tags: coding
 通过网页的Genes页面，可以看到总共有5424个基因信息。那么通过调用selenium，先将表格显示改为100，就只有55页，这时爬下55个网页即可。
 
 
-![decipher](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/master/downloads/images/decipher.png)
+![decipher](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/decipher.png)
 
 
 使用selenium调用edge浏览器，关于调用edge，可参考[此文章](https://pzweuj.github.io/2021/03/18/CHPO-crawler.html)。本来在显示100行后，打算定位到Next按钮来遍历每一页的，但是尝试了几次都有bug，在爬到第六页时定位时定位到“...”按钮去了，看了半天也不知道为啥，因此直接点击对应的目录数字按钮算了。

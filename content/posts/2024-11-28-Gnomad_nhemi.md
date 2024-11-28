@@ -103,6 +103,7 @@ bedtools sort -i gnomad.v4.1.sites.chrY.combined_AC_XY.vcf -header > gnomad.v4.1
 
 ```bash
 wget https://hgdownload.soe.ucsc.edu/goldenPath/hg38/liftOver/hg38ToHg19.over.chain.gz
+gunzip hg38ToHg19.over.chain.gz
 ```
 
 为了一步到位，先把chrX和chrY合起来
@@ -118,7 +119,7 @@ awk 'NR>1 && !/^#/' gnomad.v4.1.sites.chrY.combined_AC_XY.sort.vcf >> gnomad.v4.
 gatk LiftoverVcf \
     -I gnomad.v4.1.sites.combined_AC_XY.vcf \
     -O gnomad.v4.1.sites.combined_AC_XY.hg19.vcf \
-    -C b37tohg38.chain \
+    -C hg38ToHg19.over.chain \
     --REJECT rejected_variants.vcf \
     -R hg19.fa
 ```

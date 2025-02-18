@@ -18,7 +18,7 @@ tags: coding
 
 ## 代码
 
-我写了[一个脚本](https://github.com/pzweuj/practice/tree/master/python/pdf2markdown)来执行pdf转markdown的过程，我转换了一个220页的pdf文件，大概消耗了50000个tokens。
+我写了[一个脚本](https://github.com/pzweuj/practice/tree/master/python/pdf2markdown)来执行pdf转markdown的过程，我转换了一个220页的pdf文件，大概消耗了50000个tokens。Qwen 2.5 VL 7B在百炼平台的费用大概是输入 2元/1M tokens，输出 5元/1M tokens，这样算下来如果没有免费额度的话，转换这个220页的文件大概要花费2毛钱。当然，模型是开源的，硬件性能充足可以自部署。
 
 
 ### 依赖

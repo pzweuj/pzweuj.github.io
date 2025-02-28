@@ -7,7 +7,7 @@ tags: coding
 
 使用下面的代码前，首先需要注册NCCN的账户。
 
-照例，为了反反爬，会用到(stealth.min.js)[https://github.com/requireCool/stealth.min.js]
+照例，为了反反爬，会用到[stealth.min.js](https://github.com/requireCool/stealth.min.js)
 
 ## 爬取代码
 

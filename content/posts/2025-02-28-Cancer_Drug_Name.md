@@ -118,27 +118,19 @@ tags: default
 | 维莫非尼 | 皮肤肿瘤 | Vemurafenib |
 | 阿贝西利 | 乳腺癌 | Abemaciclib |
 | 西达本胺 | 乳腺癌 | Chidamide |
-| 西达本胺 | 乳腺癌 | Chidamide |
-| 达尔西利 | 乳腺癌 | Dalpiciclib |
 | 达尔西利 | 乳腺癌 | Dalpiciclib |
 | 恩替司他 | 乳腺癌 | Entinostat |
-| 恩替司他 | 乳腺癌 | Entinostat |
-| 依维莫司 | 乳腺癌 | Everolimus |
 | 依维莫司 | 乳腺癌 | Everolimus |
 | 伊尼妥单抗 | 乳腺癌 | Inetetamab |
 | 拉帕替尼 | 乳腺癌 | Lapatinib |
 | 奈拉替尼 | 乳腺癌 | Neratinib |
 | 哌柏西利 | 乳腺癌 | Palbociclib |
 | 帕博利珠单抗 | 乳腺癌 | Pembrolizumab |
-| 帕博利珠单抗 | 乳腺癌 | Pembrolizumab |
 | 帕妥珠单抗 | 乳腺癌 | Pertuzumab |
 | 帕妥珠曲妥珠单抗(皮下注射) | 乳腺癌 | Pertuzumab and Trastuzumab (Subcutaneous Injection) |
 | 吡咯替尼 | 乳腺癌 | Pyrotinib |
 | 瑞波西利 | 乳腺癌 | Ribociclib |
-| 瑞波西利 | 乳腺癌 | Ribociclib |
 | 戈沙妥珠单抗 | 乳腺癌 | Sacituzumab Govitecan |
-| 戈沙妥珠单抗 | 乳腺癌 | Sacituzumab Govitecan |
-| 特瑞普利单抗 | 乳腺癌 | Toripalimab |
 | 特瑞普利单抗 | 乳腺癌 | Toripalimab |
 | 曲妥珠单抗 | 乳腺癌 | Trastuzumab |
 | 德曲妥珠单抗 | 乳腺癌 | Trastuzumab deruxtecan |

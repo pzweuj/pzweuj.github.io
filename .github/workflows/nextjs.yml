@@ -3,6 +3,8 @@ name: Deploy Next.js site to Pages
 on:
   push:
     branches: ["master"]
+    paths:
+      - 'content/**/*.md'
   workflow_dispatch:
 
 permissions:

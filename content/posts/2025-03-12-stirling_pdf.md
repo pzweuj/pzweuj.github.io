@@ -42,6 +42,10 @@ docker compose up -d
 
 在使用登录模式进行部署时，Stirling-PDF会下载下面这个主程序，由于墙的存在，很可能会下载失败
 
+```bash
+https://github.com/Stirling-Tools/Stirling-PDF/releases/download/v${version}/Stirling-PDF-with-login.jar
+```
+
 官方方案是将基础镜像改为fat版本
 
 ```bash
@@ -53,10 +57,6 @@ stirlingtools/stirling-pdf:0.44.2-fat
 ```
 
 **也**可以使用下面的方法：
-
-```bash
-https://github.com/Stirling-Tools/Stirling-PDF/releases/download/v${version}/Stirling-PDF-with-login.jar
-```
 
 可以根据部署的版本，自行[使用镜像](https://greasyfork.org/zh-CN/scripts/412245-github-enhancement-high-speed-download)进行下载。
 

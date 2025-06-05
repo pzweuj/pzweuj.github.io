@@ -84,6 +84,10 @@ OncoSense输出一个json格式的结果，你可以根据自己的需求二次�
 
 实际测试中，分析NCCN非小细胞指南 (2025.3)，共计285页，耗时约9分钟，测试结果文件[点击此处](https://github.com/pzweuj/OncoSense/blob/main/test/%5BNCCN%5D%5BNon-Small%20Cell%20Lung%20Cancer%5D%5B3.2025%5D.json)。
 
+## 后记
+
+应可封装出一个API，使用n8n、dify等工作流框架来调用，达成监控到一份新的指南文件，就及时提取出其中靶药信息。
+
 
 ## 叠甲
 

@@ -15,7 +15,7 @@ tags: default
 
 ## 拓扑图
 主路由也用带无线的（现在仅有线的家用路由还真少），弄一个软路由做旁路由，但旁路由和设备最好接在同一个交换机上，性能损耗少，考虑把一个AP去掉，在交换机上接旁路由。
-![top](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/network_topology.png)
+![top](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/content/data/images/network_topology.png)
 
 
 ## 挑款

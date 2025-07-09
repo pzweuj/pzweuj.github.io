@@ -53,7 +53,7 @@ gemini
 
 连续两次Ctrl + C可以退出。
 
-## Bug
+## FAILED_PRECONDITION
 
 尽管进入了输入界面，但是我目前还是没有使用成功，回报的错误是
 
@@ -61,5 +61,5 @@ gemini
 ✕ [API Error: User location is not supported for the API use. (Status: FAILED_PRECONDITION)]
 ```
 
-如上面所说，我的VPS是新加坡的，应该没有在Gemini的封锁区域里。后面再拿PC开代理试试。
+如上面所说，我的VPS是新加坡的，应该没有在Gemini的封锁区域里。查了一下[官方文档](https://ai.google.dev/gemini-api/docs/troubleshooting?hl=zh-cn)，说是需要在Google AI Studio中启用结算才可以。
 

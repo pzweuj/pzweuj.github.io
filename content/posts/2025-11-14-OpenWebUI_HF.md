@@ -41,7 +41,7 @@ FROM ghcr.io/open-webui/open-webui:main
 
 示例，在项目的Setting的Variables and secrets中，添加Secrets
 ```env
-DATABASE_URL="postgresql://postgres.[YOUR-DBID]:[YOUR-PASSWORD]@aws-1-eu-north-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
+DATABASE_URL="postgresql://postgres.[YOUR-DBID]:[YOUR-PASSWORD]@aws-1-eu-north-1.pooler.supabase.com:6543/postgres"
 ```
 
 配置好后，可以通过更新Space中任意的文件，让它自行触发一次重新构建。

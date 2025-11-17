@@ -36,7 +36,7 @@ FROM ghcr.io/open-webui/open-webui:main
 
 从查询到的资料看，抱抱脸部署的项目在服务端是有数据储存的。但是，抱抱脸的免费实例存在**Sleep Mode**，即当你的 Space 长时间无人访问（通常约 45–60 分钟无请求），HF 会自动将其 休眠（sleep） 以节省资源，然后下次有人访问时，会**重新构建**并启动容器（cold start）。
 
-为了持久化，我们需要配置一个外部数据库`DATABASE_URL`，这里可以使用[supabase](https://supabase.com/)提供的免费数据库，也可以使用其他，自便咯。
+为了持久化，我们需要配置一个外部数据库`DATABASE_URL`，这里可以使用[supabase](https://supabase.com/)提供的免费数据库（建议选择美东区域，和HF连接理论上会更快），也可以使用其他，自便咯。
 
 
 示例，在项目的Setting的Variables and secrets中，添加Secrets

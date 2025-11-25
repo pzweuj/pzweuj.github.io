@@ -26,6 +26,10 @@ pre[class*="language-"] {
   @apply px-1.5 py-0.5 mx-0.5 rounded bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100;
   font-size: 0.9em;
 }
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none !important; /* 移除排版插件自动添加的反引号 */
+}
 
 /* Prism.js 语法高亮主题 */
 .token.comment,

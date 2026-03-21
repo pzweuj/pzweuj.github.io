@@ -78,6 +78,8 @@ curl -X POST http://localhost:8000/api/batch_annotate \
 
 这是我部署的[在线版本](https://pzweuj-transvarweb.hf.space/)的[API参考文档](https://pzweuj-transvarweb.hf.space/docs)。
 
+当然，你也可以在[BioTools](https://use.biotools.space/tools/transvar)中获得一站式的多工具体验。
+
 ## 常见变异格式
 
 | 模式 | 格式示例 | 说明 |

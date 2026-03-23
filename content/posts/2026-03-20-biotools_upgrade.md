@@ -16,13 +16,15 @@ BioTools仍然提供着[在线使用](https://use.biotools.space/)的方式。
 
 然后是[剪接位点有害性预测工具](https://use.biotools.space/tools/spliceai)，这个工具可以使用SpliceAI和Pangolin模型预测变异对剪接位点的影响，支持GRCh37和GRCh38。请求将被发送到博德研究所的SpliceAI Lookup。
 
+还有是[Transvar](https://use.biotools.space/tools/transvar)，这个工具可以反向注释pHGVS和cHGVS等，支持GRCh37和GRCh38。请求将被发送我自己在抱抱脸部署的space。
+
 ### 跳转
 
 当然，现在BioTools还包含了下面三个外部工具的跳转。
 
 1. [ManeLoca](https://use.biotools.space/tools/maneloca)，这会跳转到我编写的MANE转录本坐标查询器
 2. [DeepHPO](https://use.biotools.space/tools/deephpo)，这会跳转到我编写的基于LLM的病历信息HPO术语提取
-3. [DeepHPO](https://use.biotools.space/tools/warfarin)，这会跳转到我编写的华法林剂量计算器
+3. [Warfarin](https://use.biotools.space/tools/warfarin)，这会跳转到我编写的华法林剂量计算器
 
 ### 实验性更新
 

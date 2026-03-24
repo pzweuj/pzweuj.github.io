@@ -4,14 +4,15 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 
 interface Props {
-  params: {
+  params: Promise<{
     slug: string[]
-  }
+  }>
 }
 
 export default async function ProjectDocPage({ params }: Props) {
+  const { slug: slugArr } = await params
   const chapters = await getProjectDocs()
-  const slug = params.slug.join('/')
+  const slug = slugArr.join('/')
   
   // 查找当前文档
   const doc = chapters
@@ -46,9 +47,10 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug: slugArr } = await params
   const chapters = await getProjectDocs()
-  const slug = params.slug.join('/')
-  
+  const slug = slugArr.join('/')
+
   const doc = chapters
     .flatMap(chapter => chapter.docs)
     .find(doc => doc.slug === slug)

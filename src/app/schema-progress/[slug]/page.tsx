@@ -3,12 +3,13 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
   const posts = await getAllSchemaProgress()
-  const post = posts.find(p => p.slug === params.slug)
+  const post = posts.find(p => p.slug === slug)
 
   if (!post) {
     return {
@@ -23,8 +24,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function SchemaProgressPostPage({ params }: Props) {
+  const { slug } = await params
   const posts = await getAllSchemaProgress()
-  const post = posts.find(p => p.slug === params.slug)
+  const post = posts.find(p => p.slug === slug)
 
   if (!post) {
     notFound()

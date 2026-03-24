@@ -4,15 +4,16 @@ import { notFound } from 'next/navigation'
 
 // 定义类型
 type PageProps = {
-  params: {
+  params: Promise<{
     page: string
-  }
-  searchParams?: { [key: string]: string | string[] | undefined }
+  }>
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
 // 页面组件
 export default async function BlogPage({ params }: PageProps) {
-  const page = parseInt(params.page) // 将参数转为数字
+  const { page: pageParam } = await params
+  const page = parseInt(pageParam) // 将参数转为数字
   
   if (isNaN(page) || page < 1) {
     notFound() // 无效页码返回 404

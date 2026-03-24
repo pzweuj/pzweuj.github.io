@@ -3,13 +3,14 @@ import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 
 interface Props {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 // 生成动态元数据
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params
   const posts = await getAllPosts()
-  const post = posts.find(p => p.slug === params.slug)
+  const post = posts.find(p => p.slug === slug)
 
   if (!post) {
     return {
@@ -31,8 +32,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PostPage({ params }: Props) {
+  const { slug } = await params
   const posts = await getAllPosts()
-  const post = posts.find(p => p.slug === params.slug)
+  const post = posts.find(p => p.slug === slug)
 
   if (!post) {
     notFound()

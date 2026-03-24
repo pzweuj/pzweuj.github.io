@@ -1,4 +1,5 @@
 #update log
+<br>20260324 增加schema进度板块，鞭笞自己更新
 <br>20241120 博客模板替换为自己的项目[MyBlog](https://github.com/pzweuj/MyBlog)
 <br>20190310 添加流程实践板块，采取模板为mkdocs
 <br>20190309 以后的博文添加评论模块

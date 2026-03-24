@@ -100,9 +100,20 @@ function parseTags(tags: unknown): string[] {
 
 // 修改为异步函数
 export async function getAllPosts(): Promise<BlogPost[]> {
-  const postsDirectory = path.join(process.cwd(), 'content/posts')
+  return getAllPostsFromDirectory('content/posts')
+}
+
+// 通用的从指定目录获取所有文章的函数
+export async function getAllPostsFromDirectory(directory: string): Promise<BlogPost[]> {
+  const postsDirectory = path.join(process.cwd(), directory)
+
+  // 检查目录是否存在
+  if (!fs.existsSync(postsDirectory)) {
+    return []
+  }
+
   const fileNames = fs.readdirSync(postsDirectory)
-  
+
   const posts = await Promise.all(fileNames
     .filter(fileName => fileName.endsWith('.md'))
     .map(async fileName => {
@@ -110,7 +121,7 @@ export async function getAllPosts(): Promise<BlogPost[]> {
       const fullPath = path.join(postsDirectory, fileName)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data, content } = matter(fileContents)
-      
+
       return {
         slug,
         title: data.title || slug,
@@ -122,6 +133,11 @@ export async function getAllPosts(): Promise<BlogPost[]> {
     }))
 
   return posts.sort((a, b) => b.date.localeCompare(a.date))
+}
+
+// 获取 Schema 进度文章
+export async function getAllSchemaProgress(): Promise<BlogPost[]> {
+  return getAllPostsFromDirectory('content/schema-progress')
 }
 
 // 分页相关接口定义保持不变

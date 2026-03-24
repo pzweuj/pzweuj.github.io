@@ -11,6 +11,7 @@ export default function Header() {
   const navigation = [
     { name: '首页', href: '/' },
     { name: '归档', href: '/archives' },
+    { name: 'Schema进度', href: '/schema-progress' },
     { name: '实践', href: '/projects' },
     { name: '关于', href: '/about' }
   ]

@@ -55,4 +55,9 @@ next-env.d.ts
 .Trashes
 ehthumbs.db
 Thumbs.db
+# feed files (generated on build)
+/public/rss.xml
+/public/atom.xml
+/public/feed.json
+
 .claude/

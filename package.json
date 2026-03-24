@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run feed && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "feed": "tsx scripts/generate-feed.ts"
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.3.5",
@@ -16,6 +17,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.4",
+    "feed": "^4.2.2",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.21",
     "lucide-react": "^0.460.0",
@@ -44,6 +46,7 @@
     "eslint-config-next": "15.0.3",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

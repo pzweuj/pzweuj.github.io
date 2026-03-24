@@ -15,6 +15,16 @@ export const metadata = {
     icon: '/icon.ico',
     shortcut: '/icon.ico',
   },
+  alternates: {
+    types: {
+      'application/rss+xml': [
+        { url: '/rss.xml', title: 'RSS Feed' },
+      ],
+      'application/atom+xml': [
+        { url: '/atom.xml', title: 'Atom Feed' },
+      ],
+    },
+  },
 }
 
 export default function RootLayout({

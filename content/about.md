@@ -27,12 +27,11 @@
 |  3   |    Grok-4.2    |  88  |
 
 #### 文生图
-|  1   | Gemini-3-Pro(Nano Banana Pro) | 100  |
+|  1   |         GPT Image 2.0         | 100  |
 | :--: | :---------------------------: | :--: |
-|  2   |        Qwen-Image-Max         |  70  |
-|  3   |         Z-Image-Turbo         |  69  |
-|  4   |         FLUX.2 [dev]          |  65  |
-|  5   |         Seedream 4.5          |  55  |
+|  2   | Gemini-3-Pro(Nano Banana Pro) |  96  |
+|  3   |        Qwen-Image-Max         |  65  |
+|  4   |         Z-Image-Turbo         |  64  |
 
 #### 文(图)生视频
 |  1   | HappyHorse -1.0 | 100  |

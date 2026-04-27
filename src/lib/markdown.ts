@@ -11,6 +11,7 @@ import rehypeStringify from 'rehype-stringify'
 import rehypePrism from 'rehype-prism-plus'
 import rehypeImgSize from 'rehype-img-size'
 import { remarkQQMusic } from './plugins/remarkQQMusic'
+import { rehypeTableLabel } from './plugins/rehypeTableLabel'
 
 // 创建统一的 markdown 处理器
 const processor = unified()
@@ -25,6 +26,7 @@ const processor = unified()
     showLineNumbers: true,
     ignoreMissing: true,
   })
+  .use(rehypeTableLabel)
   .use(rehypeImgSize, {
     dir: path.join(process.cwd(), 'public')
   })

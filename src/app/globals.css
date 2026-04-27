@@ -340,3 +340,64 @@ pre[class*="language-"] {
     @apply mx-0;
   }
 }
+
+/* Markdown 表格样式 - 桌面端 */
+.prose table {
+  @apply w-full border-collapse my-6;
+}
+
+.prose thead {
+  @apply border-b-2 border-gray-300 dark:border-gray-600;
+}
+
+.prose th {
+  @apply px-3 py-2 text-left font-semibold text-gray-900 dark:text-gray-100 bg-gray-100 dark:bg-gray-800;
+}
+
+.prose tbody tr {
+  @apply border-b border-gray-200 dark:border-gray-700;
+}
+
+.prose tbody tr:nth-child(even) {
+  @apply bg-gray-50 dark:bg-gray-800/30;
+}
+
+.prose td {
+  @apply px-3 py-2 text-gray-700 dark:text-gray-300;
+}
+
+/* 移动端表格：堆叠卡片式布局 */
+@media (max-width: 640px) {
+  .prose table {
+    @apply block w-full border-0;
+  }
+
+  .prose thead {
+    @apply hidden;
+  }
+
+  .prose tbody {
+    @apply block;
+  }
+
+  .prose tr {
+    @apply block mb-4 p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50;
+  }
+
+  .prose td {
+    @apply block w-full border-0 px-0 py-2 text-left;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .prose td::before {
+    content: attr(data-label);
+    @apply font-semibold text-gray-600 dark:text-gray-400 mr-4 min-w-[80px];
+  }
+
+  .prose td > * {
+    flex: 1;
+    text-align: left;
+  }
+}

@@ -47,17 +47,6 @@ export default function Footer() {
           {/* 版权信息 */}
           <div className="text-center text-sm text-gray-600 dark:text-gray-400">
             <p>© {new Date().getFullYear()} {selfConfig.author}. All rights reserved.</p>
-            <p className="mt-1">
-              Built with{' '}
-              <a 
-                href="https://nextjs.org"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-500 dark:text-blue-400"
-              >
-                Next.js
-              </a>
-            </p>
           </div>
         </div>
       </div>

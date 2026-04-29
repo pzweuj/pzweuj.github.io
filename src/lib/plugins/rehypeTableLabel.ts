@@ -35,7 +35,7 @@ export function rehypeTableLabel() {
         cells.forEach((cell: Element, idx: number) => {
           if (idx < headers.length) {
             cell.properties = cell.properties || {}
-            cell.properties.dataLabel = headers[idx]
+            cell.properties['data-label'] = headers[idx]
           }
         })
       })

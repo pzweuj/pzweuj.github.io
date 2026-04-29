@@ -2,9 +2,9 @@ import { Inter } from 'next/font/google'
 import { ThemeProvider } from '@/components/providers/ThemeProvider'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
+import ScrollToTop from '@/components/ui/ScrollToTop'
 import selfConfig from '@/config/self.config'
 import './globals.css'
-import 'katex/dist/katex.min.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -46,6 +46,7 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+          <ScrollToTop />
         </ThemeProvider>
       </body>
     </html>

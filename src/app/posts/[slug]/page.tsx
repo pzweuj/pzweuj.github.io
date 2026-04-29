@@ -1,6 +1,7 @@
 import { getAllPosts } from '@/lib/markdown'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import 'katex/dist/katex.min.css'
 
 interface Props {
   params: Promise<{ slug: string }>

@@ -62,7 +62,7 @@ export default function SearchDialog() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="group p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
+        className="group flex items-center justify-center w-11 h-11 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
         aria-label="搜索 (⌘K)"
       >
         <SearchIcon className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100" />

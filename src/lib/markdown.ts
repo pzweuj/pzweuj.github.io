@@ -13,6 +13,7 @@ import rehypeImgSize from 'rehype-img-size'
 import { remarkQQMusic } from './plugins/remarkQQMusic'
 import { rehypeTableLabel } from './plugins/rehypeTableLabel'
 import { rehypeLazyImage } from './plugins/rehypeLazyImage'
+import { rehypeCodeCopy } from './plugins/rehypeCodeCopy'
 
 // 创建统一的 markdown 处理器
 const processor = unified()
@@ -28,6 +29,7 @@ const processor = unified()
     ignoreMissing: true,
   })
   .use(rehypeTableLabel)
+  .use(rehypeCodeCopy)
   .use(rehypeImgSize, {
     dir: path.join(process.cwd(), 'public')
   })

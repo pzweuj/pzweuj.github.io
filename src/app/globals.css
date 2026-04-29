@@ -4,7 +4,8 @@
 
 /* 代码块样式 */
 pre[class*="language-"] {
-  @apply my-4 p-4 rounded-lg !bg-gray-900 dark:!bg-gray-950 overflow-x-auto;
+  @apply my-0 p-4 !bg-gray-900 dark:!bg-gray-950;
+  border-radius: 0 0 0.5rem 0.5rem;
 }
 
 code[class*="language-"],
@@ -19,6 +20,52 @@ pre[class*="language-"] {
   line-height: 1.5;
   tab-size: 4;
   hyphens: none;
+}
+
+/* 代码块包裹层 */
+.code-block-wrapper {
+  @apply relative my-4 rounded-lg;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* 代码块复制按钮（VitePress 风格） */
+.code-copy-btn {
+  @apply absolute top-3 right-3 z-10 rounded-md;
+  @apply border border-gray-600/50 bg-gray-800/80;
+  @apply opacity-0 cursor-pointer select-none;
+  width: 40px;
+  height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='13' height='13' rx='2' ry='2'/%3E%3Cpath d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/%3E%3C/svg%3E");
+  background-position: center;
+  background-size: 20px;
+  background-repeat: no-repeat;
+  transition: border-color 0.25s, background-color 0.25s, opacity 0.25s;
+}
+
+.code-block-wrapper:hover .code-copy-btn {
+  @apply opacity-100;
+}
+
+.code-copy-btn:hover {
+  @apply border-gray-500 bg-gray-700/90;
+}
+
+.code-copy-btn:active {
+  @apply bg-gray-600/90;
+}
+
+/* 已复制状态 */
+.code-copy-btn.copied {
+  @apply !opacity-100 border-emerald-500/60 bg-emerald-900/60;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%2334d399' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
+}
+
+/* 移动端始终显示复制按钮 */
+@media (max-width: 640px) {
+  .code-copy-btn {
+    @apply opacity-100;
+  }
 }
 
 /* 行内代码样式 */
@@ -331,6 +378,7 @@ body {
 .prose {
   line-height: 1.8;
   word-break: break-word;
+  overflow-x: hidden;
   overflow-wrap: break-word;
 }
 
@@ -444,5 +492,19 @@ body {
     padding: 0.6em 1em;
     margin-left: 0;
     margin-right: 0;
+  }
+
+  /* 移动端代码块：减小内边距 */
+  .code-block-wrapper {
+    @apply mx-0;
+  }
+
+  .code-block-wrapper pre[class*="language-"] {
+    @apply p-3 text-sm;
+  }
+
+  /* 移动端行内代码字号 */
+  .prose :not(pre) > code {
+    font-size: 0.85em;
   }
 }

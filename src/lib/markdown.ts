@@ -14,6 +14,7 @@ import { remarkQQMusic } from './plugins/remarkQQMusic'
 import { rehypeTableLabel } from './plugins/rehypeTableLabel'
 import { rehypeLazyImage } from './plugins/rehypeLazyImage'
 import { rehypeCodeCopy } from './plugins/rehypeCodeCopy'
+import { loadHtmlCache, saveHtmlCache, renderMarkdownWithCache } from './cache'
 
 // 创建统一的 markdown 处理器
 const processor = unified()
@@ -104,9 +105,16 @@ function parseTags(tags: unknown): string[] {
   return []
 }
 
+// 内存缓存：避免同一次构建中重复调用
+const postsMemoCache = new Map<string, BlogPost[]>()
+
 // 修改为异步函数
 export async function getAllPosts(): Promise<BlogPost[]> {
-  return getAllPostsFromDirectory('content/posts')
+  const key = 'content/posts'
+  if (postsMemoCache.has(key)) return postsMemoCache.get(key)!
+  const posts = await getAllPostsFromDirectory(key)
+  postsMemoCache.set(key, posts)
+  return posts
 }
 
 // 通用的从指定目录获取所有文章的函数
@@ -118,6 +126,7 @@ export async function getAllPostsFromDirectory(directory: string): Promise<BlogP
     return []
   }
 
+  const htmlCache = loadHtmlCache()
   const fileNames = fs.readdirSync(postsDirectory)
 
   const posts = await Promise.all(fileNames
@@ -125,6 +134,7 @@ export async function getAllPostsFromDirectory(directory: string): Promise<BlogP
     .map(async fileName => {
       const { date, slug } = parseFileName(fileName)
       const fullPath = path.join(postsDirectory, fileName)
+      const cacheKey = path.relative(process.cwd(), fullPath).replace(/\\/g, '/')
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data, content } = matter(fileContents)
 
@@ -134,16 +144,21 @@ export async function getAllPostsFromDirectory(directory: string): Promise<BlogP
         date,
         tags: parseTags(data.tags),
         excerpt: generateExcerpt(content),
-        content: await renderMarkdown(content)
+        content: await renderMarkdownWithCache(content, cacheKey, 'blog', htmlCache, renderMarkdown)
       }
     }))
 
+  saveHtmlCache(htmlCache)
   return posts.sort((a, b) => b.date.localeCompare(a.date))
 }
 
 // 获取 Schema 进度文章
 export async function getAllSchemaProgress(): Promise<BlogPost[]> {
-  return getAllPostsFromDirectory('content/schema-progress')
+  const key = 'content/schema-progress'
+  if (postsMemoCache.has(key)) return postsMemoCache.get(key)!
+  const posts = await getAllPostsFromDirectory(key)
+  postsMemoCache.set(key, posts)
+  return posts
 }
 
 // 分页相关接口定义保持不变

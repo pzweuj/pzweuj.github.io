@@ -11,6 +11,7 @@ import rehypeStringify from 'rehype-stringify'
 import rehypePrism from 'rehype-prism-plus'
 import rehypeImgSize from 'rehype-img-size'
 import { remarkQQMusic } from './plugins/remarkQQMusic'
+import { loadHtmlCache, saveHtmlCache, renderMarkdownWithCache } from './cache'
 
 // 创建统一的 markdown 处理器
 const processor = unified()
@@ -41,13 +42,22 @@ async function renderMarkdown(content: string): Promise<string> {
   return result.toString()
 }
 
+let aboutCache: { title: string; content: string } | null = null
+
 export async function getAboutContent() {
+  if (aboutCache) return aboutCache
+
   const filePath = path.join(process.cwd(), 'content/about.md')
+  const htmlCache = loadHtmlCache()
+  const cacheKey = 'content/about.md'
   const content = fs.readFileSync(filePath, 'utf-8')
   const { data, content: markdown } = matter(content)
-  
-  return {
+
+  const result = {
     title: data.title || '关于',
-    content: await renderMarkdown(markdown)
+    content: await renderMarkdownWithCache(markdown, cacheKey, 'about', htmlCache, renderMarkdown)
   }
+  saveHtmlCache(htmlCache)
+  aboutCache = result
+  return result
 } 

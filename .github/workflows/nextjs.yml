@@ -52,7 +52,7 @@ jobs:
         run: echo "NEXT_TELEMETRY_DISABLED=1" >> $GITHUB_ENV
 
       - name: Cache Next.js build
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.npm

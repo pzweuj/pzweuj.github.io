@@ -22,7 +22,7 @@
     "katex": "^0.16.21",
     "lucide-react": "^0.460.0",
     "next": "^15.5.18",
-    "next-themes": "^0.4.3",
+    "next-themes": "^0.4.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "rehype-img-size": "^1.0.1",

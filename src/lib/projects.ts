@@ -1,52 +1,15 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { unified } from 'unified'
-import remarkParse from 'remark-parse'
-import remarkMath from 'remark-math'
-import remarkRehype from 'remark-rehype'
-import rehypeKatex from 'rehype-katex'
-import rehypeStringify from 'rehype-stringify'
-import rehypePrism from 'rehype-prism-plus'
-import rehypeImgSize from 'rehype-img-size'
-import remarkGfm from 'remark-gfm'
-import { remarkQQMusic } from './plugins/remarkQQMusic'
+import { createMarkdownProcessor, renderMarkdown, PROCESSOR_VERSION } from './createMarkdownProcessor'
 import { loadHtmlCache, saveHtmlCache, renderMarkdownWithCache } from './cache'
 
-// 创建统一的 markdown 处理器
-const processor = unified()
-  .use(remarkParse)
-  .use(remarkQQMusic)
-  .use(remarkMath)
-  .use(remarkGfm)
-  .use(remarkRehype, {
-    allowDangerousHtml: true
-  })
-  .use(rehypePrism, {
-    showLineNumbers: true,
-    ignoreMissing: true,
-    aliases: {
-      typescript: ['ts'],
-      javascript: ['js'],
-      python: ['py'],
-      r: ['R'],
-      perl: ['pl']
-    }
-  })
-  .use(rehypeImgSize, {
-    dir: path.join(process.cwd(), 'public')
-  })
-  .use(rehypeKatex, {
-    strict: false
-  })
-  .use(rehypeStringify, {
-    allowDangerousHtml: true
-  })
+// 项目管道：基础渲染，无表格标签/代码复制/懒加载
+const processor = createMarkdownProcessor()
 
 // 异步渲染 markdown
-async function renderMarkdown(content: string): Promise<string> {
-  const result = await processor.process(content)
-  return result.toString()
+async function renderMarkdownForProject(content: string, filePath?: string): Promise<string> {
+  return renderMarkdown(processor, content, filePath)
 }
 
 export interface ProjectDoc {
@@ -109,7 +72,10 @@ export async function getProjectDocs(): Promise<ProjectChapter[]> {
       docs.push({
         slug: `${dir}/${file.replace('.md', '')}`,
         title: h1Title || data.title || file.replace('.md', '').split('_')[1] || file.replace('.md', ''),
-        content: await renderMarkdownWithCache(contentWithoutTitle, cacheKey, 'project', htmlCache, renderMarkdown),
+        content: await renderMarkdownWithCache(
+          contentWithoutTitle, cacheKey, 'project', PROCESSOR_VERSION, htmlCache,
+          (c) => renderMarkdownForProject(c, cacheKey),
+        ),
         chapter: dir,
         order: parseInt(file.split('_')[0])
       })
@@ -145,9 +111,12 @@ export async function getProjectIndex() {
 
   const result = {
     title: data.title || '实践项目',
-    content: await renderMarkdownWithCache(markdown, cacheKey, 'project', htmlCache, renderMarkdown)
+    content: await renderMarkdownWithCache(
+      markdown, cacheKey, 'project', PROCESSOR_VERSION, htmlCache,
+      (c) => renderMarkdownForProject(c, cacheKey),
+    )
   }
   saveHtmlCache(htmlCache)
   projectIndexCache = result
   return result
-} 
+}

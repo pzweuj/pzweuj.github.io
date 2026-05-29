@@ -28,7 +28,7 @@ export default async function ProjectDocPage({ params }: Props) {
       <ProjectSidebar chapters={chapters} />
       
       <main className="flex-1 max-w-4xl mx-auto px-4 py-12">
-        <div className="prose dark:prose-invert max-w-none">
+        <div className="prose max-w-none">
           <h1>{doc.title}</h1>
           <div dangerouslySetInnerHTML={{ __html: doc.content }} />
         </div>

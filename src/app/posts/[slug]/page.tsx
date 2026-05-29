@@ -1,13 +1,13 @@
 import { getAllPosts } from '@/lib/markdown'
 import { notFound } from 'next/navigation'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
+import selfConfig from '@/config/self.config'
 import 'katex/dist/katex.min.css'
 
 interface Props {
   params: Promise<{ slug: string }>
 }
 
-// 生成动态元数据
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const posts = await getAllPosts()
@@ -15,20 +15,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!post) {
     return {
-      title: '文章未找到 | 生物信息文件夹'
+      title: '文章未找到'
     }
   }
 
   return {
-    title: `${post.title} | 生物信息文件夹`,
+    title: post.title,
     description: post.excerpt,
     openGraph: {
       title: post.title,
       description: post.excerpt,
       type: 'article',
       publishedTime: post.date,
-      tags: post.tags
-    }
+      tags: post.tags,
+      url: `${selfConfig.siteUrl}/posts/${post.slug}`,
+    },
+    twitter: {
+      card: 'summary',
+      title: post.title,
+      description: post.excerpt,
+    },
+    alternates: {
+      canonical: `${selfConfig.siteUrl}/posts/${post.slug}`,
+    },
   }
 }
 
@@ -41,8 +50,35 @@ export default async function PostPage({ params }: Props) {
     notFound()
   }
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    datePublished: post.date,
+    description: post.excerpt,
+    keywords: post.tags,
+    url: `${selfConfig.siteUrl}/posts/${post.slug}`,
+    author: {
+      '@type': 'Person',
+      name: selfConfig.author,
+      url: selfConfig.social.github,
+    },
+    publisher: {
+      '@type': 'Person',
+      name: selfConfig.author,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': selfConfig.siteUrl,
+    },
+  }
+
   return (
     <article className="max-w-4xl mx-auto px-4 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="mb-8">
         <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">
           {post.title}
@@ -56,9 +92,9 @@ export default async function PostPage({ params }: Props) {
           </div>
         </div>
       </header>
-      <div 
-        className="prose dark:prose-invert max-w-none"
-        dangerouslySetInnerHTML={{ __html: post.content }} 
+      <div
+        className="prose max-w-none"
+        dangerouslySetInnerHTML={{ __html: post.content }}
       />
     </article>
   )

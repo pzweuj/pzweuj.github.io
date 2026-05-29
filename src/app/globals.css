@@ -458,15 +458,20 @@ body {
   margin-bottom: 0.35em;
 }
 
-/* 链接下划线优化 */
+/* 链接样式 */
 .prose a {
   text-decoration: none;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .prose a:hover {
   border-bottom-color: currentColor;
+  filter: brightness(0.85);
+}
+
+.dark .prose a:hover {
+  filter: brightness(1.2);
 }
 
 /* 移动端中文排版微调 */

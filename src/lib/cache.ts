@@ -12,10 +12,11 @@ export interface CacheEntry {
 
 export type HtmlCache = Record<string, CacheEntry>
 
-function computeContentHash(pipelineId: string, content: string): string {
+function computeContentHash(pipelineId: string, version: number, content: string): string {
   return crypto
     .createHash('md5')
     .update(pipelineId)
+    .update(String(version))
     .update(content)
     .digest('hex')
 }
@@ -46,10 +47,11 @@ export async function renderMarkdownWithCache(
   rawMarkdown: string,
   filePath: string,
   pipelineId: string,
+  version: number,
   cache: HtmlCache,
-  renderFn: (content: string) => Promise<string>
+  renderFn: (content: string) => Promise<string>,
 ): Promise<string> {
-  const hash = computeContentHash(pipelineId, rawMarkdown)
+  const hash = computeContentHash(pipelineId, version, rawMarkdown)
   const cached = cache[filePath]
 
   if (cached && cached.hash === hash) {

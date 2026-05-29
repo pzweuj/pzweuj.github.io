@@ -26,7 +26,7 @@ export function PostCard({ post }: { post: BlogPost }) {
             {post.date}
           </time>
         </div>
-        <div className="prose dark:prose-invert max-w-none text-gray-600 dark:text-gray-400">
+        <div className="prose max-w-none text-gray-600 dark:text-gray-400">
           {post.excerpt}
         </div>
         <div className="flex flex-wrap gap-2">

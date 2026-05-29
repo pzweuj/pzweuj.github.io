@@ -44,7 +44,7 @@ export default async function SchemaProgressPostPage({ params }: Props) {
         </div>
       </header>
       <div
-        className="prose dark:prose-invert max-w-none"
+        className="prose max-w-none"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
     </article>

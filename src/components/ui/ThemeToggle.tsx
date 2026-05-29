@@ -2,23 +2,17 @@
 
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
+import { useAutoTheme } from '@/hooks/useAutoTheme'
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
 
+  useAutoTheme()
+
   useEffect(() => {
     setMounted(true)
-    
-    // 添加自动设置主题的逻辑
-    const hour = new Date().getHours()
-    const isDay = hour >= 8 && hour < 18
-    
-    // 只在首次加载时根据时间设置主题
-    if (!localStorage.getItem('theme')) {
-      setTheme(isDay ? 'light' : 'dark')
-    }
-  }, [setTheme])
+  }, [])
 
   if (!mounted) {
     return null
@@ -61,4 +55,4 @@ export function ThemeToggle() {
       )}
     </button>
   )
-} 
+}

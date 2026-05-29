@@ -1,46 +1,21 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useTheme } from 'next-themes'
 
+/**
+ * 自动根据时间设置主题（仅在首次加载且用户未手动切换时生效）
+ * 日间 8:00-18:00 使用 light，其余时间使用 dark
+ */
 export function useAutoTheme() {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
+  const { setTheme } = useTheme()
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    // next-themes 会在 localStorage 中存储 'theme' key
+    // 如果用户已经手动选择过主题，则不自动切换
+    if (localStorage.getItem('theme')) return
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-
-    // 获取保存的用户偏好
-    const savedTheme = localStorage.getItem('user-theme-preference')
-    
-    if (savedTheme) {
-      setTheme(savedTheme)
-      return
-    }
-
-    // 检查当前时间
     const hour = new Date().getHours()
-    const shouldBeDark = hour < 8 || hour >= 18
-    
-    setTheme(shouldBeDark ? 'dark' : 'light')
+    setTheme(hour >= 8 && hour < 18 ? 'light' : 'dark')
   }, [setTheme])
-
-  const toggleTheme = () => {
-    if (typeof window === 'undefined') return
-
-    const newTheme = theme === 'dark' ? 'light' : 'dark'
-    setTheme(newTheme)
-    localStorage.setItem('user-theme-preference', newTheme)
-  }
-
-  // 如果组件未挂载，返回null或初始值
-  if (!mounted) {
-    return { theme: undefined, toggleTheme }
-  }
-
-  return { theme, toggleTheme }
-} 
+}

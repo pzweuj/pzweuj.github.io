@@ -1,54 +1,16 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
-import { unified } from 'unified'
-import remarkParse from 'remark-parse'
-import remarkMath from 'remark-math'
-import remarkGfm from 'remark-gfm'
-import remarkRehype from 'remark-rehype'
-import rehypeKatex from 'rehype-katex'
-import rehypeStringify from 'rehype-stringify'
-import rehypePrism from 'rehype-prism-plus'
-import rehypeImgSize from 'rehype-img-size'
-import { remarkQQMusic } from './plugins/remarkQQMusic'
-import { rehypeTableLabel } from './plugins/rehypeTableLabel'
-import { rehypeLazyImage } from './plugins/rehypeLazyImage'
-import { rehypeCodeCopy } from './plugins/rehypeCodeCopy'
+import { createMarkdownProcessor, renderMarkdown, PROCESSOR_VERSION } from './createMarkdownProcessor'
 import { loadHtmlCache, saveHtmlCache, renderMarkdownWithCache } from './cache'
 
-// 创建统一的 markdown 处理器
-const processor = unified()
-  .use(remarkParse)
-  .use(remarkQQMusic)
-  .use(remarkMath)
-  .use(remarkGfm)
-  .use(remarkRehype, {
-    allowDangerousHtml: true
-  })
-  .use(rehypePrism, {
-    showLineNumbers: true,
-    ignoreMissing: true,
-  })
-  .use(rehypeTableLabel)
-  .use(rehypeCodeCopy)
-  .use(rehypeImgSize, {
-    dir: path.join(process.cwd(), 'public')
-  })
-  .use(rehypeLazyImage)
-  .use(rehypeKatex, {
-    strict: false
-  })
-  .use(rehypeStringify, {
-    allowDangerousHtml: true
-  })
+// 博客管道：启用表格标签、代码复制按钮、图片懒加载
+const processor = createMarkdownProcessor({
+  enableTableLabel: true,
+  enableCodeCopy: true,
+  enableLazyImage: true,
+})
 
-// 异步渲染 markdown
-async function renderMarkdown(content: string): Promise<string> {
-  const result = await processor.process(content)
-  return result.toString()
-}
-
-// 接口定义保持不变
 export interface BlogPost {
   slug: string
   title: string
@@ -74,7 +36,7 @@ function generateExcerpt(content: string, maxLength: number = 200) {
     .replace(/<[^>]+>/g, '')
     .replace(/[#*`]/g, '')
     .trim()
-  
+
   const firstParagraph = plainText
     .split('\n')
     .find(line => line.trim().length > 0)
@@ -86,29 +48,25 @@ function generateExcerpt(content: string, maxLength: number = 200) {
 }
 
 function parseTags(tags: unknown): string[] {
-  // 如果是字符串（单行格式），按逗号或空格分割
   if (typeof tags === 'string') {
     return tags
       .split(/[,\s]+/)
       .map(tag => tag.trim())
       .filter(Boolean)
   }
-  
-  // 如果是数组（YAML 列表格式），确保每个元素都是字符串
+
   if (Array.isArray(tags)) {
     return tags
       .map(tag => String(tag).trim())
       .filter(Boolean)
   }
-  
-  // 其他情况返回空数组
+
   return []
 }
 
 // 内存缓存：避免同一次构建中重复调用
 const postsMemoCache = new Map<string, BlogPost[]>()
 
-// 修改为异步函数
 export async function getAllPosts(): Promise<BlogPost[]> {
   const key = 'content/posts'
   if (postsMemoCache.has(key)) return postsMemoCache.get(key)!
@@ -121,7 +79,6 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 export async function getAllPostsFromDirectory(directory: string): Promise<BlogPost[]> {
   const postsDirectory = path.join(process.cwd(), directory)
 
-  // 检查目录是否存在
   if (!fs.existsSync(postsDirectory)) {
     return []
   }
@@ -144,7 +101,10 @@ export async function getAllPostsFromDirectory(directory: string): Promise<BlogP
         date,
         tags: parseTags(data.tags),
         excerpt: generateExcerpt(content),
-        content: await renderMarkdownWithCache(content, cacheKey, 'blog', htmlCache, renderMarkdown)
+        content: await renderMarkdownWithCache(
+          content, cacheKey, 'blog', PROCESSOR_VERSION, htmlCache,
+          (c) => renderMarkdown(processor, c, cacheKey),
+        )
       }
     }))
 
@@ -161,7 +121,7 @@ export async function getAllSchemaProgress(): Promise<BlogPost[]> {
   return posts
 }
 
-// 分页相关接口定义保持不变
+// 分页相关接口定义
 export interface PaginationInfo {
   currentPage: number
   totalPages: number
@@ -174,7 +134,6 @@ export interface PaginatedPosts {
   pagination: PaginationInfo
 }
 
-// 修改为异步函数
 export async function getPaginatedPosts(page: number = 1, limit: number = 5): Promise<PaginatedPosts> {
   const posts = await getAllPosts()
   const startIndex = (page - 1) * limit
@@ -190,4 +149,4 @@ export async function getPaginatedPosts(page: number = 1, limit: number = 5): Pr
       hasPrevPage: page > 1
     }
   }
-} 
+}

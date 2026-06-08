@@ -33,7 +33,7 @@
     "remark-math": "^6.0.0",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.0",
-    "tailwind-merge": "^2.5.4",
+    "tailwind-merge": "^3.6.0",
     "unified": "^11.0.5"
   },
   "devDependencies": {

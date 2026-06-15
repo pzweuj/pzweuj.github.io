@@ -154,7 +154,7 @@ pre[class*="language-"] {
   --background-rgb: 255, 255, 255;
 }
 
-[data-theme='dark'] {
+.dark {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: 0, 0, 0;
 }

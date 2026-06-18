@@ -159,6 +159,45 @@ pre[class*="language-"] {
   --background-rgb: 0, 0, 0;
 }
 
+/* 暗色模式下 prose 正文可见性修复
+   说明：tailwind.config.ts 里通过 :where(.dark) & 注入的 typography 变量
+   在某些情况下不会覆盖 prose 内部带 :where 前缀的默认值，这里用更高
+   优先级的具体选择器直接给变量赋值，确保正文/加粗/标题在深色背景下可读。 */
+.dark .prose {
+  --tw-prose-body: rgb(229, 231, 235);      /* gray-200，正文 */
+  --tw-prose-headings: rgb(243, 244, 246);  /* gray-100，标题 */
+  --tw-prose-lead: rgb(209, 213, 219);      /* gray-300 */
+  --tw-prose-links: rgb(96, 165, 250);      /* blue-400 */
+  --tw-prose-bold: rgb(255, 255, 255);      /* 加粗用纯白，最高对比度 */
+  --tw-prose-counters: rgb(156, 163, 175);  /* gray-400 */
+  --tw-prose-bullets: rgb(156, 163, 175);
+  --tw-prose-hr: rgb(55, 65, 81);           /* gray-700 */
+  --tw-prose-quotes: rgb(209, 213, 219);
+  --tw-prose-quote-borders: rgb(55, 65, 81);
+  --tw-prose-captions: rgb(156, 163, 175);
+  --tw-prose-code: rgb(243, 244, 246);
+  --tw-prose-pre-code: rgb(209, 213, 219);
+  --tw-prose-pre-bg: rgb(17, 24, 39);       /* gray-900 */
+  --tw-prose-th-borders: rgb(55, 65, 81);
+  --tw-prose-td-borders: rgb(55, 65, 81);
+
+  color: var(--tw-prose-body);
+}
+
+/* 兜底：即使变量未生效，下面的具体规则也能让加粗/标题/正文在深色模式下可见 */
+.dark .prose :where(strong, b):not(:where([class~="not-prose"] *)) {
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+}
+
+.dark .prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"] *)) {
+  color: rgb(243, 244, 246);
+}
+
+.dark .prose :where(p, li, td, th, blockquote):not(:where([class~="not-prose"] *)) {
+  color: rgb(229, 231, 235);
+}
+
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-rgb));

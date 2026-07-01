@@ -52,7 +52,7 @@ jobs:
         run: echo "NEXT_TELEMETRY_DISABLED=1" >> $GITHUB_ENV
 
       - name: Cache Next.js build
-        uses: actions/cache@v5
+        uses: actions/cache@v6
         env:
           # 想强制全量重新构建时，把这里的版本号 +1（例如 v1 -> v2）即可让旧缓存全部失效
           CACHE_VERSION: v1

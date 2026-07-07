@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { SearchIcon } from './Icons'
 import { Command } from 'cmdk'
@@ -68,9 +69,9 @@ export default function SearchDialog() {
         <SearchIcon className="w-5 h-5 text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-100" />
       </button>
 
-      {open && (
+      {open && createPortal(
         <div className="fixed inset-0 z-50">
-          <div className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div className="fixed inset-0 bg-gray-900/30 backdrop-blur-sm" onClick={() => setOpen(false)} />
           
           <div className="fixed inset-x-4 top-8 mx-auto max-w-2xl">
             <div className="relative bg-white dark:bg-gray-900 rounded-xl shadow-2xl ring-1 ring-gray-200 dark:ring-gray-800">
@@ -137,7 +138,7 @@ export default function SearchDialog() {
             </div>
           </div>
         </div>
-      )}
+      , document.body)}
     </>
   )
 } 

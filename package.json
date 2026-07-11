@@ -10,7 +10,7 @@
     "feed": "tsx scripts/generate-feed.ts"
   },
   "dependencies": {
-    "@eslint/eslintrc": "^3.3.5",
+    "@eslint/eslintrc": "^3.3.6",
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-dropdown-menu": "^2.1.18",
     "@radix-ui/react-slot": "^1.1.0",

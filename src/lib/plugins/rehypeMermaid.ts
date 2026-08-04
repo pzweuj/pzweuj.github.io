@@ -45,7 +45,12 @@ export function rehypeMermaid() {
       const mermaidDiv: Element = {
         type: 'element',
         tagName: 'div',
-        properties: { className: ['mermaid'] },
+        properties: {
+          className: ['mermaid'],
+          // 把源码冗余存一份到 data 属性里：首次渲染后 textContent 会被替换成
+          // SVG，主题切换重渲染时无法再从 textContent 找回源码，只能依赖这里。
+          dataMermaidSrc: source,
+        },
         children: [{ type: 'text', value: source }],
       }
 

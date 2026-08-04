@@ -13,7 +13,7 @@ import { rehypeLazyImage } from './plugins/rehypeLazyImage'
 import { rehypeMermaid } from './plugins/rehypeMermaid'
 
 // 插件链版本号，插件配置变更时递增以使缓存失效
-export const PROCESSOR_VERSION = 2
+export const PROCESSOR_VERSION = 3
 
 // Prism.js 语言别名，统一用于所有管道
 const PRISM_ALIASES: Record<string, string[]> = {

@@ -27,44 +27,47 @@ export default function MarkdownContent({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const { resolvedTheme } = useTheme()
-  const sourcesRef = useRef<Map<HTMLElement, string>>(new Map())
-  const renderCountRef = useRef(0)
+  // 渲染序号：每次渲染递增，异步完成时若发现已有更新的渲染，则丢弃本次结果。
+  // 主题切换时（尤其首次挂载 resolvedTheme 为 undefined 后解析成真实主题）会
+  // 并发触发多次 renderMermaid，不丢弃旧结果的话，慢的旧主题可能覆盖新主题。
+  const renderSeqRef = useRef(0)
+  // mermaid 需要唯一的 diagram id，重复 id 会抛错，用全局递增计数器保证唯一。
+  const idCounterRef = useRef(0)
 
-  // html 变化时重新收集 mermaid 源码（此时占位元素仍在 DOM 中）
+  // 只在主题确定后渲染；主题或 html 变化时重渲染（从 data 属性重新取源码）。
   useEffect(() => {
+    if (!resolvedTheme) return
     const container = ref.current
     if (!container) return
-    sourcesRef.current.clear()
-    container.querySelectorAll('.mermaid').forEach((el) => {
-      const source = (el.textContent ?? '').trim()
-      if (source) sourcesRef.current.set(el as HTMLElement, source)
-    })
-  }, [html])
+    renderMermaid(container)
+  }, [resolvedTheme, html])
 
-  // 挂载及主题变化时渲染（主题切换时用存储的源码重渲染）
-  useEffect(() => {
-    renderMermaid()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [resolvedTheme])
+  async function renderMermaid(container: HTMLElement) {
+    const blocks = Array.from(container.querySelectorAll<HTMLElement>('.mermaid'))
+    if (blocks.length === 0) return
 
-  async function renderMermaid() {
-    if (sourcesRef.current.size === 0) return
     const mermaid = (await import('mermaid')).default
     const theme = resolvedTheme === 'dark' ? 'dark' : 'default'
     mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme })
 
-    sourcesRef.current.forEach((source, el) => {
-      const id = `mermaid-${renderCountRef.current++}`
-      mermaid
-        .render(id, source)
-        .then(({ svg }) => {
-          el.innerHTML = svg
-        })
-        .catch((err) => {
-          console.error('Mermaid 渲染失败:', err)
+    const seq = ++renderSeqRef.current
+    for (const el of blocks) {
+      // 源码优先从 data-mermaid-src 读取（首次渲染后 textContent 已被 SVG 覆盖）
+      const source = el.getAttribute('data-mermaid-src') ?? (el.textContent ?? '').trim()
+      if (!source) continue
+
+      const id = `mermaid-${idCounterRef.current++}`
+      try {
+        const { svg } = await mermaid.render(id, source)
+        if (seq !== renderSeqRef.current) return // 已有更新的渲染，丢弃过期结果
+        el.innerHTML = svg
+      } catch (err) {
+        console.error('Mermaid 渲染失败:', err)
+        if (seq === renderSeqRef.current) {
           el.innerHTML = `<pre style="color:#dc2626;white-space:pre-wrap;overflow:auto;">${escapeHtml(source)}</pre>`
-        })
-    })
+        }
+      }
+    }
   }
 
   return <div ref={ref} className={className} dangerouslySetInnerHTML={{ __html: html }} />

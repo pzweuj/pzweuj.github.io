@@ -1,5 +1,6 @@
 import { getProjectDocs, getProjectIndex } from '@/lib/projects'
 import { ProjectSidebar } from '@/components/projects/ProjectSidebar'
+import MarkdownContent from '@/components/blog/MarkdownContent'
 
 export default async function ProjectsPage() {
   const chapters = await getProjectDocs()
@@ -12,9 +13,7 @@ export default async function ProjectsPage() {
       
       {/* 主内容区 */}
       <main className="flex-1 max-w-4xl mx-auto px-4 py-12">
-        <div className="prose max-w-none">
-          <div dangerouslySetInnerHTML={{ __html: index.content }} />
-        </div>
+        <MarkdownContent html={index.content} />
       </main>
     </div>
   )

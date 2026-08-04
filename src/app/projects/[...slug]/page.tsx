@@ -2,6 +2,7 @@ import { getProjectDocs } from '@/lib/projects'
 import { ProjectSidebar } from '@/components/projects/ProjectSidebar'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import MarkdownContent from '@/components/blog/MarkdownContent'
 
 interface Props {
   params: Promise<{
@@ -30,7 +31,7 @@ export default async function ProjectDocPage({ params }: Props) {
       <main className="flex-1 max-w-4xl mx-auto px-4 py-12">
         <div className="prose max-w-none">
           <h1>{doc.title}</h1>
-          <div dangerouslySetInnerHTML={{ __html: doc.content }} />
+          <MarkdownContent html={doc.content} className="prose max-w-none" />
         </div>
       </main>
     </div>

@@ -10,9 +10,10 @@ import { remarkQQMusic } from './plugins/remarkQQMusic'
 import { rehypeTableLabel } from './plugins/rehypeTableLabel'
 import { rehypeCodeCopy } from './plugins/rehypeCodeCopy'
 import { rehypeLazyImage } from './plugins/rehypeLazyImage'
+import { rehypeMermaid } from './plugins/rehypeMermaid'
 
 // 插件链版本号，插件配置变更时递增以使缓存失效
-export const PROCESSOR_VERSION = 1
+export const PROCESSOR_VERSION = 2
 
 // Prism.js 语言别名，统一用于所有管道
 const PRISM_ALIASES: Record<string, string[]> = {
@@ -48,6 +49,7 @@ export function createMarkdownProcessor(options: ProcessorOptions = {}) {
     .use(remarkMath)
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeMermaid)
     .use(rehypePrism, {
       showLineNumbers: true,
       ignoreMissing: true,

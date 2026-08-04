@@ -1,6 +1,7 @@
 import { getAllSchemaProgress } from '@/lib/markdown'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
+import MarkdownContent from '@/components/blog/MarkdownContent'
 import 'katex/dist/katex.min.css'
 
 interface Props {
@@ -43,10 +44,7 @@ export default async function SchemaProgressPostPage({ params }: Props) {
           <time dateTime={post.date}>{post.date}</time>
         </div>
       </header>
-      <div
-        className="prose max-w-none"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
+      <MarkdownContent html={post.content} />
     </article>
   )
 }

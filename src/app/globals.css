@@ -145,6 +145,19 @@ pre[class*="language-"] {
   content: attr(line);
 }
 
+/* Mermaid 图表容器 */
+.mermaid {
+  @apply my-6 rounded-lg overflow-x-auto;
+  background: var(--tw-prose-pre-bg);
+}
+
+.mermaid svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
 /* 代码块标题 */
 .code-title {
   @apply px-4 py-2 font-mono text-sm text-gray-400 dark:text-gray-500 bg-gray-800 dark:bg-gray-900 border-b border-gray-700 dark:border-gray-800 rounded-t-lg;

@@ -2,6 +2,7 @@ import { getAllPosts } from '@/lib/markdown'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import selfConfig from '@/config/self.config'
+import MarkdownContent from '@/components/blog/MarkdownContent'
 import 'katex/dist/katex.min.css'
 
 interface Props {
@@ -92,10 +93,7 @@ export default async function PostPage({ params }: Props) {
           </div>
         </div>
       </header>
-      <div
-        className="prose max-w-none"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
+      <MarkdownContent html={post.content} />
     </article>
   )
 }

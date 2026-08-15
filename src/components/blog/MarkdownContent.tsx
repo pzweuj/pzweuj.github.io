@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useTheme } from 'next-themes'
 
 function escapeHtml(s: string) {
@@ -34,41 +34,44 @@ export default function MarkdownContent({
   // mermaid 需要唯一的 diagram id，重复 id 会抛错，用全局递增计数器保证唯一。
   const idCounterRef = useRef(0)
 
+  const renderMermaid = useCallback(
+    async (container: HTMLElement) => {
+      const blocks = Array.from(container.querySelectorAll<HTMLElement>('.mermaid'))
+      if (blocks.length === 0) return
+
+      const mermaid = (await import('mermaid')).default
+      const theme = resolvedTheme === 'dark' ? 'dark' : 'default'
+      mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme })
+
+      const seq = ++renderSeqRef.current
+      for (const el of blocks) {
+        // 源码优先从 data-mermaid-src 读取（首次渲染后 textContent 已被 SVG 覆盖）
+        const source = el.getAttribute('data-mermaid-src') ?? (el.textContent ?? '').trim()
+        if (!source) continue
+
+        const id = `mermaid-${idCounterRef.current++}`
+        try {
+          const { svg } = await mermaid.render(id, source)
+          if (seq !== renderSeqRef.current) return // 已有更新的渲染，丢弃过期结果
+          el.innerHTML = svg
+        } catch (err) {
+          console.error('Mermaid 渲染失败:', err)
+          if (seq === renderSeqRef.current) {
+            el.innerHTML = `<pre style="color:#dc2626;white-space:pre-wrap;overflow:auto;">${escapeHtml(source)}</pre>`
+          }
+        }
+      }
+    },
+    [resolvedTheme],
+  )
+
   // 只在主题确定后渲染；主题或 html 变化时重渲染（从 data 属性重新取源码）。
   useEffect(() => {
     if (!resolvedTheme) return
     const container = ref.current
     if (!container) return
     renderMermaid(container)
-  }, [resolvedTheme, html])
-
-  async function renderMermaid(container: HTMLElement) {
-    const blocks = Array.from(container.querySelectorAll<HTMLElement>('.mermaid'))
-    if (blocks.length === 0) return
-
-    const mermaid = (await import('mermaid')).default
-    const theme = resolvedTheme === 'dark' ? 'dark' : 'default'
-    mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme })
-
-    const seq = ++renderSeqRef.current
-    for (const el of blocks) {
-      // 源码优先从 data-mermaid-src 读取（首次渲染后 textContent 已被 SVG 覆盖）
-      const source = el.getAttribute('data-mermaid-src') ?? (el.textContent ?? '').trim()
-      if (!source) continue
-
-      const id = `mermaid-${idCounterRef.current++}`
-      try {
-        const { svg } = await mermaid.render(id, source)
-        if (seq !== renderSeqRef.current) return // 已有更新的渲染，丢弃过期结果
-        el.innerHTML = svg
-      } catch (err) {
-        console.error('Mermaid 渲染失败:', err)
-        if (seq === renderSeqRef.current) {
-          el.innerHTML = `<pre style="color:#dc2626;white-space:pre-wrap;overflow:auto;">${escapeHtml(source)}</pre>`
-        }
-      }
-    }
-  }
+  }, [resolvedTheme, html, renderMermaid])
 
   return <div ref={ref} className={className} dangerouslySetInnerHTML={{ __html: html }} />
 }

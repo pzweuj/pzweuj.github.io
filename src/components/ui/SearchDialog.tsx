@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useRouter } from 'next/navigation'
 import { SearchIcon } from './Icons'
@@ -11,7 +11,6 @@ export default function SearchDialog() {
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState('')
   const [searchIndex, setSearchIndex] = useState<SearchResult[]>([])
-  const [results, setResults] = useState<SearchResult[]>([])
   const router = useRouter()
 
   // 加载搜索索引
@@ -22,20 +21,17 @@ export default function SearchDialog() {
       .catch(error => console.error('Failed to load search index:', error))
   }, [])
 
-  // 本地搜索处理
-  useEffect(() => {
-    if (!query.trim()) {
-      setResults([])
-      return
-    }
+  // 本地搜索：派生状态，直接用 useMemo 计算，避免在 effect 里 setState
+  const results = useMemo<SearchResult[]>(() => {
+    if (!query.trim()) return []
 
     const searchQuery = query.toLowerCase()
-    const filtered = searchIndex.filter(item => 
+    const filtered = searchIndex.filter(item =>
       item.title.toLowerCase().includes(searchQuery) ||
       item.excerpt.toLowerCase().includes(searchQuery)
     )
 
-    const articleMap = new Map()
+    const articleMap = new Map<string, SearchResult>()
     filtered.forEach((item: SearchResult) => {
       const existing = articleMap.get(item.slug)
       if (!existing || (item.matchType === 'title' && existing.matchType === 'content')) {
@@ -43,7 +39,7 @@ export default function SearchDialog() {
       }
     })
 
-    setResults(Array.from(articleMap.values()))
+    return Array.from(articleMap.values())
   }, [query, searchIndex])
 
   // 键盘快捷键处理

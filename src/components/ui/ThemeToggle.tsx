@@ -1,18 +1,22 @@
 'use client'
 
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
+import { useSyncExternalStore } from 'react'
 import { useAutoTheme } from '@/hooks/useAutoTheme'
 
+const emptySubscribe = () => () => {}
+
 export function ThemeToggle() {
-  const [mounted, setMounted] = useState(false)
+  // 用 useSyncExternalStore 判断是否已挂载（hydration guard），
+  // 服务端快照返回 false，客户端返回 true，避免 SSR/客户端主题不一致。
+  const mounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  )
   const { theme, setTheme } = useTheme()
 
   useAutoTheme()
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   if (!mounted) {
     return null

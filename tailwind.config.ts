@@ -8,7 +8,7 @@ const config = {
   ],
   theme: {
     extend: {
-      typography: ({ theme }: any) => ({
+      typography: ({ theme }: { theme: (path: string) => string }) => ({
         DEFAULT: {
           css: {
             '--tw-prose-links': theme('colors.blue[600]'),

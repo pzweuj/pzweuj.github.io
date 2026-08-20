@@ -14,7 +14,7 @@ interface SiteConfig {
 }
 
 const selfConfig: SiteConfig = {
-  title: '生物信息文件夹',
+  title: '生信民工的折腾笔记',
   description: '生信工作学习记录',
   author: 'pzweuj',
   language: 'zh-CN',

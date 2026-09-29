@@ -70,3 +70,35 @@ fail 文件本来就是"这条 read 没有稳定的双侧基因锚点"才被丢�
 - 复用 STAR-Fusion 的 TSV 格式，单独存 rescue_predictions.tsv，再和正式 PASS 合并出 merged_predictions.tsv，下游不用改。
 
 最后一点：intergenic 就是 intergenic，不要为了好看强行命名成最近的基因。Rescue 产出的是候选，不是直接报告阳性。
+
+
+
+## 附：易发生IGR伴侣的基因清单
+
+| Gene | Level | Direction | KeyRegion | Domain | Mode |
+|---|---|---|---|---|---|
+| ALK | A | 3P | exon19-20 | kinase | RESCUE |
+| RET | A | 3P | intron10-11 | kinase | RESCUE |
+| ROS1 | A | 3P | variable | kinase | RESCUE |
+| FGFR2 | A | 5P | exon17 | kinase | RESCUE |
+| BRAF | A | 3P | intron8-10 | kinase | RESCUE |
+| MET | A | 3P | variable | kinase | RESCUE |
+| NRG1 | A | 3P | exon2+ | EGF_like | RESCUE |
+| MYB | A | 5P | truncation | MYB_DNA_binding | RESCUE |
+| MYBL1 | A | 5P | exon8-10 | MYB_DNA_binding | RESCUE |
+| EGFR | B | ANY | variable | kinase | RESCUE |
+| ERBB2 | B | ANY | variable | kinase | RESCUE |
+| ERBB3 | B | ANY | variable | NA | RESCUE |
+| FGFR1 | B | ANY | variable | kinase | RESCUE |
+| FGFR3 | B | ANY | variable | kinase | RESCUE |
+| NTRK1 | B | 3P | variable | kinase | RESCUE |
+| RAF1 | B | 3P | intron5-9 | kinase | RESCUE |
+| ERG | B | ANY | variable | ETS | RESCUE |
+| ETV4 | B | ANY | variable | ETS | RESCUE |
+| RSPO3 | B | ANY | variable | NA | RESCUE |
+| PIK3CA | B | ANY | variable | kinase | RESCUE |
+| NTRK2 | C | 3P | variable | kinase | REVIEW |
+| NTRK3 | C | 3P | variable | kinase | REVIEW |
+| PDGFRA | C | 3P | variable | kinase | REVIEW |
+| PDGFRB | C | 3P | variable | kinase | REVIEW |
+

@@ -20,8 +20,14 @@ export const metadata: Metadata = {
   creator: selfConfig.author,
   metadataBase: new URL(selfConfig.siteUrl),
   icons: {
-    icon: '/icon.ico',
+    icon: [
+      { url: '/icon.png', sizes: '512x512', type: 'image/png' },
+      { url: '/icon.ico', sizes: 'any' },
+    ],
     shortcut: '/icon.ico',
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
   },
   referrer: 'strict-origin-when-cross-origin',
   formatDetection: {

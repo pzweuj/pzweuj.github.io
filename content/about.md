@@ -11,13 +11,15 @@
 
 没有续费Grok了，甚至在考虑不续费GPT Plus，改开通付费Gemini AI Pro。
 
+整体AI月付成本，从当初最高峰的 ＄20 GPT Plus + ＄15 Grok Premium，到￥10 Gemini Pro + ＄10 CommandCode Goat (预期) ，下降了整整￥165。
+
 #### 养🦐养🐎
 
 |  1   | DeepSeek-V4.1-Flash | 100  |
 | :--: | :-------------: | :--: |
 |  2   |  ~~GPT-6-Luna~~  |  90  |
 
-由于不准备续费GPT了，而Gemini反代必死，所以考虑🐎🦐整体切换到按量付费的DeepSeek，我看了一下后台，当前预期一天的花费在2元 RMB左右，所以考虑找个Agent Plan或者Commander Code的套餐。
+由于不准备续费GPT了，而Gemini反代必死，所以考虑🐎🦐整体切换到按量付费的DeepSeek，我看了一下后台，当前预期一天的花费在2元 RMB左右，所以考虑找个Agent Plan或者Command Code的套餐。
 
 最近都在玩脸书的[Muse.AI](https://muse.ai/)，确实有和🐎🦐不一样的地方，不过速度嘎嘎快，缺点是只能用它的APP了，没有反代出来。不过一台免费的2C8G，还是挺不错的。欢迎大家使用的我的邀请码**`MN0Y8D`**。
 

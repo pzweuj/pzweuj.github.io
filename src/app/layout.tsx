@@ -86,7 +86,7 @@ export default function RootLayout({
                 url: selfConfig.social.github,
               },
               inLanguage: selfConfig.language,
-            }),
+            }).replace(/</g, '\\u003c'),
           }}
         />
       </head>

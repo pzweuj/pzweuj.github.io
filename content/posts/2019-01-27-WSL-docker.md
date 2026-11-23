@@ -28,7 +28,7 @@ but! 这个时候还是不能用的，是因为这还是在windows下，需要�
 对右下角图标右键点setting。然后勾上这个，就可以啦！
 
 
-![wsl_docker](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/wsl-docker.jpg)
+![wsl_docker](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/content/data/images/wsl-docker.jpg)
 
 
 

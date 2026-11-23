@@ -109,7 +109,7 @@ cat vcf/202411.pass.vcf | grep -v "normal_artifact" > vcf/202411.final.vcf
 
 经过上述处理，获得29个体细胞突变。
 
-下面可以各自用自己的[注释方案](https://pzweuj.github.io/2024/04/02/VEP.html)进行注释，[按照3'原则进行校正](https://pzweuj.github.io/2021/04/15/NCCL-pancancer.html)等等咯，VEP等工具在设置参数里可以指定3'原则，在结果中的HGVSg即是已校正的基因组坐标了。最终的结果是必然需要人工复核的，不要想着结果直出直接回报。经过核对，上述的29个突变均可回报。
+下面可以各自用自己的[注释方案](/posts/VEP_2)进行注释，[按照3'原则进行校正](https://pzweuj.github.io/2021/04/15/NCCL-pancancer.html)等等咯，VEP等工具在设置参数里可以指定3'原则，在结果中的HGVSg即是已校正的基因组坐标了。最终的结果是必然需要人工复核的，不要想着结果直出直接回报。经过核对，上述的29个突变均可回报。
 
 
 ## 融合检测

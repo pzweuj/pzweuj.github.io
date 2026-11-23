@@ -9,7 +9,7 @@ TCGA是一个癌症相关的数据库。可以弄到很多癌症的基因数据�
 进去之后，点右边那个蓝色的*Launch Data Portal*
 
 可以看到样本量还是挺多的。
-![TCGA](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/downloads/images/TCGA.PNG)
+![TCGA](https://raw.githubusercontent.com/pzweuj/pzweuj.github.io/refs/heads/master/content/data/images/TCGA.PNG)
 
 我们可以点右边的那个人的甲状腺（Thyroid）。
 就进入了一个统计界面。

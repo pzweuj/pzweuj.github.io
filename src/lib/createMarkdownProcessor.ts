@@ -5,15 +5,17 @@ import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
 import rehypeKatex from 'rehype-katex'
 import rehypeStringify from 'rehype-stringify'
+import rehypeRaw from 'rehype-raw'
+import rehypeSanitize, { defaultSchema } from 'rehype-sanitize'
 import rehypePrism from 'rehype-prism-plus'
-import { remarkQQMusic } from './plugins/remarkQQMusic'
+import { rehypeQQMusic } from './plugins/rehypeQQMusic'
 import { rehypeTableLabel } from './plugins/rehypeTableLabel'
 import { rehypeCodeCopy } from './plugins/rehypeCodeCopy'
 import { rehypeLazyImage } from './plugins/rehypeLazyImage'
 import { rehypeMermaid } from './plugins/rehypeMermaid'
 
 // 插件链版本号，插件配置变更时递增以使缓存失效
-export const PROCESSOR_VERSION = 3
+export const PROCESSOR_VERSION = 4
 
 // Prism.js 语言别名，统一用于所有管道
 const PRISM_ALIASES: Record<string, string[]> = {
@@ -45,10 +47,30 @@ export function createMarkdownProcessor(options: ProcessorOptions = {}) {
   // 条件插件通过中间变量承接，避免 let 重赋值的类型推断问题
   const base = unified()
     .use(remarkParse)
-    .use(remarkQQMusic)
     .use(remarkMath)
     .use(remarkGfm)
     .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeSanitize, {
+      ...defaultSchema,
+      tagNames: [...(defaultSchema.tagNames ?? []), 'font'],
+      protocols: {
+        ...defaultSchema.protocols,
+        href: [...(defaultSchema.protocols?.href ?? []), 'ftp'],
+      },
+      // remark-rehype already namespaces footnotes. Keep their fragment links intact.
+      clobber: ['name'],
+      attributes: {
+        ...defaultSchema.attributes,
+        '*': [
+          ...(defaultSchema.attributes?.['*'] ?? []).filter(attribute => attribute !== 'id'),
+          ['id', /^user-content-/, 'footnote-label'],
+        ],
+        font: [['color', 'red']],
+        code: [['className', /^language-./, 'math-inline', 'math-display']],
+      },
+    })
+    .use(rehypeQQMusic)
     .use(rehypeMermaid)
     .use(rehypePrism, {
       showLineNumbers: true,
@@ -65,7 +87,7 @@ export function createMarkdownProcessor(options: ProcessorOptions = {}) {
 
   return proc
     .use(rehypeKatex, { strict: false })
-    .use(rehypeStringify, { allowDangerousHtml: true })
+    .use(rehypeStringify)
 }
 
 /**
@@ -83,9 +105,6 @@ export async function renderMarkdown(
   } catch (error) {
     const label = filePath ? `[${filePath}]` : '[unknown]'
     console.error(`Markdown 渲染失败 ${label}:`, error)
-    return `<div style="color:red;border:1px solid red;padding:1em;margin:1em 0;">
-      <strong>渲染失败</strong> ${label}<br/>
-      <pre>${(error as Error).message}</pre>
-    </div>`
+    return '<p role="alert">这篇文章暂时无法渲染。</p>'
   }
 }

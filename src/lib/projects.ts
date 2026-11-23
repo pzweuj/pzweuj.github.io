@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import matter from 'gray-matter'
+import { parseFrontMatter } from './frontMatter'
 import { createMarkdownProcessor, renderMarkdown, PROCESSOR_VERSION } from './createMarkdownProcessor'
 import { loadHtmlCache, saveHtmlCache, renderMarkdownWithCache } from './cache'
 
@@ -64,7 +64,7 @@ export async function getProjectDocs(): Promise<ProjectChapter[]> {
       const docPath = path.join(chapterPath, file)
       const cacheKey = path.relative(process.cwd(), docPath).replace(/\\/g, '/')
       const content = fs.readFileSync(docPath, 'utf-8')
-      const { data, content: markdown } = matter(content)
+      const { data, content: markdown } = parseFrontMatter(content, docPath)
 
       const h1Title = extractH1Title(markdown)
       const contentWithoutTitle = markdown.replace(/^#\s+(.+)$/m, '')
@@ -107,7 +107,7 @@ export async function getProjectIndex() {
   const htmlCache = loadHtmlCache()
   const cacheKey = 'content/project/index.md'
   const content = fs.readFileSync(indexPath, 'utf-8')
-  const { data, content: markdown } = matter(content)
+  const { data, content: markdown } = parseFrontMatter(content, indexPath)
 
   const result = {
     title: data.title || '实践项目',

@@ -10,8 +10,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: "pages"
@@ -23,6 +21,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Detect package manager
         id: detect-package-manager
@@ -45,7 +45,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
-          node-version: "20"
+          node-version: "24"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
 
       - name: Disable Next.js Telemetry
@@ -55,7 +55,7 @@ jobs:
         uses: actions/cache@v6
         env:
           # 想强制全量重新构建时，把这里的版本号 +1（例如 v1 -> v2）即可让旧缓存全部失效
-          CACHE_VERSION: v1
+          CACHE_VERSION: v2
         with:
           path: |
             ~/.npm
@@ -80,6 +80,9 @@ jobs:
           path: ./out
 
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

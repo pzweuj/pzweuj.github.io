@@ -4,7 +4,7 @@ tags: default
 ---
 悄悄的水一篇。
 
-[老实人点击这里](https://github.com/pzweuj/pzweuj.github.io/blob/master/downloads/WESreport.pdf)。
+[老实人点击这里](https://github.com/pzweuj/pzweuj.github.io/blob/master/content/data/document/WESreport.pdf)。
 
 完。
 

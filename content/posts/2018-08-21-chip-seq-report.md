@@ -4,7 +4,7 @@ tags: default
 ---
 其实差不多就是画图而已。。
 
-[老实人点击这里](https://github.com/pzweuj/pzweuj.github.io/blob/master/downloads/ChIP-seq.pdf)。
+[老实人点击这里](https://github.com/pzweuj/pzweuj.github.io/blob/master/content/data/document/ChIP-seq.pdf)。
 
 完。
 

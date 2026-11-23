@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import matter from 'gray-matter'
+import { parseFrontMatter } from './frontMatter'
 import { createMarkdownProcessor, renderMarkdown, PROCESSOR_VERSION } from './createMarkdownProcessor'
 import { loadHtmlCache, saveHtmlCache, renderMarkdownWithCache } from './cache'
 
@@ -16,7 +16,7 @@ export async function getAboutContent() {
   const htmlCache = loadHtmlCache()
   const cacheKey = 'content/about.md'
   const content = fs.readFileSync(filePath, 'utf-8')
-  const { data, content: markdown } = matter(content)
+  const { data, content: markdown } = parseFrontMatter(content, filePath)
 
   const result = {
     title: data.title || '关于',

@@ -3,7 +3,7 @@ title: sklearn 鸢尾花
 tags: coding
 ---
 
-[上次](https://pzweuj.github.io/2020/03/05/weka.html)使用weka对鸢尾花数据集进行了一个预测，这次使用sklearn试一下。其实sklearn貌似内置了iris的数据，可以直接用，但是为了直观一点，还是自己去下载数据。然后为了方便之后带到其他情况中，分成两个数据来处理。
+[上次](/posts/weka_2)使用weka对鸢尾花数据集进行了一个预测，这次使用sklearn试一下。其实sklearn貌似内置了iris的数据，可以直接用，但是为了直观一点，还是自己去下载数据。然后为了方便之后带到其他情况中，分成两个数据来处理。
 
 照旧，数据集在[这里](https://archive.ics.uci.edu/ml/datasets/Iris)可以找到。
 

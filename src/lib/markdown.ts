@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import matter from 'gray-matter'
+import { parseFrontMatter } from './frontMatter'
 import { createMarkdownProcessor, renderMarkdown, PROCESSOR_VERSION } from './createMarkdownProcessor'
 import { loadHtmlCache, saveHtmlCache, renderMarkdownWithCache } from './cache'
 
@@ -93,7 +93,7 @@ export async function getAllPostsFromDirectory(directory: string): Promise<BlogP
       const fullPath = path.join(postsDirectory, fileName)
       const cacheKey = path.relative(process.cwd(), fullPath).replace(/\\/g, '/')
       const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const { data, content } = matter(fileContents)
+      const { data, content } = parseFrontMatter(fileContents, fullPath)
 
       return {
         slug,

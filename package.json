@@ -7,6 +7,7 @@
     "build": "npm run feed && next build",
     "start": "next start",
     "lint": "eslint .",
+    "test": "tsx --test tests/markdown.test.ts",
     "feed": "tsx scripts/generate-feed.ts"
   },
   "dependencies": {
@@ -18,24 +19,31 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "feed": "^5.2.1",
-    "gray-matter": "^4.0.3",
-    "katex": "^0.17.0",
+    "katex": "^0.19.1",
     "lucide-react": "^1.21.0",
     "mermaid": "^11.16.1",
-    "next": "^16.3.0",
+    "next": "^16.4.6",
     "next-themes": "^0.4.6",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "rehype-img-size": "^1.0.1",
     "rehype-katex": "^7.0.0",
     "rehype-prism-plus": "^2.0.2",
+    "rehype-raw": "^7.0.0",
+    "rehype-sanitize": "^6.0.0",
     "rehype-stringify": "^10.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
     "tailwind-merge": "^3.6.0",
-    "unified": "^11.0.5"
+    "unified": "^11.0.5",
+    "yaml": "^2.8.0"
+  },
+  "overrides": {
+    "katex": "$katex",
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "^6.1.5"
+    }
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.1",
@@ -45,7 +53,7 @@
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.20",
     "eslint": "^9",
-    "eslint-config-next": "16.2.12",
+    "eslint-config-next": "^16.4.6",
     "postcss": "^8.5.23",
     "tailwindcss": "^4.3.1",
     "tsx": "^4.22.4",

@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import matter from 'gray-matter'
+import { parseFrontMatter } from '../src/lib/frontMatter'
 import { Feed } from 'feed'
 import selfConfig from '../src/config/self.config'
 
@@ -76,7 +76,7 @@ function getAllPosts(): Post[] {
       const { date, slug } = parsed
       const fullPath = path.join(postsDirectory, fileName)
       const fileContents = fs.readFileSync(fullPath, 'utf8')
-      const { data, content } = matter(fileContents)
+      const { data, content } = parseFrontMatter(fileContents, fullPath)
 
       return {
         slug,
@@ -145,4 +145,7 @@ async function generateFeed() {
   console.log(`- feed.json (${posts.length} posts)`)
 }
 
-generateFeed().catch(console.error)
+generateFeed().catch(error => {
+  console.error(error)
+  process.exitCode = 1
+})

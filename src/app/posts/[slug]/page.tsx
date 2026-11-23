@@ -78,7 +78,7 @@ export default async function PostPage({ params }: Props) {
     <article className="max-w-4xl mx-auto px-4 py-12">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, '\\u003c') }}
       />
       <header className="mb-8">
         <h1 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">
@@ -104,4 +104,4 @@ export async function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.slug
   }))
-} 
+}

@@ -4,7 +4,7 @@ tags: default
 ---
 悄悄的又水一篇。
 
-[老实人点击这里](https://github.com/pzweuj/pzweuj.github.io/blob/master/downloads/RNA-seq.pdf)。
+[老实人点击这里](https://github.com/pzweuj/pzweuj.github.io/blob/master/content/data/document/RNA-seq.pdf)。
 
 完。
 

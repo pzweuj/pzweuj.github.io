@@ -1,5 +1,4 @@
 import { getProjectDocs } from '@/lib/projects'
-import { ProjectSidebar } from '@/components/projects/ProjectSidebar'
 import { notFound } from 'next/navigation'
 import { Metadata } from 'next'
 import MarkdownContent from '@/components/blog/MarkdownContent'
@@ -25,16 +24,10 @@ export default async function ProjectDocPage({ params }: Props) {
   }
   
   return (
-    <div className="flex">
-      <ProjectSidebar chapters={chapters} />
-      
-      <main className="flex-1 max-w-4xl mx-auto px-4 py-12">
-        <div className="prose max-w-none">
-          <h1>{doc.title}</h1>
-          <MarkdownContent html={doc.content} className="prose max-w-none" />
-        </div>
-      </main>
-    </div>
+    <article className="prose max-w-none">
+      <h1>{doc.title}</h1>
+      <MarkdownContent html={doc.content} />
+    </article>
   )
 }
 
@@ -67,4 +60,4 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: doc.title,
     description: `${doc.title} - 项目文档`
   }
-} 
+}

@@ -7,7 +7,7 @@
 
 ### LLM认知排行
 
-**100%主观的个人体感**，对我自己关注模块的LLM认知排行。以第一名为100分，给出后几名能给我达到的感受。当前更新日期：2026年11月19日。A÷和Z÷都退出认知。**宣布咕咕嘎嘎王者归来！**
+**100%主观的个人体感**，对我自己关注模块的LLM认知排行。以第一名为100分，给出后几名能给我达到的感受。当前更新日期：2026年11月25日。A÷和Z÷都退出认知。**宣布咕咕嘎嘎王者归来！**
 
 没有续费Grok了，甚至在考虑不续费GPT Plus，改开通付费Gemini AI Pro。
 
@@ -25,23 +25,23 @@
 
 #### 编程
 
-|  1   | Gemini-4-Argon | 100  |
+|  1   | Gemini-4-Carbon | 100  |
 | :--: | :-------------: | :--: |
 |  2   |  Gemini-4-Neon  |  90  |
 | 3 | Gemini-4-Hydrogen | 75 |
 
-所有任务都用Antigravity。简单的任务，用 Gemini-4-Hydrogen。日常用Gemini-4-Neon，复杂任务切Gemini-4-Argon（我的渠道没有Gemini-4-Carbon）。实际我的GPT还没有到期，还是会同时用GPT-6.2-Sol的。
+所有任务都用Antigravity。简单的任务，用 Gemini-4-Hydrogen。日常用Gemini-4-Neon，复杂任务切Gemini-4-Carbon。实际我的GPT还没有到期，还是会同时用GPT-6.2-Astra的。
 
 
 
 #### 文生文（主要指拿来写小说）
 
-|  1   |  Gemini-4-Argon   | 100  |
+|  1   |  Gemini-4-Carbon   | 100  |
 | :--: | :---------------: | :--: |
 |  2   | Gemini-4-Hydrogen |  90  |
 |  3   | Gemini-3.8-Flash  |  86  |
 
-Gemini的活人感不用多说。但Gemini 4都不稳定，很多时候只能切回3.8。
+Gemini的活人感不用多说。但RP时，Vertex渠道容易429，很多时候只能切回3.8。
 
 
 
@@ -49,7 +49,7 @@ Gemini的活人感不用多说。但Gemini 4都不稳定，很多时候只能切
 
 |  1   | GPT Image 2.6 | 100  |
 | :--: | :-----------: | :--: |
-|  2   | Nano Banana 2 |  95  |
+|  2   | Nano Banana Pro |  95  |
 
 
 
